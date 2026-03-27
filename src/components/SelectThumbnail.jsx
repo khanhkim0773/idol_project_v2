@@ -36,6 +36,7 @@ const arrModels = [
 
 const SelectThumbnail = () => {
   const setSelectedVideo = useVideoStore((state) => state.setSelectedVideo);
+  const selectedVideo = useVideoStore((state) => state.selectedVideo);
 
   return (
     <section className="fixed inset-0 z-10 flex items-center justify-center pointer-events-none">
@@ -48,11 +49,15 @@ const SelectThumbnail = () => {
         {/* Scroll area */}
         <div className="flex-1 overflow-auto flex flex-col gap-5 p-3">
           {arrModels.map((model) => {
+            const isActive = selectedVideo === model.video;
+
             return (
               <div
                 key={model.id}
                 onClick={() => setSelectedVideo(model.video)}
-                className="w-full flex items-center justify-between px-3 cursor-pointer pointer-events-auto rounded-xl py-1 transition-all hover:bg-white/20"
+                className={`w-full flex items-center justify-between px-3 cursor-pointer pointer-events-auto rounded-xl py-1 transition-all
+        ${isActive ? "bg-white/20" : "hover:bg-white/20"}
+      `}
               >
                 <div className="rounded-md overflow-hidden border-2">
                   <img
