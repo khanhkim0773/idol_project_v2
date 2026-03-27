@@ -1,8 +1,9 @@
 import React from 'react'
+import SelectThumbnail from './components/SelectThumbnail'
 
 const App = () => {
   return (
-    <div>App</div>
+    <div><SelectThumbnail /></div>
   )
 }
 
