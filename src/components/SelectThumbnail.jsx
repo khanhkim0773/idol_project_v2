@@ -32,6 +32,12 @@ const arrModels = [
     image: "/images/moews.jpeg",
     video: "/video/video-3.mp4",
   },
+  {
+    id: 6,
+    name: "Model 6",
+    image: "/images/moews.jpeg",
+    video: "/video/cideo-d1.mp4",
+  },
 ];
 
 const SelectThumbnail = () => {
