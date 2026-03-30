@@ -1,5 +1,5 @@
 import { useEffect, useRef, useMemo } from "react";
-import { VideoTexture, DoubleSide } from "three";
+import { VideoTexture, DoubleSide, Color } from "three";
 
 const vertexShader = /* glsl */ `
   varying vec2 vUv;
@@ -15,6 +15,12 @@ const fragmentShader = /* glsl */ `
   uniform float uSmoothingBlack;
   uniform float uThresholdGreen;
   uniform float uSmoothingGreen;
+  
+  // Các uniform cho hiệu ứng Aura
+  uniform vec3 uAuraColor;
+  uniform float uAuraSize;
+  uniform float uAuraIntensity;
+  
   varying vec2 vUv;
 
   float getBrightness(vec3 color) {
@@ -27,8 +33,13 @@ const fragmentShader = /* glsl */ `
     return maxC - minC;
   }
 
-  void main() {
-    vec4 color = texture2D(uTexture, vUv);
+  float getAlpha(vec2 uv) {
+    // Tránh việc texture lặp lại ở viền (clamp-to-edge) làm xuất hiện viền hình chữ nhật
+    if (uv.x < 0.01 || uv.x > 0.99 || uv.y < 0.01 || uv.y > 0.99) {
+      return 0.0;
+    }
+    
+    vec4 color = texture2D(uTexture, uv);
 
     // --- Xử lý nền đen ---
     float brightness = getBrightness(color.rgb);
@@ -49,16 +60,47 @@ const fragmentShader = /* glsl */ `
     );
     alphaGreen = pow(alphaGreen, 1.5); // làm gọn viền
 
-    // Alpha tổng (nếu nền đen HẶC nền xanh thì đều trong suốt)
-    float alpha = min(alphaBlack, alphaGreen);
+    return min(alphaBlack, alphaGreen);
+  }
 
-    if (alpha < 0.02) discard;
+  void main() {
+    vec4 color = texture2D(uTexture, vUv);
+    
+    float alpha = getAlpha(vUv);
+
+    // Xử lý viền (Aura)
+    float auraAlpha = 0.0;
+    int samples = 12; // Số lượng mẫu xung quanh
+    float radius = uAuraSize; // Bán kính viền
+    float twopi = 6.28318530718;
+    
+    for (int i = 0; i < samples; i++) {
+        float angle = float(i) * twopi / float(samples);
+        vec2 offset = vec2(cos(angle), sin(angle)) * radius;
+        auraAlpha += getAlpha(vUv + offset);
+    }
+    
+    auraAlpha /= float(samples);
+    auraAlpha = clamp(auraAlpha * uAuraIntensity, 0.0, 1.0);
+    
+    // Smooth rìa aura để blend mượt hơn
+    auraAlpha = smoothstep(0.0, 0.8, auraAlpha);
+    
+    // Aura chỉ xuất hiện ở vùng ngoài nhân vật
+    float finalAuraAlpha = auraAlpha * (1.0 - alpha);
+    
+    // Nếu cả char và aura đều mờ, loại bỏ pixel
+    if (alpha < 0.02 && finalAuraAlpha < 0.02) discard;
 
     // Khử viền xanh (chỉ áp dụng nhẹ vùng viền)
     vec3 finalColor = color.rgb;
     finalColor.g = min(finalColor.g, max(finalColor.r, finalColor.b));
 
-    gl_FragColor = vec4(finalColor, alpha);
+    // Phối màu: alpha của nhân vật quyết định màu finalColor, ngược lại là aura
+    vec3 outColor = mix(uAuraColor, finalColor, alpha);
+    float outAlpha = max(alpha, finalAuraAlpha);
+
+    gl_FragColor = vec4(outColor, outAlpha);
   }
 `;
 
@@ -74,6 +116,9 @@ export const BlackScreenVideo = ({ videoSrc }) => {
       uSmoothingBlack: { value: 0.08 },
       uThresholdGreen: { value: 0.4 },
       uSmoothingGreen: { value: 0.06 },
+      // uAuraColor: { value: new Color(0x33ffff) }, // Màu glow (Sáng xanh lục/lam)
+      // uAuraSize: { value: 0.000 }, // Kích cỡ glow
+      uAuraIntensity: { value: 3.5 }, // Độ sáng rõ của glow
     }),
     [],
   );
@@ -127,7 +172,7 @@ export const BlackScreenVideo = ({ videoSrc }) => {
   return (
     <mesh
       ref={meshRef}
-      position={[-0.1, -2, -5]}
+      position={[-0.1, -0.2, -5]}
       scale={[5, 12, 1]}
     >
       <planeGeometry args={[1, 1]} />

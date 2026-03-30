@@ -4,39 +4,21 @@ import { useVideoStore } from "../hooks/useVideoStore";
 const arrModels = [
   {
     id: 1,
-    name: "Model 1",
+    name: "Dance 1",
     image: "/images/moews.jpeg",
-    video: "/video/anhsang.mp4",
+    video: "/video/video-1.mp4",
   },
   {
     id: 2,
-    name: "Model 2",
+    name: "Dance 2",
     image: "/images/moews.jpeg",
-    video: "/video/video-1.mov",
+    video: "/video/video-2.mp4",
   },
   {
     id: 3,
-    name: "Model 3",
-    image: "/images/moews.jpeg",
-    video: "/video/video-5.mp4",
-  },
-  {
-    id: 4,
-    name: "Model 4",
-    image: "/images/moews.jpeg",
-    video: "/video/dance-3.mp4",
-  },
-  {
-    id: 5,
-    name: "Model 5",
+    name: "Dance 3",
     image: "/images/moews.jpeg",
     video: "/video/video-3.mp4",
-  },
-  {
-    id: 6,
-    name: "Model 6",
-    image: "/images/moews.jpeg",
-    video: "/video/cideo-d1.mp4",
   },
 ];
 
