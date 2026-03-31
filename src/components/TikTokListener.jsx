@@ -82,124 +82,37 @@ const TikTokListener = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "1px",
-        right: "1px",
-        bottom: "1px",
-        width: "380px",
-        height: "100dvh",
-        zIndex: 20,
-        display: "flex",
-        flexDirection: "column",
-        borderRadius: "16px",
-        overflow: "hidden",
-        background: "rgba(10,10,20,0.75)",
-        backdropFilter: "blur(16px)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        boxShadow:
-          "0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
-        fontFamily: "'Inter', sans-serif",
-        color: "white",
-        pointerEvents: "auto",
-      }}
-    >
-      {/* Header */}
-      <div
-        style={{
-          padding: "12px 14px 10px",
-          borderBottom: "1px solid rgba(255,255,255,0.07)",
-          background: "rgba(255,255,255,0.03)",
-          flexShrink: 0,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "6px",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontSize: "16px" }}>📡</span>
-            <span
-              style={{
-                fontWeight: 700,
-                fontSize: "13px",
-                color: "#f472b6",
-                letterSpacing: "0.3px",
-              }}
-            >
+    <div className="w-96 h-full overflow-hidden bg-black/20 backdrop-blur-sm border border-white/30 rounded-xl flex flex-col">
+      <div className="p-3.5 bg-black/30 shrink-0 border-b border-b-gray-500">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-3">
+            <span>📡</span>
+            <span className="font-semibold text-sm text-purple tracking-wider">
               TikTok LIVE
             </span>
           </div>
           <div
-            style={{
-              width: "8px",
-              height: "8px",
-              borderRadius: "50%",
-              background: isConnected ? "#22c55e" : "#ef4444",
-              boxShadow: isConnected ? "0 0 8px #22c55e" : "0 0 8px #ef4444",
-              flexShrink: 0,
-            }}
+            className={`w-3 h-3 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"} ${isConnected ? "shadow-green-500/50" : "shadow-red-500/50"} shrink-0`}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <div className="flex justify-between items-center">
           <span
-            style={{
-              fontSize: "11px",
-              color: isConnected ? "#86efac" : "#f87171",
-            }}
+            className={` text-xs ${isConnected ? "text-thirdary" : "text-fivethary"}`}
           >
             {isConnected ? "● Đang kết nối" : "● Chưa kết nối"}
           </span>
-          <span style={{ fontSize: "11px", color: "#a78bfa", fontWeight: 600 }}>
+          <span className="text-xs text-purple-1 font-semibold">
             Dancer {actualIndex + 1}/{DANCER_VIDEOS.length}
           </span>
         </div>
       </div>
 
-      {/* Chat feed */}
-      <div
-        style={{
-          flex: 1,
-          overflowY: "auto",
-          padding: "10px 10px 6px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "6px",
-          scrollbarWidth: "thin",
-          scrollbarColor: "rgba(255,255,255,0.1) transparent",
-        }}
-      >
+      <div className="flex-1 overflow-auto p-3 flex flex-col gap-2">
         {logs.length === 0 ? (
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "rgba(255,255,255,0.3)",
-              fontSize: "12px",
-              fontStyle: "italic",
-              textAlign: "center",
-            }}
-          >
+          <div className="flex-1 flex items-center justify-center text-gray-400 text-xs italic text-center">
             Chưa có sự kiện nào...
             <br />
-            <span
-              style={{ fontSize: "20px", marginTop: "6px", display: "block" }}
-            >
-              💤
-            </span>
+            <span className="text-lg mt-2 block">💤</span>
           </div>
         ) : (
           logs.map((log) => {
@@ -207,17 +120,7 @@ const TikTokListener = () => {
             return (
               <div
                 key={log.id}
-                style={{
-                  background: style.bg,
-                  borderLeft: `2.5px solid ${style.border}`,
-                  borderRadius: "8px",
-                  padding: "7px 10px",
-                  fontSize: "11.5px",
-                  lineHeight: "1.5",
-                  color: "rgba(255,255,255,0.88)",
-                  wordBreak: "break-word",
-                  animation: "slideInChat 0.25s ease",
-                }}
+                className={`${style.bg} border-l-2 border-l-${style.border} rounded-lg text-xs p-3 wrap-break-word slideInChat duration-300 ease-in-out`}
               >
                 {log.text}
               </div>
@@ -227,27 +130,9 @@ const TikTokListener = () => {
         <div ref={chatEndRef} />
       </div>
 
-      {/* Footer */}
-      <div
-        style={{
-          padding: "8px 12px",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          background: "rgba(255,255,255,0.02)",
-          fontSize: "10px",
-          color: "rgba(255,255,255,0.25)",
-          textAlign: "center",
-          flexShrink: 0,
-        }}
-      >
+      <div className="shrink-0 px-3 py-4 border-t border-t-gray-500 text-center text-white/70 text-xs">
         Hoạt động TikTok LIVE realtime
       </div>
-
-      <style>{`
-        @keyframes slideInChat {
-          from { opacity: 0; transform: translateY(6px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 };

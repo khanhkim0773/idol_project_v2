@@ -13,16 +13,41 @@ body {
 @theme {
   --color-purple: #ff2d55;
   --color-primary: #0fc1f7;
+  --color-secondary: #211f21;
+  --color-thirdary: #86efac;
+  --color-fivethary: #f87171;
+  --color-purple-1: #a78bfa;
 }
 
 @keyframes textColor {
-  0%   { color: #00c6ff; }
-  25%  { color: #0072ff; }  
-  50%  { color: #00f2fe; }  
-  75%  { color: #4facfe; } 
-  100% { color: #00c6ff; }
+  0% {
+    color: #00c6ff;
+  }
+  25% {
+    color: #0072ff;
+  }
+  50% {
+    color: #00f2fe;
+  }
+  75% {
+    color: #4facfe;
+  }
+  100% {
+    color: #00c6ff;
+  }
 }
 
 .animate-text {
   animation: textColor 4s linear infinite;
+}
+
+@keyframes slideInChat {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
