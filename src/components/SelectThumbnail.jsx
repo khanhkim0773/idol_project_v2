@@ -9,8 +9,8 @@ const SelectThumbnail = () => {
   const selectedVideo = useVideoStore((state) => state.selectedVideo);
 
   return (
-    <section className="fixed inset-0 z-10 flex items-center justify-center pointer-events-none">
-      <div className="absolute bg-red-500 sm:block hidden left-4 w-[300px] h-[400px] flex flex-col overflow-hidden rounded-2xl bg-white/10 backdrop-blur-xs">
+    <section className=" pointer-events-none">
+      <div className=" bg-red-500 sm:block hidden  w-[300px] h-[400px] flex flex-col overflow-hidden rounded-2xl bg-white/10 backdrop-blur-xs">
         {/* Header */}
         <div className="flex-shrink-0 flex items-center justify-center py-3 border-b border-white/10 text-white font-semibold">
           Chọn người mẫu
