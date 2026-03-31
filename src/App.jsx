@@ -6,6 +6,7 @@ import { GreenScreenVideo } from './components/GreenScreenVideo'
 import SelectThumbnail from './components/SelectThumbnail'
 import * as THREE from 'three'
 import { BlackScreenVideo } from './components/BlackScreenVideo'
+import TikTokListener from './components/TikTokListener'
 
 const StageLights = () => {
   const spotLightRef1 = useRef()
@@ -120,6 +121,7 @@ const App = () => {
       </div>
 
       {/* UI Layer */}
+      <TikTokListener />
       <SelectThumbnail />
     </div>
   )

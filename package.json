@@ -22,6 +22,7 @@
     "leva": "^0.10.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "socket.io-client": "^4.8.3",
     "tailwindcss": "^4.1.4",
     "three": "^0.173.0",
     "zustand": "^5.0.3"

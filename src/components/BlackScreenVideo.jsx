@@ -153,8 +153,8 @@ export const BlackScreenVideo = ({ videoSrc }) => {
       uSmoothingGreen: { value: 0.06 },
       uClipY: { value: 0.1 }, // Vị trí giới hạn dọc cho reflection
       uReflectSpace: { value: 0.25 }, // % không gian dự phòng bên dưới cho bóng kéo dài (25%)
-      // uAuraColor: { value: new Color(0x33ffff) }, // Màu glow (Sáng xanh lục/lam)
-      // uAuraSize: { value: 0.000 }, // Kích cỡ glow
+      uAuraColor: { value: new Color(0x33ffff) }, // Màu glow (Sáng xanh lục/lam)
+      uAuraSize: { value: 0.000 }, // Kích cỡ glow
       uAuraIntensity: { value: 3.5 }, // Độ sáng rõ của glow
     }),
     [],
