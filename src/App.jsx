@@ -113,12 +113,25 @@ const App = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* 3D Canvas Layer */}
-      <div className="absolute inset-0 z-0">
-        <Canvas>
-          <StageLights />
-          {selectedVideo && <BlackScreenVideo videoSrc={selectedVideo} />}
-        </Canvas>
+      {/* 3D Canvas Layer inside a Phone Frame */}
+      <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
+        
+        <div className="relative w-[380px] h-[740px] flex items-center justify-center">
+          {/* Vầng sáng Glow (Stage Lights) bao quanh */}
+          <div className="absolute inset-0 rounded-[3.5rem] animate-pulse bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 blur-[30px] opacity-70"></div>
+          
+          {/* Khung điện thoại */}
+          <div className="relative w-[360px] h-[720px] rounded-[3rem] overflow-hidden pointer-events-auto border-4 border-white/80 shadow-[0_0_20px_#33ffff,inset_0_0_20px_#33ffff] bg-black">
+            <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+              <StageLights />
+              {selectedVideo && <BlackScreenVideo videoSrc={selectedVideo} />}
+            </Canvas>
+
+            {/* Kính chói của màn hình tĩnh mạch (Reflection) */}
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/5 to-white/10"></div>
+            <div className="absolute -top-1/4 -right-1/2 w-full h-[150%] bg-white/5 -rotate-45 blur-sm pointer-events-none"></div>
+          </div>
+        </div>
       </div>
 
       {/* UI Layer */}

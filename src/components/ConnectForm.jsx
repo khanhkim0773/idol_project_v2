@@ -41,8 +41,8 @@ const ConnectForm = () => {
   };
 
   return (
-    <div className="absolute top-4 right-[320px] mx-4 z-20 w-[300px] bg-black/60 backdrop-blur-md border border-white/10 rounded-xl p-4 text-white font-sans pointer-events-auto">
-      <h3 className="font-bold text-lg text-pink-500 mb-2">
+    <div className="absolute top-4 right-[320px] mx-4 z-20 w-[300px] bg-black/60 backdrop-blur-md border sm:block hidden border-white/10 rounded-xl p-4 text-white font-sans pointer-events-auto">
+      <h3 className="font-bold text-lg text-pink-500 mb-2 ">
         Kết nối TikTok LIVE
       </h3>
       <form onSubmit={handleConnect} className="flex flex-col gap-3">
