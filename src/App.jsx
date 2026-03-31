@@ -1,52 +1,52 @@
-import React, { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { SpotLight } from '@react-three/drei'
-import { useVideoStore } from './hooks/useVideoStore'
-import { GreenScreenVideo } from './components/GreenScreenVideo'
-import SelectThumbnail from './components/SelectThumbnail'
-import * as THREE from 'three'
-import { BlackScreenVideo } from './components/BlackScreenVideo'
-import TikTokListener from './components/TikTokListener'
-import ConnectForm from './components/ConnectForm'
+import React, { useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { SpotLight } from "@react-three/drei";
+import { useVideoStore } from "./hooks/useVideoStore";
+import { GreenScreenVideo } from "./components/GreenScreenVideo";
+import SelectThumbnail from "./components/SelectThumbnail";
+import * as THREE from "three";
+import { BlackScreenVideo } from "./components/BlackScreenVideo";
+import TikTokListener from "./components/TikTokListener";
+import ConnectForm from "./components/ConnectForm";
 
 const StageLights = () => {
-  const spotLightRef1 = useRef()
-  const spotLightRef2 = useRef()
-  const mainSpotLightRef = useRef()
+  const spotLightRef1 = useRef();
+  const spotLightRef2 = useRef();
+  const mainSpotLightRef = useRef();
 
   const [target1] = useState(() => {
-    const obj = new THREE.Object3D()
-    obj.position.set(-1, -2, -5)
-    return obj
-  })
+    const obj = new THREE.Object3D();
+    obj.position.set(-1, -2, -5);
+    return obj;
+  });
   const [target2] = useState(() => {
-    const obj = new THREE.Object3D()
-    obj.position.set(1, -2, -5)
-    return obj
-  })
+    const obj = new THREE.Object3D();
+    obj.position.set(1, -2, -5);
+    return obj;
+  });
   const [targetMain] = useState(() => {
-    const obj = new THREE.Object3D()
-    obj.position.set(0, -2, -5)
-    return obj
-  })
+    const obj = new THREE.Object3D();
+    obj.position.set(0, -2, -5);
+    return obj;
+  });
 
   useFrame((state) => {
-    const t = state.clock.elapsedTime
+    const t = state.clock.elapsedTime;
 
     // Flashing effect and moving slightly
     if (spotLightRef1.current) {
-      spotLightRef1.current.intensity = 4 + Math.sin(t * 6) * 4
-      spotLightRef1.current.position.x = -4 + Math.sin(t * 2) * 2
+      spotLightRef1.current.intensity = 4 + Math.sin(t * 6) * 4;
+      spotLightRef1.current.position.x = -4 + Math.sin(t * 2) * 2;
     }
     if (spotLightRef2.current) {
-      spotLightRef2.current.intensity = 4 + Math.cos(t * 7) * 4
-      spotLightRef2.current.position.x = 4 + Math.cos(t * 1.5) * 2
+      spotLightRef2.current.intensity = 4 + Math.cos(t * 7) * 4;
+      spotLightRef2.current.position.x = 4 + Math.cos(t * 1.5) * 2;
     }
     // Main spotlight flickering slightly
     if (mainSpotLightRef.current) {
-      mainSpotLightRef.current.intensity = 6 + Math.sin(t * 10) * 1.5
+      mainSpotLightRef.current.intensity = 6 + Math.sin(t * 10) * 1.5;
     }
-  })
+  });
 
   return (
     <>
@@ -98,12 +98,12 @@ const StageLights = () => {
         target={target2}
       />
     </>
-  )
-}
+  );
+};
 
 const App = () => {
-  const selectedVideo = useVideoStore((state) => state.selectedVideo)
-  const [isConnected, setIsConnected] = useState(false)
+  const selectedVideo = useVideoStore((state) => state.selectedVideo);
+  const [isConnected, setIsConnected] = useState(false);
 
   if (!isConnected) {
     return (
@@ -116,7 +116,7 @@ const App = () => {
         />
         <ConnectForm onConnectSuccess={() => setIsConnected(true)} />
       </div>
-    )
+    );
   }
 
   return (
@@ -128,21 +128,15 @@ const App = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* 3D Canvas Layer inside a Phone Frame */}
       <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
-        
         <div className="relative w-[380px] h-[740px] flex items-center justify-center">
-          {/* Vầng sáng Glow (Stage Lights) bao quanh */}
           <div className="absolute inset-0 rounded-[3.5rem] animate-pulse bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 blur-[30px] opacity-70"></div>
-          
-          {/* Khung điện thoại */}
           <div className="relative w-[360px] h-[720px] rounded-[3rem] overflow-hidden pointer-events-auto border-4 border-white/80 shadow-[0_0_20px_#33ffff,inset_0_0_20px_#33ffff] bg-black">
             <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
               <StageLights />
               {selectedVideo && <BlackScreenVideo videoSrc={selectedVideo} />}
             </Canvas>
 
-            {/* Kính chói của màn hình tĩnh mạch (Reflection) */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/5 to-white/10"></div>
             <div className="absolute -top-1/4 -right-1/2 w-full h-[150%] bg-white/5 -rotate-45 blur-sm pointer-events-none"></div>
           </div>
@@ -153,7 +147,7 @@ const App = () => {
       <TikTokListener />
       <SelectThumbnail />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 #root {
   width: 100vw;
   height: 100vh;
@@ -12,6 +11,18 @@ body {
 }
 
 @theme {
-  --color-purple: #FF2D55;
+  --color-purple: #ff2d55;
   --color-primary: #0fc1f7;
+}
+
+@keyframes textColor {
+  0%   { color: #00c6ff; }
+  25%  { color: #0072ff; }  
+  50%  { color: #00f2fe; }  
+  75%  { color: #4facfe; } 
+  100% { color: #00c6ff; }
+}
+
+.animate-text {
+  animation: textColor 4s linear infinite;
 }

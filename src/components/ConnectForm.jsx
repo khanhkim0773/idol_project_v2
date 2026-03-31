@@ -46,9 +46,17 @@ const ConnectForm = ({ onConnectSuccess }) => {
   return (
     <div className="relative z-20 sm:max-w-md w-full sm:h-auto h-full bg-white/10 backdrop-blur-xl sm:border border-white/40 sm:rounded-xl p-6 text-white font-sans pointer-events-auto">
       <div className="w-full h-full flex flex-col items-center sm:mt-5 gap-4 mt-10 sm:mb-5 mb-10">
-        <img src={IMAGES.ICO_TIKTOK} alt="Logo" className="w-24"/>
-        <h3 className="font-bold text-3xl text-center uppercase">
-          Kết nối <span className="text-primary">TikTok LIVE</span>
+        <img src={IMAGES.ICO_TIKTOK} alt="Logo" className="w-24" />
+        <h3 className="font-bold text-3xl text-center uppercase flex justify-center gap-1">
+          {"Kết nối TikTok LIVE".split("").map((char, i) => (
+            <span
+              key={i}
+              className="animate-text"
+              style={{ animationDelay: `${i * 0.05}s` }}
+            >
+              {char}
+            </span>
+          ))}
         </h3>
         <p className="text-sm">Sẵn sàng để bùng nổ với phiên live của bạn</p>
         <form
@@ -83,7 +91,11 @@ const ConnectForm = ({ onConnectSuccess }) => {
               </div>
             )}
 
-            {loading ? <span className="text-green-400">Đang kết nối...</span> : "Kết nối"}
+            {loading ? (
+              <span className="text-green-400">Đang kết nối...</span>
+            ) : (
+              "Kết nối"
+            )}
           </button>
         </form>
         {message && (

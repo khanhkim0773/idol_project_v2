@@ -53,6 +53,8 @@ const connectToTikTok = (username, res) => {
       `${data.uniqueId} sent ${data.giftName} (qty: ${data.repeatCount})!`,
     );
 
+    // console.log("FULL DATA:", data);
+
     if (
       data.giftName.toLowerCase().includes("rose") ||
       data.giftName.toLowerCase().includes("hoa hồng") ||
@@ -63,6 +65,8 @@ const connectToTikTok = (username, res) => {
         user: data.uniqueId,
         giftName: data.giftName,
         giftId: data.giftId,
+        nickname: data.nickname,
+        profilePicture: data.profilePictureUrl,
         amount: data.repeatCount || 1,
         type: "rose",
       });
@@ -70,9 +74,21 @@ const connectToTikTok = (username, res) => {
       io.emit("tiktok_gift_other", {
         user: data.uniqueId,
         giftName: data.giftName,
+        nickname: data.nickname,
         amount: data.repeatCount || 1,
+        profilePicture: data.profilePictureUrl,
       });
     }
+  });
+
+  tiktokLiveConnection.on("chat", (data) => {
+    // console.log("FULL Chat:", data);
+    io.emit("tiktok_chat", {
+      user: data.uniqueId,
+      nickname: data.nickname,
+      comment: data.comment,
+      profilePicture: data.profilePictureUrl,
+    });
   });
 
   tiktokLiveConnection.on("disconnected", () => {
