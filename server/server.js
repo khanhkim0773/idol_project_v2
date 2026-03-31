@@ -12,57 +12,85 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
     origin: "*", // allow anywhere for testing
-    methods: ["GET", "POST"]
-  }
+    methods: ["GET", "POST"],
+  },
 });
 
-// TikTok Username to connect to
-const TIKTOK_USERNAME = "ledoankimkhanh"; // <--- Đổi thành username TikTok LIVE thật ở đây
+app.use(express.json());
 
-// Create connection to TikTok Live
-const tiktokLiveConnection = new WebcastPushConnection(TIKTOK_USERNAME);
+let tiktokLiveConnection = null;
 
-// Connect
-tiktokLiveConnection.connect().then(state => {
-  console.info(`Connected to roomId ${state.roomId}`);
-}).catch(err => {
-  console.error('Failed to connect', err);
-});
-
-// Listen to Gift events
-tiktokLiveConnection.on('gift', data => {
-  // Option: filter for "Rose" only or handle others
-  // "Rose" is usually giftId: 5655 or giftName: "Rose" / "Hoa hồng"
-  if (data.giftType === 1 && !data.repeatEnd) {
-    // Only process when a gift strike is complete (for strike gifts like roses)
-    // Actually, to get every single Rose, we can just process them as they come.
-    // Or just look at data.giftName.
+const connectToTikTok = (username, res) => {
+  if (tiktokLiveConnection) {
+    try {
+      tiktokLiveConnection.disconnect();
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  // To be safe and log every gift:
-  console.log(`${data.uniqueId} sent ${data.giftName} (qty: ${data.repeatCount})!`);
+  console.log(`Attempting to connect to @${username}...`);
+  tiktokLiveConnection = new WebcastPushConnection(username);
 
-  if (
-    data.giftName.toLowerCase().includes("rose") || 
-    data.giftName.toLowerCase().includes("hoa hồng") ||
-    data.giftId === 5655
-  ) {
-    console.log("🌸 Rose received! Emitting to socket...");
-    io.emit('tiktok_gift', {
-      user: data.uniqueId,
-      giftName: data.giftName,
-      giftId: data.giftId,
-      amount: data.repeatCount || 1,
-      type: 'rose'
+  tiktokLiveConnection
+    .connect()
+    .then((state) => {
+      console.info(`Connected to roomId ${state.roomId}`);
+      io.emit("tiktok_connected", username);
+      if (res) res.json({ success: true, message: `Connected to ${username}` });
+    })
+    .catch((err) => {
+      console.error("Failed to connect", err);
+      if (res)
+        res.status(500).json({ success: false, message: "Failed to connect" });
     });
-  } else {
-    // Emit other gifts if desired
-    io.emit('tiktok_gift_other', {
-      user: data.uniqueId,
-      giftName: data.giftName,
-      amount: data.repeatCount || 1
-    });
+
+  // Listen to Gift events
+  tiktokLiveConnection.on("gift", (data) => {
+    if (data.giftType === 1 && !data.repeatEnd) {
+      return;
+    }
+
+    console.log(
+      `${data.uniqueId} sent ${data.giftName} (qty: ${data.repeatCount})!`,
+    );
+
+    if (
+      data.giftName.toLowerCase().includes("rose") ||
+      data.giftName.toLowerCase().includes("hoa hồng") ||
+      data.giftId === 5655
+    ) {
+      console.log("🌸 Rose received! Emitting to socket...");
+      io.emit("tiktok_gift", {
+        user: data.uniqueId,
+        giftName: data.giftName,
+        giftId: data.giftId,
+        amount: data.repeatCount || 1,
+        type: "rose",
+      });
+    } else {
+      io.emit("tiktok_gift_other", {
+        user: data.uniqueId,
+        giftName: data.giftName,
+        amount: data.repeatCount || 1,
+      });
+    }
+  });
+
+  tiktokLiveConnection.on("disconnected", () => {
+    console.log("Disconnected from TikTok");
+    io.emit("tiktok_disconnected");
+  });
+};
+
+app.post("/api/connect", (req, res) => {
+  const { username } = req.body;
+  if (!username) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Username is required" });
   }
+  connectToTikTok(username, res);
 });
 
 // Socket client connection
@@ -76,5 +104,5 @@ io.on("connection", (socket) => {
 const PORT = 3004;
 httpServer.listen(PORT, () => {
   console.log(`Backend Server listening at http://localhost:${PORT}`);
-  console.log(`Watching TikTok Live for: @${TIKTOK_USERNAME}`);
+  console.log(`Waiting for frontend to connect TikTok Live via API...`);
 });

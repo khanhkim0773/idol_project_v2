@@ -7,6 +7,7 @@ import SelectThumbnail from './components/SelectThumbnail'
 import * as THREE from 'three'
 import { BlackScreenVideo } from './components/BlackScreenVideo'
 import TikTokListener from './components/TikTokListener'
+import ConnectForm from './components/ConnectForm'
 
 const StageLights = () => {
   const spotLightRef1 = useRef()
@@ -121,6 +122,7 @@ const App = () => {
       </div>
 
       {/* UI Layer */}
+      <ConnectForm />
       <TikTokListener />
       <SelectThumbnail />
     </div>
