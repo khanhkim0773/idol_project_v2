@@ -2,17 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useVideoStore } from "../hooks/useVideoStore";
 import { DANCER_VIDEOS, SOCKET_URL } from "../utils/constant";
+import { MESSAGE_TYPE } from "../utils/type";
 
 const getMessageStyle = (msg) => {
-  if (msg.startsWith("✅"))
-    return { border: "#22c55e", bg: "rgba(34,197,94,0.08)" };
-  if (msg.startsWith("❌"))
-    return { border: "#ef4444", bg: "rgba(239,68,68,0.08)" };
+  if (msg === MESSAGE_TYPE.CONNECT)
+    return { border: "border-l-[#00FF00]", bg: "bg-[#00FF0014]" };
+  if (msg === MESSAGE_TYPE.DISCONNECT)
+    return { border: "border-l-[#FF0000]", bg: "bg-[#EF444434]" };
   if (msg.startsWith("🌹"))
-    return { border: "#ec4899", bg: "rgba(236,72,153,0.10)" };
+    return { border: "border-l-[#ec4899]", bg: "bg-[#EC489914]" };
   if (msg.startsWith("🎁"))
-    return { border: "#a78bfa", bg: "rgba(167,139,250,0.08)" };
-  return { border: "#ffffff30", bg: "rgba(255,255,255,0.04)" };
+    return { border: "border-l-[#a78bfa]", bg: "bg-[#A78BFA14]" };
+  return { border: "border-l-[#ffffff30]", bg: "bg-[#FFFFFF0A]" };
 };
 
 const TikTokListener = () => {
@@ -47,12 +48,12 @@ const TikTokListener = () => {
 
     socket.on("connect", () => {
       setIsConnected(true);
-      addLog("Kết nối tới Server Tiktok thành công");
+      addLog(`${MESSAGE_TYPE.CONNECT}`);
     });
 
     socket.on("disconnect", () => {
       setIsConnected(false);
-      addLog("Mất kết nối tới Server");
+      addLog(`${MESSAGE_TYPE.DISCONNECT}`);
     });
 
     socket.on("tiktok_gift", (giftData) => {
@@ -120,7 +121,7 @@ const TikTokListener = () => {
             return (
               <div
                 key={log.id}
-                className={`${style.bg} border-l-2 border-l-${style.border} rounded-lg text-xs p-3 wrap-break-word slideInChat duration-300 ease-in-out`}
+                className={`${style.bg} text-white border-l-2 ${style.border} rounded-lg text-xs p-3 wrap-break-word slideInChat duration-300 ease-in-out`}
               >
                 {log.text}
               </div>

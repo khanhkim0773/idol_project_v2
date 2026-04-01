@@ -8,7 +8,7 @@ import UploadPage from "./pages/UploadPage";
 const App = () => {
   const [isConnected, setIsConnected] = useState(false);
 
-  if (isConnected) {
+  if (!isConnected) {
     return (
       <div className="w-screen h-screen relative flex items-center justify-center bg-black overflow-hidden">
         {/* Background Image */}

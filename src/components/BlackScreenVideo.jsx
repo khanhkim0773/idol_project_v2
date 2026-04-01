@@ -217,8 +217,13 @@ export const BlackScreenVideo = ({ videoSrc }) => {
   }, [videoSrc, uniforms]);
 
   return (
-    <mesh ref={meshRef} position={[-0.1, -2.5, -5]} scale={[5, 16, 1]}>
-      <planeGeometry args={[1, 1, 1]} />
+    <mesh
+      ref={meshRef}
+      renderOrder={1}
+      position={[0, -2.5, -6]}
+      scale={[5, 16, 1]}
+    >
+      <planeGeometry args={[1.4, 1.5, 1]} />
       <shaderMaterial
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}

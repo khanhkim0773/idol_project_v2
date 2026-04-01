@@ -6,6 +6,7 @@ import { useVideoStore } from "../hooks/useVideoStore";
 import TikTokListener from "../components/TikTokListener";
 import SelectThumbnail from "../components/SelectThumbnail";
 import { BlackScreenVideo } from "../components/BlackScreenVideo";
+import Background from "../components/Background";
 
 const StageLights = () => {
   const spotLightRef1 = useRef();
@@ -112,6 +113,7 @@ const HomePage = () => {
             <div className="relative w-[360px] h-[720px] rounded-[3rem] overflow-hidden pointer-events-auto border-4 border-white/80  bg-black">
               <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
                 {/* <StageLights /> */}
+                <Background imgSrc="/images/background.png" />
                 {selectedVideo && <BlackScreenVideo videoSrc={selectedVideo} />}
               </Canvas>
 

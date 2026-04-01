@@ -10,7 +10,7 @@ const Menu = [
 
 const Sidebar = () => {
   return (
-    <div className="w-[300px] h-full bg-secondary">
+    <div className="w-[290px] h-full bg-secondary">
       <div className="w-full h-full flex flex-col gap-5 py-5 ">
         <div className="flex items-center gap-4 px-2 border-b border-white/30 pb-5">
           <img
@@ -18,9 +18,12 @@ const Sidebar = () => {
             alt="Logo"
             className="w-16 h-16 object-contain"
           />
-          <p className="uppercase text-white text-2xl font-bold">
-            Tiktok Live Dancer
-          </p>
+          <div>
+            <p className="uppercase text-white text-xl font-bold">
+              Live Dancer
+            </p>
+            <p className="text-sm text-white">Chọn mẫu theo yêu cầu</p>
+          </div>
         </div>
         <div className="px-2 flex flex-col gap-4">
           {Menu.map((item) => (
@@ -36,9 +39,7 @@ const Sidebar = () => {
               }
             >
               <span className="text-2xl">{item.icon}</span>
-              <span className="text-xl font-medium">
-                {item.name}
-              </span>
+              <span className="text-xl font-medium">{item.name}</span>
             </NavLink>
           ))}
         </div>
