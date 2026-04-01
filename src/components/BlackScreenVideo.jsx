@@ -11,7 +11,7 @@ import { useEffect, useRef } from "react";
  */
 const THRESHOLD = -10; // Điều chỉnh tại đây nếu cần
 
-export const BlackScreenVideo = ({ videoSrc }) => {
+export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const animFrameRef = useRef(null);
@@ -26,7 +26,7 @@ export const BlackScreenVideo = ({ videoSrc }) => {
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
     video.src = videoSrc;
-    video.loop = true;
+    video.loop = false;   // Không lặp → để sự kiện 'ended' có thể bắt
     video.muted = false;
     video.playsInline = true;
     video.preload = "auto";
@@ -92,6 +92,12 @@ const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
     video.addEventListener("loadeddata", handleLoaded);
 
+    // Khi video kết thúc → gọi callback để phát video tiếp theo trong queue
+    const handleEnded = () => {
+      if (onVideoEnded) onVideoEnded();
+    };
+    video.addEventListener("ended", handleEnded);
+
     return () => {
       running = false;
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
@@ -99,6 +105,7 @@ const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
       video.removeAttribute("src");
       video.load();
       video.removeEventListener("loadeddata", handleLoaded);
+      video.removeEventListener("ended", handleEnded);
     };
   }, [videoSrc]);
 

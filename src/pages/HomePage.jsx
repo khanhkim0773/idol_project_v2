@@ -7,6 +7,7 @@ import Background from "../components/Background";
 
 const HomePage = () => {
   const selectedVideo = useVideoStore((state) => state.selectedVideo);
+  const dequeueVideo = useVideoStore((state) => state.dequeueVideo);
 
   return (
     <>
@@ -20,7 +21,12 @@ const HomePage = () => {
               <Background imgSrc="/images/background.png" />
 
               {/* Video dancer layer */}
-              {selectedVideo && <BlackScreenVideo videoSrc={selectedVideo} />}
+              {selectedVideo && (
+                <BlackScreenVideo
+                  videoSrc={selectedVideo}
+                  onVideoEnded={dequeueVideo}
+                />
+              )}
 
               {/* Gloss overlay */}
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/5 to-white/10" style={{ zIndex: 2 }}></div>

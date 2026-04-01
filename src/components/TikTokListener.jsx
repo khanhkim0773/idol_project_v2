@@ -18,8 +18,8 @@ const getMessageStyle = (msg) => {
 
 const TikTokListener = () => {
   const selectedVideo = useVideoStore((state) => state.selectedVideo);
+  const videoQueue = useVideoStore((state) => state.videoQueue);
   const getActiveVideos = useVideoStore((state) => state.getActiveVideos);
-  const setSelectedVideo = useVideoStore((state) => state.setSelectedVideo);
 
   const [logs, setLogs] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
@@ -82,11 +82,15 @@ const TikTokListener = () => {
 
       const pool = matched.length > 0 ? matched : active;
 
-      // Cycle: find current video index in pool, advance to next
-      const curVideo = useVideoStore.getState().selectedVideo;
-      const curIdx = pool.findIndex((v) => v.video === curVideo);
+      // Cycle: tìm video tiếp theo trong pool (vòng tròn)
+      // Dùng queue cuối cùng trong store để tính nextIdx chính xác
+      const state = useVideoStore.getState();
+      const lastQueued = state.videoQueue[state.videoQueue.length - 1] ?? state.selectedVideo;
+      const curIdx = pool.findIndex((v) => v.video === lastQueued);
       const nextIdx = curIdx + 1 >= pool.length ? 0 : curIdx + 1;
-      useVideoStore.getState().setSelectedVideo(pool[nextIdx].video);
+
+      // Đẩy vào queue thay vì set trực tiếp
+      useVideoStore.getState().enqueueVideo(pool[nextIdx].video);
     });
 
     socket.on("tiktok_gift_other", (giftData) => {
@@ -126,6 +130,11 @@ const TikTokListener = () => {
             </span>
             <span className="text-xs text-purple-1 font-semibold">
               Dancer {actualIndex + 1}/{activeVideos.length}
+              {videoQueue.length > 0 && (
+                <span className="ml-2 bg-pink-500/80 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                  +{videoQueue.length}
+                </span>
+              )}
             </span>
           </div>
         </div>

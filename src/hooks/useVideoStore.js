@@ -101,6 +101,40 @@ export const useVideoStore = create(
       setSelectedVideo: (path) => set({ selectedVideo: path }),
       setSelected: (video, sound) => set({ selectedVideo: video, selectedSound: sound }),
       selectedSound: null,
+
+      // ---------- video queue ----------
+      // Queue lưu danh sách video chờ phát (mỗi phần tử là đường dẫn video)
+      videoQueue: [],
+
+      /**
+       * Thêm video vào hệ thống phát:
+       * - Nếu chưa có video đang phát → phát ngay
+       * - Nếu đã có video đang phát → đẩy vào queue chờ
+       */
+      enqueueVideo: (videoPath) =>
+        set((state) => {
+          if (!state.selectedVideo) {
+            // Không có video nào đang phát → phát ngay
+            return { selectedVideo: videoPath };
+          }
+          // Đã có video đang phát → đẩy vào cuối queue
+          return { videoQueue: [...state.videoQueue, videoPath] };
+        }),
+
+      /**
+       * Được gọi khi video hiện tại kết thúc.
+       * Lấy video đầu tiên trong queue (nếu có) và set làm video hiện tại.
+       * Nếu queue rỗng → về trạng thái idle (selectedVideo = null)
+       */
+      dequeueVideo: () =>
+        set((state) => {
+          if (state.videoQueue.length === 0) {
+            // Queue rỗng → idle
+            return { selectedVideo: null };
+          }
+          const [next, ...remaining] = state.videoQueue;
+          return { selectedVideo: next, videoQueue: remaining };
+        }),
     }),
     {
       name: "idol-video-store",
