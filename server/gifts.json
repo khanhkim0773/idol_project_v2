@@ -90,5 +90,13 @@
   {
     "giftId": 57800,
     "giftName": "Parrot"
+  },
+  {
+    "giftId": 6427,
+    "giftName": "Hat and Mustache"
+  },
+  {
+    "giftId": 10961,
+    "giftName": "Peach"
   }
 ]
