@@ -62,35 +62,37 @@ const TikTokListener = () => {
     });
 
     socket.on("tiktok_gift", (giftData) => {
+      const giftName = giftData.giftName ?? "";
       addLog(
-        `🌹 Nhận được ${giftData.amount} ${giftData.giftName} từ ${giftData.user} (${giftData.nickname})!`
+        `🌹 Nhận được ${giftData.amount} ${giftName} từ ${giftData.user} (${giftData.nickname})!`
       );
 
-      // Find matching active videos for this gift name
+      // Lấy danh sách active videos
       const active = useVideoStore.getState().getActiveVideos();
       if (active.length === 0) return;
 
-      const giftNameLower = giftData.giftName?.toLowerCase() ?? "";
+      const giftNameLower = giftName.toLowerCase().trim();
 
-      // Try to find a video whose "gift" field matches the gift received
+      // Chỉ lấy video có gift field khớp chính xác với tên quà nhận được
+      // (case-insensitive, exact match)
       const matched = active.filter(
-        (v) =>
-          v.gift &&
-          (giftNameLower.includes(v.gift.toLowerCase()) ||
-            v.gift.toLowerCase().includes(giftNameLower))
+        (v) => v.gift && v.gift.toLowerCase().trim() === giftNameLower
       );
 
-      const pool = matched.length > 0 ? matched : active;
+      // Nếu không có video nào khớp với quà này → KHÔNG phát gì cả
+      if (matched.length === 0) {
+        addLog(`⚠️ Không có dancer nào được gán quà "${giftName}", bỏ qua.`);
+        return;
+      }
 
-      // Cycle: tìm video tiếp theo trong pool (vòng tròn)
-      // Dùng queue cuối cùng trong store để tính nextIdx chính xác
+      // Cycle qua các video khớp (vòng tròn)
       const state = useVideoStore.getState();
       const lastQueued = state.videoQueue[state.videoQueue.length - 1] ?? state.selectedVideo;
-      const curIdx = pool.findIndex((v) => v.video === lastQueued);
-      const nextIdx = curIdx + 1 >= pool.length ? 0 : curIdx + 1;
+      const curIdx = matched.findIndex((v) => v.video === lastQueued);
+      const nextIdx = curIdx + 1 >= matched.length ? 0 : curIdx + 1;
 
-      // Đẩy vào queue thay vì set trực tiếp
-      useVideoStore.getState().enqueueVideo(pool[nextIdx].video);
+      // Đẩy vào queue
+      useVideoStore.getState().enqueueVideo(matched[nextIdx].video);
     });
 
     socket.on("tiktok_gift_other", (giftData) => {

@@ -9,7 +9,7 @@ const seedVideos = arrModels.map((m, idx) => ({
   description: m.description,
   avatar: m.image,
   video: m.video,
-  gift: "Rose",         // gift name that triggers this video
+  gift: "",            // gift name that triggers this video (empty = no trigger)
   order: idx + 1,       // display order
   active: true,         // active/inactive
 }));

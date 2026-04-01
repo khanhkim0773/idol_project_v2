@@ -43,6 +43,6 @@ app.use("/api/gifts", createGiftsRouter(knownGifts));   // GET /api/gifts
 
 const PORT = 3004;
 httpServer.listen(PORT, () => {
-  console.log(`\n🚀 Backend Server listening at http://localhost:${PORT}`);
+  console.log(`Backend Server listening at http://localhost:${PORT}`);
   console.log(`   Waiting for frontend to connect TikTok Live via API...\n`);
 });

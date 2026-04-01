@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useVideoStore } from "../hooks/useVideoStore";
 import {
   MdAdd,
@@ -45,7 +45,7 @@ async function uploadFile(file, type) {
 const EMPTY_FORM = {
   name: "",
   description: "",
-  gift: "Rose",
+  gift: "",
   avatar: "",
   video: "",
   order: 1,
@@ -61,8 +61,27 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
   );
   const [uploading, setUploading] = useState({ video: false, avatar: false });
   const [uploadError, setUploadError] = useState("");
+  const [giftOptions, setGiftOptions] = useState(["Rose"]);
   const avatarRef = useRef();
   const videoRef = useRef();
+
+  // Fetch gift list from server
+  useEffect(() => {
+    fetch("/api/gifts")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          // Extract unique gift names, always keep Rose at top
+          const names = data.map((g) => g.giftName).filter(Boolean);
+          const unique = [...new Set(["Rose", ...names])];
+          setGiftOptions(unique);
+        }
+      })
+      .catch(() => {
+        // Fallback: just keep Rose
+        setGiftOptions(["Rose"]);
+      });
+  }, []);
 
   const set = (k, v) => setForm((p) => ({ ...p, [k]: v }));
 
@@ -197,14 +216,38 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
               <label className="text-xs text-white/50 mb-1 flex items-center gap-1">
                 <MdCardGiftcard className="text-pink-400" /> Quà kích hoạt
               </label>
-              <input
-                value={form.gift}
-                onChange={(e) => set("gift", e.target.value)}
-                placeholder="Rose"
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-pink-400 transition"
-              />
+              <div className="relative">
+                <select
+                  value={form.gift}
+                  onChange={(e) => set("gift", e.target.value)}
+                  className="w-full appearance-none bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-pink-400 transition cursor-pointer pr-8"
+                  style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
+                >
+                  <option
+                    value=""
+                    style={{ backgroundColor: "#1a1820", color: "rgba(255,255,255,0.3)" }}
+                  >
+                    — Chưa chọn quà —
+                  </option>
+                  {giftOptions.map((name) => (
+                    <option
+                      key={name}
+                      value={name}
+                      style={{ backgroundColor: "#1a1820", color: "#fff" }}
+                    >
+                      🎁 {name}
+                    </option>
+                  ))}
+                </select>
+                {/* Custom dropdown arrow */}
+                <div className="pointer-events-none absolute inset-y-0 right-2.5 flex items-center">
+                  <svg className="w-4 h-4 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
               <p className="text-[10px] text-white/30 mt-1">
-                Tên quà TikTok kích hoạt video
+                Chọn quà TikTok kích hoạt video • Không chọn = không kích hoạt
               </p>
             </div>
             <div>
@@ -226,11 +269,10 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
               <MdVideocam className="text-cyan-400" /> File Video *
             </label>
             <div
-              className={`w-full border border-dashed rounded-lg px-4 py-4 flex flex-col items-center gap-2 transition bg-white/5 group ${
-                uploading.video
+              className={`w-full border border-dashed rounded-lg px-4 py-4 flex flex-col items-center gap-2 transition bg-white/5 group ${uploading.video
                   ? "border-cyan-400/60 cursor-not-allowed"
                   : "border-white/20 cursor-pointer hover:border-cyan-400"
-              }`}
+                }`}
               onClick={() => !uploading.video && videoRef.current?.click()}
             >
               {uploading.video ? (
@@ -298,11 +340,10 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
           <button
             disabled={!valid}
             onClick={() => onSave(form)}
-            className={`px-5 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${
-              valid
+            className={`px-5 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${valid
                 ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:opacity-90 shadow-lg shadow-cyan-500/20"
                 : "bg-white/10 text-white/30 cursor-not-allowed"
-            }`}
+              }`}
           >
             {isUploading ? (
               <div className="w-4 h-4 border-2 border-white/40 border-t-transparent rounded-full animate-spin" />
@@ -347,11 +388,10 @@ const DeleteConfirm = ({ name, onConfirm, onClose }) => (
 const VideoCard = ({ video, index, total, onEdit, onDelete, onToggle, onMoveUp, onMoveDown }) => {
   return (
     <div
-      className={`group relative flex items-center gap-4 p-4 rounded-2xl border transition-all duration-200 ${
-        video.active
+      className={`group relative flex items-center gap-4 p-4 rounded-2xl border transition-all duration-200 ${video.active
           ? "bg-white/5 border-white/10 hover:border-cyan-500/40 hover:bg-white/8"
           : "bg-white/[0.02] border-white/5 opacity-60 hover:opacity-80"
-      }`}
+        }`}
     >
       {/* order badge */}
       <div className="flex flex-col items-center gap-1 shrink-0">
@@ -363,11 +403,10 @@ const VideoCard = ({ video, index, total, onEdit, onDelete, onToggle, onMoveUp, 
           <MdArrowUpward size={16} />
         </button>
         <div
-          className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${
-            video.active
+          className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${video.active
               ? "bg-gradient-to-br from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-500/30"
               : "bg-white/10 text-white/30"
-          }`}
+            }`}
         >
           {video.order}
         </div>
@@ -397,11 +436,10 @@ const VideoCard = ({ video, index, total, onEdit, onDelete, onToggle, onMoveUp, 
           <h3 className="text-white font-semibold text-sm truncate">{video.name}</h3>
           {/* active badge */}
           <span
-            className={`shrink-0 text-[10px] px-2 py-0.5 rounded-full font-semibold border ${
-              video.active
+            className={`shrink-0 text-[10px] px-2 py-0.5 rounded-full font-semibold border ${video.active
                 ? "bg-green-500/15 text-green-400 border-green-500/30"
                 : "bg-white/5 text-white/30 border-white/10"
-            }`}
+              }`}
           >
             {video.active ? "● Active" : "○ Inactive"}
           </span>
@@ -428,14 +466,12 @@ const VideoCard = ({ video, index, total, onEdit, onDelete, onToggle, onMoveUp, 
         <button
           onClick={onToggle}
           title={video.active ? "Tắt video" : "Bật video"}
-          className={`relative w-10 h-5 rounded-full transition-colors shrink-0 ${
-            video.active ? "bg-green-500" : "bg-white/15"
-          }`}
+          className={`relative w-10 h-5 rounded-full transition-colors shrink-0 ${video.active ? "bg-green-500" : "bg-white/15"
+            }`}
         >
           <span
-            className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${
-              video.active ? "translate-x-5" : ""
-            }`}
+            className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${video.active ? "translate-x-5" : ""
+              }`}
           />
         </button>
 
@@ -473,8 +509,8 @@ const UploadPage = () => {
     filter === "all"
       ? sorted
       : filter === "active"
-      ? sorted.filter((v) => v.active)
-      : sorted.filter((v) => !v.active);
+        ? sorted.filter((v) => v.active)
+        : sorted.filter((v) => !v.active);
 
   const activeCount = videos.filter((v) => v.active).length;
 
@@ -529,11 +565,10 @@ const UploadPage = () => {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                filter === f
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${filter === f
                   ? "bg-white/15 text-white"
                   : "text-white/30 hover:text-white/60 hover:bg-white/5"
-              }`}
+                }`}
             >
               {f === "all" ? `Tất cả (${videos.length})` : f === "active" ? `Active (${activeCount})` : `Inactive (${videos.length - activeCount})`}
             </button>
