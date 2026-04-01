@@ -101,6 +101,8 @@ export const useVideoStore = create(
       setSelectedVideo: (path) => set({ selectedVideo: path }),
       setSelected: (video, sound) => set({ selectedVideo: video, selectedSound: sound }),
       selectedSound: null,
+      // Bump mỗi khi bắt đầu phát (kể cả phát lại cùng src)
+      playId: 0,
 
       // ---------- video queue ----------
       // Queue lưu danh sách video chờ phát (mỗi phần tử là đường dẫn video)
@@ -115,7 +117,7 @@ export const useVideoStore = create(
         set((state) => {
           if (!state.selectedVideo) {
             // Không có video nào đang phát → phát ngay
-            return { selectedVideo: videoPath };
+            return { selectedVideo: videoPath, playId: state.playId + 1 };
           }
           // Đã có video đang phát → đẩy vào cuối queue
           return { videoQueue: [...state.videoQueue, videoPath] };
@@ -133,7 +135,12 @@ export const useVideoStore = create(
             return { selectedVideo: null };
           }
           const [next, ...remaining] = state.videoQueue;
-          return { selectedVideo: next, videoQueue: remaining };
+          // Dù next có thể trùng selectedVideo, vẫn tăng playId để ép remount player
+          return {
+            selectedVideo: next,
+            videoQueue: remaining,
+            playId: state.playId + 1,
+          };
         }),
     }),
     {

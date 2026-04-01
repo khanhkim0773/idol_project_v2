@@ -118,5 +118,18 @@
   {
     "giftId": 37318,
     "giftName": "Monster Vãi Chè"
+  },
+  { "giftId": 6427, "giftName": "Hat and Mustache" },
+  {
+    "giftId": 10961,
+    "giftName": "Peach"
+  },
+  {
+    "giftId": 7122,
+    "giftName": " Gem Gun"
+  },
+  {
+    "giftId": 19448,
+    "giftName": "Slow motion"
   }
 ]

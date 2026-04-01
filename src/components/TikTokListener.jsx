@@ -85,14 +85,28 @@ const TikTokListener = () => {
         return;
       }
 
-      // Cycle qua các video khớp (vòng tròn)
-      const state = useVideoStore.getState();
-      const lastQueued = state.videoQueue[state.videoQueue.length - 1] ?? state.selectedVideo;
-      const curIdx = matched.findIndex((v) => v.video === lastQueued);
-      const nextIdx = curIdx + 1 >= matched.length ? 0 : curIdx + 1;
+      // Enqueue đúng số lần gift (amount). Có giới hạn để tránh spam queue quá lớn.
+      const MAX_PER_EVENT = 50;
+      const rawAmount = Number(giftData.amount ?? 1);
+      const amount = Number.isFinite(rawAmount) ? Math.max(1, rawAmount) : 1;
+      const n = Math.min(amount, MAX_PER_EVENT);
 
-      // Đẩy vào queue
-      useVideoStore.getState().enqueueVideo(matched[nextIdx].video);
+      // Cycle qua các video khớp (vòng tròn), dựa trên video cuối đang/đã queue
+      const state = useVideoStore.getState();
+      const lastQueued =
+        state.videoQueue[state.videoQueue.length - 1] ?? state.selectedVideo;
+      const curIdx = matched.findIndex((v) => v.video === lastQueued);
+
+      for (let i = 0; i < n; i++) {
+        const idx = ((curIdx === -1 ? 0 : curIdx) + 1 + i) % matched.length;
+        useVideoStore.getState().enqueueVideo(matched[idx].video);
+      }
+
+      if (amount > MAX_PER_EVENT) {
+        addLog(
+          `⚠️ Quà x${amount} vượt giới hạn, chỉ xếp ${MAX_PER_EVENT} lượt phát để tránh quá tải.`
+        );
+      }
     });
 
     socket.on("tiktok_chat", (msg) => {

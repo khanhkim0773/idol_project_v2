@@ -6,6 +6,13 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
+    watch: {
+      ignored: [
+        "**/server/gifts.json",
+        // nếu còn file server khác cũng gây reload thì thêm ở đây
+        // "**/server/**/*.json",
+      ],
+    },
     proxy: {
       "/api": {
         target: "http://localhost:3004",
