@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import ConnectForm from "./components/ConnectForm";
 import Sidebar from "./components/Sidebar";
 import HomePage from "./pages/HomePage";
-
+import UploadPage from "./pages/UploadPage";
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(false);
 
-  if (isConnected) {
+  if (!isConnected) {
     return (
       <div className="w-screen h-screen relative flex items-center justify-center bg-black overflow-hidden">
         {/* Background Image */}
@@ -24,7 +25,12 @@ const App = () => {
   return (
     <div className="w-screen h-screen relative overflow-hidden bg-black/80 flex ">
       <Sidebar />
-      <HomePage />
+      <div className="flex-1 h-screen sm:py-10 sm:px-3">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/upload" element={<UploadPage />} />
+        </Routes>
+      </div>
     </div>
   );
 };

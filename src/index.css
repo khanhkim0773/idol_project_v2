@@ -17,6 +17,7 @@ body {
   --color-thirdary: #86efac;
   --color-fivethary: #f87171;
   --color-purple-1: #a78bfa;
+  --color-neon: #07f2e7;
 }
 
 @keyframes textColor {
