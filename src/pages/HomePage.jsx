@@ -4,6 +4,7 @@ import TikTokListener from "../components/TikTokListener";
 import SelectThumbnail from "../components/SelectThumbnail";
 import { BlackScreenVideo } from "../components/BlackScreenVideo";
 import Background from "../components/Background";
+import ResizableDraggable from "../components/ResizableDraggable";
 
 const HomePage = () => {
   const selectedVideo = useVideoStore((state) => state.selectedVideo);
@@ -11,12 +12,12 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="flex sm:justify-between w-full sm:p-2 h-full">
-        <SelectThumbnail />
-        <div className="w-full flex items-center justify-center z-0 pointer-events-none">
+      <div className="relative w-full h-full overflow-hidden">
+        {/* Main Viewport (iPhone Frame) */}
+        <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
           <div className="relative sm:w-[390px] sm:h-[740px] w-full h-full flex items-center justify-center">
             <div className="absolute inset-0 rounded-[3.5rem] animate-pulse bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 blur-[30px] opacity-70"></div>
-            <div className="relative sm:w-[360px] sm:h-[720px] w-full h-full sm:rounded-[3rem] overflow-hidden pointer-events-auto sm:border-4 border-white/80 bg-black">
+            <div className="relative sm:w-[360px] sm:h-[720px] w-full h-full sm:rounded-[3rem] overflow-hidden pointer-events-auto sm:border-4 border-white/80 bg-black shadow-2xl">
               <Background imgSrc="/images/background.png" />
 
               {selectedVideo && (
@@ -32,8 +33,24 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* UI Layer */}
-        <TikTokListener />
+        {/* Floating UI Layers */}
+        <ResizableDraggable
+          title="DANCER MODELS"
+          initialPos={{ x: 40, y: 80 }}
+          initialSize={{ width: 300, height: 450 }}
+          minSize={{ width: 180, height: 200 }}
+        >
+          <SelectThumbnail />
+        </ResizableDraggable>
+
+        <ResizableDraggable
+          title="TIKTOK LIVE FEED"
+          initialPos={{ x: window.innerWidth - 360, y: 80 }}
+          initialSize={{ width: 320, height: 600 }}
+          minSize={{ width: 220, height: 250 }}
+        >
+          <TikTokListener />
+        </ResizableDraggable>
       </div>
     </>
   );

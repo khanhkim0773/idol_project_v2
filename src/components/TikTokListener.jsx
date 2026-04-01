@@ -106,63 +106,60 @@ const TikTokListener = () => {
   }, []);
 
   return (
-    <div className="sm:block hidden">
-      <div className="w-80 h-full overflow-hidden bg-black/20 backdrop-blur-sm border border-white/30 rounded-xl flex flex-col">
-        <div className="p-3.5 bg-black/30 shrink-0 border-b border-b-gray-500">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-3">
-              <span>📡</span>
-              <span className="font-semibold text-sm text-purple tracking-wider">
-                TikTok LIVE
+    <div className="w-full h-full flex flex-col bg-transparent">
+      <div className="p-3.5 bg-white/5 shrink-0 border-b border-white/10">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">📡</span>
+            <span className="font-bold text-[11px] text-white/80 tracking-[0.2em] uppercase">
+              TikTok LIVE
+            </span>
+          </div>
+          <div
+            className={`w-2 h-2 rounded-full ${isConnected ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"} shrink-0 animate-pulse`}
+          />
+        </div>
+        <div className="flex justify-between items-center">
+          <span
+            className={`text-[10px] font-medium ${isConnected ? "text-green-400" : "text-red-400"}`}
+          >
+            {isConnected ? "CONNECTED" : "DISCONNECTED"}
+          </span>
+          <span className="text-[10px] text-white/40 font-bold">
+            DANCER {actualIndex + 1}/{activeVideos.length}
+            {videoQueue.length > 0 && (
+              <span className="ml-2 bg-pink-500 text-white text-[9px] px-1.5 py-0.5 rounded-full">
+                +{videoQueue.length}
               </span>
-            </div>
-            <div
-              className={`w-3 h-3 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"} ${isConnected ? "shadow-green-500/50" : "shadow-red-500/50"} shrink-0`}
-            />
-          </div>
-          <div className="flex justify-between items-center">
-            <span
-              className={` text-xs ${isConnected ? "text-thirdary" : "text-fivethary"}`}
-            >
-              {isConnected ? "● Đã kết nối" : "● Chưa kết nối"}
-            </span>
-            <span className="text-xs text-purple-1 font-semibold">
-              Dancer {actualIndex + 1}/{activeVideos.length}
-              {videoQueue.length > 0 && (
-                <span className="ml-2 bg-pink-500/80 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
-                  +{videoQueue.length}
-                </span>
-              )}
-            </span>
-          </div>
+            )}
+          </span>
         </div>
+      </div>
 
-        <div className="flex-1 overflow-auto p-3 flex flex-col gap-2">
-          {logs.length === 0 ? (
-            <div className="flex-1 flex items-center justify-center text-gray-400 text-xs italic text-center">
-              Chưa có sự kiện nào...
-              <br />
-              <span className="text-lg mt-2 block">💤</span>
-            </div>
-          ) : (
-            logs.map((log) => {
-              const style = getMessageStyle(log.text);
-              return (
-                <div
-                  key={log.id}
-                  className={`${style.bg} text-white border-l-2 ${style.border} rounded-lg text-xs p-3 wrap-break-word slideInChat duration-300 ease-in-out`}
-                >
-                  {log.text}
-                </div>
-              );
-            })
-          )}
-          <div ref={chatEndRef} />
-        </div>
+      <div className="flex-1 overflow-auto p-3 flex flex-col gap-2 custom-scrollbar">
+        {logs.length === 0 ? (
+          <div className="flex-1 flex flex-col items-center justify-center text-white/20 text-[10px] uppercase tracking-widest gap-2">
+            <span className="text-2xl opacity-20">📡</span>
+            Waiting for events...
+          </div>
+        ) : (
+          logs.map((log) => {
+            const style = getMessageStyle(log.text);
+            return (
+              <div
+                key={log.id}
+                className={`${style.bg} text-[11px] text-white/90 border-l-2 ${style.border} rounded-lg p-2.5 break-words slideInChat`}
+              >
+                {log.text}
+              </div>
+            );
+          })
+        )}
+        <div ref={chatEndRef} />
+      </div>
 
-        <div className="shrink-0 px-3 py-4 border-t border-t-gray-500 text-center text-white/70 text-xs">
-          Hoạt động TikTok LIVE realtime
-        </div>
+      <div className="shrink-0 px-3 py-3 border-t border-white/5 text-center text-[9px] text-white/30 uppercase tracking-[0.1em] font-medium">
+        TikTok LIVE Real-time Feed
       </div>
     </div>
   );
