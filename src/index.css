@@ -52,3 +52,23 @@ body {
     transform: translateY(0);
   }
 }
+
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #530c63;
+  border-radius: 999px;
+  transition: all 0.3s;
+}
+b
+::-webkit-scrollbar-thumb:hover {
+  background: #a101f7;
+}
+

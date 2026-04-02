@@ -26,7 +26,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
     video.src = videoSrc;
-    video.loop = false;   // Không lặp → để sự kiện 'ended' có thể bắt
+    video.loop = false; // Không lặp → để sự kiện 'ended' có thể bắt
     video.muted = false;
     video.playsInline = true;
     video.preload = "auto";
@@ -58,24 +58,24 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
           const r = data[i];
           const g = data[i + 1];
           const b = data[i + 2];
-const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+          const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
-  // 🔥 detect nền đen chuẩn hơn
-  const isDark = r < 70 && g < 70 && b < 70;
+          // 🔥 detect nền đen chuẩn hơn
+          const isDark = r < 70 && g < 70 && b < 70;
 
-  if (isDark && brightness < THRESHOLD + 10) {
-    // xoá mạnh
-    data[i + 3] = 0;
-  } else if (brightness < THRESHOLD + 60) {
-    // vùng viền → làm mượt + xoá màu đen
-    const alpha = (brightness - THRESHOLD) / 60;
+          if (isDark && brightness < THRESHOLD + 10) {
+            // xoá mạnh
+            data[i + 3] = 0;
+          } else if (brightness < THRESHOLD + 60) {
+            // vùng viền → làm mượt + xoá màu đen
+            const alpha = (brightness - THRESHOLD) / 60;
 
-    // 🔥 despill mạnh hơn
-    data[i] = r * alpha;
-    data[i + 1] = g * alpha;
-    data[i + 2] = b * alpha;
-    data[i + 3] = Math.round(alpha * 255);
-  }
+            // 🔥 despill mạnh hơn
+            data[i] = r * alpha;
+            data[i + 1] = g * alpha;
+            data[i + 2] = b * alpha;
+            data[i + 3] = Math.round(alpha * 255);
+          }
         }
         ctx.putImageData(imageData, 0, 0);
       }
@@ -120,16 +120,7 @@ const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
       <canvas
         ref={canvasRef}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "center bottom",
-          zIndex: 1,
-          pointerEvents: "none",
-        }}
+        className="absolute bottom-0 w-full h-[90%] object-cover object-center pointer-events-none z-[1]"
       />
     </>
   );

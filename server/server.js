@@ -6,7 +6,7 @@ import fs from "fs";
 
 import { PUBLIC_DIR, VIDEO_DIR, AVATAR_DIR, DATA_DIR } from "./config/paths.js";
 import { loadGifts } from "./services/gifts.service.js";
-import { loadVideos, saveVideos } from "./services/videos.service.js";
+import { loadVideos } from "./services/videos.service.js";
 import { createTiktokRouter } from "./routes/tiktok.routes.js";
 import { uploadRouter } from "./routes/upload.routes.js";
 import { filesRouter } from "./routes/files.routes.js";
@@ -23,7 +23,6 @@ console.log(`[gifts] Loaded ${knownGifts.length} gift(s) from gifts.json`);
 
 const initialVideos = loadVideos();
 console.log(`[videos] Loaded ${initialVideos.length} video(s) from videos.json`);
-
 const app = express();
 app.use(cors());
 app.use(express.json());

@@ -97,10 +97,16 @@ const TikTokListener = () => {
         state.videoQueue[state.videoQueue.length - 1] ?? state.selectedVideo;
       const curIdx = matched.findIndex((v) => v.video === lastQueued);
 
+      const scoreByPath = new Map();
       for (let i = 0; i < n; i++) {
         const idx = ((curIdx === -1 ? 0 : curIdx) + 1 + i) % matched.length;
-        useVideoStore.getState().enqueueVideo(matched[idx].video);
+        const path = matched[idx].video;
+        useVideoStore.getState().enqueueVideo(path);
+        scoreByPath.set(path, (scoreByPath.get(path) || 0) + 1);
       }
+      scoreByPath.forEach((delta, path) => {
+        useVideoStore.getState().addGiftScore(path, delta);
+      });
 
       if (amount > MAX_PER_EVENT) {
         addLog(

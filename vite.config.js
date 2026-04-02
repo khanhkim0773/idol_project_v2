@@ -12,7 +12,8 @@ export default defineConfig({
         "**/server/data/videos.json",
         // nếu còn file server khác cũng gây reload thì thêm ở đây
         // "**/server/**/*.json",
-      ],
+  
+      ]
     },
     proxy: {
       "/api": {

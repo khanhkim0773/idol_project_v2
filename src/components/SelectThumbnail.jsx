@@ -10,7 +10,6 @@ const SelectThumbnail = () => {
 
   return (
     <div className="w-full h-full flex flex-col p-4 bg-transparent backdrop-blur-none">
-      {/* Header Info (Optionally kept or moved to ResizableDraggable) */}
       <div className="flex-shrink-0 flex items-center justify-between mb-4 text-white font-semibold">
         <p className="text-sm tracking-tight">Cấu hình Dancer</p>
         <div className="bg-white/10 text-[10px] px-2 py-0.5 rounded-full border border-white/5 uppercase">
@@ -32,10 +31,10 @@ const SelectThumbnail = () => {
                 key={model.id}
                 onClick={() => setSelectedVideo(model.video)}
                 className={`w-full flex items-center gap-3 px-3 cursor-pointer rounded-xl py-2 transition-all duration-300
-                  ${isActive ? "bg-white/10 ring-1 ring-white/20" : "hover:bg-white/5 opacity-40 hover:opacity-80"}
+                  ${isActive ? "bg-white/10 border border-white/20" : "hover:bg-white/5 opacity-40 hover:opacity-80"}
                 `}
               >
-                <div className="shrink-0 w-4 h-4 rounded-full bg-white/5 text-white/50 text-[9px] flex items-center justify-center font-bold">
+                <div className={`shrink-0 w-4 h-4 rounded-full ${isActive ? "bg-green-500" : "bg-white/5"} text-white text-[9px] flex items-center justify-center font-bold`}>
                   {model.order}
                 </div>
                 <div className="rounded-lg overflow-hidden border border-white/10 shadow-sm shrink-0">

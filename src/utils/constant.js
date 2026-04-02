@@ -1,3 +1,4 @@
+
 export const SOCKET_URL = "http://localhost:3004";
 
 export const IMAGES = {
@@ -5,8 +6,11 @@ export const IMAGES = {
     ICO_TIKTOK: "/images/iconTiktok.png",
 }
 
+
 export const ROUTES_URL = {
     DASHBOARD: "/",
     UPLOAD: "/upload",
     GIFTS: "/gifts",
 }
+
+

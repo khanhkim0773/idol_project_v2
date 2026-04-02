@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import ConnectForm from "./components/ConnectForm";
-import Sidebar from "./components/Sidebar";
 import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
 import GiftPage from "./pages/GiftPage";
 import { useVideoStore } from "./hooks/useVideoStore";
-import { useGiftStore } from "./hooks/useGiftStore";
-import { ROUTES_URL } from "./utils/constant";
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(false);
@@ -34,15 +31,16 @@ const App = () => {
   }
 
   return (
-    <div className="w-screen h-screen relative overflow-hidden bg-black/80 flex ">
+    <div className="w-screen h-screen relative overflow-hidden bg-black/80 flex flex-col sm:flex-row">
       <Sidebar />
-      <div className="flex-1 h-screen sm:py-10 sm:px-3">
+      <div className="flex-1 h-full sm:h-screen sm:px-3 overflow-auto">
         <Routes>
           <Route path={ROUTES_URL.DASHBOARD} element={<HomePage />} />
           <Route path={ROUTES_URL.UPLOAD} element={<UploadPage />} />
           <Route path={ROUTES_URL.GIFTS} element={<GiftPage />} />
         </Routes>
       </div>
+      <FooterBar />
     </div>
   );
 };

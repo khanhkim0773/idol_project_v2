@@ -141,4 +141,16 @@ export const useVideoStore = create((set, get) => ({
         playId: state.playId + 1,
       };
     }),
+
+  // ---------- điểm quà (số lần video được xếp hàng từ TikTok gift) ----------
+  videoGiftScores: {},
+
+  /** Cộng điểm cho một dancer theo đường dẫn video (chỉ gift, không tính chọn tay). */
+  addGiftScore: (videoPath, delta = 1) =>
+    set((state) => ({
+      videoGiftScores: {
+        ...state.videoGiftScores,
+        [videoPath]: (state.videoGiftScores[videoPath] || 0) + delta,
+      },
+    })),
 }));
