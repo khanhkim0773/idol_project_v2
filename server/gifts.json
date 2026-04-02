@@ -138,5 +138,25 @@
   {
     "giftId": 17667,
     "giftName": "Side by Side"
+  },
+  {
+    "giftId": 8635,
+    "giftName": "Okay"
+  },
+  {
+    "giftId": 19441,
+    "giftName": "Freestyle"
+  },
+  {
+    "giftId": 7121,
+    "giftName": "Marvelous Confetti"
+  },
+  {
+    "giftId": 6064,
+    "giftName": "GG"
+  },
+  {
+    "giftId": 11046,
+    "giftName": "Galaxy"
   }
 ]

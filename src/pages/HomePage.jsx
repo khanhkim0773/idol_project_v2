@@ -16,9 +16,9 @@ const HomePage = () => {
       <div className="relative w-full h-full overflow-hidden">
         {/* Main Viewport (iPhone Frame) */}
         <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
-          <div className="relative sm:w-[390px] sm:h-[740px] w-full h-full flex items-center justify-center">
-            <div className="absolute inset-0 rounded-[3.5rem] animate-pulse bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 blur-[30px] opacity-70"></div>
-            <div className="relative sm:w-[360px] sm:h-[720px] w-full h-full sm:rounded-[3rem] overflow-hidden pointer-events-auto sm:border-4 border-white/80 bg-black shadow-2xl">
+          <div className="relative sm:w-[390px] sm:h-full w-full h-full flex items-center justify-center">
+            <div className="absolute inset-0 rounded-[3.5rem] "></div>
+            <div className="relative sm:w-[360px] sm:h-full w-full h-full sm:rounded-[3rem] overflow-hidden pointer-events-auto sm:border-4 border-white/80 bg-black shadow-2xl">
               <Background imgSrc="/images/background.png" />
 
               {selectedVideo && (

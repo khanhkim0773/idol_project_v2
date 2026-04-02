@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 .env
 yarn.log
+yarn.lock
+package-lock.json
+package.json
