@@ -5,6 +5,10 @@ import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
 import GiftPage from "./pages/GiftPage";
 import { useVideoStore } from "./hooks/useVideoStore";
+import { useGiftStore } from "./hooks/useGiftStore";
+import { ROUTES_URL } from "./utils/constant";
+import FooterBar from "./components/Layout/FooterBar";
+import Sidebar from "./components/Layout/SideBar";
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(false);
@@ -16,7 +20,7 @@ const App = () => {
     fetchGifts();
   }, [fetchVideos, fetchGifts]);
 
-  if (!isConnected) {
+  if (isConnected) {
     return (
       <div className="w-screen h-screen relative flex items-center justify-center bg-black overflow-hidden">
         {/* Background Image */}

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { MdDashboard, MdOndemandVideo, MdCardGiftcard } from "react-icons/md";
-import { IMAGES, ROUTES_URL } from "../utils/constant";
+import { IMAGES, ROUTES_URL } from "../../utils/constant";
 
 const Menu = [
   { name: "Dashboard", icon: <MdDashboard />, path: ROUTES_URL.DASHBOARD },
