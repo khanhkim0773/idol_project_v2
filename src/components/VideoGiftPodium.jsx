@@ -54,10 +54,10 @@ function PodiumCell({ rank, data }) {
         {data?.name}
       </p>
       
-      {/* <p className="text-lg sm:text-xl font-black text-white tabular-nums leading-none mt-1">
+      <p className="text-md sm:text-md font-black text-white tabular-nums leading-none mt-1">
         {data?.score ?? "0"}
       </p>
-      <p className="text-[8px] text-white/45 uppercase mt-0.5">điểm</p> */}
+      <p className="text-[8px] text-white/45 uppercase mt-0.5">điểm</p>
       {/* <div className={`w-full mt-1.5 rounded-t-md ${st.bar}`} /> */}
     </div>
   );
@@ -87,7 +87,7 @@ const VideoGiftPodium = () => {
     };
   }, [videoGiftScores, videos]);
   return (
-    <div className="absolute sm:top-0 -top-3 left-0 right-0 z-[15] pointer-events-none px-1 sm:px-2 pt-1 sm:pt-2">
+    <div className="absolute sm:top-10 top-4 left-0 right-0 z-[15] pointer-events-none px-1 sm:px-2 pt-1 sm:pt-2">
       <div className="mx-auto max-w-[340px]">
         <div className="flex flex-row items-end justify-center gap-1 sm:gap-3 px-2 pb-2 pt-1">
           <div className="flex-1 flex justify-center">

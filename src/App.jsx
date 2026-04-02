@@ -20,7 +20,7 @@ const App = () => {
     fetchGifts();
   }, [fetchVideos, fetchGifts]);
 
-  if (isConnected) {
+  if (!isConnected) {
     return (
       <div className="w-screen h-screen relative flex items-center justify-center bg-black overflow-hidden">
         {/* Background Image */}

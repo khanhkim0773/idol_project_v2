@@ -49,8 +49,8 @@ const HomePage = () => {
           <ResizableDraggable
             title="DANCER MODELS"
             initialPos={{ x: 330, y: 80 }}
-            initialSize={{ width: 300, height: 450 }}
-            minSize={{ width: 180, height: 200 }}
+            initialSize={{ width: 300, height: 500 }}
+            minSize={{ width: 180, height: 300 }}
           >
             <SelectThumbnail />
           </ResizableDraggable>

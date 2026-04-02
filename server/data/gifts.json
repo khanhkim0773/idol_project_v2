@@ -61,14 +61,18 @@
   },
   {
     "giftId": 5879,
-    "giftName": "Doughnut"
+    "giftName": "Doughnut",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4e7ad6bdf0a1d860c538f38026d4e812~tplv-obj.png",
+    "diamonds": 30,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 5487,
     "giftName": "Finger Heart",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/a4c4dc437fd3a6632aba149769491f49.png~tplv-obj.png",
     "diamonds": 5,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 8,
     "active": true
   },
   {
@@ -126,7 +130,11 @@
   },
   {
     "giftId": 5827,
-    "giftName": "Ice Cream Cone"
+    "giftName": "Ice Cream Cone",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/968820bc85e274713c795a6aef3f7c67~tplv-obj.png",
+    "diamonds": 1,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 57800,
@@ -179,7 +187,10 @@
   {
     "giftId": 6427,
     "giftName": "Hat and Mustache",
-    "active": true
+    "active": true,
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/2f1e4f3f5c728ffbfa35705b480fdc92~tplv-obj.png",
+    "diamonds": 99,
+    "maxRepeatCount": 1
   },
   {
     "giftId": 10961,
@@ -243,7 +254,11 @@
   },
   {
     "giftId": 6064,
-    "giftName": "GG"
+    "giftName": "GG",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/3f02fa9594bd1495ff4e8aa5ae265eef~tplv-obj.png",
+    "diamonds": 1,
+    "maxRepeatCount": 50,
+    "active": true
   },
   {
     "giftId": 17950,
@@ -287,7 +302,11 @@
   },
   {
     "giftId": 11046,
-    "giftName": "Galaxy"
+    "giftName": "Galaxy",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/79a02148079526539f7599150da9fd28.png~tplv-obj.png",
+    "diamonds": 1000,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 6784,
@@ -333,5 +352,21 @@
   {
     "giftId": 6267,
     "giftName": "Corgi"
+  },
+  {
+    "giftId": 9202,
+    "giftName": "Flame Heart",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/b199d028d5beb081fe16edcf77db0830~tplv-obj.png",
+    "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 54724,
+    "giftName": "Creeper",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/d686d45bd66e16b0aca8b0e5eb52a977.png~tplv-obj.png",
+    "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 1
   }
 ]
