@@ -81,7 +81,8 @@
   },
   {
     "giftId": 6652,
-    "giftName": "Autumn 2024"
+    "giftName": "Autumn 2024",
+    "active": true
   },
   {
     "giftId": 5660,
@@ -177,7 +178,8 @@
   },
   {
     "giftId": 6427,
-    "giftName": "Hat and Mustache"
+    "giftName": "Hat and Mustache",
+    "active": true
   },
   {
     "giftId": 10961,
@@ -313,7 +315,8 @@
   },
   {
     "giftId": 9340,
-    "giftName": "Birthday Cake"
+    "giftName": "Birthday Cake",
+    "active": true
   },
   {
     "giftId": 15063,

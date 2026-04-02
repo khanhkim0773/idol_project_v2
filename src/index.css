@@ -63,12 +63,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #530c63;
+  background: #07f2e7;
   border-radius: 999px;
   transition: all 0.3s;
 }
-b
-::-webkit-scrollbar-thumb:hover {
-  background: #a101f7;
-}
-
