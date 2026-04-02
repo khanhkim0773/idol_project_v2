@@ -183,7 +183,7 @@
     "giftId": 17947,
     "giftName": "Bubbly Kiss"
   },
-    {
+  {
     "giftId": 16690,
     "giftName": "Super Popular"
   },
@@ -194,5 +194,29 @@
   {
     "giftId": 17949,
     "giftName": "Candy Kiss"
+  },
+  {
+    "giftId": 6788,
+    "giftName": "Glow Stick"
+  },
+  {
+    "giftId": 6097,
+    "giftName": "Little Crown"
+  },
+  {
+    "giftId": 52064,
+    "giftName": "Spicy Chaos"
+  },
+  {
+    "giftId": 19447,
+    "giftName": "Overreact"
+  },
+  {
+    "giftId": 11583,
+    "giftName": "DJ Glasses"
+  },
+  {
+    "giftId": 11046,
+    "giftName": "Galaxy"
   }
 ]

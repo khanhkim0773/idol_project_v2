@@ -29,30 +29,38 @@ const HomePage = () => {
                 />
               )}
 
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/5 to-white/10" style={{ zIndex: 2 }}></div>
-              <div className="absolute -top-1/4 -right-1/2 w-full h-[150%] bg-white/5 -rotate-45 blur-sm pointer-events-none" style={{ zIndex: 2 }}></div>
+              <div
+                className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/5 to-white/10"
+                style={{ zIndex: 2 }}
+              ></div>
+              <div
+                className="absolute -top-1/4 -right-1/2 w-full h-[150%] bg-white/5 -rotate-45 blur-sm pointer-events-none"
+                style={{ zIndex: 2 }}
+              ></div>
             </div>
           </div>
         </div>
 
         {/* Floating UI Layers */}
-        <ResizableDraggable
-          title="DANCER MODELS"
-          initialPos={{ x: 40, y: 80 }}
-          initialSize={{ width: 300, height: 450 }}
-          minSize={{ width: 180, height: 200 }}
-        >
-          <SelectThumbnail />
-        </ResizableDraggable>
+        <div className="sm:block hidden">
+          <ResizableDraggable
+            title="DANCER MODELS"
+            initialPos={{ x: 330, y: 80 }}
+            initialSize={{ width: 300, height: 450 }}
+            minSize={{ width: 180, height: 200 }}
+          >
+            <SelectThumbnail />
+          </ResizableDraggable>
 
-        <ResizableDraggable
-          title="TIKTOK LIVE FEED"
-          initialPos={{ x: window.innerWidth - 360, y: 80 }}
-          initialSize={{ width: 320, height: 600 }}
-          minSize={{ width: 220, height: 250 }}
-        >
-          <TikTokListener />
-        </ResizableDraggable>
+          <ResizableDraggable
+            title="TIKTOK LIVE FEED"
+            initialPos={{ x: 1180, y: 80 }}
+            initialSize={{ width: 320, height: 600 }}
+            minSize={{ width: 220, height: 250 }}
+          >
+            <TikTokListener />
+          </ResizableDraggable>
+        </div>
       </div>
     </>
   );
