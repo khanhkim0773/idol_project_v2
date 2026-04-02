@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div className="w-screen h-screen relative overflow-hidden bg-black/80 flex ">
       <Sidebar />
-      <div className="flex-1 h-screen sm:py-10 sm:px-3">
+      <div className="flex-1 h-screen sm:px-3">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/upload" element={<UploadPage />} />

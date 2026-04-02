@@ -34,7 +34,7 @@ const SelectThumbnail = () => {
                   ${isActive ? "bg-white/10 border border-white/20" : "hover:bg-white/5 opacity-40 hover:opacity-80"}
                 `}
               >
-                <div className="shrink-0 w-4 h-4 rounded-full bg-white/5 text-white/50 text-[9px] flex items-center justify-center font-bold">
+                <div className={`shrink-0 w-4 h-4 rounded-full ${isActive ? "bg-green-500" : "bg-white/5"} text-white text-[9px] flex items-center justify-center font-bold`}>
                   {model.order}
                 </div>
                 <div className="rounded-lg overflow-hidden border border-white/10 shadow-sm shrink-0">
