@@ -33,9 +33,11 @@ server/node_modules
 server/data/
 server/data/gifts.json
 server/data/videos.json
+server/data/gifts_logs.json
 /data/gifts.json
 data/gifts.json
 /data/videos.json
 data/videos.json
 server/data/*
+
 
