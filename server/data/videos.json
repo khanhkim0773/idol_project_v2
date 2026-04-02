@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Bình An",
+    "description": "Mẫu nhảy số 1",
+    "avatar": "/avatar/avatar-ba1.jpg",
+    "video": "/video/binhan-1.mp4",
+    "gift": "Rose",
+    "order": 1,
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "Liễu Như Yên",
+    "description": "Mẫu nhảy số 2",
+    "avatar": "/avatar/avatar-ba2.jpg",
+    "video": "/video/binhan-2.mp4",
+    "gift": "TikTok",
+    "order": 2,
+    "active": true
+  },
+  {
+    "id": 3,
+    "name": "Tiểu Mỹ",
+    "description": "Mẫu nhảy số 3",
+    "avatar": "/avatar/avatar-ba3.jpg",
+    "video": "/video/binhan-3.mp4",
+    "gift": "",
+    "order": 3,
+    "active": true
+  },
+  {
+    "id": 4,
+    "name": "Tiểu Kiều",
+    "description": "Mẫu nhảy số 4",
+    "avatar": "/avatar/avatar-ba4.jpg",
+    "video": "/video/binhan-4.mp4",
+    "gift": "",
+    "order": 4,
+    "active": true
+  }
+]

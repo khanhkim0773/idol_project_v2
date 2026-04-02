@@ -270,8 +270,8 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
             </label>
             <div
               className={`w-full border border-dashed rounded-lg px-4 py-4 flex flex-col items-center gap-2 transition bg-white/5 group ${uploading.video
-                  ? "border-cyan-400/60 cursor-not-allowed"
-                  : "border-white/20 cursor-pointer hover:border-cyan-400"
+                ? "border-cyan-400/60 cursor-not-allowed"
+                : "border-white/20 cursor-pointer hover:border-cyan-400"
                 }`}
               onClick={() => !uploading.video && videoRef.current?.click()}
             >
@@ -341,8 +341,8 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
             disabled={!valid}
             onClick={() => onSave(form)}
             className={`px-5 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 ${valid
-                ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:opacity-90 shadow-lg shadow-cyan-500/20"
-                : "bg-white/10 text-white/30 cursor-not-allowed"
+              ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:opacity-90 shadow-lg shadow-cyan-500/20"
+              : "bg-white/10 text-white/30 cursor-not-allowed"
               }`}
           >
             {isUploading ? (
@@ -389,8 +389,8 @@ const VideoCard = ({ video, index, total, onEdit, onDelete, onToggle, onMoveUp, 
   return (
     <div
       className={`group relative flex items-center gap-4 p-4 rounded-2xl border transition-all duration-200 ${video.active
-          ? "bg-white/5 border-white/10 hover:border-cyan-500/40 hover:bg-white/8"
-          : "bg-white/[0.02] border-white/5 opacity-60 hover:opacity-80"
+        ? "bg-white/5 border-white/10 hover:border-cyan-500/40 hover:bg-white/8"
+        : "bg-white/[0.02] border-white/5 opacity-60 hover:opacity-80"
         }`}
     >
       {/* order badge */}
@@ -404,8 +404,8 @@ const VideoCard = ({ video, index, total, onEdit, onDelete, onToggle, onMoveUp, 
         </button>
         <div
           className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${video.active
-              ? "bg-gradient-to-br from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-500/30"
-              : "bg-white/10 text-white/30"
+            ? "bg-gradient-to-br from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-500/30"
+            : "bg-white/10 text-white/30"
             }`}
         >
           {video.order}
@@ -437,8 +437,8 @@ const VideoCard = ({ video, index, total, onEdit, onDelete, onToggle, onMoveUp, 
           {/* active badge */}
           <span
             className={`shrink-0 text-[10px] px-2 py-0.5 rounded-full font-semibold border ${video.active
-                ? "bg-green-500/15 text-green-400 border-green-500/30"
-                : "bg-white/5 text-white/30 border-white/10"
+              ? "bg-green-500/15 text-green-400 border-green-500/30"
+              : "bg-white/5 text-white/30 border-white/10"
               }`}
           >
             {video.active ? "● Active" : "○ Inactive"}
@@ -566,8 +566,8 @@ const UploadPage = () => {
               key={f}
               onClick={() => setFilter(f)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${filter === f
-                  ? "bg-white/15 text-white"
-                  : "text-white/30 hover:text-white/60 hover:bg-white/5"
+                ? "bg-white/15 text-white"
+                : "text-white/30 hover:text-white/60 hover:bg-white/5"
                 }`}
             >
               {f === "all" ? `Tất cả (${videos.length})` : f === "active" ? `Active (${activeCount})` : `Inactive (${videos.length - activeCount})`}

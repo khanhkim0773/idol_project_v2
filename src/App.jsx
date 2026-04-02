@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import ConnectForm from "./components/ConnectForm";
 import Sidebar from "./components/Sidebar";
 import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
+import { useVideoStore } from "./hooks/useVideoStore";
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(false);
+  const { fetchVideos } = useVideoStore();
+
+  useEffect(() => {
+    fetchVideos();
+  }, [fetchVideos]);
 
   if (!isConnected) {
     return (
