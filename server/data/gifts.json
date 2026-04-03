@@ -178,7 +178,11 @@
   },
   {
     "giftId": 5659,
-    "giftName": "Paper Crane"
+    "giftName": "Paper Crane",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/0f158a08f7886189cdabf496e8a07c21~tplv-obj.png",
+    "diamonds": 99,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 9948,
