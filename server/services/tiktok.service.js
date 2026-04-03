@@ -1,5 +1,6 @@
 import { WebcastPushConnection } from "tiktok-live-connector";
 import { registerGift } from "./gifts.service.js";
+import { logGift } from "./stats.service.js";
 
 let tiktokLiveConnection = null;
 
@@ -57,6 +58,8 @@ export const connectToTikTok = (username, io, knownGifts, res) => {
 
 
     registerGift(data, knownGifts);
+    logGift(data); // Log for leaderboard statistics
+
 
     // Gửi event tiktok_gift cho tất cả các loại quà để frontend có thể check matching video
     io.emit("tiktok_gift", {

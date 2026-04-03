@@ -4,6 +4,11 @@ import ConnectForm from "./components/ConnectForm";
 import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
 import GiftPage from "./pages/GiftPage";
+import { useGiftStore } from "./hooks/useGiftStore";
+import Sidebar from "./components/Layout/Sidebar";
+import FooterBar from "./components/Layout/FooterBar";
+import { ROUTES_URL } from "./utils/constant";
+
 import { useVideoStore } from "./hooks/useVideoStore";
 
 const App = () => {

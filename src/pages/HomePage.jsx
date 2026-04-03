@@ -6,6 +6,7 @@ import { BlackScreenVideo } from "../components/BlackScreenVideo";
 import Background from "../components/Background";
 import ResizableDraggable from "../components/ResizableDraggable";
 import VideoGiftPodium from "../components/VideoGiftPodium";
+import Leaderboard from "../components/Leaderboard";
 
 const HomePage = () => {
   const selectedVideo = useVideoStore((state) => state.selectedVideo);
@@ -62,6 +63,14 @@ const HomePage = () => {
             minSize={{ width: 220, height: 250 }}
           >
             <TikTokListener />
+          </ResizableDraggable>
+          <ResizableDraggable
+            title="TOP GIFTS & GIFTERS"
+            initialPos={{ x: 20, y: 80 }}
+            initialSize={{ width: 300, height: 600 }}
+            minSize={{ width: 250, height: 300 }}
+          >
+            <Leaderboard />
           </ResizableDraggable>
         </div>
       </div>
