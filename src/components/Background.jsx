@@ -3,16 +3,7 @@ const Background = ({ imgSrc }) => {
     <img
       src={imgSrc}
       alt="background"
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        objectPosition: "center",
-        zIndex: 0,
-        pointerEvents: "none",
-      }}
+      className="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none"
     />
   );
 };

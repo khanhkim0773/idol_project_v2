@@ -4,6 +4,7 @@ export const SOCKET_URL = "http://localhost:3004";
 export const IMAGES = {
     LOGO: "/images/logoMeow.png",
     ICO_TIKTOK: "/images/iconTiktok.png",
+    ICO_COIN: "/images/coin.png",
 }
 
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Leaderboard.css";
-import { SOCKET_URL } from "../utils/constant";
+import { IMAGES, SOCKET_URL } from "../utils/constant";
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
@@ -71,38 +71,46 @@ const Leaderboard = () => {
   };
 
   return (
-    <div className="leaderboard-container">
-      <div className="leaderboard-header">
-        <h3 className="leaderboard-title">🏆 TOP ĐẠI GIA</h3>
+    <div className="flex flex-col h-full text-white bg-black/50 backdrop-blur-md rounded-xl overflow-hidden">
+      <div className="p-4 bg-black/50 border-b border-gray-600">
+        <h3 className=" mb-2.5 text-base font-semibold tracking-wide">
+          🏆 TOP ĐẠI GIA
+        </h3>
       </div>
 
-      <div className="leaderboard-list">
+      <div className="flex-1 overflow-y-auto p-3">
         {loading && data.length === 0 ? (
-          <div className="empty-state">Đang tải...</div>
+          <div className="flex flex-col items-center justify-center h-full">
+            Đang tải...
+          </div>
         ) : data.length > 0 ? (
           data.slice(0, 5).map((item, index) => (
-            <div className="leaderboard-item" key={item.id}>
+            <div
+              className="flex items-center p-2.5 mb-2 rounded-xl hover:bg-gray-500 transition-colors duration-300 ease-in-out"
+              key={item.id}
+            >
               {renderRank(index)}
               <img
                 src={item.profilePicture || "/images/default_avatar.png"}
                 alt={item.nickname}
-                className="item-avatar"
-                onError={(e) => { e.target.src = "/images/default_avatar.png"; }}
+                className="w-10 h-10 rounded-lg object-cover mx-3 flex-shrink-0"
+                onError={(e) => {
+                  e.target.src = "/images/default_avatar.png";
+                }}
               />
-              <div className="item-info">
-                <div className="item-name">{item.nickname}</div>
-                <div className="item-stats">
-                  <div className="diamond-count">
-                    <span>{item.totalDiamonds.toLocaleString()}</span>
-                    <span className="diamond-icon">💎</span>
-                  </div>
+              <div className="flex flex-col gap-1">
+                <p className="text-sm truncate">{item.nickname}</p>
+
+                <div className="flex items-center gap-1">
+                  <span>{item.totalDiamonds.toLocaleString()}</span>
+                  <img src={IMAGES.ICO_COIN} alt="Coin" className="w-4 h-4" />
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <div className="empty-state">
-            <span className="empty-icon">📊</span>
+          <div className="flex flex-col items-center justify-center h-full">
+            <span className="text-4xl mb-3">📊</span>
             <span>Chưa có dữ liệu</span>
           </div>
         )}

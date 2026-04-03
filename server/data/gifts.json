@@ -20,7 +20,7 @@
     "giftName": "Perfume",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/20b8f61246c7b6032777bb81bf4ee055~tplv-obj.png",
     "diamonds": 20,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 5,
     "active": true
   },
   {
@@ -511,5 +511,13 @@
     "diamonds": 1,
     "active": true,
     "maxRepeatCount": 69
+  },
+  {
+    "giftId": 7168,
+    "giftName": "Money Gun",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/e0589e95a2b41970f0f30f6202f5fce6~tplv-obj.png",
+    "diamonds": 500,
+    "active": true,
+    "maxRepeatCount": 1
   }
 ]
