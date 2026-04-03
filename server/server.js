@@ -12,6 +12,7 @@ import { uploadRouter } from "./routes/upload.routes.js";
 import { filesRouter } from "./routes/files.routes.js";
 import { createGiftsRouter } from "./routes/gifts.routes.js";
 import { createVideosRouter } from "./routes/videos.routes.js";
+import statsRouter from "./routes/stats.routes.js";
 
 // Ensure directories exist
 [VIDEO_DIR, AVATAR_DIR, DATA_DIR].forEach((dir) => {
@@ -46,6 +47,8 @@ app.use("/api/upload", uploadRouter);                   // POST /api/upload/vide
 app.use("/api/files", filesRouter);                     // DELETE /api/files
 app.use("/api/gifts", createGiftsRouter(knownGifts));   // GET /api/gifts
 app.use("/api/videos", createVideosRouter(initialVideos)); // NEW: GET/POST/PATCH /api/videos
+app.use("/api/stats", statsRouter);                     // NEW: GET /api/stats/leaderboard 
+
 
 const PORT = 3004;
 httpServer.listen(PORT, () => {
