@@ -6,7 +6,7 @@ const ResizableDraggable = ({
   initialSize = { width: 320, height: 480 },
   minSize = { width: 150, height: 150 }, // Reduced min size for better flexibility
   className = "",
-  title = "Window",
+  title = "",
 }) => {
   const [pos, setPos] = useState(initialPos);
   const [size, setSize] = useState(initialSize);
@@ -55,7 +55,10 @@ const ResizableDraggable = ({
 
       if (isResizing) {
         const newWidth = Math.max(minSize.width, e.clientX - posRef.current.x);
-        const newHeight = Math.max(minSize.height, e.clientY - posRef.current.y);
+        const newHeight = Math.max(
+          minSize.height,
+          e.clientY - posRef.current.y,
+        );
         setSize({ width: newWidth, height: newHeight });
       }
     };
@@ -94,19 +97,19 @@ const ResizableDraggable = ({
       }}
     >
       {/* Header / Drag Handle */}
-      <div
-        onMouseDown={handleMouseDown}
-        className={`shrink-0 h-10 px-4 flex items-center justify-center cursor-grab active:cursor-grabbing bg-white/5 border-b border-white/10 hover:bg-white/10 transition-colors`}
-      >
-        <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.25em] leading-none select-none">
-          {title}
-        </span>
-      </div>
+      {title && (
+        <div
+          onMouseDown={handleMouseDown}
+          className={`shrink-0 h-10 px-4 flex items-center justify-center cursor-grab active:cursor-grabbing bg-white/5 border-b border-white/10 hover:bg-white/10 transition-colors`}
+        >
+          <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.25em] leading-none select-none">
+            {title}
+          </span>
+        </div>
+      )}
 
       {/* Content */}
-      <div className="flex-1 overflow-hidden relative">
-        {children}
-      </div>
+      <div className="flex-1 overflow-hidden relative" onMouseDown={handleMouseDown}>{children}</div>
 
       {/* Resize Handle (Bottom Right) */}
       <div

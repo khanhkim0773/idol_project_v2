@@ -21,7 +21,7 @@ export const connectToTikTok = (username, io, knownGifts, res) => {
     }
   }
 
-  console.log(`[tiktok] Attempting to connect to @${username}...`);
+  console.log(`[tiktok] Attempting to connect to ${username}`);
   tiktokLiveConnection = new WebcastPushConnection(username);
 
   tiktokLiveConnection

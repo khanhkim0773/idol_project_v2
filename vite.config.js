@@ -10,6 +10,7 @@ export default defineConfig({
       ignored: [
         "**/server/data/gifts.json",
         "**/server/data/videos.json",
+        "**/server/data/gift_logs.json",
         // nếu còn file server khác cũng gây reload thì thêm ở đây
         // "**/server/**/*.json",
   

@@ -10,10 +10,6 @@ import FooterBar from "./components/Layout/FooterBar";
 import { ROUTES_URL } from "./utils/constant";
 
 import { useVideoStore } from "./hooks/useVideoStore";
-import { useGiftStore } from "./hooks/useGiftStore";
-import { ROUTES_URL } from "./utils/constant";
-import FooterBar from "./components/Layout/FooterBar";
-import Sidebar from "./components/Layout/SideBar";
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(false);

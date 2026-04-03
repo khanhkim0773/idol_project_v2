@@ -32,7 +32,7 @@
     "giftName": "Love you so much",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/fc549cf1bc61f9c8a1c97ebab68dced7.png~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 2,
+    "maxRepeatCount": 20,
     "active": true
   },
   {
@@ -45,7 +45,11 @@
   },
   {
     "giftId": 8913,
-    "giftName": "Rosa"
+    "giftName": "Rosa",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eb77ead5c3abb6da6034d3cf6cfeb438~tplv-obj.png",
+    "diamonds": 10,
+    "maxRepeatCount": 2,
+    "active": true
   },
   {
     "giftId": 17465,
@@ -64,7 +68,7 @@
     "giftName": "Doughnut",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4e7ad6bdf0a1d860c538f38026d4e812~tplv-obj.png",
     "diamonds": 30,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 4,
     "active": true
   },
   {
@@ -80,7 +84,7 @@
     "giftName": "Popular Vote",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/b342e28d73dac6547e0b3e2ad57f6597.png~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 20,
     "active": true
   },
   {
@@ -130,7 +134,11 @@
   },
   {
     "giftId": 10138,
-    "giftName": "Drip Brewing"
+    "giftName": "Drip Brewing",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/3c5e5fc699ed9bee71e79cc90bc5ab37.png~tplv-obj.png",
+    "diamonds": 10,
+    "maxRepeatCount": 10,
+    "active": true
   },
   {
     "giftId": 5827,
@@ -222,7 +230,11 @@
   },
   {
     "giftId": 17667,
-    "giftName": "Side by Side"
+    "giftName": "Side by Side",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/14b52e1933131d94a2634acf1625559d.png~tplv-obj.png",
+    "diamonds": 199,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 41327,
@@ -254,7 +266,11 @@
   },
   {
     "giftId": 9875,
-    "giftName": "Shamrock"
+    "giftName": "Shamrock",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/312f721603de550519983ca22f5cc445.png~tplv-obj.png",
+    "diamonds": 10,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 57596,
@@ -306,7 +322,11 @@
   },
   {
     "giftId": 6788,
-    "giftName": "Glow Stick"
+    "giftName": "Glow Stick",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/8e1a5d66370c5586545e358e37c10d25~tplv-obj.png",
+    "diamonds": 1,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 6097,
@@ -346,7 +366,11 @@
   },
   {
     "giftId": 8914,
-    "giftName": "Forever Rosa"
+    "giftName": "Forever Rosa",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/863e7947bc793f694acbe970d70440a1.png~tplv-obj.png",
+    "diamonds": 399,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 12852,
@@ -367,7 +391,11 @@
   },
   {
     "giftId": 19438,
-    "giftName": "Pop"
+    "giftName": "Pop",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/0b4f61e8ab637f11449300d03929ef87.png~tplv-obj.png",
+    "diamonds": 1,
+    "maxRepeatCount": 20,
+    "active": true
   },
   {
     "giftId": 9947,
@@ -432,5 +460,45 @@
     "diamonds": 2150,
     "active": true,
     "maxRepeatCount": 1
+  },
+  {
+    "giftId": 6414,
+    "giftName": "Wedding",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/0115cb20f6629dc50d39f6b747bddf73~tplv-obj.png",
+    "diamonds": 1500,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 13903,
+    "giftName": "Falling For You",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/2b9e1ad149b5f642a5e4371771b4e091.png~tplv-obj.png",
+    "diamonds": 299,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 14048,
+    "giftName": "Pink Dream",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/0de49ea9a79e65307c674596da517792.png~tplv-obj.png",
+    "diamonds": 2988,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 6671,
+    "giftName": "Love You",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/134e51c00f46e01976399883ca4e4798~tplv-obj.png",
+    "diamonds": 199,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 19446,
+    "giftName": "Wink wink",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/4a68411b3e92fc2bf68d458d5f906b74.png~tplv-obj.png",
+    "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 69
   }
 ]

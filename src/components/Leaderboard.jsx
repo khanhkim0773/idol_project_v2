@@ -3,19 +3,58 @@ import "./Leaderboard.css";
 import { SOCKET_URL } from "../utils/constant";
 
 const Leaderboard = () => {
-  const [type, setType] = useState("gifts"); // gifts | gifters
-  const [period, setPeriod] = useState("day"); // day | week | month | year
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchLeaderboard = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${SOCKET_URL}/api/stats/leaderboard?type=${type}&period=${period}`);
-      if (res.ok) {
-        const result = await res.json();
-        setData(result);
-      }
+
+      // Fetch raw gift logs + gifts list in parallel
+      const [logsRes, giftsRes] = await Promise.all([
+        fetch(`${SOCKET_URL}/api/stats/leaderboard`),
+        fetch(`${SOCKET_URL}/api/gifts`),
+      ]);
+
+      if (!logsRes.ok || !giftsRes.ok) return;
+
+      const logs = await logsRes.json();
+      const gifts = await giftsRes.json();
+
+      // Build diamond lookup map: giftId -> diamonds
+      const diamondMap = {};
+      gifts.forEach((g) => {
+        if (g.giftId && g.diamonds !== undefined) {
+          diamondMap[g.giftId] = g.diamonds;
+        }
+      });
+
+      // Aggregate per user — lookup diamonds from gifts.json via giftId
+      const gifterStats = {};
+      logs.forEach((log) => {
+        if (!log.userId) return;
+
+        if (!gifterStats[log.userId]) {
+          gifterStats[log.userId] = {
+            id: log.userId,
+            nickname: log.nickname,
+            profilePicture: log.profilePicture,
+            totalDiamonds: 0,
+          };
+        }
+
+        // Lookup diamond value from gifts.json, fallback to log.diamonds
+        const diamonds = diamondMap[log.giftId] ?? log.diamonds ?? 0;
+        const amount = log.amount || 1;
+        gifterStats[log.userId].totalDiamonds += amount * diamonds;
+      });
+
+      // Sort by totalDiamonds descending, take top 10
+      const sorted = Object.values(gifterStats)
+        .sort((a, b) => b.totalDiamonds - a.totalDiamonds)
+        .slice(0, 10);
+
+      setData(sorted);
     } catch (error) {
       console.error("Failed to fetch leaderboard:", error);
     } finally {
@@ -25,9 +64,9 @@ const Leaderboard = () => {
 
   useEffect(() => {
     fetchLeaderboard();
-    const interval = setInterval(fetchLeaderboard, 30000); // Auto refresh every 30s
+    const interval = setInterval(fetchLeaderboard, 300); // Auto refresh every 30s
     return () => clearInterval(interval);
-  }, [type, period]);
+  }, []);
 
   const renderRank = (index) => {
     const rank = index + 1;
@@ -40,51 +79,25 @@ const Leaderboard = () => {
   return (
     <div className="leaderboard-container">
       <div className="leaderboard-header">
-        <div className="leaderboard-tabs">
-          <button 
-            className={`tab-btn ${type === "gifts" ? "active" : ""}`}
-            onClick={() => setType("gifts")}
-          >
-            QUÀ TẶNG
-          </button>
-          <button 
-            className={`tab-btn ${type === "gifters" ? "active" : ""}`}
-            onClick={() => setType("gifters")}
-          >
-            ĐẠI GIA
-          </button>
-        </div>
-
-        <div className="period-tabs">
-          {["day", "week", "month", "year"].map((p) => (
-            <button
-              key={p}
-              className={`period-btn ${period === p ? "active" : ""}`}
-              onClick={() => setPeriod(p)}
-            >
-              {p === "day" ? "Ngày" : p === "week" ? "Tuần" : p === "month" ? "Tháng" : "Năm"}
-            </button>
-          ))}
-        </div>
+        <h3 className="leaderboard-title">🏆 TOP ĐẠI GIA</h3>
       </div>
 
       <div className="leaderboard-list">
         {loading && data.length === 0 ? (
           <div className="empty-state">Đang tải...</div>
         ) : data.length > 0 ? (
-          data.map((item, index) => (
+          data.slice(0, 5).map((item, index) => (
             <div className="leaderboard-item" key={item.id}>
               {renderRank(index)}
-              <img 
-                src={type === "gifts" ? item.image : (item.profilePicture || "/images/default_avatar.png")} 
-                alt={item.name || item.nickname} 
+              <img
+                src={item.profilePicture || "/images/default_avatar.png"}
+                alt={item.nickname}
                 className="item-avatar"
-                onError={(e) => { e.target.src = "/images/default_avatar.png" }}
+                onError={(e) => { e.target.src = "/images/default_avatar.png"; }}
               />
               <div className="item-info">
-                <div className="item-name">{type === "gifts" ? item.name : item.nickname}</div>
+                <div className="item-name">{item.nickname}</div>
                 <div className="item-stats">
-                  {type === "gifts" && <span>x{item.totalAmount} lần</span>}
                   <div className="diamond-count">
                     <span>{item.totalDiamonds.toLocaleString()}</span>
                     <span className="diamond-icon">💎</span>

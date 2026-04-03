@@ -15,7 +15,7 @@
     "description": "Mẫu nhảy số 2",
     "avatar": "/avatar/avatar-ba2.jpg",
     "video": "/video/binhan-2.mp4",
-    "gift": "Shining Starlight",
+    "gift": "TikTok",
     "order": 2,
     "active": true
   },
@@ -35,7 +35,7 @@
     "description": "Mẫu nhảy số 4",
     "avatar": "/avatar/avatar-ba4.jpg",
     "video": "/video/binhan-4.mp4",
-    "gift": "Bing Chiling",
+    "gift": "Confetti",
     "order": 4,
     "active": true
   }

@@ -39,5 +39,5 @@ data/gifts.json
 /data/videos.json
 data/videos.json
 server/data/*
-
+server/yarn.lock
 
