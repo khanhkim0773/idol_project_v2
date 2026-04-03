@@ -32,9 +32,10 @@ const Sidebar = () => {
               key={item.name}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-2 py-3 rounded-lg transition-colors ${isActive
-                  ? "bg-white/20 text-neon"
-                  : "text-white hover:bg-white/20"
+                `flex items-center gap-3 px-2 py-3 rounded-lg transition-colors ${
+                  isActive
+                    ? "bg-white/20 text-neon"
+                    : "text-white hover:bg-white/20"
                 }`
               }
             >

@@ -26,7 +26,7 @@ const ConnectForm = ({ onConnectSuccess }) => {
         setMessage(`Connected to @${username.trim()}`);
         setError(false);
         if (onConnectSuccess) {
-          setTimeout(() => onConnectSuccess(), 800);
+          setTimeout(() => onConnectSuccess(username.trim()), 800);
         }
       } else {
         // setMessage(`Failed: ${data.message}`);

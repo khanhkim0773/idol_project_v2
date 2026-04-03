@@ -72,7 +72,7 @@
     "giftName": "Doughnut",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4e7ad6bdf0a1d860c538f38026d4e812~tplv-obj.png",
     "diamonds": 30,
-    "maxRepeatCount": 4,
+    "maxRepeatCount": 10,
     "active": true
   },
   {
@@ -149,7 +149,7 @@
     "giftName": "Ice Cream Cone",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/968820bc85e274713c795a6aef3f7c67~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 10,
     "active": true
   },
   {
@@ -165,7 +165,7 @@
     "giftName": "You're awesome",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/e9cafce8279220ed26016a71076d6a8a.png~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 7,
     "active": true
   },
   {
@@ -390,7 +390,7 @@
     "active": true,
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/3ac5ec732f6f4ba7b1492248bfea83d6~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 9
   },
   {
     "giftId": 15063,
@@ -517,6 +517,14 @@
     "giftName": "Money Gun",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/e0589e95a2b41970f0f30f6202f5fce6~tplv-obj.png",
     "diamonds": 500,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 6089,
+    "giftName": "Sports Car",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/e7ce188da898772f18aaffe49a7bd7db~tplv-obj.png",
+    "diamonds": 7000,
     "active": true,
     "maxRepeatCount": 1
   }

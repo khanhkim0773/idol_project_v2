@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Leaderboard.css";
 import { IMAGES, SOCKET_URL } from "../utils/constant";
 
 const Leaderboard = () => {

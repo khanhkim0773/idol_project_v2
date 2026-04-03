@@ -8,7 +8,7 @@ import ResizableDraggable from "../components/ResizableDraggable";
 import VideoGiftPodium from "../components/VideoGiftPodium";
 import Leaderboard from "../components/Leaderboard";
 
-const HomePage = () => {
+const HomePage = ({ username }) => {
   const selectedVideo = useVideoStore((state) => state.selectedVideo);
   const dequeueVideo = useVideoStore((state) => state.dequeueVideo);
   const playId = useVideoStore((state) => state.playId);
@@ -16,6 +16,16 @@ const HomePage = () => {
   return (
     <>
       <div className="relative w-full h-full overflow-hidden">
+        {username && (
+          <div className="absolute top-4 left-4 z-10 bg-white/10 text-white px-4 py-4 rounded-full text-sm ">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
+              <p>
+                Username: <span className="font-semibold">@{username}</span>
+              </p>
+            </div>
+          </div>
+        )}
         {/* Main Viewport (iPhone Frame) */}
         <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
           <div className="relative sm:w-[390px] sm:h-full w-full h-full flex items-center justify-center">

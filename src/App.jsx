@@ -13,6 +13,7 @@ import { useVideoStore } from "./hooks/useVideoStore";
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(false);
+  const [connectedUsername, setConnectedUsername] = useState("");
   const { fetchVideos } = useVideoStore();
   const { fetchGifts } = useGiftStore();
 
@@ -30,17 +31,20 @@ const App = () => {
           alt="background"
           className="absolute inset-0 w-full h-full object-cover blur-sm opacity-40 z-0"
         />
-        <ConnectForm onConnectSuccess={() => setIsConnected(true)} />
+        <ConnectForm onConnectSuccess={(username) => {
+          setConnectedUsername(username);
+          setIsConnected(true);
+        }} />
       </div>
     );
   }
 
   return (
     <div className="w-screen h-screen relative overflow-hidden bg-black/80 flex flex-col sm:flex-row">
-      <Sidebar />
+      <Sidebar/>
       <div className="flex-1 h-full sm:h-screen sm:px-3 overflow-auto">
         <Routes>
-          <Route path={ROUTES_URL.DASHBOARD} element={<HomePage />} />
+          <Route path={ROUTES_URL.DASHBOARD} element={<HomePage username={connectedUsername} />} />
           <Route path={ROUTES_URL.UPLOAD} element={<UploadPage />} />
           <Route path={ROUTES_URL.GIFTS} element={<GiftPage />} />
         </Routes>
