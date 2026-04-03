@@ -4,7 +4,7 @@
     "giftName": "Rose",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eba3a9bb85c33e017f3648eaf88d7189~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 50,
+    "maxRepeatCount": 100,
     "active": true
   },
   {
@@ -17,7 +17,11 @@
   },
   {
     "giftId": 5658,
-    "giftName": "Perfume"
+    "giftName": "Perfume",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/20b8f61246c7b6032777bb81bf4ee055~tplv-obj.png",
+    "diamonds": 20,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 5269,
@@ -32,7 +36,7 @@
     "giftName": "Love you so much",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/fc549cf1bc61f9c8a1c97ebab68dced7.png~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 20,
+    "maxRepeatCount": 50,
     "active": true
   },
   {
@@ -269,7 +273,7 @@
     "giftName": "Shamrock",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/312f721603de550519983ca22f5cc445.png~tplv-obj.png",
     "diamonds": 10,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 2,
     "active": true
   },
   {
@@ -383,7 +387,10 @@
   {
     "giftId": 9340,
     "giftName": "Birthday Cake",
-    "active": true
+    "active": true,
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/3ac5ec732f6f4ba7b1492248bfea83d6~tplv-obj.png",
+    "diamonds": 1,
+    "maxRepeatCount": 1
   },
   {
     "giftId": 15063,
@@ -394,12 +401,16 @@
     "giftName": "Pop",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/0b4f61e8ab637f11449300d03929ef87.png~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 20,
+    "maxRepeatCount": 100,
     "active": true
   },
   {
     "giftId": 9947,
-    "giftName": "BFF Necklace"
+    "giftName": "BFF Necklace",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/e033c3f28632e233bebac1668ff66a2f.png~tplv-obj.png",
+    "diamonds": 10,
+    "maxRepeatCount": 3,
+    "active": true
   },
   {
     "giftId": 6267,

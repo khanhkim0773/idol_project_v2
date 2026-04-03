@@ -16,55 +16,38 @@
   border-bottom: 1px border rgba(255, 255, 255, 0.1);
 }
 
-.leaderboard-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 4px;
-  border-radius: 8px;
+.leaderboard-title {
+  margin: 0 0 10px 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
-.tab-btn {
-  flex: 1;
-  padding: 6px 12px;
-  border: none;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.5);
+.username-filter {
+  display: flex;
+  align-items: center;
+}
+
+.username-select {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
   font-size: 13px;
-  font-weight: 500;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 6px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-.tab-btn.active {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.period-tabs {
-  display: flex;
-  justify-content: space-between;
-  gap: 4px;
-}
-
-.period-btn {
-  padding: 4px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: transparent;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 11px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.period-btn.active {
-  background: #3b82f6;
-  color: #fff;
+.username-select:focus {
   border-color: #3b82f6;
+}
+
+.username-select option {
+  background: #1a1a2e;
+  color: #fff;
 }
 
 .leaderboard-list {

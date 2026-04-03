@@ -9,8 +9,6 @@ const Leaderboard = () => {
   const fetchLeaderboard = async () => {
     try {
       setLoading(true);
-
-      // Fetch raw gift logs + gifts list in parallel
       const [logsRes, giftsRes] = await Promise.all([
         fetch(`${SOCKET_URL}/api/stats/leaderboard`),
         fetch(`${SOCKET_URL}/api/gifts`),
@@ -21,7 +19,6 @@ const Leaderboard = () => {
       const logs = await logsRes.json();
       const gifts = await giftsRes.json();
 
-      // Build diamond lookup map: giftId -> diamonds
       const diamondMap = {};
       gifts.forEach((g) => {
         if (g.giftId && g.diamonds !== undefined) {
@@ -29,7 +26,6 @@ const Leaderboard = () => {
         }
       });
 
-      // Aggregate per user — lookup diamonds from gifts.json via giftId
       const gifterStats = {};
       logs.forEach((log) => {
         if (!log.userId) return;
@@ -43,13 +39,11 @@ const Leaderboard = () => {
           };
         }
 
-        // Lookup diamond value from gifts.json, fallback to log.diamonds
         const diamonds = diamondMap[log.giftId] ?? log.diamonds ?? 0;
         const amount = log.amount || 1;
         gifterStats[log.userId].totalDiamonds += amount * diamonds;
       });
 
-      // Sort by totalDiamonds descending, take top 10
       const sorted = Object.values(gifterStats)
         .sort((a, b) => b.totalDiamonds - a.totalDiamonds)
         .slice(0, 10);
