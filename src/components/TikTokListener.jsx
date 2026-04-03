@@ -69,7 +69,7 @@ const TikTokListener = () => {
       addLog({
         type: "gift",
         name: giftData.nickname,
-        text: `${giftData.amount} ${giftName}`,
+        text: `tặng ${giftData.amount} ${giftName}`,
         avatar: giftData.profilePicture,
       });
 

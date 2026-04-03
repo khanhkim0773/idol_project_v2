@@ -567,5 +567,13 @@
     "diamonds": 100,
     "active": true,
     "maxRepeatCount": 1
+  },
+  {
+    "giftId": 10668,
+    "giftName": "Future Encounter",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/af980f4ec9ed73f3229df8dfb583abe6.png~tplv-obj.png",
+    "diamonds": 1500,
+    "active": true,
+    "maxRepeatCount": 1
   }
 ]
