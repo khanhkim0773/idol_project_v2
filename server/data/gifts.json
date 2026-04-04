@@ -234,7 +234,11 @@
   },
   {
     "giftId": 19448,
-    "giftName": "Slow motion"
+    "giftName": "Slow motion",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/12374117770f779919bf002461fdfac0.png~tplv-obj.png",
+    "diamonds": 10,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 17667,
@@ -597,6 +601,22 @@
     "giftName": "Oldies",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/77f6ab69b0b03bda98a0a3d2bfdeb46f.png~tplv-obj.png",
     "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 49519,
+    "giftName": "Huytx4 Xanh Ngọc",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/saliency_seg_1768451332860_0.4e9206fba57ce145656e07c66c35d4e2.png~tplv-obj.png",
+    "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 6104,
+    "giftName": "Cap",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/6c2ab2da19249ea570a2ece5e3377f04~tplv-obj.png",
+    "diamonds": 99,
     "active": true,
     "maxRepeatCount": 1
   }

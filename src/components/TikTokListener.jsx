@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useVideoStore } from "../hooks/useVideoStore";
+import { useTTSStore } from "../hooks/useTTSStore";
 import { SOCKET_URL } from "../utils/constant";
 import { MESSAGE_TYPE } from "../utils/type";
 
@@ -72,6 +73,13 @@ const TikTokListener = () => {
         text: `tặng ${giftData.amount} ${giftName}`,
         avatar: giftData.profilePicture,
       });
+
+      // TTS: đọc quà tặng
+      useTTSStore.getState().speakGift(
+        giftData.nickname,
+        giftData.amount,
+        giftName
+      );
 
       const active = useVideoStore.getState().getActiveVideos();
       if (active.length === 0) return;
@@ -152,19 +160,17 @@ const TikTokListener = () => {
           </div>
 
           <div
-            className={`w-2 h-2 rounded-full ${
-              isConnected
+            className={`w-2 h-2 rounded-full ${isConnected
                 ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"
                 : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"
-            } animate-pulse`}
+              } animate-pulse`}
           />
         </div>
 
         <div className="flex justify-between items-center">
           <span
-            className={`text-[10px] font-medium ${
-              isConnected ? "text-green-400" : "text-red-400"
-            }`}
+            className={`text-[10px] font-medium ${isConnected ? "text-green-400" : "text-red-400"
+              }`}
           >
             {isConnected ? "Đã kết nối" : "Ngắt kết nối"}
           </span>
