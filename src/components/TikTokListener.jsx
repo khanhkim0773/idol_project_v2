@@ -7,14 +7,34 @@ import { MESSAGE_TYPE } from "../utils/type";
 
 const getMessageStyle = (type) => {
   if (type === "connect")
-    return { border: "border-l-green-400", bg: "bg-green-400/5 backdrop-blur-sm" };
+    return {
+      border: "border-l-[#10b981]",
+      bg: "bg-gradient-to-r from-[#10b981]/10 to-transparent",
+      text: "text-[#10b981]"
+    };
   if (type === "disconnect")
-    return { border: "border-l-red-400", bg: "bg-red-400/5 backdrop-blur-sm" };
+    return {
+      border: "border-l-red-500",
+      bg: "bg-gradient-to-r from-red-500/10 to-transparent",
+      text: "text-red-400"
+    };
   if (type === "warning")
-    return { border: "border-l-orange-400", bg: "bg-orange-400/5 backdrop-blur-sm" };
+    return {
+      border: "border-l-[#fbbf24]",
+      bg: "bg-gradient-to-r from-[#fbbf24]/10 to-transparent",
+      text: "text-[#fbbf24]"
+    };
   if (type === "gift")
-    return { border: "border-l-fuchsia-400", bg: "bg-fuchsia-400/5 backdrop-blur-sm" };
-  return { border: "border-l-white/20", bg: "bg-white/5 backdrop-blur-sm" };
+    return {
+      border: "border-l-[#d946ef]",
+      bg: "bg-gradient-to-r from-[#d946ef]/15 to-transparent",
+      text: "text-white"
+    };
+  return {
+    border: "border-l-white/20",
+    bg: "bg-white/[0.02]",
+    text: "text-gray-300"
+  };
 };
 
 const TikTokListener = () => {
@@ -70,7 +90,7 @@ const TikTokListener = () => {
       addLog({
         type: "gift",
         name: giftData.nickname,
-        text: `tặng ${giftData.amount} ${giftName}`,
+        text: `vừa tặng ${giftData.amount} ${giftName} 🎁`,
         avatar: giftData.profilePicture,
       });
 
@@ -93,7 +113,7 @@ const TikTokListener = () => {
       if (matched.length === 0) {
         addLog({
           type: "warning",
-          text: `Không có dancer nào cho quà "${giftName}"`,
+          text: `Không có Dancer nào nhận quà "${giftName}"`,
         });
         return;
       }
@@ -127,7 +147,7 @@ const TikTokListener = () => {
       if (amount > MAX_PER_EVENT) {
         addLog({
           type: "warning",
-          text: `⚠️ Quà x${amount}, chỉ lấy ${MAX_PER_EVENT}`,
+          text: `⚠️ Số lượng quà vượt mức x${amount}, hệ thống chỉ xử lý ${MAX_PER_EVENT}`,
         });
       }
     });
@@ -149,36 +169,28 @@ const TikTokListener = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col bg-transparent">
-      <div className="p-4 bg-white/[0.03] shrink-0 border-b border-white/5">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <span className="text-sm">⚡</span>
-            <span className="font-bold text-[10px] text-luminous-cyan tracking-[0.25em] uppercase">
-              Live Feed
+    <div className="w-full h-full flex flex-col bg-transparent relative">
+      <div className="px-6 py-4 shrink-0 border-b border-white/[0.05]">
+        <div className="flex justify-between items-center px-1">
+          <div className="flex items-center gap-2.5">
+            <div
+              className={`w-2 h-2 rounded-full ${isConnected
+                ? "bg-[#10b981] shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse"
+                : "bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse"
+                }`}
+            />
+            <span
+              className={`text-[10px] font-bold uppercase tracking-widest ${isConnected ? "text-[#10b981]" : "text-red-400"
+                }`}
+            >
+              {isConnected ? "Connected" : "Disconnected"}
             </span>
           </div>
 
-          <div
-            className={`w-2.5 h-2.5 rounded-full ${isConnected
-              ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.6)]"
-              : "bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.6)]"
-              } animate-pulse`}
-          />
-        </div>
-
-        <div className="flex justify-between items-center px-0.5">
-          <span
-            className={`text-[9px] font-bold uppercase tracking-widest ${isConnected ? "text-green-400" : "text-red-400"
-              }`}
-          >
-            {isConnected ? "Connection Stable" : "Waiting for TikTok..."}
-          </span>
-
-          <span className="text-[9px] text-white/30 font-bold tracking-wider">
-            DANCER {actualIndex + 1}/{activeVideos.length}
+          <span className="text-[10px] text-white/40 font-bold tracking-[0.2em] uppercase">
+            Model <span className="text-white/80 ml-1">{actualIndex + 1}/{activeVideos.length}</span>
             {videoQueue.length > 0 && (
-              <span className="ml-2 bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white text-[8px] px-2 py-0.5 rounded-full shadow-lg">
+              <span className="ml-2 bg-[#d946ef]/20 text-[#d946ef] border border-[#d946ef]/50 text-[9px] px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(217,70,239,0.2)]">
                 +{videoQueue.length}
               </span>
             )}
@@ -186,10 +198,11 @@ const TikTokListener = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto p-3 flex flex-col gap-2 custom-scrollbar">
+      <div className="flex-1 overflow-auto p-5 flex flex-col gap-3 custom-scrollbar relative z-10">
         {logs.length === 0 ? (
-          <div className="flex-1 flex items-center justify-center text-white/20 text-[10px] uppercase">
-            Waiting for events...
+          <div className="flex-1 flex flex-col items-center justify-center text-white/20 text-[10px] uppercase font-bold tracking-[0.2em] gap-3 opacity-50">
+            <div className="w-6 h-6 rounded-full border border-dashed border-white/30 animate-spin-slow"></div>
+            Awaiting Activity
           </div>
         ) : (
           logs.map((log) => {
@@ -198,23 +211,23 @@ const TikTokListener = () => {
             return (
               <div
                 key={log.id}
-                className={`${style.bg} border-l-2 ${style.border} rounded-lg p-2.5 flex items-start gap-2 text-[11px] text-white/90`}
+                className={`${style.bg} border-l-[3px] ${style.border} rounded-r-xl p-3.5 flex items-start gap-4 transition-all hover:bg-white/[0.04]`}
               >
                 {log.avatar && (
                   <img
                     src={log.avatar}
                     alt=""
-                    className="w-6 h-6 rounded-full object-cover shrink-0"
+                    className="w-8 h-8 rounded-full object-cover shrink-0 border border-white/10 shadow-sm"
                   />
                 )}
 
-                <div className="break-words">
+                <div className={`break-words leading-relaxed text-[13px] ${style.text}`}>
                   {log.name && (
-                    <span className="font-semibold text-white">
-                      {log.name}:{" "}
+                    <span className="font-bold text-white mr-2">
+                      {log.name}:
                     </span>
                   )}
-                  {log.text}
+                  <span className="opacity-90 leading-snug">{log.text}</span>
                 </div>
               </div>
             );
@@ -222,9 +235,6 @@ const TikTokListener = () => {
         )}
 
         <div ref={chatEndRef} />
-      </div>
-      <div className="shrink-0 px-3 py-3 border-t border-white/5 text-center text-[9px] text-white/30 uppercase">
-        TikTok LIVE Real-time Feed
       </div>
     </div>
   );

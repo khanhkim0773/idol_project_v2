@@ -86,7 +86,7 @@ const ResizableDraggable = ({
 
   return (
     <div
-      className={`fixed z-50 flex flex-col bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-2xl ${className} ${isDragging || isResizing ? "select-none" : ""}`}
+      className={`fixed z-50 flex flex-col bg-gradient-to-r from-[#2b1d42]/95 to-[#173340]/95 backdrop-blur-3xl border border-[#d946ef]/20 rounded-[2rem] overflow-hidden shadow-[inset_-2px_0_0_#d946ef,0_30px_80px_rgba(0,0,0,0.8)] ${className} ${isDragging || isResizing ? "select-none" : ""}`}
       style={{
         left: `${pos.x}px`,
         top: `${pos.y}px`,
@@ -96,28 +96,33 @@ const ResizableDraggable = ({
         cursor: isDragging ? "grabbing" : "auto",
       }}
     >
+      {/* Decorative Top Glow */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-50 z-10" />
+
       {/* Header / Drag Handle */}
       {title && (
         <div
           onMouseDown={handleMouseDown}
-          className={`shrink-0 h-10 px-4 flex items-center justify-center cursor-grab active:cursor-grabbing bg-white/5 border-b border-white/10 hover:bg-white/10 transition-colors`}
+          className={`shrink-0 h-14 px-6 flex items-center justify-between cursor-grab active:cursor-grabbing bg-gradient-to-b from-white/[0.05] to-transparent border-b border-white/[0.08] hover:bg-white/[0.08] transition-colors relative`}
         >
-          <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.25em] leading-none select-none">
+          <span className="text-[11px] font-bold text-white/70 uppercase tracking-[0.3em] leading-none select-none">
             {title}
           </span>
+          <div className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
         </div>
       )}
 
       {/* Content */}
-      <div className="flex-1 overflow-hidden relative" onMouseDown={handleMouseDown}>{children}</div>
+      <div className="flex-1 overflow-hidden relative bg-transparent" onMouseDown={handleMouseDown}>
+         {children}
+      </div>
 
       {/* Resize Handle (Bottom Right) */}
       <div
         onMouseDown={handleResizeMouseDown}
-        className="absolute bottom-0 right-0 w-8 h-8 cursor-nwse-resize flex items-end justify-end p-1.5 group z-[60]"
-        title="Resize"
+        className="absolute bottom-1 right-1 w-8 h-8 cursor-nwse-resize flex items-end justify-end p-2.5 z-[60]"
       >
-        <div className="w-3 h-3 border-r-2 border-b-2 border-white/20 group-hover:border-white/60 transition-colors rounded-sm" />
+        <div className="w-3 h-3 border-r-2 border-b-2 border-white/20 hover:border-white transition-colors rounded-sm" />
       </div>
     </div>
   );

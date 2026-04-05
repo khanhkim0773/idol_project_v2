@@ -12,6 +12,7 @@ import {
   MdTextFields,
   MdApi,
   MdTune,
+  MdCheckCircle,
 } from "react-icons/md";
 import { LuSpeech } from "react-icons/lu";
 
@@ -47,6 +48,25 @@ const ELEVENLABS_MODELS = [
   { id: "eleven_flash_v2_5", label: "Flash v2.5", desc: "Nhanh" },
   { id: "eleven_turbo_v2_5", label: "Turbo v2.5", desc: "Cân bằng" },
 ];
+
+const Slider = ({ label, value, min, max, step, displayValue, onChange }) => {
+  const percentage = ((value - min) / (max - min)) * 100;
+  return (
+    <div className="mb-8">
+      <div className="flex justify-between text-[10px] font-bold mb-3">
+        <span className="text-gray-400 uppercase tracking-[0.15em]">{label}</span>
+        <span className="text-white font-mono">{displayValue}</span>
+      </div>
+      <div className="relative h-1.5 bg-[#252630] rounded-full flex items-center cursor-pointer">
+        <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] rounded-full" style={{ width: `${percentage}%` }}></div>
+        <input type="range" min={min} max={max} step={step} value={value} onChange={onChange}
+          className="w-full h-full opacity-0 cursor-pointer relative z-10"
+        />
+        <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_12px_rgba(217,70,239,0.8)] pointer-events-none" style={{ left: `calc(${percentage}% - 6px)` }}></div>
+      </div>
+    </div>
+  );
+};
 
 const ModalTTS = () => {
   const store = useTTSStore();
@@ -114,428 +134,359 @@ const ModalTTS = () => {
   };
 
   const badge = getBadgeInfo();
-  const badgeColorClass =
-    badge.color === "orange" ? "bg-orange-500/15 border-orange-500/30 text-orange-400" :
-      badge.color === "purple" ? "bg-purple-500/15 border-purple-500/30 text-purple-400" :
-        badge.color === "blue" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" :
-          "bg-yellow-500/15 border-yellow-500/30 text-yellow-400";
 
   return (
-    <div className="w-full h-full overflow-hidden flex flex-col text-white">
-      {/* Header */}
-      <div className="shrink-0 flex sm:flex-row flex-col items-center justify-between px-6 py-5 border-b border-white/10">
+    <div className="w-full h-full text-white bg-[#0f0f13] overflow-y-auto p-6 md:p-10 font-sans">
+      {/* Header section */}
+      <div className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <h1 className="text-2xl font-bold text-neon sm:text-left text-center flex items-center gap-3">
-            <LuSpeech className="text-3xl" />
-            Text to Speech
-          </h1>
-          <p className="text-xs text-white/40 mt-0.5 sm:text-left text-center">
-            Cấu hình giọng đọc tự động khi nhận quà tặng
+          <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d946ef] uppercase mb-3">Configuration Studio</h4>
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">Voice Dynamics</h1>
+          <p className="text-sm text-gray-400 max-w-2xl leading-relaxed">
+            Customize your stream's auditory identity. Đồng bộ hóa trí thông minh nhân tạo với luồng phát sóng của bạn thông qua các nhà cung cấp TTS hàng đầu.
           </p>
         </div>
 
-        <div className="flex items-center gap-3 sm:mt-0 mt-4">
-          <div className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider border ${badgeColorClass}`}>
+        <div className="flex items-center gap-3 shrink-0 pb-1">
+          <div className="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider bg-[#252630] border border-[#2e2f38] text-gray-300">
             {badge.text}
           </div>
-          <button
-            onClick={() => setEnabled(!enabled)}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${enabled
-                ? "bg-green-500/20 border border-green-500/40 text-green-400 hover:bg-green-500/30"
-                : "bg-white/5 border border-white/10 text-white/50 hover:text-white hover:border-white/30"
-              }`}
-          >
-            {enabled ? <MdVolumeUp size={20} /> : <MdVolumeOff size={20} />}
-            {enabled ? "Đang bật" : "Đã tắt"}
-          </button>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto px-6 py-6">
-        <div className="max-w-2xl mx-auto flex flex-col gap-6">
-          {/* Status */}
-          <div
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-500 ${enabled ? "bg-green-500/10 border-green-500/20" : "bg-red-500/10 border-red-500/20"
-              }`}
-          >
-            <div className={`w-3 h-3 rounded-full animate-pulse ${enabled ? "bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.5)]" : "bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.5)]"}`} />
-            <span className={`text-sm font-medium ${enabled ? "text-green-400" : "text-red-400"}`}>
-              {enabled ? `TTS đang hoạt động qua ${badge.text}` : "TTS đã tắt — bật để đọc quà tặng"}
-            </span>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
 
-          {/* ─── Provider Selector ─── */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/10 bg-white/[0.03]">
-              <MdRecordVoiceOver size={18} className="text-neon" />
-              <span className="text-sm font-bold tracking-wide uppercase text-white/70">
-                Chọn nhà cung cấp TTS
+        {/* Left Column */}
+        <div className="md:col-span-1 lg:col-span-2 space-y-8">
+
+          {/* Provider Selection */}
+          <div>
+            <h2 className="text-white font-bold flex items-center gap-3 mb-5 text-sm uppercase tracking-wider">
+              <span className="w-4 h-4 rounded-full bg-gradient-to-tr from-[#d946ef] to-[#8b5cf6] inline-flex items-center justify-center text-[10px]">
+                <span className="w-2 h-2 rounded-full bg-[#111115]"></span>
               </span>
-            </div>
-            <div className="p-5">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {PROVIDERS.map((p) => (
-                  <button
+              Voice Provider Selection
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {PROVIDERS.map((p) => {
+                const isActive = provider === p.id;
+                return (
+                  <div
                     key={p.id}
                     onClick={() => setProvider(p.id)}
-                    className={`flex flex-col items-center gap-2 px-3 py-4 rounded-xl border text-sm transition-all duration-300 ${provider === p.id
-                        ? "bg-neon/15 border-neon/40 text-neon shadow-[0_0_20px_rgba(7,242,231,0.1)]"
-                        : "bg-white/5 border-white/10 text-white/60 hover:border-white/20 hover:text-white/80"
+                    className={`relative p-6 rounded-2xl border cursor-pointer transition-all duration-300 group ${isActive
+                      ? "bg-[#251e30] border-[#d946ef] shadow-[0_4px_25px_rgba(217,70,239,0.15)]"
+                      : "bg-[#1a1b23] border-[#2e2f38] hover:border-gray-500"
                       }`}
                   >
-                    <span className="text-2xl">{p.icon}</span>
-                    <span className="font-bold text-xs">{p.label}</span>
-                    <span className="text-[9px] opacity-50">{p.desc}</span>
-                  </button>
-                ))}
-              </div>
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors ${isActive ? 'bg-[#d946ef]/20 text-[#d946ef]' : 'bg-[#252630] text-gray-400 group-hover:bg-[#2e2f38]'}`}>
+                      <span className="text-2xl">{p.icon}</span>
+                    </div>
+                    <h3 className="text-white font-bold text-[15px] mb-1.5">{p.label}</h3>
+                    <p className="text-gray-400 text-xs">{p.desc}</p>
+
+                    {isActive && (
+                      <div className="absolute top-5 right-5 text-[9px] font-extrabold tracking-[0.1em] text-white bg-[#d946ef] px-2.5 py-1 rounded-full shadow-[0_0_10px_rgba(217,70,239,0.5)]">
+                        ACTIVE
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* ─── Custom API Settings ─── */}
+          {/* Dynamic Provider Settings */}
           {provider === "custom" && (
-            <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-              <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/10 bg-white/[0.03]">
-                <MdApi size={18} className="text-orange-400" />
-                <span className="text-sm font-bold tracking-wide uppercase text-white/70">
-                  Cấu hình Custom API
-                </span>
-              </div>
-              <div className="p-5 flex flex-col gap-4">
-                {/* API URL */}
-                <div>
-                  <label className="text-xs text-white/50 mb-1.5 flex items-center gap-1.5">
-                    <MdApi size={14} />
-                    API URL
-                  </label>
+            <div className="bg-[#1a1b23] border border-[#2e2f38] rounded-2xl p-7">
+              <h3 className="text-white font-bold mb-6 flex items-center gap-2">
+                <MdApi className="text-orange-400" size={20} /> Cấu hình Custom API
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="sm:col-span-2">
+                  <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">API URL</label>
                   <input
                     value={customApiUrl}
                     onChange={(e) => setCustomApiUrl(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/25 focus:outline-none focus:border-orange-400/60 focus:shadow-[0_0_20px_rgba(251,146,60,0.1)] transition-all duration-300 font-mono text-[12px]"
+                    className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 focus:shadow-[0_0_15px_rgba(217,70,239,0.1)] transition-all font-mono"
                     placeholder="https://your-api.ngrok-free.dev/tts"
                   />
                 </div>
-
-                {/* Voice + Num Step */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs text-white/50 mb-1.5 block">Voice</label>
-                    <input
-                      value={customVoice}
-                      onChange={(e) => setCustomVoice(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-orange-400/60 transition-all duration-300"
-                      placeholder="ref3"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs text-white/50 mb-1.5 block">Num Step</label>
-                    <input
-                      type="number"
-                      value={customNumStep}
-                      onChange={(e) => setCustomNumStep(Number(e.target.value))}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-orange-400/60 transition-all duration-300"
-                      placeholder="16"
-                    />
-                  </div>
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">Voice (Reference ID)</label>
+                  <input
+                    value={customVoice}
+                    onChange={(e) => setCustomVoice(e.target.value)}
+                    className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all font-mono"
+                    placeholder="ref3"
+                  />
                 </div>
-
-                {/* First Chunk Words + Min Chunk Words */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs text-white/50 mb-1.5 block">First Chunk Words</label>
-                    <input
-                      type="number"
-                      value={customFirstChunkWords}
-                      onChange={(e) => setCustomFirstChunkWords(Number(e.target.value))}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-orange-400/60 transition-all duration-300"
-                      placeholder="10"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs text-white/50 mb-1.5 block">Min Chunk Words</label>
-                    <input
-                      type="number"
-                      value={customMinChunkWords}
-                      onChange={(e) => setCustomMinChunkWords(Number(e.target.value))}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-orange-400/60 transition-all duration-300"
-                      placeholder="15"
-                    />
-                  </div>
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">Num Step</label>
+                  <input
+                    type="number"
+                    value={customNumStep}
+                    onChange={(e) => setCustomNumStep(Number(e.target.value))}
+                    className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all"
+                  />
                 </div>
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">First Chunk Words</label>
+                  <input
+                    type="number"
+                    value={customFirstChunkWords}
+                    onChange={(e) => setCustomFirstChunkWords(Number(e.target.value))}
+                    className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">Min Chunk Words</label>
+                  <input
+                    type="number"
+                    value={customMinChunkWords}
+                    onChange={(e) => setCustomMinChunkWords(Number(e.target.value))}
+                    className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">Batch Size</label>
+                  <input
+                    type="number"
+                    value={customBatchSize}
+                    onChange={(e) => setCustomBatchSize(Number(e.target.value))}
+                    className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">No Warmup</label>
+                  <button
+                    onClick={() => setCustomNoWarmup(!customNoWarmup)}
+                    className={`w-full h-[50px] rounded-xl border text-sm font-semibold transition-all flex items-center justify-center gap-2 ${customNoWarmup
+                      ? "bg-[#d946ef]/20 border-[#d946ef]/40 text-[#d946ef]"
+                      : "bg-[#252630] border-[#2e2f38] text-gray-400 hover:bg-[#2a2c36]"
+                      }`}
+                  >
+                    {customNoWarmup ? <><MdCheckCircle size={18} /> Enabled (True)</> : "Disabled (False)"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
-                {/* Batch Size + No Warmup */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs text-white/50 mb-1.5 block">Batch Size</label>
-                    <input
-                      type="number"
-                      value={customBatchSize}
-                      onChange={(e) => setCustomBatchSize(Number(e.target.value))}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-orange-400/60 transition-all duration-300"
-                      placeholder="2"
-                    />
+          {(provider === "openai" || provider === "elevenlabs") && (
+            <div className="space-y-8">
+              {/* API Key */}
+              <div className="bg-[#1a1b23] border border-[#2e2f38] rounded-2xl p-7">
+                <h3 className="text-white font-bold mb-6 flex items-center gap-2 text-[15px]">
+                  <MdKey className="text-[#d946ef]" size={20} /> Xác thực Kết nối
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className={provider === "openai" || provider === "elevenlabs" ? "sm:col-span-1" : "sm:col-span-2"}>
+                    <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">
+                      {provider === "elevenlabs" ? "ElevenLabs API Key" : "OpenAI API Key"}
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showKey ? "text" : "password"}
+                        value={apiKey}
+                        onChange={(e) => setApiKey(e.target.value)}
+                        className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 pr-16 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all font-mono placeholder-[#52546e]"
+                        placeholder={provider === "elevenlabs" ? "xi-xxxxxxxx" : "sk-xxxxxxxx"}
+                      />
+                      <button
+                        onClick={() => setShowKey(!showKey)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-bold text-gray-400 hover:text-white uppercase tracking-wider"
+                      >
+                        {showKey ? "Ẩn" : "Hiện"}
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <label className="text-xs text-white/50 mb-1.5 block">No Warmup</label>
+                  {provider === "openai" && (
+                    <div>
+                      <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">Model</label>
+                      <select
+                        value={modelName}
+                        onChange={(e) => setModelName(e.target.value)}
+                        className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="tts-1">tts-1 (Nhanh)</option>
+                        <option value="tts-1-hd">tts-1-hd (Chất lượng cao)</option>
+                      </select>
+                    </div>
+                  )}
+                  {provider === "elevenlabs" && (
+                    <div>
+                      <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">Model ElevenLabs</label>
+                      <select
+                        value={elevenLabsModel}
+                        onChange={(e) => setElevenLabsModel(e.target.value)}
+                        className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all appearance-none cursor-pointer"
+                      >
+                        {ELEVENLABS_MODELS.map(m => (
+                          <option key={m.id} value={m.id}>{m.label} &mdash; {m.desc}</option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Voice Selection */}
+              <div className="bg-[#1a1b23] border border-[#2e2f38] rounded-2xl p-7">
+                <h3 className="text-white font-bold mb-6 flex items-center gap-2 text-[15px]">
+                  <MdRecordVoiceOver className="text-[#d946ef]" size={20} />
+                  Danh sách Giọng đọc {provider === "elevenlabs" ? "ElevenLabs" : "OpenAI"}
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {provider === "openai" && OPENAI_VOICES.map((v) => (
                     <button
-                      onClick={() => setCustomNoWarmup(!customNoWarmup)}
-                      className={`w-full px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-300 ${customNoWarmup
-                          ? "bg-green-500/15 border-green-500/30 text-green-400"
-                          : "bg-white/5 border-white/10 text-white/50"
+                      key={v.id}
+                      onClick={() => setVoice(v.id)}
+                      className={`p-4 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${voice === v.id
+                        ? 'bg-gradient-to-br from-[#d946ef]/15 to-[#8b5cf6]/15 border-[#d946ef]/50 text-white shadow-[0_0_15px_rgba(217,70,239,0.1)]'
+                        : 'bg-[#252630] border-[#2e2f38] text-gray-400 hover:border-gray-500'
                         }`}
                     >
-                      {customNoWarmup ? "✅ True" : "❌ False"}
+                      <span className="font-bold text-sm tracking-wide">{v.label}</span>
+                      <span className="text-[10px] opacity-70">{v.desc}</span>
                     </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* ─── API Key (elevenlabs/openai) ─── */}
-          {(provider === "openai" || provider === "elevenlabs") && (
-            <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-              <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/10 bg-white/[0.03]">
-                <MdKey size={18} className="text-neon" />
-                <span className="text-sm font-bold tracking-wide uppercase text-white/70">
-                  Xác thực API
-                </span>
-              </div>
-              <div className="p-5 flex flex-col gap-5">
-                <div>
-                  <label className="text-xs text-white/50 mb-1.5 flex items-center gap-1.5">
-                    <MdKey size={14} />
-                    {provider === "elevenlabs" ? "ElevenLabs API Key" : "OpenAI API Key"}
-                  </label>
-                  <div className="relative">
-                    <input
-                      type={showKey ? "text" : "password"}
-                      value={apiKey}
-                      onChange={(e) => setApiKey(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-20 text-white text-sm placeholder-white/25 focus:outline-none focus:border-neon/60 transition-all duration-300 font-mono"
-                      placeholder={provider === "elevenlabs" ? "xi-xxxxxxxx" : "sk-xxxxxxxx"}
-                    />
+                  ))}
+                  {provider === "elevenlabs" && ELEVENLABS_VOICES.map((v) => (
                     <button
-                      onClick={() => setShowKey(!showKey)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white/40 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg transition"
+                      key={v.id}
+                      onClick={() => setElevenLabsVoiceId(v.id)}
+                      className={`p-4 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${elevenLabsVoiceId === v.id
+                        ? 'bg-gradient-to-br from-[#d946ef]/15 to-[#8b5cf6]/15 border-[#d946ef]/50 text-white shadow-[0_0_15px_rgba(217,70,239,0.1)]'
+                        : 'bg-[#252630] border-[#2e2f38] text-gray-400 hover:border-gray-500'
+                        }`}
                     >
-                      {showKey ? "Ẩn" : "Hiện"}
+                      <span className="font-bold text-sm tracking-wide">{v.label}</span>
+                      <span className="text-[10px] opacity-70">{v.desc}</span>
                     </button>
-                  </div>
-                </div>
-
-                {provider === "openai" && (
-                  <div>
-                    <label className="text-xs text-white/50 mb-1.5 block">Model</label>
-                    <select
-                      value={modelName}
-                      onChange={(e) => setModelName(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-neon/60 transition-all duration-300 appearance-none cursor-pointer"
-                    >
-                      <option value="tts-1" className="bg-[#1a1820]">tts-1 (Nhanh)</option>
-                      <option value="tts-1-hd" className="bg-[#1a1820]">tts-1-hd (HD)</option>
-                    </select>
-                  </div>
-                )}
-
-                {provider === "elevenlabs" && (
-                  <div>
-                    <label className="text-xs text-white/50 mb-1.5 block">Model ElevenLabs</label>
-                    <select
-                      value={elevenLabsModel}
-                      onChange={(e) => setElevenLabsModel(e.target.value)}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-neon/60 transition-all duration-300 appearance-none cursor-pointer"
-                    >
-                      {ELEVENLABS_MODELS.map((m) => (
-                        <option key={m.id} value={m.id} className="bg-[#1a1820]">{m.label} — {m.desc}</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* ─── Voice Selection (openai/elevenlabs) ─── */}
-          {(provider === "openai" || provider === "elevenlabs") && (
-            <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-              <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/10 bg-white/[0.03]">
-                <MdRecordVoiceOver size={18} className="text-neon" />
-                <span className="text-sm font-bold tracking-wide uppercase text-white/70">
-                  Giọng đọc {provider === "elevenlabs" ? "ElevenLabs" : "OpenAI"}
-                </span>
-              </div>
-              <div className="p-5">
-                {provider === "openai" && (
-                  <div className="grid grid-cols-3 gap-2">
-                    {OPENAI_VOICES.map((v) => (
-                      <button
-                        key={v.id}
-                        onClick={() => setVoice(v.id)}
-                        className={`flex flex-col items-center gap-1 px-3 py-2.5 rounded-xl border text-sm transition-all duration-300 ${voice === v.id
-                            ? "bg-neon/15 border-neon/40 text-neon"
-                            : "bg-white/5 border-white/10 text-white/60 hover:border-white/20"
-                          }`}
-                      >
-                        <span className="font-bold text-xs">{v.label}</span>
-                        <span className="text-[9px] opacity-60">{v.desc}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-                {provider === "elevenlabs" && (
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {ELEVENLABS_VOICES.map((v) => (
-                      <button
-                        key={v.id}
-                        onClick={() => setElevenLabsVoiceId(v.id)}
-                        className={`flex flex-col items-center gap-1 px-3 py-3 rounded-xl border text-sm transition-all duration-300 ${elevenLabsVoiceId === v.id
-                            ? "bg-purple-500/15 border-purple-500/40 text-purple-400"
-                            : "bg-white/5 border-white/10 text-white/60 hover:border-white/20"
-                          }`}
-                      >
-                        <span className="font-bold text-xs">{v.label}</span>
-                        <span className="text-[9px] opacity-60">{v.desc}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* ─── Voice Settings ─── */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/10 bg-white/[0.03]">
-              <MdTune size={18} className="text-neon" />
-              <span className="text-sm font-bold tracking-wide uppercase text-white/70">
-                Tùy chỉnh
-              </span>
-            </div>
-            <div className="p-5 flex flex-col gap-5">
-              {/* Volume */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs text-white/50 flex items-center gap-1.5">
-                    <MdVolumeUp size={14} /> Âm lượng
-                  </label>
-                  <span className="text-xs font-bold text-neon tabular-nums">{Math.round(volume * 100)}%</span>
-                </div>
-                <input type="range" min="0" max="1" step="0.05" value={volume}
-                  onChange={(e) => setVolume(parseFloat(e.target.value))}
-                  className="w-full h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#07f2e7]"
-                />
-              </div>
-
-              {/* Rate */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs text-white/50 flex items-center gap-1.5">
-                    <MdSpeed size={14} /> Tốc độ đọc
-                  </label>
-                  <span className="text-xs font-bold text-neon tabular-nums">{rate.toFixed(1)}x</span>
-                </div>
-                <input type="range" min="0.5" max="2" step="0.1" value={rate}
-                  onChange={(e) => setRate(parseFloat(e.target.value))}
-                  className="w-full h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#07f2e7]"
-                />
-              </div>
-
-              {/* Template */}
-              <div>
-                <label className="text-xs text-white/50 mb-1.5 flex items-center gap-1.5">
-                  <MdTextFields size={14} /> Mẫu câu đọc
-                </label>
-                <textarea
-                  value={template}
-                  onChange={(e) => setTemplate(e.target.value)}
-                  rows={2}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/25 focus:outline-none focus:border-neon/60 transition-all duration-300 resize-none"
-                  placeholder="Cảm ơn {name} đã tặng {amount} {gift}"
-                />
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {[
-                    { tag: "{name}", label: "Tên người" },
-                    { tag: "{amount}", label: "Số lượng" },
-                    { tag: "{gift}", label: "Tên quà" },
-                  ].map((item) => (
-                    <span key={item.tag}
-                      className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-neon/10 border border-neon/20 text-[10px] text-neon font-mono"
-                    >
-                      {item.tag}
-                      <span className="text-white/40 font-sans">= {item.label}</span>
-                    </span>
                   ))}
                 </div>
               </div>
             </div>
+          )}
+
+        </div>
+
+        {/* Right Column */}
+        <div className="md:col-span-1 border border-[#2e2f38] bg-[#1a1b23] rounded-2xl p-7 h-fit relative sm:sticky top-0 shadow-lg">
+          <h3 className="text-white font-bold text-[17px] mb-8">Audio Dynamics</h3>
+
+          <div className="mt-2 text-[#d946ef]">
+            <Slider
+              label="VOICE PITCH"
+              value={volume}
+              min={0}
+              max={1}
+              step={0.05}
+              displayValue={`+${Math.round(volume * 100)}%`}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+            />
           </div>
 
-          {/* ─── Test ─── */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/10 bg-white/[0.03]">
-              <MdPlayArrow size={18} className="text-neon" />
-              <span className="text-sm font-bold tracking-wide uppercase text-white/70">Thử giọng đọc</span>
-            </div>
-            <div className="p-5 flex flex-col gap-4">
-              <div className="flex items-center gap-2 px-4 py-3 bg-pink-500/10 border border-pink-500/20 rounded-xl text-sm text-pink-300">
-                <span>🎁</span>
-                <span className="font-semibold text-white">Ngọc Trinh</span>
-                <span>tặng 5 Rose</span>
-              </div>
-
-              <div className="flex items-center gap-2 px-4 py-3 bg-neon/5 border border-neon/15 rounded-xl text-sm text-neon/80">
-                <MdVolumeUp size={16} />
-                <span className="italic">
-                  "{template.replace("{name}", "Ngọc Trinh").replace("{amount}", "5").replace("{gift}", "Rose")}"
-                </span>
-              </div>
-
-              <div className={`text-center text-[10px] py-1.5 rounded-lg font-medium ${provider === "custom" ? "bg-orange-500/10 text-orange-400" :
-                  provider === "elevenlabs" ? "bg-purple-500/10 text-purple-400" :
-                    provider === "openai" ? "bg-blue-500/10 text-blue-400" :
-                      "bg-yellow-500/10 text-yellow-400"
-                }`}>
-                Sẽ đọc bằng {badge.text}
-                {provider === "custom" && ` → ${customApiUrl}`}
-              </div>
-
-              <input
-                value={testText}
-                onChange={(e) => setTestText(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/25 focus:outline-none focus:border-neon/60 transition-all duration-300"
-                placeholder="Hoặc nhập văn bản tùy ý để thử..."
-              />
-
-              <div className="flex items-center gap-3">
-                <button onClick={handleTest}
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-neon/20 border border-neon/30 text-neon font-semibold text-sm hover:bg-neon/30 hover:shadow-[0_0_25px_rgba(7,242,231,0.15)] transition-all duration-300"
-                >
-                  <MdPlayArrow size={20} /> Phát thử
-                </button>
-                <button onClick={stopSpeaking}
-                  className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-red-500/20 border border-red-500/30 text-red-400 font-semibold text-sm hover:bg-red-500/30 transition-all duration-300"
-                >
-                  <MdStop size={20} /> Dừng
-                </button>
-              </div>
-            </div>
+          <div className="mt-8">
+            <Slider
+              label="READING SPEED"
+              value={rate}
+              min={0.5}
+              max={2}
+              step={0.1}
+              displayValue={`${rate.toFixed(1)}X`}
+              onChange={(e) => setRate(parseFloat(e.target.value))}
+            />
           </div>
 
-          {/* Save */}
-          <button onClick={handleSave}
-            className={`w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 ${saved
-                ? "bg-green-500 text-white shadow-[0_0_30px_rgba(34,197,94,0.3)]"
-                : "bg-neon text-white hover:bg-neon/80 hover:shadow-[0_0_30px_rgba(7,242,231,0.2)]"
-              }`}
-          >
-            <MdSave size={20} />
-            {saved ? "✓ Đã lưu thành công!" : "Lưu cấu hình"}
-          </button>
+          <h3 className="text-gray-400 text-[10px] uppercase font-bold tracking-[0.15em] mt-12 mb-5">SYSTEM CONTROLS</h3>
 
-          <div className="text-center text-[10px] text-white/20 pb-4">
-            Cấu hình được tự động lưu vào trình duyệt (localStorage)
+          <div className="space-y-4">
+            <div className="flex justify-between items-center p-4 rounded-xl bg-[#252630] hover:bg-[#2c2d38] transition-colors border border-transparent">
+              <span className="text-[13px] text-gray-300">Text To Speech Auto-Read</span>
+              <button
+                onClick={() => setEnabled(!enabled)}
+                className={`w-12 h-6 rounded-full relative transition-colors ${enabled ? 'bg-gradient-to-r from-[#d946ef] to-[#8b5cf6]' : 'bg-[#3f404d]'
+                  }`}
+              >
+                <div className={`absolute top-[3px] left-[3px] w-[18px] h-[18px] rounded-full bg-white transition-transform duration-300 shadow-sm ${enabled ? 'translate-x-[24px]' : 'translate-x-0'
+                  }`}></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="bg-[#1a1b23] border border-[#2e2f38] rounded-2xl p-8 relative">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="p-2 bg-[#252630] rounded-lg">
+            <MdTextFields className="text-gray-300" size={18} />
+          </div>
+          <h3 className="text-white font-bold text-[17px]">Announcement Template</h3>
+        </div>
+
+        <div className="relative mb-6">
+          <div className="absolute top-2 right-6 text-9xl text-white/[0.02] font-serif leading-none rotate-180 hidden md:block pointer-events-none select-none">"</div>
+          <div className="absolute bottom-2 left-6 text-9xl text-white/[0.02] font-serif leading-none hidden md:block pointer-events-none select-none">"</div>
+          <textarea
+            value={template}
+            onChange={(e) => setTemplate(e.target.value)}
+            className="w-full bg-[#252630] border border-[#2e2f38] rounded-2xl p-6 text-gray-300 placeholder-gray-600 focus:outline-none focus:border-[#d946ef]/50 transition-colors resize-none leading-relaxed relative z-10 font-medium text-[15px]"
+            rows={3}
+            placeholder="Hey everyone! {name} just subscribed with {amount} {gift}! Let's get some hype in the chat for the legend!"
+          />
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3 mb-8 px-2">
+          {[
+            { tag: "{name}", label: "Tên người tặng" },
+            { tag: "{amount}", label: "Số lượng" },
+            { tag: "{gift}", label: "Tên quà" },
+          ].map((item) => (
+            <span
+              key={item.tag}
+              onClick={() => setTemplate(template + " " + item.tag)}
+              className="text-[10px] px-4 py-2 rounded-full bg-[#252630] border border-[#2e2f38] text-gray-400 font-mono tracking-widest cursor-pointer hover:bg-[#323340] hover:text-[#d946ef] transition-colors"
+              title={`Thêm ${item.label}`}
+            >
+              [{item.tag.replace('{', '').replace('}', '').toUpperCase()}]
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-between gap-5 pt-7 border-t border-[#2e2f38]">
+          <div className="flex-1 w-full flex items-center bg-[#252630] border border-[#2e2f38] rounded-xl px-5 focus-within:border-[#d946ef]/60 transition-colors">
+            <MdPlayArrow className="text-gray-500 shrink-0" size={20} />
+            <input
+              value={testText}
+              onChange={(e) => setTestText(e.target.value)}
+              className="w-full bg-transparent py-3.5 pl-3 text-sm text-gray-300 placeholder-[#52546e] focus:outline-none"
+              placeholder="Enter custom text here to preview the voice..."
+            />
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0 justify-end">
+            <button
+              onClick={handleTest}
+              className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#252630] hover:bg-[#2d2e3b] border border-[#3f404d] text-gray-300 text-sm font-semibold transition-colors flex-1 md:flex-none"
+            >
+              Preview Voice
+            </button>
+            {/* <button
+                 onClick={stopSpeaking}
+                 className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-500 text-sm font-semibold transition-colors"
+                 title="Stop Speaking"
+               >
+                 <MdStop size={20} />
+               </button> */}
+            <button
+              onClick={handleSave}
+              className="flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-sm font-bold shadow-[0_0_20px_rgba(217,70,239,0.2)] hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] transition-all flex-1 md:flex-none"
+            >
+              {saved ? 'Saved Successfully!' : 'Save Configuration'}
+            </button>
           </div>
         </div>
       </div>

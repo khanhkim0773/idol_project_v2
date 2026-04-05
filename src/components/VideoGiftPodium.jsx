@@ -4,61 +4,72 @@ import { useVideoStore } from "../hooks/useVideoStore";
 const rankStyles = {
   1: {
     label: "TOP 1",
-    size: "w-14 h-14 sm:w-18 sm:h-18",
-    // bar: "h-[52px] sm:h-[60px] bg-gradient-to-b from-amber-400/90 to-amber-600/80 ring-2 ring-amber-300/60",
-    ring: "ring-2 ring-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.35)]",
-    labelClass: "text-amber-300",
+    size: "w-[68px] h-[68px] sm:w-[76px] sm:h-[76px]",
+    ring: "ring-2 ring-[#fbbf24] ring-offset-2 ring-offset-black shadow-[0_0_30px_rgba(251,191,36,0.6)]",
+    labelClass: "text-[#fbbf24] drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]",
+    scoreClass: "text-[#fbbf24] drop-shadow-[0_0_12px_rgba(251,191,36,0.5)]",
+    badgeBg: "bg-gradient-to-r from-[#fbbf24]/20 to-[#f59e0b]/20 border border-[#fbbf24]/50",
   },
   2: {
     label: "TOP 2",
-    size: "w-12 h-12 sm:w-14 sm:h-14",
-    // bar: "h-[38px] sm:h-[44px] bg-gradient-to-b from-slate-300/90 to-slate-500/80 ring-1 ring-slate-200/50",
-    ring: "ring-2 ring-slate-300/70",
-    labelClass: "text-slate-300",
+    size: "w-[56px] h-[56px] sm:w-[60px] sm:h-[60px]",
+    ring: "ring-2 ring-[#06b6d4] ring-offset-2 ring-offset-black shadow-[0_0_20px_rgba(6,182,212,0.6)]",
+    labelClass: "text-[#06b6d4] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]",
+    scoreClass: "text-[#06b6d4] drop-shadow-[0_0_12px_rgba(6,182,212,0.5)]",
+    badgeBg: "bg-gradient-to-r from-[#06b6d4]/20 to-[#0ea5e9]/20 border border-[#06b6d4]/50",
   },
   3: {
     label: "TOP 3",
-    size: "w-12 h-12 sm:w-14 sm:h-14",
-    // bar: "h-[30px] sm:h-[36px] bg-gradient-to-b from-orange-400/85 to-amber-800/75 ring-1 ring-orange-300/40",
-    ring: "ring-2 ring-orange-500/60",
-    labelClass: "text-orange-300",
+    size: "w-[56px] h-[56px] sm:w-[60px] sm:h-[60px]",
+    ring: "ring-2 ring-[#d946ef] ring-offset-2 ring-offset-black shadow-[0_0_20px_rgba(217,70,239,0.6)]",
+    labelClass: "text-[#d946ef] drop-shadow-[0_0_8px_rgba(217,70,239,0.8)]",
+    scoreClass: "text-[#d946ef] drop-shadow-[0_0_12px_rgba(217,70,239,0.5)]",
+    badgeBg: "bg-gradient-to-r from-[#d946ef]/20 to-[#a855f7]/20 border border-[#d946ef]/50",
   },
 };
 
 function PodiumCell({ rank, data }) {
   const st = rankStyles[rank];
   return (
-    <div className="w-full max-w-[100px] sm:max-w-[120px] flex flex-col items-center justify-end min-h-[120px] sm:min-h-[140px] relative">
-      <div
-        className={`relative rounded-full overflow-hidden ${st.size} ${st.ring} bg-black/40`}
-      >
-        {data?.avatar ? (
-          <img
-            src={data?.avatar}
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-white/40 text-xs">
-            ?
-          </div>
-        )}
+    <div className={`w-full max-w-[100px] sm:max-w-[120px] flex flex-col items-center justify-end relative ${rank === 1 ? 'z-20' : 'z-10'}`}>
+      
+      {/* Avatar Container */}
+      <div className="relative flex flex-col items-center justify-center mb-1">
+        <div
+          className={`relative rounded-full overflow-hidden ${st.size} ${st.ring} bg-black flex items-center justify-center shrink-0 transition-transform hover:scale-105 duration-300`}
+        >
+          {data?.avatar ? (
+            <img
+              src={data?.avatar}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-white/20 text-[10px] font-black uppercase">
+              N/A
+            </div>
+          )}
+        </div>
+
+        {/* Rank Badge */}
+        <div className={`absolute -bottom-2.5 px-3 py-0.5 rounded-full ${st.badgeBg} backdrop-blur-md z-10 shadow-xl flex items-center justify-center`}>
+          <span className={`text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] ${st.labelClass} leading-none mb-[1px]`}>
+            {st.label}
+          </span>
+        </div>
       </div>
 
-      <p
-        className={`text-[9px] sm:text-[10px] font-bold mt-1.5 uppercase tracking-wide ${st.labelClass}`}
-      >
-        {st.label}
-      </p>
-      <p className="text-[10px] sm:text-[11px] text-white font-semibold truncate max-w-full px-0.5 text-center leading-tight mt-0.5">
-        {data?.name}
-      </p>
-      
-      <p className="text-md sm:text-md font-black text-white tabular-nums leading-none mt-1">
-        {data?.score ?? "0"}
-      </p>
-      <p className="text-[8px] text-white/45 uppercase mt-0.5">điểm</p>
-      {/* <div className={`w-full mt-1.5 rounded-t-md ${st.bar}`} /> */}
+      {/* Info Container */}
+      <div className="flex flex-col items-center justify-center w-full px-1 pt-5 pb-2 bg-gradient-to-t from-black/90 via-black/40 to-transparent rounded-2xl mt-1">
+        <p className="text-[11px] sm:text-[12px] font-extrabold text-white truncate max-w-full px-2 text-center w-full drop-shadow-md">
+          {data?.name || "—"}
+        </p>
+        <p className={`text-[18px] sm:text-[20px] font-black tabular-nums leading-none mt-1.5 ${st.scoreClass}`}>
+          {data?.score ?? "0"}
+        </p>
+        <p className="text-[8px] text-white/50 uppercase tracking-[0.3em] mt-1.5 font-bold">Điểm</p>
+      </div>
+
     </div>
   );
 }
@@ -66,6 +77,7 @@ function PodiumCell({ rank, data }) {
 const VideoGiftPodium = () => {
   const videos = useVideoStore((state) => state.videos);
   const videoGiftScores = useVideoStore((state) => state.videoGiftScores);
+  
   const { first, second, third } = useMemo(() => {
     const ranked = Object.entries(videoGiftScores)
       .filter(([, score]) => score > 0)
@@ -86,17 +98,18 @@ const VideoGiftPodium = () => {
       third: ranked[2] ?? null,
     };
   }, [videoGiftScores, videos]);
+
   return (
-    <div className="absolute sm:top-10 top-4 left-0 right-0 z-[15] pointer-events-none px-1 sm:px-2 pt-1 sm:pt-2">
-      <div className="mx-auto max-w-[340px]">
-        <div className="flex flex-row items-end justify-center gap-1 sm:gap-3 px-2 pb-2 pt-1">
-          <div className="flex-1 flex justify-center">
+    <div className="absolute sm:top-10 top-6 left-0 right-0 z-[15] pointer-events-none px-2 sm:px-4 pt-2">
+      <div className="mx-auto max-w-[380px]">
+        <div className="flex flex-row items-end justify-center gap-2 sm:gap-4 px-2 pb-2 pt-1">
+          <div className="flex-1 flex justify-center translate-y-3 sm:translate-y-4">
             <PodiumCell rank={2} data={second} />
           </div>
-          <div className="flex-1 flex justify-center -translate-y-1 sm:-translate-y-3 scale-105 sm:scale-110 origin-bottom">
+          <div className="flex-1 flex justify-center -translate-y-2 sm:-translate-y-3 scale-105 sm:scale-110 origin-bottom">
             <PodiumCell rank={1} data={first} />
           </div>
-          <div className="flex-1 flex justify-center">
+          <div className="flex-1 flex justify-center translate-y-3 sm:translate-y-4">
             <PodiumCell rank={3} data={third} />
           </div>
         </div>
@@ -104,4 +117,5 @@ const VideoGiftPodium = () => {
     </div>
   );
 };
+
 export default VideoGiftPodium;

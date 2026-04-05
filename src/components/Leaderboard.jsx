@@ -94,9 +94,21 @@ const Leaderboard = () => {
   const renderRank = (index) => {
     const rank = index + 1;
     if (rank <= 3) {
-      return <div className={`rank-badge rank-${rank}`}>{rank}</div>;
+      return (
+        <div className={`w-9 h-9 rounded-full flex items-center justify-center font-black text-[14px] shadow-sm transform -rotate-6 shrink-0
+          ${rank === 1 ? "bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-600 text-yellow-900 border-2 border-yellow-200 shadow-[0_0_15px_rgba(234,179,8,0.5)]" : ""}
+          ${rank === 2 ? "bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500 text-gray-800 border-2 border-gray-200 shadow-[0_0_15px_rgba(156,163,175,0.4)]" : ""}
+          ${rank === 3 ? "bg-gradient-to-br from-orange-300 via-orange-400 to-orange-600 text-orange-950 border-2 border-orange-200 shadow-[0_0_15px_rgba(249,115,22,0.4)]" : ""}
+        `}>
+          {rank}
+        </div>
+      );
     }
-    return <div className="rank-badge">{rank}</div>;
+    return (
+      <div className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[13px] bg-white/[0.05] text-white/40 border border-white/10 shrink-0">
+        {rank}
+      </div>
+    );
   };
 
   const formatTime = (date) => {
@@ -105,68 +117,85 @@ const Leaderboard = () => {
   };
 
   return (
-    <div className="flex flex-col h-full text-white bg-black/50 backdrop-blur-md rounded-xl overflow-hidden">
-      <div className="p-4 bg-black/50 border-b border-gray-600">
-        <div className="flex items-center justify-between mb-1">
-          <h3 className="text-base font-semibold tracking-wide">🏆 TOP ĐẠI GIA</h3>
+    <div className="w-full h-full flex flex-col bg-transparent relative">
+      <div className="px-6 py-4 shrink-0 border-b border-white/[0.05]">
+        <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
+            <span className="text-[14px]">🏆</span>
+            <span className="font-extrabold text-[11px] text-[#fbbf24] tracking-[0.2em] uppercase mt-0.5">
+              Top Donators
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
             {loading && (
-              <svg className="w-3 h-3 animate-spin text-white/50" fill="none" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 animate-spin text-white/40" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
               </svg>
             )}
             <span
-              className={`text-[9px] font-bold px-2 py-0.5 rounded-full tracking-widest ${isConnected
-                  ? "bg-green-500/20 text-green-400 border border-green-500/40 animate-pulse"
-                  : "bg-red-500/20 text-red-400 border border-red-500/40"
+              className={`text-[9px] font-bold px-2.5 py-0.5 rounded-full tracking-wider shadow-sm uppercase ${isConnected
+                  ? "bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/30"
+                  : "bg-red-500/15 text-red-400 border border-red-500/30"
                 }`}
             >
-              {isConnected ? "● LIVE" : "○ OFFLINE"}
+              {isConnected ? "Live" : "Offline"}
             </span>
           </div>
         </div>
         {lastUpdated && (
-          <p className="text-[10px] text-white/30">
-            Cập nhật lúc {formatTime(lastUpdated)}
+          <p className="text-[9px] font-bold text-white/30 uppercase tracking-[0.15em] mt-1">
+            Last Sync: {formatTime(lastUpdated)}
           </p>
         )}
       </div>
 
-      <div className="flex-1 overflow-y-auto p-3">
+      <div className="flex-1 overflow-y-auto p-5 custom-scrollbar relative z-10 flex flex-col gap-3">
         {loading && data.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full">
-            Đang tải...
+          <div className="flex-1 flex flex-col items-center justify-center text-white/30 text-[10px] uppercase font-bold tracking-widest gap-3 py-10 opacity-50">
+            <div className="w-6 h-6 rounded-full border border-dashed border-white/40 animate-spin-slow"></div>
+            Loading Leaderboard...
           </div>
         ) : data.length > 0 ? (
-          data.slice(0, 5).map((item, index) => (
+          data.slice(0, 10).map((item, index) => (
             <div
-              className="flex items-center p-2.5 mb-2 rounded-xl hover:bg-gray-500 transition-colors duration-300 ease-in-out"
+              className={`flex items-center p-3 rounded-[1.25rem] transition-all duration-300 ease-in-out border group ${
+                 index === 0 ? "bg-gradient-to-r from-yellow-500/10 to-transparent border-yellow-500/20 shadow-[0_0_20px_rgba(234,179,8,0.05)]" :
+                 index === 1 ? "bg-gradient-to-r from-gray-500/10 to-transparent border-gray-500/20 shadow-[0_0_20px_rgba(156,163,175,0.05)]" :
+                 index === 2 ? "bg-gradient-to-r from-orange-500/10 to-transparent border-orange-500/20 shadow-[0_0_20px_rgba(249,115,22,0.05)]" :
+                 "bg-white/[0.02] border-transparent hover:border-white/10 hover:bg-white/[0.04]"
+              }`}
               key={item.id}
             >
-              {renderRank(index)}
+              <div className="shrink-0">{renderRank(index)}</div>
               <img
                 src={item.profilePicture || "/images/default_avatar.png"}
                 alt={item.nickname}
-                className="w-10 h-10 rounded-lg object-cover mx-3 flex-shrink-0"
+                className={`w-11 h-11 rounded-full object-cover ml-3.5 mr-3.5 flex-shrink-0 shadow-sm ${index <= 2 ? "ring-2 ring-white/10" : ""}`}
                 onError={(e) => {
                   e.target.src = "/images/default_avatar.png";
                 }}
               />
-              <div className="flex flex-col gap-1">
-                <p className="text-sm truncate">{item.nickname}</p>
+              <div className="flex flex-col gap-0.5 min-w-0">
+                <p className={`text-[14px] font-bold truncate ${index <= 2 ? "text-white" : "text-white/80"}`}>{item.nickname}</p>
 
-                <div className="flex items-center gap-1">
-                  <span>{item.totalDiamonds.toLocaleString()}</span>
-                  <img src={IMAGES.ICO_COIN} alt="Coin" className="w-4 h-4" />
+                <div className="flex items-center gap-1.5 opacity-90 mt-0.5">
+                  <span className={`font-black text-[13px] tracking-tight ${
+                    index === 0 ? "text-yellow-400" :
+                    index === 1 ? "text-gray-300" :
+                    index === 2 ? "text-orange-400" :
+                    "text-white/60"
+                  }`}>{item.totalDiamonds.toLocaleString()}</span>
+                  <img src={IMAGES.ICO_COIN} alt="Coin" className="w-[14px] h-[14px] opacity-90" />
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <div className="flex flex-col items-center justify-center h-full">
-            <span className="text-4xl mb-3">📊</span>
-            <span>Chưa có dữ liệu</span>
+          <div className="flex-1 flex flex-col items-center justify-center text-white/30 text-[10px] uppercase font-bold tracking-widest gap-2 py-10 opacity-50">
+            <span className="text-3xl grayscale mb-1">📊</span>
+            <span>Chưa có dữ liệu thống kê</span>
           </div>
         )}
       </div>
