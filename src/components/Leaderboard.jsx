@@ -117,11 +117,10 @@ const Leaderboard = () => {
               </svg>
             )}
             <span
-              className={`text-[9px] font-bold px-2 py-0.5 rounded-full tracking-widest ${
-                isConnected
+              className={`text-[9px] font-bold px-2 py-0.5 rounded-full tracking-widest ${isConnected
                   ? "bg-green-500/20 text-green-400 border border-green-500/40 animate-pulse"
                   : "bg-red-500/20 text-red-400 border border-red-500/40"
-              }`}
+                }`}
             >
               {isConnected ? "● LIVE" : "○ OFFLINE"}
             </span>

@@ -13,10 +13,11 @@ body {
 @theme {
   --color-purple: #ff2d55;
   --color-primary: #0fc1f7;
-  --color-secondary: #211f21;
-  --color-thirdary: #86efac;
-  --color-fivethary: #f87171;
-  --color-purple-1: #a78bfa;
+  --color-secondary: #0a0a0a;
+  --color-luminous-cyan: #07f2e7;
+  --color-luminous-blue: #0ea5e9;
+  --color-luminous-purple: #a855f7;
+  --color-luminous-gray: #9ca3af;
   --color-neon: #07f2e7;
 }
 
@@ -24,15 +25,19 @@ body {
   0% {
     color: #00c6ff;
   }
+
   25% {
     color: #0072ff;
   }
+
   50% {
     color: #00f2fe;
   }
+
   75% {
     color: #4facfe;
   }
+
   100% {
     color: #00c6ff;
   }
@@ -42,17 +47,46 @@ body {
   animation: textColor 4s linear infinite;
 }
 
+/* Luminous UI Utilities */
+.luminous-text-gradient {
+  background: linear-gradient(135deg, #07f2e7 0%, #0ea5e9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.luminous-btn-gradient {
+  background: linear-gradient(90deg, #d946ef 0%, #8b5cf6 50%, #06b6d4 100%);
+  background-size: 200% auto;
+  transition: 0.5s;
+}
+
+.luminous-btn-gradient:hover {
+  background-position: right center;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.sidebar-active-gradient {
+  background: linear-gradient(90deg, #2b1d42 0%, #173340 100%);
+  color: #e2d1ff !important;
+  box-shadow: inset -2px 0 0 #d946ef, 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-active-indicator {
+  display: none;
+}
+
 @keyframes slideInChat {
   from {
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 
 ::-webkit-scrollbar {
   width: 6px;

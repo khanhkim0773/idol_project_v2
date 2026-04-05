@@ -206,20 +206,18 @@ const GiftPage = () => {
               return (
                 <div
                   key={gift.giftId}
-                  className={`group relative flex flex-col p-5 rounded-2xl border transition-all duration-300 ${
-                    isActive
+                  className={`group relative flex flex-col p-5 rounded-2xl border transition-all duration-300 ${isActive
                       ? "bg-white/5 border-white/10 hover:border-neon hover:bg-white/8 shadow-lg shadow-black/20"
                       : "bg-white/[0.02] border-white/5 opacity-60 grayscale-[0.5]"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-4">
                       <div
-                        className={`w-14 h-14 rounded-2xl flex items-center justify-center border transition-colors ${
-                          isActive
+                        className={`w-14 h-14 rounded-2xl flex items-center justify-center border transition-colors ${isActive
                             ? "bg-neon/10 border-neon/80 text-neon"
                             : "bg-white/5 border-white/10 text-white/30"
-                        }`}
+                          }`}
                       >
                         {gift.image ? (
                           <img

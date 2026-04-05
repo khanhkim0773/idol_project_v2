@@ -7,14 +7,14 @@ import { MESSAGE_TYPE } from "../utils/type";
 
 const getMessageStyle = (type) => {
   if (type === "connect")
-    return { border: "border-l-[#00FF00]", bg: "bg-[#00FF0014]" };
+    return { border: "border-l-green-400", bg: "bg-green-400/5 backdrop-blur-sm" };
   if (type === "disconnect")
-    return { border: "border-l-red-400", bg: "bg-red-400/10" };
+    return { border: "border-l-red-400", bg: "bg-red-400/5 backdrop-blur-sm" };
   if (type === "warning")
-    return { border: "border-l-yellow-400", bg: "bg-yellow-400/10" };
+    return { border: "border-l-orange-400", bg: "bg-orange-400/5 backdrop-blur-sm" };
   if (type === "gift")
-    return { border: "border-l-pink-400", bg: "bg-pink-400/10" };
-  return { border: "border-l-[#ffffff30]", bg: "bg-[#FFFFFF0A]" };
+    return { border: "border-l-fuchsia-400", bg: "bg-fuchsia-400/5 backdrop-blur-sm" };
+  return { border: "border-l-white/20", bg: "bg-white/5 backdrop-blur-sm" };
 };
 
 const TikTokListener = () => {
@@ -150,35 +150,35 @@ const TikTokListener = () => {
 
   return (
     <div className="w-full h-full flex flex-col bg-transparent">
-      <div className="p-3.5 bg-white/5 shrink-0 border-b border-white/10">
-        <div className="flex items-center justify-between mb-2">
+      <div className="p-4 bg-white/[0.03] shrink-0 border-b border-white/5">
+        <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <span className="text-lg">📡</span>
-            <span className="font-bold text-[11px] text-white/80 tracking-[0.2em] uppercase">
-              TikTok LIVE
+            <span className="text-sm">⚡</span>
+            <span className="font-bold text-[10px] text-luminous-cyan tracking-[0.25em] uppercase">
+              Live Feed
             </span>
           </div>
 
           <div
-            className={`w-2 h-2 rounded-full ${isConnected
-                ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"
-                : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"
+            className={`w-2.5 h-2.5 rounded-full ${isConnected
+              ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.6)]"
+              : "bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.6)]"
               } animate-pulse`}
           />
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center px-0.5">
           <span
-            className={`text-[10px] font-medium ${isConnected ? "text-green-400" : "text-red-400"
+            className={`text-[9px] font-bold uppercase tracking-widest ${isConnected ? "text-green-400" : "text-red-400"
               }`}
           >
-            {isConnected ? "Đã kết nối" : "Ngắt kết nối"}
+            {isConnected ? "Connection Stable" : "Waiting for TikTok..."}
           </span>
 
-          <span className="text-[10px] text-white/40 font-bold">
+          <span className="text-[9px] text-white/30 font-bold tracking-wider">
             DANCER {actualIndex + 1}/{activeVideos.length}
             {videoQueue.length > 0 && (
-              <span className="ml-2 bg-pink-500 text-white text-[9px] px-1.5 py-0.5 rounded-full">
+              <span className="ml-2 bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white text-[8px] px-2 py-0.5 rounded-full shadow-lg">
                 +{videoQueue.length}
               </span>
             )}

@@ -17,11 +17,12 @@ const HomePage = ({ username }) => {
     <>
       <div className="relative w-full h-full overflow-hidden">
         {username && (
-          <div className="absolute top-4 left-4 z-10 bg-white/10 text-white px-4 py-4 rounded-full text-sm ">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-              <p>
-                Username: <span className="font-semibold">@{username}</span>
+          <div className="absolute top-6 left-6 z-10 bg-secondary/40 backdrop-blur-md border border-white/10 text-white px-5 py-2.5 rounded-2xl text-xs flex items-center gap-3 shadow-xl">
+            <div className="flex items-center gap-2.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)] animate-pulse" />
+              <p className="tracking-wide">
+                <span className="opacity-50 uppercase font-bold mr-1">Streamer:</span>
+                <span className="font-bold text-luminous-cyan">@{username}</span>
               </p>
             </div>
           </div>

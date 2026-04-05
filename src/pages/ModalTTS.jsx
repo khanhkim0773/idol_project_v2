@@ -116,9 +116,9 @@ const ModalTTS = () => {
   const badge = getBadgeInfo();
   const badgeColorClass =
     badge.color === "orange" ? "bg-orange-500/15 border-orange-500/30 text-orange-400" :
-    badge.color === "purple" ? "bg-purple-500/15 border-purple-500/30 text-purple-400" :
-    badge.color === "blue" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" :
-    "bg-yellow-500/15 border-yellow-500/30 text-yellow-400";
+      badge.color === "purple" ? "bg-purple-500/15 border-purple-500/30 text-purple-400" :
+        badge.color === "blue" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" :
+          "bg-yellow-500/15 border-yellow-500/30 text-yellow-400";
 
   return (
     <div className="w-full h-full overflow-hidden flex flex-col text-white">
@@ -140,11 +140,10 @@ const ModalTTS = () => {
           </div>
           <button
             onClick={() => setEnabled(!enabled)}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-              enabled
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${enabled
                 ? "bg-green-500/20 border border-green-500/40 text-green-400 hover:bg-green-500/30"
                 : "bg-white/5 border border-white/10 text-white/50 hover:text-white hover:border-white/30"
-            }`}
+              }`}
           >
             {enabled ? <MdVolumeUp size={20} /> : <MdVolumeOff size={20} />}
             {enabled ? "Đang bật" : "Đã tắt"}
@@ -157,9 +156,8 @@ const ModalTTS = () => {
         <div className="max-w-2xl mx-auto flex flex-col gap-6">
           {/* Status */}
           <div
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-500 ${
-              enabled ? "bg-green-500/10 border-green-500/20" : "bg-red-500/10 border-red-500/20"
-            }`}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-500 ${enabled ? "bg-green-500/10 border-green-500/20" : "bg-red-500/10 border-red-500/20"
+              }`}
           >
             <div className={`w-3 h-3 rounded-full animate-pulse ${enabled ? "bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.5)]" : "bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.5)]"}`} />
             <span className={`text-sm font-medium ${enabled ? "text-green-400" : "text-red-400"}`}>
@@ -181,11 +179,10 @@ const ModalTTS = () => {
                   <button
                     key={p.id}
                     onClick={() => setProvider(p.id)}
-                    className={`flex flex-col items-center gap-2 px-3 py-4 rounded-xl border text-sm transition-all duration-300 ${
-                      provider === p.id
+                    className={`flex flex-col items-center gap-2 px-3 py-4 rounded-xl border text-sm transition-all duration-300 ${provider === p.id
                         ? "bg-neon/15 border-neon/40 text-neon shadow-[0_0_20px_rgba(7,242,231,0.1)]"
                         : "bg-white/5 border-white/10 text-white/60 hover:border-white/20 hover:text-white/80"
-                    }`}
+                      }`}
                   >
                     <span className="text-2xl">{p.icon}</span>
                     <span className="font-bold text-xs">{p.label}</span>
@@ -283,11 +280,10 @@ const ModalTTS = () => {
                     <label className="text-xs text-white/50 mb-1.5 block">No Warmup</label>
                     <button
                       onClick={() => setCustomNoWarmup(!customNoWarmup)}
-                      className={`w-full px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-300 ${
-                        customNoWarmup
+                      className={`w-full px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all duration-300 ${customNoWarmup
                           ? "bg-green-500/15 border-green-500/30 text-green-400"
                           : "bg-white/5 border-white/10 text-white/50"
-                      }`}
+                        }`}
                     >
                       {customNoWarmup ? "✅ True" : "❌ False"}
                     </button>
@@ -377,11 +373,10 @@ const ModalTTS = () => {
                       <button
                         key={v.id}
                         onClick={() => setVoice(v.id)}
-                        className={`flex flex-col items-center gap-1 px-3 py-2.5 rounded-xl border text-sm transition-all duration-300 ${
-                          voice === v.id
+                        className={`flex flex-col items-center gap-1 px-3 py-2.5 rounded-xl border text-sm transition-all duration-300 ${voice === v.id
                             ? "bg-neon/15 border-neon/40 text-neon"
                             : "bg-white/5 border-white/10 text-white/60 hover:border-white/20"
-                        }`}
+                          }`}
                       >
                         <span className="font-bold text-xs">{v.label}</span>
                         <span className="text-[9px] opacity-60">{v.desc}</span>
@@ -395,11 +390,10 @@ const ModalTTS = () => {
                       <button
                         key={v.id}
                         onClick={() => setElevenLabsVoiceId(v.id)}
-                        className={`flex flex-col items-center gap-1 px-3 py-3 rounded-xl border text-sm transition-all duration-300 ${
-                          elevenLabsVoiceId === v.id
+                        className={`flex flex-col items-center gap-1 px-3 py-3 rounded-xl border text-sm transition-all duration-300 ${elevenLabsVoiceId === v.id
                             ? "bg-purple-500/15 border-purple-500/40 text-purple-400"
                             : "bg-white/5 border-white/10 text-white/60 hover:border-white/20"
-                        }`}
+                          }`}
                       >
                         <span className="font-bold text-xs">{v.label}</span>
                         <span className="text-[9px] opacity-60">{v.desc}</span>
@@ -498,12 +492,11 @@ const ModalTTS = () => {
                 </span>
               </div>
 
-              <div className={`text-center text-[10px] py-1.5 rounded-lg font-medium ${
-                provider === "custom" ? "bg-orange-500/10 text-orange-400" :
-                provider === "elevenlabs" ? "bg-purple-500/10 text-purple-400" :
-                provider === "openai" ? "bg-blue-500/10 text-blue-400" :
-                "bg-yellow-500/10 text-yellow-400"
-              }`}>
+              <div className={`text-center text-[10px] py-1.5 rounded-lg font-medium ${provider === "custom" ? "bg-orange-500/10 text-orange-400" :
+                  provider === "elevenlabs" ? "bg-purple-500/10 text-purple-400" :
+                    provider === "openai" ? "bg-blue-500/10 text-blue-400" :
+                      "bg-yellow-500/10 text-yellow-400"
+                }`}>
                 Sẽ đọc bằng {badge.text}
                 {provider === "custom" && ` → ${customApiUrl}`}
               </div>
@@ -532,11 +525,10 @@ const ModalTTS = () => {
 
           {/* Save */}
           <button onClick={handleSave}
-            className={`w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
-              saved
+            className={`w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 ${saved
                 ? "bg-green-500 text-white shadow-[0_0_30px_rgba(34,197,94,0.3)]"
                 : "bg-neon text-white hover:bg-neon/80 hover:shadow-[0_0_30px_rgba(7,242,231,0.2)]"
-            }`}
+              }`}
           >
             <MdSave size={20} />
             {saved ? "✓ Đã lưu thành công!" : "Lưu cấu hình"}
