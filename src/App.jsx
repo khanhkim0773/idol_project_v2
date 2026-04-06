@@ -41,26 +41,21 @@ const App = () => {
   }
 
   return (
-    <div className="w-screen h-screen relative overflow-hidden flex flex-col sm:flex-row">
-      {/* Rich gradient background */}
-      <div className="absolute inset-0 z-0 bg-[#0d0d1a]">
-        {/* Top-left: deep indigo blob */}
-        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#312e81]/80 blur-[80px] pointer-events-none" />
-        {/* Bottom-right: teal blob */}
-        <div className="absolute -bottom-32 -right-32 w-[700px] h-[700px] rounded-full bg-[#0e7490]/70 blur-[80px] pointer-events-none" />
-        {/* Center: purple spotlight */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-[#4f46e5]/25 blur-[120px] pointer-events-none" />
-        {/* Top-right: pink/rose accent */}
-        <div className="absolute top-0 right-1/4 w-[400px] h-[300px] rounded-full bg-[#db2777]/50 blur-[80px] pointer-events-none" />
+    <div className="h-full w-full bg-[#0d0d1a] relative overflow-hidden flex sm:flex-row flex-col z-10 transition-all duration-500">
+      {/* Background blobs (simplified and safely positioned) */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-[#312e81]/40 blur-[100px] -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-[#0e7490]/30 blur-[100px] translate-x-1/2 translate-y-1/2" />
       </div>
 
       <Sidebar />
-      <div className="flex-1 h-full sm:h-screen sm:px-3 overflow-auto relative z-10">
+
+      <div className="flex-1 min-h-0 h-full relative z-10 overflow-hidden">
         <Routes>
           <Route path={ROUTES_URL.DASHBOARD} element={<HomePage username={connectedUsername} />} />
-          <Route path={ROUTES_URL.UPLOAD} element={<UploadPage />} />
-          <Route path={ROUTES_URL.GIFTS} element={<GiftPage />} />
-          <Route path={ROUTES_URL.TTS} element={<ModalTTS />} />
+          <Route path={ROUTES_URL.UPLOAD} element={<div className="w-full h-full overflow-y-auto pt-24 pb-12 px-6"><UploadPage /></div>} />
+          <Route path={ROUTES_URL.GIFTS} element={<div className="w-full h-full overflow-y-auto pt-24 pb-12 px-6"><GiftPage /></div>} />
+          <Route path={ROUTES_URL.TTS} element={<div className="w-full h-full overflow-y-auto pt-24 pb-12 px-6"><ModalTTS /></div>} />
         </Routes>
       </div>
       <FooterBar />
