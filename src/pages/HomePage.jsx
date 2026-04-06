@@ -7,6 +7,7 @@ import Background from "../components/Background";
 import ResizableDraggable from "../components/ResizableDraggable";
 import VideoGiftPodium from "../components/VideoGiftPodium";
 import Leaderboard from "../components/Leaderboard";
+import GiftNotification from "../components/GiftNotification";
 
 const HomePage = ({ username }) => {
   const selectedVideo = useVideoStore((state) => state.selectedVideo);
@@ -64,6 +65,8 @@ const HomePage = ({ username }) => {
                   className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/[0.05] to-transparent mix-blend-overlay"
                   style={{ zIndex: 60 }}
                 ></div>
+                
+                <GiftNotification />
             </div>
 
           </div>
