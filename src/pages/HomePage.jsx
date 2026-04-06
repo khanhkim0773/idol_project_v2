@@ -31,11 +31,7 @@ const HomePage = ({ username }) => {
         <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
           <div className="relative sm:w-[420px] sm:h-[88%] w-full h-full flex items-center justify-center p-0">
             
-            {/* Spinning Aura Glow (Massive blur spilling out onto background) */}
-            <div className="absolute inset-[-100px] z-[5] opacity-80 flex items-center justify-center pointer-events-none overflow-hidden sm:overflow-visible">
-                <div className="absolute w-[200%] h-[200%] bg-[conic-gradient(from_0deg,transparent_0_260deg,#d946ef_360deg)] animate-[spin_3s_linear_infinite] blur-[100px]"></div>
-                <div className="absolute w-[200%] h-[200%] bg-[conic-gradient(from_180deg,transparent_0_260deg,#06b6d4_360deg)] animate-[spin_3s_linear_infinite] blur-[100px]"></div>
-            </div>
+            {/* removed outer led glow */}
             
             {/* Solid Neon Thick Border Outwards */}
             <div className="absolute inset-0 sm:inset-[-10px] sm:rounded-[3.2rem] overflow-hidden bg-[#050505] shadow-[0_0_100px_rgba(0,0,0,1)] pointer-events-auto">

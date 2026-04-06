@@ -8,7 +8,7 @@ const rankStyles = {
     ring: "ring-2 ring-[#fbbf24] ring-offset-2 ring-offset-black shadow-[0_0_30px_rgba(251,191,36,0.6)]",
     labelClass: "text-[#fbbf24] drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]",
     scoreClass: "text-[#fbbf24] drop-shadow-[0_0_12px_rgba(251,191,36,0.5)]",
-    badgeBg: "bg-gradient-to-r from-[#fbbf24]/20 to-[#f59e0b]/20 border border-[#fbbf24]/50",
+    badgeBg: "bg-gradient-to-r from-[#fbbf24]/30 to-[#f59e0b]/30 border border-[#fbbf24]/80",
   },
   2: {
     label: "TOP 2",
@@ -16,7 +16,7 @@ const rankStyles = {
     ring: "ring-2 ring-[#06b6d4] ring-offset-2 ring-offset-black shadow-[0_0_20px_rgba(6,182,212,0.6)]",
     labelClass: "text-[#06b6d4] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]",
     scoreClass: "text-[#06b6d4] drop-shadow-[0_0_12px_rgba(6,182,212,0.5)]",
-    badgeBg: "bg-gradient-to-r from-[#06b6d4]/20 to-[#0ea5e9]/20 border border-[#06b6d4]/50",
+    badgeBg: "bg-gradient-to-r from-[#06b6d4]/30 to-[#0ea5e9]/30 border border-[#06b6d4]/80",
   },
   3: {
     label: "TOP 3",
@@ -24,7 +24,7 @@ const rankStyles = {
     ring: "ring-2 ring-[#d946ef] ring-offset-2 ring-offset-black shadow-[0_0_20px_rgba(217,70,239,0.6)]",
     labelClass: "text-[#d946ef] drop-shadow-[0_0_8px_rgba(217,70,239,0.8)]",
     scoreClass: "text-[#d946ef] drop-shadow-[0_0_12px_rgba(217,70,239,0.5)]",
-    badgeBg: "bg-gradient-to-r from-[#d946ef]/20 to-[#a855f7]/20 border border-[#d946ef]/50",
+    badgeBg: "bg-gradient-to-r from-[#d946ef]/30 to-[#a855f7]/30 border border-[#d946ef]/80",
   },
 };
 
@@ -36,7 +36,7 @@ function PodiumCell({ rank, data }) {
       {/* Avatar Container */}
       <div className="relative flex flex-col items-center justify-center mb-1">
         <div
-          className={`relative rounded-full overflow-hidden ${st.size} ${st.ring} bg-black flex items-center justify-center shrink-0 transition-transform hover:scale-105 duration-300`}
+          className={`relative rounded-full overflow-hidden ${st.size} ${st.ring} bg-[#111] flex items-center justify-center shrink-0 transition-transform hover:scale-105 duration-300`}
         >
           {data?.avatar ? (
             <img
@@ -45,29 +45,29 @@ function PodiumCell({ rank, data }) {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-white/20 text-[10px] font-black uppercase">
+            <div className="w-full h-full flex items-center justify-center text-white/50 text-[12px] bg-white/5 font-black uppercase">
               N/A
             </div>
           )}
         </div>
 
         {/* Rank Badge */}
-        <div className={`absolute -bottom-2.5 px-3 py-0.5 rounded-full ${st.badgeBg} backdrop-blur-md z-10 shadow-xl flex items-center justify-center`}>
-          <span className={`text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] ${st.labelClass} leading-none mb-[1px]`}>
+        <div className={`absolute -bottom-3 px-3 py-1 rounded-full ${st.badgeBg} backdrop-blur-md z-10 shadow-xl flex items-center justify-center`}>
+          <span className={`text-[10px] sm:text-[11px] font-black uppercase tracking-[0.1em] text-center whitespace-nowrap ${st.labelClass} leading-none mb-[1px]`}>
             {st.label}
           </span>
         </div>
       </div>
 
       {/* Info Container */}
-      <div className="flex flex-col items-center justify-center w-full px-1 pt-5 pb-2 bg-gradient-to-t from-black/90 via-black/40 to-transparent rounded-2xl mt-1">
+      <div className="flex flex-col items-center justify-center w-full px-1 pt-6 pb-2 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-2xl mt-1">
         <p className="text-[11px] sm:text-[12px] font-extrabold text-white truncate max-w-full px-2 text-center w-full drop-shadow-md">
           {data?.name || "—"}
         </p>
         <p className={`text-[18px] sm:text-[20px] font-black tabular-nums leading-none mt-1.5 ${st.scoreClass}`}>
           {data?.score ?? "0"}
         </p>
-        <p className="text-[8px] text-white/50 uppercase tracking-[0.3em] mt-1.5 font-bold">Điểm</p>
+        <p className="text-[8px] text-white/60 uppercase tracking-[0.3em] mt-1.5 font-bold">Điểm</p>
       </div>
 
     </div>

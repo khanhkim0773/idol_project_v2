@@ -23,7 +23,7 @@ const App = () => {
     fetchGifts();
   }, [fetchVideos, fetchGifts]);
 
-  if (!isConnected) {
+  if (isConnected) {
     return (
       <div className="w-screen h-screen relative flex items-center justify-center bg-black overflow-hidden">
         {/* Background Image */}
@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <div className="w-screen h-screen relative overflow-hidden bg-black/80 flex flex-col sm:flex-row">
-      <Sidebar/>
+      <Sidebar />
       <div className="flex-1 h-full sm:h-screen sm:px-3 overflow-auto">
         <Routes>
           <Route path={ROUTES_URL.DASHBOARD} element={<HomePage username={connectedUsername} />} />
