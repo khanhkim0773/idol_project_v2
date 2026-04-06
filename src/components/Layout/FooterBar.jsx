@@ -12,7 +12,7 @@ const Menu = [
 
 const FooterBar = () => {
   return (
-    <div className="fixed bottom-2 left-0 right-0 backdrop-blur-md border-t border-white/5 rounded-full sm:hidden z-50 w-fit mx-auto">
+    <div className="fixed bottom-2 left-0 right-0 bg-white/[0.06] backdrop-blur-[40px] border border-white/[0.1] rounded-full sm:hidden z-50 w-fit mx-auto shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
       <div className="w-full flex items-center gap-10 py-2 px-2">
         {Menu.map((item) => (
           <NavLink

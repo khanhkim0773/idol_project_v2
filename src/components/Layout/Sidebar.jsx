@@ -13,7 +13,7 @@ const Menu = [
 
 const Sidebar = () => {
   return (
-    <div className="w-[300px] h-[calc(100vh-2rem)] bg-secondary sm:block hidden border border-white/5 relative overflow-hidden my-4 ml-4 rounded-[2rem] shadow-2xl">
+    <div className="w-[300px] h-[calc(100vh-2rem)] bg-white/[0.04] backdrop-blur-[60px] sm:block hidden border border-white/[0.08] relative overflow-hidden my-4 ml-4 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)]">
       <div className="w-full h-full flex flex-col justify-between py-10 px-5 relative z-10">
         <div>
           {/* Logo Section */}

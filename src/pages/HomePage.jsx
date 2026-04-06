@@ -16,9 +16,9 @@ const HomePage = ({ username }) => {
 
   return (
     <>
-      <div className="relative w-full h-full overflow-hidden bg-[#0f0f13]">
+      <div className="relative w-full h-full overflow-hidden">
         {username && (
-          <div className="absolute top-8 left-8 z-20 bg-[#1a1b23]/90 backdrop-blur-md border border-[#2e2f38] text-white px-6 py-3.5 rounded-2xl text-[13px] flex items-center gap-3 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+          <div className="absolute top-8 left-8 z-20 bg-white/[0.03] backdrop-blur-[40px] border border-white/[0.08] text-white px-6 py-3.5 rounded-2xl text-[13px] flex items-center gap-3 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)]">
             <div className="flex items-center gap-3">
               <div className="w-2.5 h-2.5 rounded-full bg-[#10b981] shadow-[0_0_12px_rgba(16,185,129,0.7)] animate-pulse" />
               <p className="tracking-wide">
@@ -31,42 +31,42 @@ const HomePage = ({ username }) => {
         {/* Main Viewport (Animated Intense LED Frame) */}
         <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
           <div className="relative sm:w-[420px] sm:h-[88%] w-full h-full flex items-center justify-center p-0">
-            
+
             {/* removed outer led glow */}
-            
+
             {/* Solid Neon Thick Border Outwards */}
-            <div className="absolute inset-0 sm:inset-[-10px] sm:rounded-[3.2rem] overflow-hidden bg-[#050505] shadow-[0_0_100px_rgba(0,0,0,1)] pointer-events-auto">
-              
+            <div className="absolute inset-0 sm:inset-[-12px] sm:rounded-[3.2rem] overflow-hidden bg-[#18181b] shadow-[0_30px_100px_rgba(0,0,0,1)] pointer-events-auto border border-white/[0.08]">
+
               {/* Spinning Sharp LED Rays */}
-              <div className="absolute inset-0 z-0 flex items-center justify-center">
-                  <div className="w-[200%] h-[200%] bg-[conic-gradient(from_0deg,transparent_0_280deg,#d946ef_350deg,#fdf4ff_360deg)] animate-[spin_3s_linear_infinite]"></div>
+              <div className="absolute inset-0 z-0 flex items-center justify-center mix-blend-screen bg-black/40">
+                <div className="w-[150%] h-[150%] bg-[conic-gradient(from_0deg,transparent_0_300deg,#d946ef_350deg,#fff_360deg)] animate-[spin_4s_linear_infinite]"></div>
               </div>
-              <div className="absolute inset-0 z-0 flex items-center justify-center">
-                  <div className="w-[200%] h-[200%] bg-[conic-gradient(from_180deg,transparent_0_280deg,#06b6d4_350deg,#ecfeff_360deg)] animate-[spin_3s_linear_infinite]"></div>
+              <div className="absolute inset-0 z-0 flex items-center justify-center mix-blend-screen bg-black/40">
+                <div className="w-[150%] h-[150%] bg-[conic-gradient(from_180deg,transparent_0_300deg,#06b6d4_350deg,#fff_360deg)] animate-[spin_4s_linear_infinite]"></div>
               </div>
             </div>
 
             {/* Inner Screen */}
-            <div className="absolute inset-0 sm:rounded-[2.6rem] bg-black overflow-hidden z-[20] shadow-[inset_0_0_50px_rgba(0,0,0,0.9)] pointer-events-auto border border-white/5 ring-4 ring-black">
-                <Background imgSrc="/images/background.png" />
+            <div className="absolute inset-0 sm:rounded-[2.8rem] bg-black overflow-hidden z-[20] shadow-[inset_0_0_80px_rgba(0,0,0,1)] pointer-events-auto border border-white/10 ring-[6px] ring-[#0a0a0a]">
+              <Background imgSrc="/images/background.png" />
 
-                <VideoGiftPodium />
+              <VideoGiftPodium />
 
-                {selectedVideo && (
-                  <BlackScreenVideo
-                    key={`${selectedVideo}:${playId}`}
-                    videoSrc={selectedVideo}
-                    onVideoEnded={dequeueVideo}
-                  />
-                )}
+              {selectedVideo && (
+                <BlackScreenVideo
+                  key={`${selectedVideo}:${playId}`}
+                  videoSrc={selectedVideo}
+                  onVideoEnded={dequeueVideo}
+                />
+              )}
 
-                {/* Subtile Screen Interlacing or Glare */}
-                <div
-                  className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/[0.05] to-transparent mix-blend-overlay"
-                  style={{ zIndex: 60 }}
-                ></div>
-                
-                <GiftNotification />
+              {/* Subtile Screen Interlacing or Glare */}
+              <div
+                className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/[0.05] to-transparent mix-blend-overlay"
+                style={{ zIndex: 60 }}
+              ></div>
+
+              <GiftNotification />
             </div>
 
           </div>
@@ -76,19 +76,19 @@ const HomePage = ({ username }) => {
         <div className="sm:block hidden">
           <ResizableDraggable
             title="DANCER MODELS"
-            initialPos={{ x: 340, y: 80 }}
-            initialSize={{ width: 320, height: 420 }}
+            initialPos={{ x: 330, y: 70 }}
+            initialSize={{ width: 310, height: 430 }}
             minSize={{ width: 180, height: 300 }}
           >
             <div className="h-full bg-transparent overflow-hidden">
-               <SelectThumbnail />
+              <SelectThumbnail />
             </div>
           </ResizableDraggable>
 
           <ResizableDraggable
             title="TIKTOK LIVE FEED"
-            initialPos={{ x: 1160, y: 80 }}
-            initialSize={{ width: 340, height: 460 }}
+            initialPos={{ x: 1155, y: 70 }}
+            initialSize={{ width: 330, height: 460 }}
             minSize={{ width: 220, height: 250 }}
           >
             <div className="h-full bg-transparent overflow-hidden">
@@ -97,12 +97,12 @@ const HomePage = ({ username }) => {
           </ResizableDraggable>
           <ResizableDraggable
             title="TOP GIFTS & GIFTERS"
-            initialPos={{ x: 30, y: 150 }}
-            initialSize={{ width: 320, height: 420 }}
+            initialPos={{ x: 18, y: 140 }}
+            initialSize={{ width: 305, height: 430 }}
             minSize={{ width: 250, height: 300 }}
           >
             <div className="h-full bg-transparent overflow-hidden">
-               <Leaderboard />
+              <Leaderboard />
             </div>
           </ResizableDraggable>
         </div>

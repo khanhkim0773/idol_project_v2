@@ -86,7 +86,7 @@ const ResizableDraggable = ({
 
   return (
     <div
-      className={`fixed z-50 flex flex-col bg-gradient-to-r from-[#2b1d42]/95 to-[#173340]/95 backdrop-blur-3xl border border-[#d946ef]/20 rounded-[2rem] overflow-hidden shadow-[inset_-2px_0_0_#d946ef,0_30px_80px_rgba(0,0,0,0.8)] ${className} ${isDragging || isResizing ? "select-none" : ""}`}
+      className={`fixed z-50 flex flex-col bg-white/[0.06] backdrop-blur-[50px] border border-white/[0.12] rounded-[1.75rem] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.12)] transition-colors ${className} ${isDragging || isResizing ? "select-none ring-1 ring-[#d946ef]/30" : ""}`}
       style={{
         left: `${pos.x}px`,
         top: `${pos.y}px`,
@@ -96,19 +96,25 @@ const ResizableDraggable = ({
         cursor: isDragging ? "grabbing" : "auto",
       }}
     >
-      {/* Decorative Top Glow */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-50 z-10" />
+      {/* Decorative Top Glow Line */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent z-10" />
 
       {/* Header / Drag Handle */}
       {title && (
         <div
           onMouseDown={handleMouseDown}
-          className={`shrink-0 h-14 px-6 flex items-center justify-between cursor-grab active:cursor-grabbing bg-gradient-to-b from-white/[0.05] to-transparent border-b border-white/[0.08] hover:bg-white/[0.08] transition-colors relative`}
+          className={`shrink-0 h-12 px-5 flex items-center justify-between cursor-grab active:cursor-grabbing bg-gradient-to-r from-white/[0.06] to-transparent border-b border-white/[0.08] hover:bg-white/[0.09] transition-colors relative`}
         >
-          <span className="text-[11px] font-bold text-white/70 uppercase tracking-[0.3em] leading-none select-none">
-            {title}
-          </span>
-          <div className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+          <div className="flex items-center gap-2.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#d946ef] to-[#06b6d4] shadow-[0_0_8px_rgba(217,70,239,0.7)]" />
+            <span className="text-[10px] font-extrabold text-white/80 uppercase tracking-[0.25em] leading-none select-none">
+              {title}
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 rounded-full bg-white/10" />
+            <div className="w-2 h-2 rounded-full bg-white/10" />
+          </div>
         </div>
       )}
 
@@ -122,7 +128,7 @@ const ResizableDraggable = ({
         onMouseDown={handleResizeMouseDown}
         className="absolute bottom-1 right-1 w-8 h-8 cursor-nwse-resize flex items-end justify-end p-2.5 z-[60]"
       >
-        <div className="w-3 h-3 border-r-2 border-b-2 border-white/20 hover:border-white transition-colors rounded-sm" />
+        <div className="w-3 h-3 border-r-2 border-b-2 border-white/25 hover:border-[#d946ef]/70 transition-colors rounded-sm" />
       </div>
     </div>
   );

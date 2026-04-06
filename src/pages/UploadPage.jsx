@@ -130,8 +130,8 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
   const valid = form.name.trim() && form.video && !isUploading;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md">
-      <div className="relative w-full max-w-xl mx-4 bg-[#1a1b23] border border-[#d946ef]/30 rounded-3xl shadow-[0_0_40px_rgba(217,70,239,0.15)] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md">
+      <div className="relative w-full max-w-xl mx-4 bg-white/[0.06] border border-white/[0.12] backdrop-blur-[40px] rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] overflow-hidden">
         {/* header */}
         <div className="flex items-center justify-between px-7 py-5 border-b border-[#2e2f38] bg-[#252630]/50">
           <h2 className="text-white font-extrabold text-xl tracking-tight flex items-center gap-2">
@@ -390,8 +390,8 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
 
 /* ─── Delete Confirm ─── */
 const DeleteConfirm = ({ name, onConfirm, onClose }) => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md">
-    <div className="w-full max-w-sm mx-4 bg-[#1a1b23] border border-red-500/30 rounded-3xl shadow-[0_0_40px_rgba(239,68,68,0.15)] p-7 flex flex-col gap-5 text-center items-center">
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md">
+    <div className="w-full max-w-sm mx-4 bg-white/[0.06] border border-red-500/30 backdrop-blur-[40px] rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.5)] p-7 flex flex-col gap-5 text-center items-center">
       <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 mb-2">
         <MdDelete size={32} className="text-red-500" />
       </div>
@@ -432,8 +432,8 @@ const VideoCard = ({
   return (
     <div
       className={`group relative flex flex-col md:flex-row items-center gap-5 p-5 rounded-3xl border transition-all duration-300 ${video.active
-          ? "bg-[#1a1b23] border-[#2e2f38] hover:border-[#d946ef]/60 hover:shadow-[0_8px_30px_rgba(217,70,239,0.12)]"
-          : "bg-[#14151a] border-[#1e1f26] opacity-[0.65] grayscale-[0.8]"
+          ? "bg-white/[0.05] border-white/[0.1] hover:border-[#d946ef]/50 hover:shadow-[0_8px_30px_rgba(217,70,239,0.12)] hover:bg-white/[0.08]"
+          : "bg-white/[0.02] border-white/[0.06] opacity-[0.65] grayscale-[0.8]"
         }`}
     >
       {/* order badge */}
@@ -463,7 +463,7 @@ const VideoCard = ({
       </div>
 
       {/* avatar */}
-      <div className={`shrink-0 w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all shadow-inner ${video.active ? "border-[#3f404d]" : "border-[#2e2f38]"}`}>
+      <div className={`shrink-0 w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all shadow-inner ${video.active ? "border-white/[0.12]" : "border-white/[0.06]"}`}>
         {video.avatar ? (
           <img
             src={video.avatar}
@@ -506,7 +506,7 @@ const VideoCard = ({
             {video.gift || "Không gắn quà"}
           </span>
           {/* video path */}
-          <span className="text-[11px] text-gray-500 font-mono truncate max-w-[200px] flex items-center gap-1.5 bg-[#252630] px-3 py-1 rounded-lg border border-[#2e2f38] shadow-inner">
+          <span className="text-[11px] text-gray-400 font-mono truncate max-w-[200px] flex items-center gap-1.5 bg-white/[0.06] px-3 py-1 rounded-lg border border-white/[0.1] shadow-inner">
             <MdVideocam size={14} className="text-gray-400 shrink-0" />
             {video.video ? video.video.split("/").pop() : "Chưa upload"}
           </span>
@@ -514,7 +514,7 @@ const VideoCard = ({
       </div>
 
       {/* actions */}
-      <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-4 md:pt-0 border-t md:border-t-0 border-[#2e2f38] w-full md:w-auto">
+      <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-4 md:pt-0 border-t md:border-t-0 border-white/[0.08] w-full md:w-auto">
         {/* toggle */}
         <button
           onClick={onToggle}
@@ -531,14 +531,14 @@ const VideoCard = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onEdit}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#252630] text-gray-400 hover:text-[#06b6d4] hover:bg-[#06b6d4]/10 border border-[#3f404d] hover:border-[#06b6d4]/40 transition-all shadow-sm"
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.06] text-gray-400 hover:text-[#06b6d4] hover:bg-[#06b6d4]/10 border border-white/[0.1] hover:border-[#06b6d4]/40 transition-all shadow-sm"
             title="Chỉnh sửa"
           >
             <MdEdit size={18} />
           </button>
           <button
             onClick={onDelete}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#252630] text-gray-400 hover:text-red-500 hover:bg-red-500/10 border border-[#3f404d] hover:border-red-500/40 transition-all shadow-sm"
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.06] text-gray-400 hover:text-red-500 hover:bg-red-500/10 border border-white/[0.1] hover:border-red-500/40 transition-all shadow-sm"
             title="Xóa"
           >
             <MdDelete size={18} />
@@ -595,7 +595,7 @@ const UploadPage = () => {
   };
 
   return (
-    <div className="w-full h-full text-white bg-[#0f0f13] overflow-y-auto p-6 md:p-10 font-sans flex flex-col">
+    <div className="w-full h-full text-white overflow-y-auto p-6 md:p-10 font-sans flex flex-col">
       {/* ── Header ── */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 shrink-0">
         <div>
@@ -625,7 +625,7 @@ const UploadPage = () => {
             onClick={() => setFilter(f)}
             className={`px-5 py-2.5 rounded-xl text-[11px] font-extrabold uppercase tracking-[0.1em] transition-all duration-300 ${filter === f
                 ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_15px_rgba(217,70,239,0.3)] border border-transparent hover:brightness-110"
-                : "bg-[#1a1b23] border border-[#2e2f38] text-gray-400 hover:text-white hover:border-[#d946ef]/40"
+                : "bg-white/[0.05] border border-white/[0.1] text-gray-400 hover:text-white hover:border-[#d946ef]/40 hover:bg-white/[0.1]"
               }`}
           >
             {f === "all"
@@ -640,7 +640,7 @@ const UploadPage = () => {
       {/* ── List ── */}
       <div className="flex-1 pb-20 flex flex-col gap-5">
         {filtered.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center gap-4 text-gray-500 py-32 rounded-3xl border border-dashed border-[#2e2f38] bg-[#1a1b23]/50">
+          <div className="flex-1 flex flex-col items-center justify-center gap-4 text-gray-500 py-32 rounded-3xl border border-dashed border-white/[0.08] bg-white/[0.02]">
             <div className="w-24 h-24 mb-2 rounded-full bg-[#1a1b23] border border-[#2e2f38] flex items-center justify-center shadow-inner">
               <MdVideocam size={40} className="text-[#3f404d]" />
             </div>

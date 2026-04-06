@@ -29,8 +29,8 @@ const GiftModal = ({ initial, onSave, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md">
-      <div className="relative w-full max-w-md mx-4 bg-[#1a1b23] border border-[#d946ef]/30 rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(217,70,239,0.15)]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md">
+      <div className="relative w-full max-w-md mx-4 bg-white/[0.06] border border-white/[0.12] rounded-3xl overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-[40px]">
         <div className="flex items-center justify-between px-7 py-5 border-b border-[#2e2f38] bg-[#252630]/50">
           <h2 className="text-white font-extrabold text-xl tracking-tight flex items-center gap-2">
             {initial ? (
@@ -45,7 +45,7 @@ const GiftModal = ({ initial, onSave, onClose }) => {
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition p-2 rounded-xl hover:bg-[#252630]"
+            className="text-gray-400 hover:text-white transition p-2 rounded-xl hover:bg-white/[0.08]"
           >
             <MdClose size={22} />
           </button>
@@ -67,7 +67,7 @@ const GiftModal = ({ initial, onSave, onClose }) => {
               value={giftId}
               disabled={!!initial}
               onChange={(e) => setGiftId(e.target.value)}
-              className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm placeholder-[#52546e] focus:outline-none focus:border-[#d946ef]/60 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-mono"
+              className="w-full bg-white/[0.06] border border-white/[0.1] rounded-xl px-5 py-3.5 text-white text-sm placeholder-white/30 focus:outline-none focus:border-[#d946ef]/60 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-mono"
               placeholder="VD: 5655"
             />
           </div>
@@ -79,7 +79,7 @@ const GiftModal = ({ initial, onSave, onClose }) => {
             <input
               value={giftName}
               onChange={(e) => setGiftName(e.target.value)}
-              className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-5 py-3.5 text-white text-sm placeholder-[#52546e] focus:outline-none focus:border-[#d946ef]/60 transition-all font-medium"
+              className="w-full bg-white/[0.06] border border-white/[0.1] rounded-xl px-5 py-3.5 text-white text-sm placeholder-white/30 focus:outline-none focus:border-[#d946ef]/60 transition-all font-medium"
               placeholder="VD: Rose"
             />
           </div>
@@ -88,7 +88,7 @@ const GiftModal = ({ initial, onSave, onClose }) => {
         <div className="flex items-center justify-end gap-3 px-7 py-5 border-t border-[#2e2f38] bg-[#15161c]">
           <button
             onClick={onClose}
-            className="px-6 py-3 rounded-xl border border-[#3f404d] text-gray-400 hover:text-white hover:bg-[#252630] text-sm font-semibold transition"
+            className="px-6 py-3 rounded-xl border border-white/[0.12] text-gray-400 hover:text-white hover:bg-white/[0.08] text-sm font-semibold transition"
           >
             Hủy
           </button>
@@ -107,20 +107,20 @@ const GiftModal = ({ initial, onSave, onClose }) => {
 
 /* ─── Delete Confirm ─── */
 const DeleteConfirm = ({ name, onConfirm, onClose }) => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md">
-    <div className="w-full max-w-sm mx-4 bg-[#1a1b23] border border-red-500/30 rounded-3xl shadow-[0_0_40px_rgba(239,68,68,0.15)] p-7 flex flex-col gap-5 text-center items-center">
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md">
+    <div className="w-full max-w-sm mx-4 bg-white/[0.06] border border-red-500/30 backdrop-blur-[40px] rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.5)] p-7 flex flex-col gap-5 text-center items-center">
       <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 mb-2">
         <MdDelete size={32} className="text-red-500" />
       </div>
       <h3 className="text-white font-extrabold text-xl">Xóa Quà Tặng</h3>
       <p className="text-gray-400 text-[15px] leading-relaxed">
         Bạn có chắc muốn xóa quà{" "}
-        <span className="text-white font-bold px-2 py-0.5 rounded-md bg-[#252630] border border-[#2e2f38] whitespace-nowrap">"{name}"</span><br />không?
+        <span className="text-white font-bold px-2 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.1] whitespace-nowrap">"{name}"</span><br />không?
       </p>
       <div className="flex w-full gap-3 mt-4">
         <button
           onClick={onClose}
-          className="flex-1 py-3.5 rounded-xl border border-[#3f404d] text-gray-400 hover:text-white hover:bg-[#252630] text-sm font-semibold transition"
+          className="flex-1 py-3.5 rounded-xl border border-white/[0.12] text-gray-400 hover:text-white hover:bg-white/[0.08] text-sm font-semibold transition"
         >
           Hủy
         </button>
@@ -158,7 +158,7 @@ const GiftPage = () => {
     .sort((a, b) => a.giftName.localeCompare(b.giftName));
 
   return (
-    <div className="w-full h-full text-white bg-[#0f0f13] overflow-y-auto p-6 md:p-10 font-sans flex flex-col">
+    <div className="w-full h-full text-white overflow-y-auto p-6 md:p-10 font-sans flex flex-col">
       {/* Header section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 shrink-0">
         <div>
@@ -188,19 +188,19 @@ const GiftPage = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Tìm kiếm theo tên hoặc ID..."
-          className="w-full bg-[#1a1b23] border border-[#2e2f38] hover:border-[#3f404d] rounded-2xl pl-12 pr-5 py-4 text-[15px] text-gray-200 placeholder-[#52546e] focus:outline-none focus:border-[#d946ef]/60 focus:bg-[#252630] transition-colors shadow-inner"
+          className="w-full bg-white/[0.06] border border-white/[0.1] hover:border-white/20 rounded-2xl pl-12 pr-5 py-4 text-[15px] text-gray-200 placeholder-white/30 focus:outline-none focus:border-[#d946ef]/60 focus:bg-white/[0.08] transition-colors shadow-inner"
         />
       </div>
 
       {/* Content */}
       <div className="flex-1 pb-20">
         {loading ? (
-          <div className="h-full flex items-center justify-center min-h-[400px]">
+          <div className="h-full flex flex-col items-center justify-center min-h-[400px]">
             <div className="w-12 h-12 border-4 border-[#d946ef] border-t-transparent rounded-full animate-spin shadow-[0_0_15px_rgba(217,70,239,0.5)]"></div>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-gray-500 py-32 rounded-3xl border border-dashed border-[#2e2f38] bg-[#1a1b23]/50">
-            <div className="w-24 h-24 mb-6 rounded-full bg-[#1a1b23] border border-[#2e2f38] flex items-center justify-center shadow-inner">
+          <div className="h-full flex flex-col items-center justify-center text-gray-500 py-32 rounded-3xl border border-dashed border-white/[0.08] bg-white/[0.02]">
+            <div className="w-24 h-24 mb-6 rounded-full bg-white/[0.05] border border-white/[0.1] flex items-center justify-center shadow-inner">
               <MdCardGiftcard size={40} className="text-[#3f404d]" />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Chưa có Gift nào</h3>
@@ -216,8 +216,8 @@ const GiftPage = () => {
                 <div
                   key={gift.giftId}
                   className={`group relative flex flex-col p-6 rounded-3xl border transition-all duration-300 ${isActive
-                    ? "bg-[#1a1b23] border-[#2e2f38] hover:border-[#d946ef]/60 hover:shadow-[0_8px_30px_rgba(217,70,239,0.12)] hover:-translate-y-1"
-                    : "bg-[#14151a] border-[#1e1f26] opacity-[0.65] grayscale-[0.8]"
+                    ? "bg-white/[0.05] border-white/[0.1] hover:border-[#d946ef]/50 hover:shadow-[0_8px_30px_rgba(217,70,239,0.12)] hover:-translate-y-1 hover:bg-white/[0.08]"
+                    : "bg-white/[0.02] border-white/[0.06] opacity-[0.65] grayscale-[0.8]"
                     }`}
                 >
                   <div className="flex items-start justify-between mb-5">
@@ -274,10 +274,10 @@ const GiftPage = () => {
                     </div>
                   </div>
 
-                  <div className="mt-auto pt-5 border-t border-[#2e2f38] flex items-center justify-between">
+                  <div className="mt-auto pt-5 border-t border-white/[0.08] flex items-center justify-between">
                     <div className="flex items-center gap-2 opacity-100 min-h-[36px]">
                       {gift.maxRepeatCount > 1 && (
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#252630] border border-[#3f404d] shadow-sm">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.05] border border-white/[0.1] shadow-sm">
                           <span className="text-xs">🏆</span>
                           <span className="text-[10px] uppercase tracking-wider font-bold text-gray-400">
                             Hit: <span className="text-white">{gift.maxRepeatCount}</span>
@@ -288,13 +288,13 @@ const GiftPage = () => {
                     <div className="flex items-center gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300">
                       <button
                         onClick={() => setModal({ mode: "edit", data: gift })}
-                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#252630] text-gray-400 hover:text-[#06b6d4] hover:bg-[#06b6d4]/10 border border-[#3f404d] hover:border-[#06b6d4]/40 transition-all shadow-sm"
+                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.06] text-gray-400 hover:text-[#06b6d4] hover:bg-[#06b6d4]/10 border border-white/[0.1] hover:border-[#06b6d4]/40 transition-all shadow-sm"
                       >
                         <MdEdit size={18} />
                       </button>
                       <button
                         onClick={() => setDeleteTarget(gift)}
-                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#252630] text-gray-400 hover:text-red-500 hover:bg-red-500/10 border border-[#3f404d] hover:border-red-500/40 transition-all shadow-sm"
+                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.06] text-gray-400 hover:text-red-500 hover:bg-red-500/10 border border-white/[0.1] hover:border-red-500/40 transition-all shadow-sm"
                       >
                         <MdDelete size={18} />
                       </button>
