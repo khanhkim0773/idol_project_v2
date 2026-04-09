@@ -23,10 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
-yarn.log
-yarn.lock
-package-lock.json
-package.json
 dist
 
 server/node_modules
