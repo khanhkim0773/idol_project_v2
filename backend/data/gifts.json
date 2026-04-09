@@ -688,5 +688,13 @@
     "diamonds": 1500,
     "active": true,
     "maxRepeatCount": 1
+  },
+  {
+    "giftId": 14046,
+    "giftName": "Match Wand",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/d1ba80bb94f93ac973bc4f30794c6d28.png~tplv-obj.png",
+    "diamonds": 100,
+    "active": true,
+    "maxRepeatCount": 1
   }
 ]

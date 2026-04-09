@@ -1,5 +1,5 @@
 
-export const SOCKET_URL = "http://localhost:3004";
+export const SOCKET_URL = import.meta.env.VITE_API_URL || "http://localhost:3004";
 
 export const IMAGES = {
     LOGO: "/images/logoMeow.png",

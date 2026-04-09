@@ -26268,5 +26268,75 @@
     "amount": 1,
     "diamonds": 1,
     "timestamp": "2026-04-09T03:33:04.403Z"
+  },
+  {
+    "giftId": 14046,
+    "giftName": "Match Wand",
+    "userId": "6781992628608041986",
+    "nickname": "A long",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/5ec07354a57053438a75d5306646b3d3~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=2930e2cf&x-expires=1775876400&x-signature=pLlTTOWkjqqqjgsej6Ie9DJWSH4%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my3",
+    "amount": 1,
+    "diamonds": 100,
+    "timestamp": "2026-04-09T03:39:02.621Z"
+  },
+  {
+    "giftId": 5269,
+    "giftName": "TikTok",
+    "userId": "6973848461826900993",
+    "nickname": "🐿️ Đồi tím hoa sim 🥑",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/951a1f02b0e38256e9ed97fceed5c4e5~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=6d4d6480&x-expires=1775876400&x-signature=ZuTzFQSSwcVoTV0amqu0puUlE8A%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 27,
+    "diamonds": 1,
+    "timestamp": "2026-04-09T03:39:18.277Z"
+  },
+  {
+    "giftId": 5655,
+    "giftName": "Rose",
+    "userId": "6725805244929852417",
+    "nickname": "牛牛",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/musically-maliva-obj/1594805258216454~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=2f19ebfb&x-expires=1775876400&x-signature=E057JIDDp%2BkL0SeYSl4v21OCySg%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-09T03:39:24.945Z"
+  },
+  {
+    "giftId": 5586,
+    "giftName": "Hearts",
+    "userId": "6725805244929852417",
+    "nickname": "牛牛",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/musically-maliva-obj/1594805258216454~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=2f19ebfb&x-expires=1775876400&x-signature=E057JIDDp%2BkL0SeYSl4v21OCySg%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 199,
+    "timestamp": "2026-04-09T03:39:43.880Z"
+  },
+  {
+    "giftId": 14237,
+    "giftName": "Crystal Shoe",
+    "userId": "6781992628608041986",
+    "nickname": "A long",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/5ec07354a57053438a75d5306646b3d3~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=2930e2cf&x-expires=1775876400&x-signature=pLlTTOWkjqqqjgsej6Ie9DJWSH4%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my3",
+    "amount": 1,
+    "diamonds": 299,
+    "timestamp": "2026-04-09T03:39:58.722Z"
+  },
+  {
+    "giftId": 5269,
+    "giftName": "TikTok",
+    "userId": "6746891662733280258",
+    "nickname": "Tuanbui",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/7327210408707063826~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=980347a8&x-expires=1775876400&x-signature=njATV4WZ50%2BECPRjt07Oh4kn5Ho%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 50,
+    "diamonds": 1,
+    "timestamp": "2026-04-09T03:39:58.731Z"
+  },
+  {
+    "giftId": 5586,
+    "giftName": "Hearts",
+    "userId": "6973848461826900993",
+    "nickname": "🐿️ Đồi tím hoa sim 🥑",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/951a1f02b0e38256e9ed97fceed5c4e5~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=6d4d6480&x-expires=1775876400&x-signature=ZuTzFQSSwcVoTV0amqu0puUlE8A%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 199,
+    "timestamp": "2026-04-09T03:40:00.369Z"
   }
 ]

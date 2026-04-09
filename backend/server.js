@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -25,14 +26,16 @@ console.log(`[gifts] Loaded ${knownGifts.length} gift(s) from gifts.json`);
 const initialVideos = loadVideos();
 console.log(`[videos] Loaded ${initialVideos.length} video(s) from videos.json`);
 const app = express();
-app.use(cors());
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "*";
+
+app.use(cors({ origin: ALLOWED_ORIGIN }));
 app.use(express.json());
 app.use(express.static(PUBLIC_DIR));
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
-  cors: { origin: "*", methods: ["GET", "POST"] },
+  cors: { origin: ALLOWED_ORIGIN, methods: ["GET", "POST"] },
 });
 
 io.on("connection", (socket) => {
@@ -50,7 +53,7 @@ app.use("/api/videos", createVideosRouter(initialVideos)); // NEW: GET/POST/PATC
 app.use("/api/stats", statsRouter);                     // NEW: GET /api/stats/leaderboard 
 
 
-const PORT = 3004;
+const PORT = process.env.PORT || 3004;
 httpServer.listen(PORT, () => {
   console.log(`Backend Server listening at http://localhost:${PORT}`);
   console.log(`   Waiting for frontend to connect TikTok Live via API...\n`);
