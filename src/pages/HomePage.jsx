@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useVideoStore } from "../hooks/useVideoStore";
 import TikTokListener from "../components/TikTokListener";
 import SelectThumbnail from "../components/SelectThumbnail";
@@ -41,8 +41,17 @@ const GlassPanel = ({ title, children, className = "" }) => (
 
 const HomePage = ({ username }) => {
   const selectedVideo = useVideoStore((state) => state.selectedVideo);
-  const dequeueVideo = useVideoStore((state) => state.dequeueVideo);
+  const processNext = useVideoStore((state) => state.processNext);
   const playId = useVideoStore((state) => state.playId);
+  const videoMode = useVideoStore((state) => state.videoMode);
+  const currentGiftName = useVideoStore((state) => state.currentGiftName);
+
+  // Auto-start or pick favorite on mount
+  useEffect(() => {
+    if (!selectedVideo) {
+      processNext();
+    }
+  }, [selectedVideo, processNext]);
 
   return (
     <div className="w-full h-full flex items-stretch gap-8 p-6 pt-6 overflow-hidden">
@@ -90,11 +99,23 @@ const HomePage = ({ username }) => {
           >
             <Background />
             <VideoGiftPodium />
+            
+            {/* Gift Performance Badge */}
+            {videoMode === "queue" && currentGiftName && (
+              <div className="absolute top-20 left-1/2 -translate-x-1/2 z-[100] w-full px-6 pointer-events-none">
+                <div className="bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl py-2 px-4 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(217,70,239,0.3)]">
+                  <span className="text-[10px] font-black text-[#d946ef] uppercase tracking-widest">Đang trình diễn</span>
+                  <div className="w-1 h-1 rounded-full bg-white/40" />
+                  <span className="text-[12px] font-bold text-white uppercase">{currentGiftName}</span>
+                </div>
+              </div>
+            )}
+
             {selectedVideo && (
               <BlackScreenVideo
                 key={`${selectedVideo}:${playId}`}
                 videoSrc={selectedVideo}
-                onVideoEnded={dequeueVideo}
+                onVideoEnded={processNext}
               />
             )}
             <div
@@ -116,3 +137,4 @@ const HomePage = ({ username }) => {
 };
 
 export default HomePage;
+

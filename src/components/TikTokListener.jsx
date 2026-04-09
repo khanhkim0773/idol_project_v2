@@ -136,7 +136,7 @@ const TikTokListener = () => {
         const idx = ((curIdx === -1 ? 0 : curIdx) + 1 + i) % matched.length;
         const path = matched[idx].video;
 
-        useVideoStore.getState().enqueueVideo(path);
+        useVideoStore.getState().enqueueVideo(path, giftName);
         scoreByPath.set(path, (scoreByPath.get(path) || 0) + 1);
       }
 

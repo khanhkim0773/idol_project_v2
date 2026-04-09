@@ -112,40 +112,111 @@ export const useVideoStore = create((set, get) => ({
 
   // ---------- currently selected video ----------
   selectedVideo: null,
-  setSelectedVideo: (path) => set({ selectedVideo: path }),
-  setSelected: (video, sound) =>
-    set({ selectedVideo: video, selectedSound: sound }),
   selectedSound: null,
+  currentGiftName: null,
+  videoMode: "favorite", // 'favorite' | 'queue'
   playId: 0,
 
+  // Settings
+  queuePriority: localStorage.getItem("stage_queue_priority") || "voting", // 'voting' | 'fifo'
+  setQueuePriority: (priority) => {
+    localStorage.setItem("stage_queue_priority", priority);
+    set({ queuePriority: priority });
+  },
+
   // ---------- video queue ----------
+  // Each item: { videoPath, count, giftName, timestamp }
   videoQueue: [],
 
-  enqueueVideo: (videoPath) =>
+  enqueueVideo: (videoPath, giftName = "") => {
     set((state) => {
-      if (!state.selectedVideo) {
-        return { selectedVideo: videoPath, playId: state.playId + 1 };
-      }
-      return { videoQueue: [...state.videoQueue, videoPath] };
-    }),
+      const existingIndex = state.videoQueue.findIndex(
+        (q) => q.videoPath === videoPath
+      );
+      let nextQueue = [...state.videoQueue];
 
-  dequeueVideo: () =>
-    set((state) => {
-      if (state.videoQueue.length === 0) {
-        return { selectedVideo: null };
+      if (existingIndex !== -1) {
+        nextQueue[existingIndex] = {
+          ...nextQueue[existingIndex],
+          count: nextQueue[existingIndex].count + 1,
+        };
+      } else {
+        nextQueue.push({
+          videoPath,
+          giftName,
+          count: 1,
+          timestamp: Date.now(),
+        });
       }
-      const [next, ...remaining] = state.videoQueue;
-      return {
-        selectedVideo: next,
-        videoQueue: remaining,
-        playId: state.playId + 1,
-      };
-    }),
 
-  // ---------- điểm quà (số lần video được xếp hàng từ TikTok gift) ----------
+      return { videoQueue: nextQueue };
+    });
+
+    // If nothing is playing, start immediately
+    if (!get().selectedVideo) {
+      get().processNext();
+    }
+  },
+
+  processNext: () => {
+    const { videoQueue, queuePriority, getActiveVideos, playId } = get();
+
+    if (videoQueue.length > 0) {
+      // Sort based on priority
+      let sorted = [...videoQueue];
+      if (queuePriority === "voting") {
+        sorted.sort((a, b) => {
+          if (b.count !== a.count) return b.count - a.count;
+          return a.timestamp - b.timestamp;
+        });
+      } else {
+        sorted.sort((a, b) => a.timestamp - b.timestamp);
+      }
+
+      const nextItem = sorted[0];
+
+      set((state) => {
+        const updatedQueue = state.videoQueue
+          .map((q) =>
+            q.videoPath === nextItem.videoPath ? { ...q, count: q.count - 1 } : q
+          )
+          .filter((q) => q.count > 0);
+
+        return {
+          selectedVideo: nextItem.videoPath,
+          currentGiftName: nextItem.giftName,
+          videoMode: "queue",
+          videoQueue: updatedQueue,
+          playId: playId + 1,
+        };
+      });
+    } else {
+      // Idle mode: Pick random favorite
+      const actives = getActiveVideos();
+      if (actives.length > 0) {
+        const randomTarget = actives[Math.floor(Math.random() * actives.length)];
+        set({
+          selectedVideo: randomTarget.video,
+          currentGiftName: null,
+          videoMode: "favorite",
+          playId: playId + 1,
+        });
+      } else {
+        set({
+          selectedVideo: null,
+          currentGiftName: null,
+          videoMode: "favorite",
+          playId: playId + 1,
+        });
+      }
+    }
+  },
+
+  dequeueVideo: () => get().processNext(),
+
+  // ---------- điểm quà ----------
   videoGiftScores: {},
 
-  /** Cộng điểm cho một dancer theo đường dẫn video (chỉ gift, không tính chọn tay). */
   addGiftScore: (videoPath, delta = 1) =>
     set((state) => ({
       videoGiftScores: {
@@ -153,4 +224,5 @@ export const useVideoStore = create((set, get) => ({
         [videoPath]: (state.videoGiftScores[videoPath] || 0) + delta,
       },
     })),
+
 }));

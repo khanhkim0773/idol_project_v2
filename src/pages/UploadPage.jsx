@@ -12,6 +12,7 @@ import {
   MdArrowDownward,
   MdImage,
   MdCloudUpload,
+  MdTune,
 } from "react-icons/md";
 
 // Backend API base (proxied through Vite)
@@ -551,7 +552,7 @@ const VideoCard = ({
 
 /* ─── Main Page ─── */
 const UploadPage = () => {
-  const { videos, addVideo, updateVideo, deleteVideo, toggleActive } =
+  const { videos, addVideo, updateVideo, deleteVideo, toggleActive, queuePriority, setQueuePriority } =
     useVideoStore();
 
   const [modal, setModal] = useState(null); // null | { mode: 'add' | 'edit', data?: video }
@@ -635,6 +636,47 @@ const UploadPage = () => {
                 : `Inactive (${videos.length - activeCount})`}
           </button>
         ))}
+      </div>
+
+      {/* ── Queue Priority Settings ── */}
+      <div className="mb-10 p-5 md:p-7 rounded-[2rem] bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#d946ef]/5 blur-[100px] -mr-32 -mt-32 pointer-events-none" />
+        
+        <div className="flex items-center gap-5 relative z-10">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d946ef]/20 to-[#8b5cf6]/20 flex items-center justify-center text-[#d946ef] border border-[#d946ef]/30 shadow-lg group-hover:scale-110 transition-transform duration-500">
+            <MdTune size={28} />
+          </div>
+          <div className="max-w-md">
+            <h3 className="text-xl font-black text-white tracking-tight">Chế độ Ưu tiên Hàng đợi</h3>
+            <p className="text-[12px] text-gray-400 mt-1.5 leading-relaxed font-medium">
+              Cách hệ thống chọn video tiếp theo khi có nhiều quà tặng cùng lúc. 
+              <span className="text-white/60 ml-1">Bình chọn (Voting)</span> giúp tăng tương tác hơn.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex bg-[#0a0a0f] p-1.5 rounded-2xl border border-white/[0.06] shadow-2xl shrink-0 relative z-10">
+          <button
+            onClick={() => setQueuePriority("voting")}
+            className={`px-7 py-3 rounded-[1rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${
+              queuePriority === "voting"
+                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_20px_rgba(217,70,239,0.4)] scale-[1.02]"
+                : "text-gray-500 hover:text-white hover:bg-white/[0.02]"
+            }`}
+          >
+            Bình chọn (Voting)
+          </button>
+          <button
+            onClick={() => setQueuePriority("fifo")}
+            className={`px-7 py-3 rounded-[1rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${
+              queuePriority === "fifo"
+                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_20px_rgba(217,70,239,0.4)] scale-[1.02]"
+                : "text-gray-500 hover:text-white hover:bg-white/[0.02]"
+            }`}
+          >
+            Thời gian (FIFO)
+          </button>
+        </div>
       </div>
 
       {/* ── List ── */}
