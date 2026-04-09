@@ -52,7 +52,7 @@
     "giftName": "Rosa",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eb77ead5c3abb6da6034d3cf6cfeb438~tplv-obj.png",
     "diamonds": 10,
-    "maxRepeatCount": 5,
+    "maxRepeatCount": 20,
     "active": true
   },
   {
@@ -262,7 +262,11 @@
   },
   {
     "giftId": 57597,
-    "giftName": "Vocal Bear"
+    "giftName": "Vocal Bear",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/3afb4aeb6abf9335864ce85f364156e2.png~tplv-obj.png",
+    "diamonds": 399,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 7412,
@@ -330,7 +334,11 @@
   },
   {
     "giftId": 17948,
-    "giftName": "Bubblegum Kiss"
+    "giftName": "Bubblegum Kiss",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/be17076f04429b60eb2d7c3e03a2ea9d.png~tplv-obj.png",
+    "diamonds": 1030,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 17949,
@@ -434,7 +442,11 @@
   },
   {
     "giftId": 6267,
-    "giftName": "Corgi"
+    "giftName": "Corgi",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/148eef0884fdb12058d1c6897d1e02b9~tplv-obj.png",
+    "diamonds": 299,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 9202,
@@ -633,6 +645,46 @@
     "giftName": "Bouquet",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/1bdf0b38142a94af0f71ea53da82a3b1~tplv-obj.png",
     "diamonds": 100,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 14237,
+    "giftName": "Crystal Shoe",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/af684e26138b33fd04ab50bd35a14a7c.png~tplv-obj.png",
+    "diamonds": 299,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 11862,
+    "giftName": "Glowing Jellyfish",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/96d9226ef1c33784a24d0779ad3029d3.png~tplv-obj.png",
+    "diamonds": 1000,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 5978,
+    "giftName": "Train",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4227ed71f2c494b554f9cbe2147d4899~tplv-obj.png",
+    "diamonds": 899,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 11473,
+    "giftName": "Diamond Gun ",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/651e705c26b704d03bc9c06d841808f1.png~tplv-obj.png",
+    "diamonds": 5000,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 15065,
+    "giftName": "Racing Debut",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/b5ac8bb9da5569185bfdc1be357d3906.png~tplv-obj.png",
+    "diamonds": 1500,
     "active": true,
     "maxRepeatCount": 1
   }

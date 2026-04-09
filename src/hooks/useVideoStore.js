@@ -214,6 +214,15 @@ export const useVideoStore = create((set, get) => ({
 
   dequeueVideo: () => get().processNext(),
 
+  setSelectedVideo: (videoPath) => {
+    set((state) => ({
+      selectedVideo: videoPath,
+      currentGiftName: null,
+      videoMode: "favorite",
+      playId: state.playId + 1,
+    }));
+  },
+
   // ---------- điểm quà ----------
   videoGiftScores: {},
 
