@@ -124,7 +124,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
       <video
         ref={videoRefA}
         src={slotA.src}
-        muted
+        muted={false}
         playsInline
         className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out
           ${isWarping ? 'blur-[12px] scale-105 contrast-[1.1]' : 'blur-0 scale-100 contrast-[1.0]'}

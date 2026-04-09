@@ -222,7 +222,7 @@
     "active": true,
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/2f1e4f3f5c728ffbfa35705b480fdc92~tplv-obj.png",
     "diamonds": 99,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 5
   },
   {
     "giftId": 10961,
@@ -702,6 +702,30 @@
     "giftName": "Quý Cô Rạng Rỡ",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/saliency_seg_1768805714471_0.f45d66cc4e45fc4922ab01767fa58954.png~tplv-obj.png",
     "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 57594,
+    "giftName": "Cheeky Pup",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/e9fbad0840d145dd95dabede5a309587.png~tplv-obj.png",
+    "diamonds": 400,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 57595,
+    "giftName": "Sloth Peek",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/602e3444f1810b8b048a2e706eb19898.png~tplv-obj.png",
+    "diamonds": 450,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 6369,
+    "giftName": "Lion",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4fb89af2082a290b37d704e20f4fe729~tplv-obj.png",
+    "diamonds": 29999,
     "active": true,
     "maxRepeatCount": 1
   }
