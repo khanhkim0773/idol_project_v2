@@ -744,5 +744,13 @@
     "diamonds": 1088,
     "active": true,
     "maxRepeatCount": 1
+  },
+  {
+    "giftId": 7124,
+    "giftName": "Signature Jet",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/fe27eba54a50c0a687e3dc0f2c02067d~tplv-obj.png",
+    "diamonds": 4888,
+    "active": true,
+    "maxRepeatCount": 1
   }
 ]

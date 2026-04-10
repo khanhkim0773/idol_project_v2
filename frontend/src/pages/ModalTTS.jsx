@@ -91,12 +91,12 @@ const ModalTTS = () => {
   const getVoiceLabel = (v) => (typeof v === "string" ? v : v.name || v.id);
 
   return (
-    <div className="w-full h-full text-white overflow-y-auto p-4 sm:p-6 md:p-10 font-sans">
+    <div className="w-full text-white p-4 sm:p-6 md:p-10 font-sans">
       {/* Header */}
-      <div className="mb-6 md:mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 md:gap-6">
+      <div className="mb-6 md:mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-6 shrink-0">
         <div>
-          <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d946ef] uppercase mb-3">Configuration Studio</h4>
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-3 md:mb-4 tracking-tight">Voice Dynamics</h1>
+          <h4 className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] text-[#d946ef] uppercase mb-2 sm:mb-3">Configuration Studio</h4>
+          <h1 className="text-xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-4 tracking-tight">Voice Dynamics</h1>
           <p className="text-sm text-gray-400 max-w-2xl leading-relaxed">
             Cấu hình TTS Custom API cho luồng phát sóng của bạn. Tự động đọc khi có quà tặng và chào đón người mới vào live.
           </p>

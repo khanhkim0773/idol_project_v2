@@ -74,10 +74,10 @@ const Leaderboard = () => {
           data.map((item, index) => (
             <div
               key={item.id}
-              className="flex items-center gap-3 px-2.5 py-1.5 rounded-lg hover:bg-white/[0.03] transition-colors group"
+              className="flex items-center gap-2 sm:gap-3 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg hover:bg-white/[0.03] transition-colors group"
             >
               {/* Rank Badge */}
-              <div className="w-5 h-5 flex items-center justify-center shrink-0">
+              <div className="w-4 sm:w-5 h-4 sm:h-5 flex items-center justify-center shrink-0">
                 <RankBadge rank={index + 1} />
               </div>
 
@@ -85,16 +85,16 @@ const Leaderboard = () => {
               <img
                 src={item.profilePicture || "/images/default_avatar.png"}
                 alt=""
-                className="w-7 h-7 rounded-full object-cover shrink-0 opacity-90 group-hover:opacity-100 transition-opacity border border-white/5"
+                className="w-5 h-5 sm:w-7 sm:h-7 rounded-full object-cover shrink-0 opacity-90 group-hover:opacity-100 transition-opacity border border-white/5"
                 onError={(e) => { e.target.src = "/images/default_avatar.png"; }}
               />
 
               {/* Info - Style "FENGMI / 105" */}
               <div className="flex-1 min-w-0 flex flex-col">
-                <p className="text-[12px] font-bold text-white/90 truncate uppercase tracking-tight leading-none group-hover:text-white transition-colors">
+                <p className="text-[10px] sm:text-[12px] font-bold text-white/90 truncate uppercase tracking-tight leading-none group-hover:text-white transition-colors">
                   {item.nickname}
                 </p>
-                <p className="text-[11px] font-black text-white mt-1.5 tabular-nums leading-none">
+                <p className="text-[9px] sm:text-[11px] font-black text-white mt-1 sm:mt-1.5 tabular-nums leading-none">
                   {item.totalDiamonds.toLocaleString()}
                 </p>
               </div>

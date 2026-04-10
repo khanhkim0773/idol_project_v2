@@ -131,11 +131,11 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
   const valid = form.name.trim() && form.video && !isUploading;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+      <div className="relative w-full max-w-xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
         {/* header */}
-        <div className="flex items-center justify-between px-7 py-5 border-b border-white/[0.05] bg-white/[0.02]">
-          <h2 className="text-white font-extrabold text-xl tracking-tight flex items-center gap-2">
+        <div className="flex items-center justify-between px-5 py-3 sm:px-7 sm:py-5 border-b border-white/[0.05] bg-white/[0.02]">
+          <h2 className="text-white font-extrabold text-lg sm:text-xl tracking-tight flex items-center gap-2">
             {initial ? (
               <span className="flex items-center gap-2 text-[#d946ef]">
                 <MdEdit size={22} /> Sửa Video
@@ -155,7 +155,7 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
         </div>
 
         {/* body */}
-        <div className="p-4 sm:p-7 flex flex-col gap-5 sm:gap-6 max-h-[60vh] sm:max-h-[65vh] overflow-y-auto">
+        <div className="p-4 sm:p-7 flex flex-col gap-3.5 sm:gap-6 max-h-[70vh] sm:max-h-[65vh] overflow-y-auto custom-scrollbar">
           {/* upload error */}
           {uploadError && (
             <div className="text-red-400 text-[13px] bg-red-400/10 border border-red-400/20 px-4 py-3 rounded-xl font-medium">
@@ -164,10 +164,10 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
           )}
 
           {/* avatar + name row */}
-          <div className="flex gap-5 items-start">
+          <div className="flex gap-4 sm:gap-5 items-start">
             {/* avatar */}
             <div
-              className={`relative shrink-0 w-24 h-24 rounded-2xl border-2 border-dashed bg-white/[0.02] flex items-center justify-center cursor-pointer transition-colors group overflow-hidden shadow-2xl ${uploading.avatar ? "border-[#06b6d4]" : "border-white/10 hover:border-[#06b6d4]"
+              className={`relative shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl border-2 border-dashed bg-white/[0.02] flex items-center justify-center cursor-pointer transition-colors group overflow-hidden shadow-2xl ${uploading.avatar ? "border-[#06b6d4]" : "border-white/10 hover:border-[#06b6d4]"
                 }`}
               onClick={() => !uploading.avatar && avatarRef.current?.click()}
             >
@@ -391,17 +391,17 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
 
 /* ─── Delete Confirm ─── */
 const DeleteConfirm = ({ name, onConfirm, onClose }) => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm p-4">
-    <div className="w-full max-w-sm bg-white/[0.03] border border-red-500/20 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl p-8 flex flex-col gap-6 text-center items-center">
-      <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/10 mb-1">
-        <MdDelete size={32} className="text-red-500" />
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
+    <div className="w-full max-w-sm bg-white/[0.06] border border-red-500/30 backdrop-blur-[40px] rounded-[1.5rem] sm:rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.5)] p-5 sm:p-7 flex flex-col gap-4 sm:gap-5 text-center items-center">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 mb-1 sm:mb-2">
+        <MdDelete size={24} className="text-red-500 sm:size-[32px]" />
       </div>
-      <h3 className="text-white font-extrabold text-xl">Xóa Video</h3>
-      <p className="text-gray-400 text-[15px] leading-relaxed">
+      <h3 className="text-white font-extrabold text-lg sm:text-xl">Xóa Video</h3>
+      <p className="text-gray-400 text-[14px] sm:text-[15px] leading-relaxed">
         Bạn có chắc muốn xóa video{" "}
-        <span className="text-white font-bold px-2 py-0.5 rounded-md bg-[#252630] border border-[#2e2f38] break-all">"{name}"</span><br />không? Hành động này không thể hoàn tác.
+        <span className="text-white font-bold px-2 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.1] whitespace-nowrap">"{name}"</span><br />không?
       </p>
-      <div className="flex w-full gap-3 mt-4">
+      <div className="flex w-full gap-3 mt-2 sm:mt-4">
         <button
           onClick={onClose}
           className="flex-1 py-3.5 rounded-xl border border-[#3f404d] text-gray-400 hover:text-white hover:bg-[#252630] text-sm font-semibold transition"
@@ -447,7 +447,7 @@ const VideoCard = ({
           <MdArrowUpward size={20} />
         </button>
         <div
-          className={`w-10 h-10 rounded-xl flex items-center justify-center text-[15px] font-black ${video.active
+          className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center text-[13px] sm:text-[15px] font-black ${video.active
               ? "bg-[#252630] text-[#d946ef] border border-[#3f404d] shadow-inner"
               : "bg-[#1a1b23] text-gray-500 border border-[#2e2f38]"
             }`}
@@ -464,7 +464,7 @@ const VideoCard = ({
       </div>
 
       {/* avatar */}
-      <div className={`shrink-0 w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all shadow-inner ${video.active ? "border-white/[0.12]" : "border-white/[0.06]"}`}>
+      <div className={`shrink-0 w-16 h-16 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl overflow-hidden border-2 transition-all shadow-inner ${video.active ? "border-white/[0.12]" : "border-white/[0.06]"}`}>
         {video.avatar ? (
           <img
             src={video.avatar}
@@ -473,19 +473,19 @@ const VideoCard = ({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-[#252630] text-gray-500">
-            <MdVideocam size={32} />
+            <MdVideocam size={24} className="sm:size-[32px]" />
           </div>
         )}
       </div>
 
       {/* info */}
       <div className="flex-1 min-w-0 w-full flex flex-col justify-center text-center md:text-left">
-        <div className="flex flex-col md:flex-row items-center gap-3 flex-wrap mb-1.5">
-          <h3 className={`text-[19px] font-extrabold tracking-tight truncate w-full md:w-auto ${video.active ? "text-white" : "text-gray-400"}`}>
+        <div className="flex flex-col md:flex-row items-center gap-2 sm:gap-3 flex-wrap mb-1">
+          <h3 className={`text-[16px] sm:text-[19px] font-extrabold tracking-tight truncate w-full md:w-auto ${video.active ? "text-white" : "text-gray-400"}`}>
             {video.name}
           </h3>
           <span
-            className={`shrink-0 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-widest border shadow-sm ${video.active
+            className={`shrink-0 text-[9px] sm:text-[10px] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full font-bold uppercase tracking-widest border shadow-sm ${video.active
                 ? "bg-[#10b981]/15 text-[#10b981] border-[#10b981]/30 shadow-[0_0_10px_rgba(16,185,129,0.1)]"
                 : "bg-[#252630] text-gray-500 border-[#3f404d]"
               }`}
@@ -494,21 +494,21 @@ const VideoCard = ({
           </span>
         </div>
         {video.description ? (
-          <p className="text-[13px] text-gray-400 mt-1 mb-3 line-clamp-2 leading-relaxed">
+          <p className="text-[11px] sm:text-[13px] text-gray-400 mt-0.5 sm:mt-1 mb-2 sm:mb-3 line-clamp-1 sm:line-clamp-2 leading-relaxed">
             {video.description}
           </p>
         ) : (
-          <p className="text-[13px] text-gray-600 italic mt-1 mb-3">Không có mô tả nội dung</p>
+          <p className="text-[11px] sm:text-[13px] text-gray-600 italic mt-0.5 sm:mt-1 mb-2 sm:mb-3">Không có mô tả</p>
         )}
-        <div className="flex items-center justify-center md:justify-start gap-3 flex-wrap">
+        <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-3 flex-wrap">
           {/* gift badge */}
-          <span className="flex items-center truncate gap-1.5 text-[11px] font-bold bg-[#fbbf24]/10 text-[#fbbf24] border border-[#fbbf24]/20 rounded-lg px-2.5 py-1 shadow-sm">
-            <MdCardGiftcard size={14} />
+          <span className="flex items-center truncate gap-1 text-[9px] sm:text-[11px] font-bold bg-[#fbbf24]/10 text-[#fbbf24] border border-[#fbbf24]/20 rounded-lg px-2 py-0.5 sm:px-2.5 sm:py-1 shadow-sm">
+            <MdCardGiftcard size={12} className="sm:size-[14px]" />
             {video.gift || "Không gắn quà"}
           </span>
           {/* video path */}
-          <span className="text-[11px] text-gray-400 font-mono truncate max-w-[200px] flex items-center gap-1.5 bg-white/[0.06] px-3 py-1 rounded-lg border border-white/[0.1] shadow-inner">
-            <MdVideocam size={14} className="text-gray-400 shrink-0" />
+          <span className="text-[9px] sm:text-[11px] text-gray-400 font-mono truncate max-w-[150px] sm:max-w-[200px] flex items-center gap-1 bg-white/[0.06] px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg border border-white/[0.1] shadow-inner">
+            <MdVideocam size={12} className="text-gray-400 shrink-0 sm:size-[14px]" />
             {video.video ? video.video.split("/").pop() : "Chưa upload"}
           </span>
         </div>

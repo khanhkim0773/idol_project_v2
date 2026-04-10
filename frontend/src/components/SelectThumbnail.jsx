@@ -22,7 +22,7 @@ const SelectThumbnail = () => {
               if (!model) return null;
               return (
                 <div key={`${index}-${videoPath}`} className="relative shrink-0">
-                  <div className="w-7 h-7 rounded-lg overflow-hidden border border-white/5">
+                  <div className="w-5 sm:w-7 h-5 sm:h-7 rounded-lg overflow-hidden border border-white/5">
                     <img src={model.avatar} alt="" className="w-full h-full object-cover opacity-60" />
                   </div>
                 </div>
@@ -45,12 +45,12 @@ const SelectThumbnail = () => {
               <div
                 key={model.id}
                 onClick={() => setSelectedVideo(model.video)}
-                className={`flex items-center gap-3 px-2 py-1.5 rounded-lg cursor-pointer transition-all duration-200 ${
+                className={`flex items-center gap-2 sm:gap-3 px-1.5 sm:px-2 py-1 sm:py-1.5 rounded-lg cursor-pointer transition-all duration-200 ${
                   isActive ? "bg-white/[0.08]" : "hover:bg-white/[0.03] opacity-80 hover:opacity-100"
                 }`}
               >
                 {/* Icon / Avatar - Cleaner look */}
-                <div className="shrink-0 w-8 h-8 rounded-lg overflow-hidden group">
+                <div className="shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-lg overflow-hidden group">
                   {model.avatar ? (
                     <img src={model.avatar} alt="" className={`w-full h-full object-cover transition-transform duration-500 ${isActive ? 'scale-110 shadow-lg' : 'grayscale-[40%]'}`} />
                   ) : (
@@ -60,7 +60,7 @@ const SelectThumbnail = () => {
 
                 {/* Name in Yellow/White - TikTok Style */}
                 <div className="flex-1 min-w-0">
-                  <p className={`text-[12px] font-black uppercase tracking-wider truncate leading-tight ${isActive ? "text-[#fbbf24]" : "text-[#fbbf24]/80 group-hover:text-[#fbbf24]"}`}>
+                  <p className={`text-[10px] sm:text-[12px] font-black uppercase tracking-wider truncate leading-tight ${isActive ? "text-[#fbbf24]" : "text-[#fbbf24]/80 group-hover:text-[#fbbf24]"}`}>
                     {model.name}
                   </p>
                 </div>

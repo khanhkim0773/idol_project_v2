@@ -29,10 +29,10 @@ const GiftModal = ({ initial, onSave, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-md bg-white/[0.03] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl backdrop-blur-2xl">
-        <div className="flex items-center justify-between px-7 py-5 border-b border-white/[0.05] bg-white/[0.02]">
-          <h2 className="text-white font-extrabold text-xl tracking-tight flex items-center gap-2">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+      <div className="relative w-full max-w-md bg-white/[0.03] border border-white/10 rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl backdrop-blur-2xl">
+        <div className="flex items-center justify-between px-5 py-3 sm:px-7 sm:py-5 border-b border-white/[0.05] bg-white/[0.02]">
+          <h2 className="text-white font-extrabold text-lg sm:text-xl tracking-tight flex items-center gap-2">
             {initial ? (
               <span className="flex items-center gap-2 text-[#d946ef]">
                 <MdEdit size={22} /> Sửa Quà Tặng
@@ -51,7 +51,7 @@ const GiftModal = ({ initial, onSave, onClose }) => {
           </button>
         </div>
 
-        <div className="p-7 flex flex-col gap-6">
+        <div className="p-5 sm:p-7 flex flex-col gap-4 sm:gap-6">
           {error && (
             <div className="text-red-400 text-[13px] bg-red-400/10 border border-red-400/20 px-4 py-3 rounded-xl font-medium">
               ⚠️ {error}
@@ -85,7 +85,7 @@ const GiftModal = ({ initial, onSave, onClose }) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-3 px-7 py-5 border-t border-white/[0.05] bg-white/[0.02]">
+        <div className="flex items-center justify-end gap-3 px-5 py-4 sm:px-7 sm:py-5 border-t border-white/[0.05] bg-white/[0.02]">
           <button
             onClick={onClose}
             className="px-6 py-3 rounded-xl border border-white/[0.12] text-gray-400 hover:text-white hover:bg-white/[0.08] text-sm font-semibold transition"
@@ -108,11 +108,11 @@ const GiftModal = ({ initial, onSave, onClose }) => {
 /* ─── Delete Confirm ─── */
 const DeleteConfirm = ({ name, onConfirm, onClose }) => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md">
-    <div className="w-full max-w-sm mx-4 bg-white/[0.06] border border-red-500/30 backdrop-blur-[40px] rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.5)] p-7 flex flex-col gap-5 text-center items-center">
-      <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 mb-2">
-        <MdDelete size={32} className="text-red-500" />
+    <div className="w-full max-w-sm mx-4 bg-white/[0.06] border border-red-500/30 backdrop-blur-[40px] rounded-[1.5rem] sm:rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.5)] p-5 sm:p-7 flex flex-col gap-4 sm:gap-5 text-center items-center">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 mb-1 sm:mb-2">
+        <MdDelete size={24} className="text-red-500 sm:size-[32px]" />
       </div>
-      <h3 className="text-white font-extrabold text-xl">Xóa Quà Tặng</h3>
+      <h3 className="text-white font-extrabold text-lg sm:text-xl">Xóa Quà Tặng</h3>
       <p className="text-gray-400 text-[15px] leading-relaxed">
         Bạn có chắc muốn xóa quà{" "}
         <span className="text-white font-bold px-2 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.1] whitespace-nowrap">"{name}"</span><br />không?

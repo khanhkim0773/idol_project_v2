@@ -49,10 +49,10 @@ const HomePage = ({ username }) => {
       <div className="hidden lg:flex flex-col gap-3 lg:gap-4 w-[280px] xl:w-[320px] shrink-0 min-h-0">
         {/* Streamer badge */}
         {username && (
-          <div className="shrink-0 bg-white/[0.05] backdrop-blur-xl border border-white/10 px-5 py-2.5 rounded-full flex items-center gap-3 shadow-2xl">
-            <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse shrink-0" />
-            <span className="text-white/30 uppercase font-black text-[10px] tracking-widest leading-none">Streamer</span>
-            <span className="font-black text-[#d946ef] text-[13px] leading-none">@{username}</span>
+          <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/[0.03] backdrop-blur-2xl border border-white/5 shadow-2xl">
+            <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#10b981] animate-pulse" />
+            <span className="text-[9px] sm:text-[10px] font-bold text-white/40 uppercase tracking-widest">Streamer</span>
+            <span className="text-[11px] sm:text-[13px] font-black text-[#d946ef] ml-0.5 sm:ml-1">@{username}</span>
           </div>
         )}
 
@@ -128,10 +128,10 @@ const HomePage = ({ username }) => {
 
           {/* Streamer Badge Mobile */}
           {username && (
-            <div className="absolute top-4 right-4 z-[100] bg-white/[0.05] backdrop-blur-xl border border-white/10 px-5 py-2.5 rounded-full flex items-center gap-3 shadow-2xl">
-              <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse shrink-0" />
-              <span className="text-white/30 uppercase font-black text-[10px] tracking-widest leading-none">Streamer</span>
-              <span className="font-black text-[#d946ef] text-[13px] leading-none">@{username}</span>
+            <div className="absolute top-4 right-4 z-[100] bg-white/[0.05] backdrop-blur-xl border border-white/10 px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-2xl">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#10b981] shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse shrink-0" />
+              <span className="text-white/30 uppercase font-black text-[9px] tracking-widest leading-none">Streamer</span>
+              <span className="font-black text-[#d946ef] text-[11px] leading-none">@{username}</span>
             </div>
           )}
 
@@ -146,8 +146,7 @@ const HomePage = ({ username }) => {
         </div>
 
         {/* ── MOBILE OVERLAYS: TikTok Style (Light Glass) ── */}
-        <div className="sm:hidden fixed left-2 top-20 bottom-24 w-[180px] z-[90] pointer-events-none flex flex-col gap-2">
-
+        <div className="sm:hidden fixed left-2 top-20 bottom-24 w-[145px] z-[90] pointer-events-none flex flex-col gap-1.5">
           {/* Dancer Models (Action List) */}
           <div className="pointer-events-auto bg-white/[0.05] backdrop-blur-xl rounded-2xl border border-white/[0.05] overflow-hidden flex-[4] min-h-0 flex flex-col">
             <div className="px-3 py-2 border-b border-white/[0.03] bg-white/[0.02]">
@@ -174,7 +173,7 @@ const HomePage = ({ username }) => {
 
         {/* Mobile Live Feed Overlay */}
         {showLiveFeed && (
-          <div className="sm:hidden fixed right-2 bottom-24 left-[200px] top-1/2 z-[90] pointer-events-auto bg-white/[0.05] backdrop-blur-xl rounded-2xl border border-white/[0.05] overflow-hidden shadow-2xl animate-fade-in">
+          <div className="sm:hidden fixed right-2 bottom-24 left-[160px] top-1/2 z-[90] pointer-events-auto bg-white/[0.05] backdrop-blur-xl rounded-2xl border border-white/[0.05] overflow-hidden shadow-2xl animate-fade-in">
             <TikTokListener />
           </div>
         )}
