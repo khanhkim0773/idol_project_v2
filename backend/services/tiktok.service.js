@@ -73,6 +73,15 @@ export const connectToTikTok = (username, io, knownGifts, res) => {
     });
   });
 
+  // ── Sự kiện Member (người mới vào live) ────────────────────────
+  tiktokLiveConnection.on("member", (data) => {
+    io.emit("tiktok_member", {
+      user: data.uniqueId,
+      nickname: data.nickname,
+      profilePicture: data.profilePictureUrl,
+    });
+  });
+
   // ── Sự kiện Chat ──────────────────────────────────────────────
   tiktokLiveConnection.on("chat", (data) => {
     io.emit("tiktok_chat", {

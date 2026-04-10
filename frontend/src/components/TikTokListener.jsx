@@ -30,6 +30,12 @@ const getMessageStyle = (type) => {
       bg: "bg-gradient-to-r from-[#d946ef]/15 to-transparent",
       text: "text-white"
     };
+  if (type === "member")
+    return {
+      border: "border-l-[#3b82f6]",
+      bg: "bg-gradient-to-r from-[#3b82f6]/10 to-transparent",
+      text: "text-[#3b82f6]"
+    };
   return {
     border: "border-l-white/20",
     bg: "bg-white/[0.02]",
@@ -150,6 +156,20 @@ const TikTokListener = () => {
           text: `⚠️ Số lượng quà vượt mức x${amount}, hệ thống chỉ xử lý ${MAX_PER_EVENT}`,
         });
       }
+    });
+
+    socket.on("tiktok_member", (data) => {
+      const name = data.nickname || data.user;
+
+      addLog({
+        type: "member",
+        name,
+        text: "vừa tham gia live",
+        avatar: data.profilePicture,
+      });
+
+      // TTS: chào người mới
+      useTTSStore.getState().speakWelcome(name);
     });
 
     socket.on("tiktok_chat", (msg) => {

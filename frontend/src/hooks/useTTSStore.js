@@ -1,33 +1,38 @@
 import { create } from "zustand";
+import { SOCKET_URL } from "../utils/constant";
 
 const STORAGE_KEY = "tts_settings";
+
+const DEFAULTS = {
+  customApiUrl: "https://unoverlooked-soulfully-rayna.ngrok-free.dev/tts",
+  customVoice: "",
+  customNumStep: 16,
+  customFirstChunkWords: 10,
+  customMinChunkWords: 15,
+  customBatchSize: 2,
+  customNoWarmup: true,
+  enabled: false,
+  volume: 1,
+  giftTemplate: "Cảm ơn {name} đã tặng {amount} {gift}",
+  welcomeTemplate: "Xin chào {name}, cho mình xin 1 follow và 1 tim nhé, cảm ơn cậu",
+  welcomeEnabled: true,
+  voicesList: [],
+  voicesLoading: false,
+};
 
 const loadSettings = () => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      // Migrate old "template" → "giftTemplate"
+      if (saved.template && !saved.giftTemplate) {
+        saved.giftTemplate = saved.template;
+      }
+      return { ...DEFAULTS, ...saved };
+    }
   } catch {}
-  return {
-    provider: "browser", // "browser" | "openai" | "elevenlabs" | "custom"
-    modelName: "tts-1",
-    apiKey: "",
-    voice: "nova",
-    elevenLabsVoiceId: "21m00Tcm4TlvDq8ikWAM",
-    elevenLabsModel: "eleven_multilingual_v2",
-    // Custom API settings
-    customApiUrl: "https://unoverlooked-soulfully-rayna.ngrok-free.dev/tts",
-    customVoice: "ref3",
-    customNumStep: 16,
-    customFirstChunkWords: 10,
-    customMinChunkWords: 15,
-    customBatchSize: 2,
-    customNoWarmup: true,
-    //
-    enabled: false,
-    volume: 1,
-    rate: 1,
-    template: "Cảm ơn {name} đã tặng {amount} {gift}",
-  };
+  return { ...DEFAULTS };
 };
 
 const saveSettings = (state) => {
@@ -35,12 +40,6 @@ const saveSettings = (state) => {
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({
-        provider: state.provider,
-        modelName: state.modelName,
-        apiKey: state.apiKey,
-        voice: state.voice,
-        elevenLabsVoiceId: state.elevenLabsVoiceId,
-        elevenLabsModel: state.elevenLabsModel,
         customApiUrl: state.customApiUrl,
         customVoice: state.customVoice,
         customNumStep: state.customNumStep,
@@ -50,8 +49,9 @@ const saveSettings = (state) => {
         customNoWarmup: state.customNoWarmup,
         enabled: state.enabled,
         volume: state.volume,
-        rate: state.rate,
-        template: state.template,
+        giftTemplate: state.giftTemplate,
+        welcomeTemplate: state.welcomeTemplate,
+        welcomeEnabled: state.welcomeEnabled,
       })
     );
   } catch {}
@@ -67,23 +67,28 @@ const speakWithCustomAPI = async (text, state) => {
   try {
     const url = state.customApiUrl || "https://unoverlooked-soulfully-rayna.ngrok-free.dev/tts";
 
-    const formData = new FormData();
-    formData.append("text", text);
-    formData.append("voice", state.customVoice || "ref3");
-    formData.append("num_step", String(state.customNumStep ?? 16));
-    formData.append("first_chunk_words", String(state.customFirstChunkWords ?? 10));
-    formData.append("min_chunk_words", String(state.customMinChunkWords ?? 15));
-    formData.append("batch_size", String(state.customBatchSize ?? 2));
-    formData.append("no_warmup", String(state.customNoWarmup ?? true));
+    const payload = {
+      text,
+      voice: state.customVoice || "",
+      num_step: state.customNumStep ?? 16,
+      first_chunk_words: state.customFirstChunkWords ?? 10,
+      min_chunk_words: state.customMinChunkWords ?? 15,
+      batch_size: state.customBatchSize ?? 2,
+      no_warmup: state.customNoWarmup ?? true,
+    };
+
+    console.log("[TTS] Custom API request:", url, payload);
 
     const response = await fetch(url, {
       method: "POST",
-      body: formData,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
-      console.warn("[TTS] Custom API error, falling back to browser:", response.status);
-      speakWithBrowser(text, state);
+      console.warn("[TTS] Custom API error:", response.status);
+      isSpeaking = false;
+      processQueue();
       return;
     }
 
@@ -109,147 +114,9 @@ const speakWithCustomAPI = async (text, state) => {
 
     audio.play();
   } catch (err) {
-    console.warn("[TTS] Custom API fetch failed, falling back to browser:", err);
-    speakWithBrowser(text, state);
-  }
-};
-
-// ─── ElevenLabs TTS API ───
-const speakWithElevenLabs = async (text, state) => {
-  try {
-    const voiceId = state.elevenLabsVoiceId || "21m00Tcm4TlvDq8ikWAM";
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-      {
-        method: "POST",
-        headers: {
-          "xi-api-key": state.apiKey,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          text: text,
-          model_id: state.elevenLabsModel || "eleven_multilingual_v2",
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.75,
-          },
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      console.warn("[TTS] ElevenLabs API error, falling back to browser:", response.status);
-      speakWithBrowser(text, state);
-      return;
-    }
-
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    const audio = new Audio(url);
-    currentAudio = audio;
-    audio.volume = state.volume;
-
-    audio.onended = () => {
-      URL.revokeObjectURL(url);
-      currentAudio = null;
-      isSpeaking = false;
-      processQueue();
-    };
-
-    audio.onerror = () => {
-      URL.revokeObjectURL(url);
-      currentAudio = null;
-      isSpeaking = false;
-      processQueue();
-    };
-
-    audio.play();
-  } catch (err) {
-    console.warn("[TTS] ElevenLabs fetch failed, falling back to browser:", err);
-    speakWithBrowser(text, state);
-  }
-};
-
-// ─── OpenAI TTS API ───
-const speakWithOpenAI = async (text, state) => {
-  try {
-    const response = await fetch("https://api.openai.com/v1/audio/speech", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${state.apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: state.modelName || "tts-1",
-        input: text,
-        voice: state.voice || "nova",
-        speed: state.rate || 1,
-      }),
-    });
-
-    if (!response.ok) {
-      console.warn("[TTS] OpenAI API error, falling back to browser:", response.status);
-      speakWithBrowser(text, state);
-      return;
-    }
-
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    const audio = new Audio(url);
-    currentAudio = audio;
-    audio.volume = state.volume;
-
-    audio.onended = () => {
-      URL.revokeObjectURL(url);
-      currentAudio = null;
-      isSpeaking = false;
-      processQueue();
-    };
-
-    audio.onerror = () => {
-      URL.revokeObjectURL(url);
-      currentAudio = null;
-      isSpeaking = false;
-      processQueue();
-    };
-
-    audio.play();
-  } catch (err) {
-    console.warn("[TTS] OpenAI fetch failed, falling back to browser:", err);
-    speakWithBrowser(text, state);
-  }
-};
-
-// ─── Browser SpeechSynthesis (fallback) ───
-const speakWithBrowser = (text, state) => {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "vi-VN";
-  utterance.volume = state.volume;
-  utterance.rate = state.rate;
-
-  utterance.onend = () => {
+    console.warn("[TTS] Custom API fetch failed:", err);
     isSpeaking = false;
     processQueue();
-  };
-
-  utterance.onerror = () => {
-    isSpeaking = false;
-    processQueue();
-  };
-
-  window.speechSynthesis.speak(utterance);
-};
-
-// ─── Route to correct provider ───
-const routeSpeak = (text, state) => {
-  if (state.provider === "custom") {
-    speakWithCustomAPI(text, state);
-  } else if (state.provider === "elevenlabs" && state.apiKey?.trim()) {
-    speakWithElevenLabs(text, state);
-  } else if (state.provider === "openai" && state.apiKey?.trim()) {
-    speakWithOpenAI(text, state);
-  } else {
-    speakWithBrowser(text, state);
   }
 };
 
@@ -260,43 +127,33 @@ const processQueue = () => {
   isSpeaking = true;
   const text = speechQueue.shift();
   const state = useTTSStore.getState();
-  routeSpeak(text, state);
+  speakWithCustomAPI(text, state);
+};
+
+// ─── Fetch voices list (proxy through backend to bypass CORS) ───
+const fetchVoicesList = async (apiUrl) => {
+  try {
+    const baseUrl = apiUrl.replace(/\/tts\/?$/, "");
+    const voicesUrl = `${baseUrl}/voices-list`;
+    const proxyUrl = `${SOCKET_URL}/api/tts/voices-list?url=${encodeURIComponent(voicesUrl)}`;
+    console.log("[TTS] Fetching voices list via proxy:", proxyUrl);
+
+    const response = await fetch(proxyUrl);
+    if (!response.ok) {
+      console.warn("[TTS] Voices list error:", response.status);
+      return [];
+    }
+    const data = await response.json();
+    return Array.isArray(data) ? data : (data.voices || []);
+  } catch (err) {
+    console.warn("[TTS] Voices list fetch failed:", err);
+    return [];
+  }
 };
 
 export const useTTSStore = create((set, get) => ({
   ...loadSettings(),
 
-  setProvider: (provider) => {
-    set({ provider });
-    saveSettings({ ...get(), provider });
-  },
-
-  setModelName: (modelName) => {
-    set({ modelName });
-    saveSettings({ ...get(), modelName });
-  },
-
-  setApiKey: (apiKey) => {
-    set({ apiKey });
-    saveSettings({ ...get(), apiKey });
-  },
-
-  setVoice: (voice) => {
-    set({ voice });
-    saveSettings({ ...get(), voice });
-  },
-
-  setElevenLabsVoiceId: (elevenLabsVoiceId) => {
-    set({ elevenLabsVoiceId });
-    saveSettings({ ...get(), elevenLabsVoiceId });
-  },
-
-  setElevenLabsModel: (elevenLabsModel) => {
-    set({ elevenLabsModel });
-    saveSettings({ ...get(), elevenLabsModel });
-  },
-
-  // Custom API setters
   setCustomApiUrl: (customApiUrl) => {
     set({ customApiUrl });
     saveSettings({ ...get(), customApiUrl });
@@ -342,22 +199,41 @@ export const useTTSStore = create((set, get) => ({
     saveSettings({ ...get(), volume });
   },
 
-  setRate: (rate) => {
-    set({ rate });
-    saveSettings({ ...get(), rate });
+  setGiftTemplate: (giftTemplate) => {
+    set({ giftTemplate });
+    saveSettings({ ...get(), giftTemplate });
   },
 
-  setTemplate: (template) => {
-    set({ template });
-    saveSettings({ ...get(), template });
+  setWelcomeTemplate: (welcomeTemplate) => {
+    set({ welcomeTemplate });
+    saveSettings({ ...get(), welcomeTemplate });
   },
 
-  // Main speak function
+  setWelcomeEnabled: (welcomeEnabled) => {
+    set({ welcomeEnabled });
+    saveSettings({ ...get(), welcomeEnabled });
+  },
+
+  // Fetch voices from API
+  loadVoices: async () => {
+    const state = get();
+    set({ voicesLoading: true });
+    const voices = await fetchVoicesList(state.customApiUrl);
+    set({ voicesList: voices, voicesLoading: false });
+    // Auto-select first voice if none selected
+    if (!state.customVoice && voices.length > 0) {
+      const firstVoice = typeof voices[0] === "string" ? voices[0] : voices[0].id || voices[0].name;
+      set({ customVoice: firstVoice });
+      saveSettings({ ...get(), customVoice: firstVoice });
+    }
+  },
+
+  // Gift TTS
   speakGift: (nickname, amount, giftName) => {
     const state = get();
     if (!state.enabled) return;
 
-    const text = state.template
+    const text = state.giftTemplate
       .replace("{name}", nickname || "bạn")
       .replace("{amount}", amount || "1")
       .replace("{gift}", giftName || "quà");
@@ -366,9 +242,20 @@ export const useTTSStore = create((set, get) => ({
     processQueue();
   },
 
+  // Welcome TTS
+  speakWelcome: (nickname) => {
+    const state = get();
+    if (!state.enabled || !state.welcomeEnabled) return;
+
+    const text = state.welcomeTemplate
+      .replace("{name}", nickname || "bạn");
+
+    speechQueue.push(text);
+    processQueue();
+  },
+
   // Test speech
   testSpeak: (text) => {
-    window.speechSynthesis.cancel();
     if (currentAudio) {
       currentAudio.pause();
       currentAudio = null;
@@ -380,11 +267,10 @@ export const useTTSStore = create((set, get) => ({
     const speakText = text || "Xin chào, đây là giọng đọc thử nghiệm";
 
     isSpeaking = true;
-    routeSpeak(speakText, state);
+    speakWithCustomAPI(speakText, state);
   },
 
   stopSpeaking: () => {
-    window.speechSynthesis.cancel();
     if (currentAudio) {
       currentAudio.pause();
       currentAudio = null;

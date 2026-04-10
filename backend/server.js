@@ -50,7 +50,23 @@ app.use("/api/upload", uploadRouter);                   // POST /api/upload/vide
 app.use("/api/files", filesRouter);                     // DELETE /api/files
 app.use("/api/gifts", createGiftsRouter(knownGifts));   // GET /api/gifts
 app.use("/api/videos", createVideosRouter(initialVideos)); // NEW: GET/POST/PATCH /api/videos
-app.use("/api/stats", statsRouter);                     // NEW: GET /api/stats/leaderboard 
+app.use("/api/stats", statsRouter);                     // NEW: GET /api/stats/leaderboard
+
+// Proxy TTS voices-list (bypass CORS from ngrok)
+app.get("/api/tts/voices-list", async (req, res) => {
+  const url = req.query.url;
+  if (!url) return res.status(400).json({ error: "Missing url param" });
+  try {
+    const response = await fetch(url, {
+      headers: { "ngrok-skip-browser-warning": "true" },
+    });
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    console.error("[proxy] voices-list error:", err.message);
+    res.status(502).json({ error: "Failed to fetch voices list" });
+  }
+});
 
 
 const PORT = process.env.PORT || 3004;
