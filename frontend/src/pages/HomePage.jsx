@@ -54,10 +54,9 @@ const HomePage = ({ username }) => {
   }, [selectedVideo, processNext]);
 
   return (
-    <div className="w-full h-full flex flex-col lg:flex-row items-stretch gap-3 md:gap-4 lg:gap-6 p-3 md:p-4 lg:p-6 pt-14 sm:pt-3 md:pt-4 lg:pt-6 overflow-hidden">
+    <div className="w-full h-full flex flex-col lg:flex-row items-stretch gap-3 md:gap-4 lg:gap-6 sm:p-3 sm:pt-3 md:p-4 md:pt-4 lg:p-6 lg:pt-6 overflow-hidden">
 
-      {/* ── LEFT COLUMN: Leaderboard + Dancer Models ── */}
-      {/* Hidden on mobile (shown via bottom tabs), visible sm+ */}
+      {/* ── LEFT COLUMN: Leaderboard + Dancer Models (desktop only) ── */}
       <div className="hidden lg:flex flex-col gap-3 lg:gap-4 w-[280px] xl:w-[320px] shrink-0 min-h-0">
 
         {/* Streamer badge */}
@@ -80,11 +79,13 @@ const HomePage = ({ username }) => {
         </GlassPanel>
       </div>
 
-      {/* ── CENTER: Phone Frame ── */}
+      {/* ── CENTER: Phone Frame (desktop) / Full Screen (mobile) ── */}
       <div className="flex-1 flex items-center justify-center min-h-0 min-w-0 relative">
-        <div className="relative h-full flex items-center justify-center">
-          {/* LED border ring behind phone */}
-          <div className="absolute inset-[-8px] md:inset-[-12px] rounded-[3.25rem] overflow-hidden bg-white/[0.1] backdrop-blur-3xl shadow-[0_40px_100px_rgba(0,0,0,0.6)] border border-white/20">
+
+        {/* ─── DESKTOP: LED ring + phone frame ─── */}
+        <div className="hidden sm:flex relative h-full items-center justify-center">
+          {/* LED border ring */}
+          <div className="absolute inset-[-12px] rounded-[3.25rem] overflow-hidden bg-white/[0.1] backdrop-blur-3xl shadow-[0_40px_100px_rgba(0,0,0,0.6)] border border-white/20">
             <div className="absolute inset-0 z-0 flex items-center justify-center mix-blend-screen">
               <div className="w-[150%] h-[150%] bg-[conic-gradient(from_0deg,transparent_0_300deg,#d946ef_350deg,#fff_360deg)] animate-[spin_3s_linear_infinite] opacity-100 scale-110" />
             </div>
@@ -95,7 +96,7 @@ const HomePage = ({ username }) => {
 
           {/* Phone screen */}
           <div
-            className="relative sm:rounded-[2.8rem] bg-[#0c0c12] overflow-hidden z-[20] shadow-[inset_0_0_60px_rgba(0,0,0,0.8)] border border-white/20 ring-[6px] ring-white/10"
+            className="relative rounded-[2.8rem] bg-[#0c0c12] overflow-hidden z-[20] shadow-[inset_0_0_60px_rgba(0,0,0,0.8)] border border-white/20 ring-[6px] ring-white/10"
             style={{ aspectRatio: "9/19.5", height: "100%" }}
           >
             <Background />
@@ -122,10 +123,47 @@ const HomePage = ({ username }) => {
             <GiftNotification />
           </div>
         </div>
+
+        {/* ─── MOBILE: True full-screen, fixed ─── */}
+        <div className="sm:hidden fixed inset-0 z-[10] bg-[#0c0c12] overflow-hidden">
+          <Background />
+          <VideoGiftPodium />
+
+          {/* Gift Performance Badge */}
+          {videoMode === "queue" && currentGiftName && (
+            <div className="absolute top-16 left-1/2 -translate-x-1/2 z-[100] w-full px-4 pointer-events-none">
+              <div className="bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl py-2 px-3 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(217,70,239,0.3)]">
+                <span className="text-[10px] font-black text-[#d946ef] uppercase tracking-widest">Đang trình diễn</span>
+                <div className="w-1 h-1 rounded-full bg-white/40" />
+                <span className="text-[12px] font-bold text-white uppercase">{currentGiftName}</span>
+              </div>
+            </div>
+          )}
+
+          {selectedVideo && (
+            <BlackScreenVideo
+              key={`${selectedVideo}:${playId}`}
+              videoSrc={selectedVideo}
+              onVideoEnded={processNext}
+            />
+          )}
+          <GiftNotification />
+        </div>
+
+        {/* ── Leaderboard overlay mobile: fixed góc giữa-trái ── */}
+        <div className="sm:hidden fixed left-0 top-1/2 -translate-y-1/2 z-[90] w-[175px] max-h-[55vh] flex flex-col rounded-r-2xl overflow-hidden shadow-[4px_0_30px_rgba(0,0,0,0.6)]">
+          <div className="shrink-0 bg-black/60 backdrop-blur-md px-3 py-2 border-b border-white/10 flex items-center gap-2">
+            <span className="text-[13px]">🏆</span>
+            <span className="text-[9px] font-extrabold text-[#fbbf24] uppercase tracking-[0.2em]">Top Đại Gia</span>
+          </div>
+          <div className="flex-1 overflow-hidden bg-black/50 backdrop-blur-md">
+            <Leaderboard />
+          </div>
+        </div>
+
       </div>
 
-      {/* ── RIGHT COLUMN: TikTok Live Feed ── */}
-      {/* Hidden on small screens to avoid overflow, visible md+ */}
+      {/* ── RIGHT COLUMN: TikTok Live Feed (desktop only) ── */}
       <GlassPanel title="TIKTOK LIVE FEED" className="hidden md:flex w-[300px] xl:w-[340px] shrink-0">
         <TikTokListener />
       </GlassPanel>

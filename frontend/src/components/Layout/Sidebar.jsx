@@ -71,7 +71,7 @@ const Sidebar = () => {
       {/* ── Mobile Hamburger Button ── */}
       <button
         onClick={() => setDrawerOpen(true)}
-        className="sm:hidden fixed top-4 left-4 z-50 w-11 h-11 flex items-center justify-center rounded-2xl bg-white/[0.08] backdrop-blur-md border border-white/[0.12] text-white shadow-lg active:scale-95 transition-all"
+        className="sm:hidden fixed top-4 left-4 z-[100] w-11 h-11 flex items-center justify-center rounded-2xl bg-white/[0.08] backdrop-blur-md border border-white/[0.12] text-white shadow-lg active:scale-95 transition-all"
         aria-label="Open menu"
       >
         <MdMenu size={22} />
