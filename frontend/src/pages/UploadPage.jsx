@@ -596,7 +596,7 @@ const UploadPage = () => {
   };
 
   return (
-    <div className="w-full h-full text-white overflow-y-auto p-4 sm:p-6 md:p-10 font-sans flex flex-col">
+    <div className="w-full text-white p-4 sm:p-6 md:p-10 font-sans flex flex-col">
       {/* ── Header ── */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 md:gap-6 mb-6 md:mb-8 shrink-0">
         <div>
@@ -639,39 +639,39 @@ const UploadPage = () => {
       </div>
 
       {/* ── Queue Priority Settings ── */}
-      <div className="mb-8 md:mb-10 p-4 sm:p-5 md:p-7 rounded-[1.5rem] md:rounded-[2rem] bg-white/[0.03] border border-white/5 backdrop-blur-2xl flex flex-col items-start md:flex-row md:items-center justify-between gap-4 md:gap-6 shadow-2xl relative overflow-hidden group">
+      <div className="mb-10 py-7 px-5 sm:px-8 md:p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/5 backdrop-blur-2xl flex flex-col items-start md:flex-row md:items-center justify-between gap-6 shadow-2xl relative overflow-hidden group shrink-0">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#d946ef]/5 blur-[100px] -mr-32 -mt-32 pointer-events-none" />
         
-        <div className="flex items-center gap-5 relative z-10">
-          <div className="w-14 h-14 rounded-2xl bg-white/[0.02] flex items-center justify-center text-[#d946ef] border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500">
+        <div className="flex items-center gap-6 relative z-10">
+          <div className="w-14 h-14 rounded-2xl bg-white/[0.02] flex items-center justify-center text-[#d946ef] border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500 shrink-0">
             <MdTune size={28} />
           </div>
           <div className="max-w-md">
-            <h3 className="text-xl font-black text-white tracking-tight">Chế độ Ưu tiên Hàng đợi</h3>
-            <p className="text-[12px] text-gray-400 mt-1.5 leading-relaxed font-medium">
+            <h3 className="text-xl font-black text-white tracking-tight leading-tight">Chế độ Ưu tiên Hàng đợi</h3>
+            <p className="text-[12px] text-gray-400 mt-2 leading-relaxed font-medium">
               Cách hệ thống chọn video tiếp theo khi có nhiều quà tặng cùng lúc. 
-              <span className="text-white/40 ml-1">Bình chọn (Voting)</span> giúp tăng tương tác hơn.
+              <span className="text-[#d946ef]/60 ml-1 font-bold">Bình chọn (Voting)</span> giúp tăng tương tác hơn.
             </p>
           </div>
         </div>
 
-        <div className="flex bg-white/[0.02] p-1.5 rounded-2xl border border-white/5 shadow-2xl relative z-10 self-stretch sm:self-auto w-full md:w-auto">
+        <div className="flex bg-white/[0.02] p-1.5 rounded-[1.25rem] border border-white/5 shadow-2xl relative z-10 self-stretch sm:self-auto w-full md:w-auto">
           <button
             onClick={() => setQueuePriority("voting")}
-            className={`flex-1 md:flex-none px-4 sm:px-7 py-3 rounded-[1rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 min-h-[44px] ${
+            className={`flex-1 md:flex-none px-6 sm:px-8 py-3.5 rounded-[1rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 min-h-[46px] flex items-center justify-center ${
               queuePriority === "voting"
-                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_20px_rgba(217,70,239,0.4)] scale-[1.02]"
-                : "text-white/30 hover:text-white hover:bg-white/[0.02]"
+                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_25px_rgba(217,70,239,0.3)] scale-[1.02]"
+                : "text-white/30 hover:text-white hover:bg-white/[0.03]"
             }`}
           >
             Bình chọn (Voting)
           </button>
           <button
             onClick={() => setQueuePriority("fifo")}
-            className={`flex-1 md:flex-none px-4 sm:px-7 py-3 rounded-[1rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 min-h-[44px] ${
+            className={`flex-1 md:flex-none px-6 sm:px-8 py-3.5 rounded-[1rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 min-h-[46px] flex items-center justify-center ${
               queuePriority === "fifo"
-                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_20px_rgba(217,70,239,0.4)] scale-[1.02]"
-                : "text-white/30 hover:text-white hover:bg-white/[0.02]"
+                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_25px_rgba(217,70,239,0.3)] scale-[1.02]"
+                : "text-white/30 hover:text-white hover:bg-white/[0.03]"
             }`}
           >
             Thời gian (FIFO)
