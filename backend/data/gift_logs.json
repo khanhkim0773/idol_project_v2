@@ -31058,5 +31058,35 @@
     "amount": 1,
     "diamonds": 10,
     "timestamp": "2026-04-10T05:20:41.103Z"
+  },
+  {
+    "giftId": 5655,
+    "giftName": "Rose",
+    "userId": "7582729052408366081",
+    "nickname": "nhu",
+    "profilePicture": "https://p19-common-sign.tiktokcdn.com/tos-alisg-avt-0068/afd10f18ef3f6bfd1d957ce29d3a63b9~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=e783e76d&x-expires=1775970000&x-signature=0zQu97wVJZiuKJJgKoBD1sOEGeo%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=sg1",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-10T05:20:43.449Z"
+  },
+  {
+    "giftId": 5655,
+    "giftName": "Rose",
+    "userId": "7032647129797706754",
+    "nickname": "[THÀNH ĐẠT] 🚬",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/1cb8d7ce42708da7b71d056b654ef93f~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=a64c987c&x-expires=1775970000&x-signature=7%2F6gkkiuoaRMhyZJn4VGQblCBvQ%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 5,
+    "diamonds": 1,
+    "timestamp": "2026-04-10T05:20:54.982Z"
+  },
+  {
+    "giftId": 7934,
+    "giftName": "Heart Me",
+    "userId": "7590772445972661266",
+    "nickname": "ăn cơm hay ăn đấm",
+    "profilePicture": "https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/c06f06ea25910f3cabe94bdd8b8cef37~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=48051b86&x-expires=1775970000&x-signature=arsIvepPZ2%2FW9YZdKLQw5fVjnJs%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-10T05:20:54.995Z"
   }
 ]
