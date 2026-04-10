@@ -25,13 +25,22 @@ const App = () => {
 
   if (!isConnected) {
     return (
-      <div className="w-screen h-screen relative flex items-center justify-center bg-black overflow-hidden">
+      <div className="w-screen h-screen relative flex items-center justify-center bg-[#0a0a14] overflow-hidden">
+        {/* Background Overlay */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-60 -left-60 w-[1000px] h-[1000px] rounded-full bg-[#4338ca]/30 blur-[120px] opacity-100" />
+          <div className="absolute -bottom-60 -right-60 w-[1000px] h-[1000px] rounded-full bg-[#0891b2]/30 blur-[120px] opacity-100" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[#7c3aed]/10 blur-[100px] opacity-100" />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
+        </div>
+
         {/* Background Image */}
         <img
           src="/images/background.png"
           alt="background"
-          className="absolute inset-0 w-full h-full object-cover blur-sm opacity-40 z-0"
+          className="absolute inset-0 w-full h-full object-cover blur-md opacity-30 z-0 scale-110"
         />
+
         <ConnectForm onConnectSuccess={(username) => {
           setConnectedUsername(username);
           setIsConnected(true);

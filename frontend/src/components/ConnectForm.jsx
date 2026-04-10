@@ -44,7 +44,7 @@ const ConnectForm = ({ onConnectSuccess }) => {
   };
 
   return (
-    <div className="relative z-20 sm:max-w-md w-full sm:h-auto h-full bg-white/[0.03] backdrop-blur-2xl sm:border border-white/[0.08] sm:rounded-[3rem] p-10 text-white font-sans pointer-events-auto shadow-2xl overflow-hidden">
+    <div className="relative z-20 sm:max-w-md w-full sm:h-auto h-full bg-white/[0.12] backdrop-blur-[40px] border border-white/20 sm:rounded-[3rem] p-10 text-white font-sans pointer-events-auto shadow-[0_50px_100px_rgba(0,0,0,0.4)] overflow-hidden">
       {/* Decorative Glow */}
       <div className="absolute -top-10 -right-10 w-40 h-40 bg-luminous-cyan/10 blur-[80px] pointer-events-none" />
 
@@ -70,7 +70,7 @@ const ConnectForm = ({ onConnectSuccess }) => {
             <label className="text-[10px] font-black uppercase tracking-widest text-luminous-cyan opacity-80 ml-1">
               Username ID
             </label>
-            <div className="w-full flex items-center bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-sm text-white transition-all duration-300 focus-within:border-luminous-cyan/40 focus-within:bg-white/[0.06] group">
+            <div className="w-full flex items-center bg-white/[0.08] border border-white/20 rounded-2xl px-5 py-4 text-sm text-white transition-all duration-300 focus-within:border-white/50 focus-within:bg-white/[0.15] group shadow-inner">
               <span className="text-luminous-gray/40 font-bold mr-2">@</span>
               <input
                 type="text"
@@ -86,7 +86,7 @@ const ConnectForm = ({ onConnectSuccess }) => {
           <button
             type="submit"
             disabled={loading || !username.trim()}
-            className="w-full h-14 bg-white text-black font-black py-3 rounded-2xl transition-all duration-300 text-sm flex items-center justify-center gap-3 hover:bg-luminous-cyan hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:grayscale disabled:scale-100 shadow-xl"
+            className="w-full h-14 bg-white text-black font-black py-3 rounded-2xl transition-all duration-300 text-sm flex items-center justify-center gap-3 hover:bg-luminous-cyan hover:scale-[1.02] active:scale-[0.98] disabled:opacity-30 disabled:grayscale-0 disabled:scale-100 shadow-[0_10px_30px_rgba(255,255,255,0.2)]"
           >
             {loading ? (
               <div className="flex items-center gap-2">

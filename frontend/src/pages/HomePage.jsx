@@ -49,10 +49,10 @@ const HomePage = ({ username }) => {
       <div className="hidden lg:flex flex-col gap-3 lg:gap-4 w-[280px] xl:w-[320px] shrink-0 min-h-0">
         {/* Streamer badge */}
         {username && (
-          <div className="shrink-0 bg-black/45 backdrop-blur-md border border-white/5 px-4 py-2 rounded-full flex items-center gap-3 shadow-xl">
-            <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.8)] animate-pulse shrink-0" />
-            <span className="text-white/40 uppercase font-black text-[10px] tracking-widest">Streamer</span>
-            <span className="font-black text-[#d946ef] text-[13px]">@{username}</span>
+          <div className="shrink-0 bg-white/[0.05] backdrop-blur-xl border border-white/10 px-5 py-2.5 rounded-full flex items-center gap-3 shadow-2xl">
+            <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse shrink-0" />
+            <span className="text-white/30 uppercase font-black text-[10px] tracking-widest leading-none">Streamer</span>
+            <span className="font-black text-[#d946ef] text-[13px] leading-none">@{username}</span>
           </div>
         )}
 
@@ -91,10 +91,10 @@ const HomePage = ({ username }) => {
             {/* Gift Performance Badge */}
             {videoMode === "queue" && currentGiftName && (
               <div className="absolute top-20 left-1/2 -translate-x-1/2 z-[100] w-full px-4 pointer-events-none">
-                <div className="bg-black/60 backdrop-blur-md border border-white/20 rounded-2xl py-2 px-3 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(217,70,239,0.3)]">
+                <div className="bg-white/[0.08] backdrop-blur-xl border border-white/20 rounded-2xl py-2 px-4 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(0,0,0,0.4)]">
                   <span className="text-[10px] font-black text-[#d946ef] uppercase tracking-widest">Đang trình diễn</span>
                   <div className="w-1 h-1 rounded-full bg-white/40" />
-                  <span className="text-[12px] font-bold text-white uppercase">{currentGiftName}</span>
+                  <span className="text-[12px] font-black text-white uppercase">{currentGiftName}</span>
                 </div>
               </div>
             )}
@@ -118,20 +118,20 @@ const HomePage = ({ username }) => {
           {/* Gift Performance Badge */}
           {videoMode === "queue" && currentGiftName && (
             <div className="absolute top-16 left-1/2 -translate-x-1/2 z-[100] w-full px-4 pointer-events-none">
-              <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-2xl py-2 px-4 flex items-center justify-center gap-2.5 shadow-2xl">
-                <span className="text-[10px] font-black text-[#d946ef] uppercase tracking-widest">Đang trình diễn</span>
+              <div className="bg-white/[0.08] backdrop-blur-xl border border-white/20 rounded-2xl py-2.5 px-5 flex items-center justify-center gap-3 shadow-2xl">
+                <span className="text-[10px] font-black text-[#d946ef] uppercase tracking-widest leading-none">Đang trình diễn</span>
                 <div className="w-1 h-1 rounded-full bg-white/20" />
-                <span className="text-[12px] font-black text-white uppercase">{currentGiftName}</span>
+                <span className="text-[13px] font-black text-white uppercase leading-none">{currentGiftName}</span>
               </div>
             </div>
           )}
 
           {/* Streamer Badge Mobile */}
           {username && (
-            <div className="absolute top-4 right-4 z-[100] bg-black/45 backdrop-blur-md border border-white/5 px-4 py-2 rounded-full flex items-center gap-3 shadow-xl">
-              <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.8)] animate-pulse shrink-0" />
-              <span className="text-white/40 uppercase font-black text-[10px] tracking-widest">Streamer</span>
-              <span className="font-black text-[#d946ef] text-[13px]">@{username}</span>
+            <div className="absolute top-4 right-4 z-[100] bg-white/[0.05] backdrop-blur-xl border border-white/10 px-5 py-2.5 rounded-full flex items-center gap-3 shadow-2xl">
+              <div className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse shrink-0" />
+              <span className="text-white/30 uppercase font-black text-[10px] tracking-widest leading-none">Streamer</span>
+              <span className="font-black text-[#d946ef] text-[13px] leading-none">@{username}</span>
             </div>
           )}
 

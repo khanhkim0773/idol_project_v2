@@ -18,12 +18,12 @@ const Slider = ({ label, value, min, max, step, displayValue, onChange }) => {
         <span className="text-gray-400 uppercase tracking-[0.15em]">{label}</span>
         <span className="text-white font-mono">{displayValue}</span>
       </div>
-      <div className="relative h-1.5 bg-[#252630] rounded-full flex items-center cursor-pointer">
-        <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] rounded-full" style={{ width: `${percentage}%` }}></div>
+      <div className="relative h-1.5 bg-white/[0.05] rounded-full flex items-center cursor-pointer">
+        <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] rounded-full shadow-[0_0_10px_rgba(217,70,239,0.4)]" style={{ width: `${percentage}%` }}></div>
         <input type="range" min={min} max={max} step={step} value={value} onChange={onChange}
           className="w-full h-full opacity-0 cursor-pointer relative z-10"
         />
-        <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_12px_rgba(217,70,239,0.8)] pointer-events-none" style={{ left: `calc(${percentage}% - 6px)` }}></div>
+        <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_12px_rgba(217,70,239,0.8)] pointer-events-none transition-all duration-200" style={{ left: `calc(${percentage}% - 6px)` }}></div>
       </div>
     </div>
   );
@@ -102,8 +102,8 @@ const ModalTTS = () => {
           </p>
         </div>
         <div className="flex items-center gap-3 shrink-0 pb-1">
-          <div className="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider bg-[#252630] border border-[#2e2f38] text-gray-300">
-            Custom API
+          <div className="px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-white/[0.03] border border-white/10 text-white/40 shadow-xl">
+             CONNECTED API
           </div>
         </div>
       </div>
@@ -113,9 +113,10 @@ const ModalTTS = () => {
         <div className="md:col-span-1 lg:col-span-2 space-y-8">
 
           {/* API Config */}
-          <div className="bg-white/[0.04] border border-white/[0.1] rounded-2xl p-4 md:p-7">
-            <h3 className="text-white font-bold mb-6 flex items-center gap-2">
-              <MdApi className="text-[#d946ef]" size={20} /> Cấu hình API
+          <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-4 md:p-8 shadow-2xl">
+            <h3 className="text-white font-black mb-7 flex items-center gap-3">
+              <span className="p-2.5 bg-white/[0.03] rounded-2xl border border-white/5"><MdApi className="text-[#d946ef]" size={20} /></span>
+              Cấu hình API
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="sm:col-span-2">
@@ -137,30 +138,30 @@ const ModalTTS = () => {
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">First Chunk Words</label>
+                <label className="text-[10px] uppercase font-bold text-white/30 tracking-wider mb-2.5 block">First Chunk Words</label>
                 <input
                   type="number"
                   value={customFirstChunkWords}
                   onChange={(e) => setCustomFirstChunkWords(Number(e.target.value))}
-                  className="w-full bg-white/[0.06] border border-white/[0.1] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all"
+                  className="w-full bg-white/[0.03] border border-white/5 rounded-2xl px-5 py-4 text-white text-sm focus:outline-none focus:border-[#d946ef]/40 transition-all"
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">Min Chunk Words</label>
+                <label className="text-[10px] uppercase font-bold text-white/30 tracking-wider mb-2.5 block">Min Chunk Words</label>
                 <input
                   type="number"
                   value={customMinChunkWords}
                   onChange={(e) => setCustomMinChunkWords(Number(e.target.value))}
-                  className="w-full bg-white/[0.06] border border-white/[0.1] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all"
+                  className="w-full bg-white/[0.03] border border-white/5 rounded-2xl px-5 py-4 text-white text-sm focus:outline-none focus:border-[#d946ef]/40 transition-all"
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2.5 block">Batch Size</label>
+                <label className="text-[10px] uppercase font-bold text-white/30 tracking-wider mb-2.5 block">Batch Size</label>
                 <input
                   type="number"
                   value={customBatchSize}
                   onChange={(e) => setCustomBatchSize(Number(e.target.value))}
-                  className="w-full bg-white/[0.06] border border-white/[0.1] rounded-xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-[#d946ef]/60 transition-all"
+                  className="w-full bg-white/[0.03] border border-white/5 rounded-2xl px-5 py-4 text-white text-sm focus:outline-none focus:border-[#d946ef]/40 transition-all"
                 />
               </div>
               <div>
@@ -208,9 +209,9 @@ const ModalTTS = () => {
                     <button
                       key={id}
                       onClick={() => setCustomVoice(id)}
-                      className={`p-4 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${isActive
-                        ? "bg-gradient-to-br from-[#d946ef]/15 to-[#8b5cf6]/15 border-[#d946ef]/50 text-white shadow-[0_0_15px_rgba(217,70,239,0.1)]"
-                        : "bg-[#252630] border-[#2e2f38] text-gray-400 hover:border-gray-500"
+                      className={`p-4 rounded-2xl border flex flex-col items-center gap-2 transition-all backdrop-blur-xl ${isActive
+                        ? "bg-white/[0.08] border-[#d946ef]/40 text-white shadow-[0_0_20px_rgba(217,70,239,0.1)]"
+                        : "bg-white/[0.02] border-white/5 text-white/40 hover:border-white/10"
                         }`}
                     >
                       <span className="font-bold text-sm tracking-wide">{label}</span>
@@ -224,7 +225,8 @@ const ModalTTS = () => {
         </div>
 
         {/* Right Column */}
-        <div className="md:col-span-1 border border-white/[0.1] bg-white/[0.04] rounded-2xl p-4 md:p-7 h-fit top-0 shadow-lg">
+        <div className="md:col-span-1 border border-white/5 bg-white/[0.03] backdrop-blur-2xl rounded-[2.5rem] p-4 md:p-8 h-fit top-0 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#d946ef]/5 blur-[100px] -mr-32 -mt-32 pointer-events-none" />
           <h3 className="text-white font-bold text-[17px] mb-8">Audio Dynamics</h3>
 
           <div className="mt-2 text-[#d946ef]">
@@ -266,18 +268,18 @@ const ModalTTS = () => {
       </div>
 
       {/* Gift Template */}
-      <div className="bg-white/[0.04] border border-white/[0.1] rounded-2xl p-4 md:p-8 mb-4 md:mb-8 relative">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2 bg-[#252630] rounded-lg">
-            <MdTextFields className="text-gray-300" size={18} />
+      <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-4 md:p-10 mb-8 relative shadow-2xl">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="p-3 bg-white/[0.03] rounded-2xl border border-white/5 shadow-2xl">
+            <MdTextFields className="text-[#d946ef]" size={20} />
           </div>
-          <h3 className="text-white font-bold text-[17px]">Template Quà tặng</h3>
+          <h3 className="text-white font-black text-[19px] tracking-tight">Template Quà tặng</h3>
         </div>
 
         <textarea
           value={giftTemplate}
           onChange={(e) => setGiftTemplate(e.target.value)}
-          className="w-full bg-white/[0.06] border border-white/[0.1] rounded-2xl p-6 text-gray-300 placeholder-white/30 focus:outline-none focus:border-[#d946ef]/50 transition-colors resize-none leading-relaxed relative z-10 font-medium text-[15px] mb-4"
+          className="w-full bg-white/[0.03] border border-white/[0.05] rounded-[2rem] p-8 text-white/70 placeholder-white/10 focus:outline-none focus:border-[#d946ef]/30 transition-all backdrop-blur-xl resize-none leading-relaxed relative z-10 font-bold text-[16px] mb-5 shadow-inner"
           rows={2}
           placeholder="Cảm ơn {name} đã tặng {amount} {gift}"
         />
@@ -301,19 +303,19 @@ const ModalTTS = () => {
       </div>
 
       {/* Welcome Template */}
-      <div className="bg-white/[0.04] border border-white/[0.1] rounded-2xl p-4 md:p-8 mb-4 md:mb-8 relative">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2 bg-[#252630] rounded-lg">
-            <MdRecordVoiceOver className="text-[#10b981]" size={18} />
+      <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-4 md:p-10 mb-8 relative shadow-2xl">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="p-3 bg-white/[0.03] rounded-2xl border border-white/5 shadow-2xl">
+            <MdRecordVoiceOver className="text-[#10b981]" size={20} />
           </div>
-          <h3 className="text-white font-bold text-[17px]">Template Chào mừng</h3>
-          <span className="text-[10px] text-gray-500">Đọc khi có người mới vào live</span>
+          <h3 className="text-white font-black text-[19px] tracking-tight">Template Chào mừng</h3>
+          <span className="text-[11px] font-bold text-white/20 uppercase tracking-widest ml-2">Người mới vào live</span>
         </div>
 
         <textarea
           value={welcomeTemplate}
           onChange={(e) => setWelcomeTemplate(e.target.value)}
-          className="w-full bg-white/[0.06] border border-white/[0.1] rounded-2xl p-6 text-gray-300 placeholder-white/30 focus:outline-none focus:border-[#10b981]/50 transition-colors resize-none leading-relaxed relative z-10 font-medium text-[15px] mb-4"
+          className="w-full bg-white/[0.03] border border-white/[0.05] rounded-[2rem] p-8 text-white/70 placeholder-white/10 focus:outline-none focus:border-[#10b981]/30 transition-all backdrop-blur-xl resize-none leading-relaxed relative z-10 font-bold text-[16px] mb-5 shadow-inner"
           rows={2}
           placeholder="Xin chào {name}, cho mình xin 1 follow và 1 tim nhé, cảm ơn cậu"
         />
@@ -332,12 +334,12 @@ const ModalTTS = () => {
       {/* Test & Save */}
       <div className="bg-white/[0.04] border border-white/[0.1] rounded-2xl p-4 md:p-8 relative">
         <div className="flex flex-col md:flex-row items-center justify-between gap-5">
-          <div className="flex-1 w-full flex items-center bg-white/[0.06] border border-white/[0.1] rounded-xl px-5 focus-within:border-[#d946ef]/60 transition-colors">
-            <MdPlayArrow className="text-gray-500 shrink-0" size={20} />
+          <div className="flex-1 w-full flex items-center bg-white/[0.03] border border-white/5 rounded-2xl px-6 focus-within:border-[#d946ef]/40 transition-all backdrop-blur-xl">
+            <MdPlayArrow className="text-white/20 shrink-0" size={24} />
             <input
               value={testText}
               onChange={(e) => setTestText(e.target.value)}
-              className="w-full bg-transparent py-3.5 pl-3 text-sm text-gray-300 placeholder-[#52546e] focus:outline-none"
+              className="w-full bg-transparent py-4.5 pl-4 text-sm text-white font-bold placeholder-white/10 focus:outline-none"
               placeholder="Nhập text thử nghiệm giọng đọc..."
             />
           </div>
