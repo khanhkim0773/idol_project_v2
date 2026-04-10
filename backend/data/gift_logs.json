@@ -31088,5 +31088,45 @@
     "amount": 1,
     "diamonds": 1,
     "timestamp": "2026-04-10T05:20:54.995Z"
+  },
+  {
+    "giftId": 7934,
+    "giftName": "Heart Me",
+    "userId": "6719653681836491777",
+    "nickname": "Ba Bé Bo",
+    "profilePicture": "https://p9-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/2b0df63a3e07412a1ad5bc928cf84419~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=d9117e41&x-expires=1775970000&x-signature=duipg1o0rWRIyPMzpIusa4nFsmE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-10T05:36:13.425Z"
+  },
+  {
+    "giftId": 7934,
+    "giftName": "Heart Me",
+    "userId": "7576218884240622599",
+    "nickname": "Duy",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/72cb19f731e9fcdeeec5cb88adb3e5c9~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=5bb743d9&x-expires=1775970000&x-signature=Dcpp5jB8qYVDy76Hs%2B3uyvFen%2Bs%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my3",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-10T05:36:38.910Z"
+  },
+  {
+    "giftId": 7934,
+    "giftName": "Heart Me",
+    "userId": "7530642438391514119",
+    "nickname": "kieumidepgai",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/920ca2f3747a0aa62fed80e19af5604e~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=31ff61f0&x-expires=1775970000&x-signature=2yxqesBRFj0AAaEGtuFG8XftX7U%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my3",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-10T05:36:50.619Z"
+  },
+  {
+    "giftId": 7934,
+    "giftName": "Heart Me",
+    "userId": "6705506796989318146",
+    "nickname": "Ngọc Trương",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/7325856752564437010~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=c5b39c1f&x-expires=1775970000&x-signature=2a1s9fle0QtOGWpA06Ayh4BwU3M%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-10T05:37:13.843Z"
   }
 ]
