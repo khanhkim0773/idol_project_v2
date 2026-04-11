@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { useIdolStore } from "./useIdolStore";
 import { SOCKET_URL } from "../utils/constant";
 
 export const useVideoStore = create((set, get) => ({
@@ -192,10 +193,30 @@ export const useVideoStore = create((set, get) => ({
         };
       });
     } else {
-      // Idle mode: Pick random favorite
-      const actives = getActiveVideos();
-      if (actives.length > 0) {
-        const randomTarget = actives[Math.floor(Math.random() * actives.length)];
+      // Idle mode: Pick random active Idol -> Pick random video from that Idol
+      const activeIdols = useIdolStore.getState().getActiveIdols();
+      let randomTarget = null;
+
+      if (activeIdols.length > 0) {
+        // Pick random Idol
+        const randomIdol = activeIdols[Math.floor(Math.random() * activeIdols.length)];
+        // Get their active videos
+        const idolVideos = getActiveVideos().filter(v => v.idolId === randomIdol.id);
+
+        if (idolVideos.length > 0) {
+           randomTarget = idolVideos[Math.floor(Math.random() * idolVideos.length)];
+        }
+      }
+
+      // Fallback if idol has no videos or no idols active: pick random from any active video
+      if (!randomTarget) {
+         const actives = getActiveVideos();
+         if (actives.length > 0) {
+           randomTarget = actives[Math.floor(Math.random() * actives.length)];
+         }
+      }
+
+      if (randomTarget) {
         set({
           selectedVideo: randomTarget.video,
           currentGiftName: null,

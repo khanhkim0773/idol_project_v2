@@ -1,42 +1,43 @@
 [
   {
     "id": 1,
-    "name": "Bình An",
-    "description": "Mẫu nhảy số 1",
-    "avatar": "/avatar/avatar-ba1.jpg",
     "video": "/video/favorite.webm",
-    "gift": "Rose",
+    "idolId": null,
+    "triggerGift": "Rose",
+    "active": false,
     "order": 1,
-    "active": true
+    "gift": ""
   },
   {
     "id": 2,
-    "name": "Liễu Như Yên",
-    "description": "Mẫu nhảy số 2",
-    "avatar": "/avatar/avatar-ba2.jpg",
     "video": "/video/maianh_3.webm",
-    "gift": "TikTok",
-    "order": 2,
-    "active": true
+    "idolId": 1775919085138,
+    "triggerGift": "TikTok",
+    "active": true,
+    "order": 2
   },
   {
     "id": 3,
-    "name": "Tiểu Mỹ",
-    "description": "Mẫu nhảy số 3",
-    "avatar": "/avatar/avatar-ba3.jpg",
     "video": "/video/maianh_4.webm",
-    "gift": "Perfume",
-    "order": 3,
-    "active": true
+    "idolId": 1775919085139,
+    "triggerGift": "Perfume",
+    "active": true,
+    "order": 3
   },
   {
     "id": 4,
-    "name": "Tiểu Kiều",
-    "description": "Mẫu nhảy số 4",
-    "avatar": "/avatar/avatar-ba4.jpg",
     "video": "/video/maianh_5.webm",
-    "gift": "Confetti",
-    "order": 4,
-    "active": true
+    "idolId": 1775919085140,
+    "triggerGift": "Confetti",
+    "active": true,
+    "order": 4
+  },
+  {
+    "idolId": null,
+    "video": "/video/1775922920432-favorite.webm",
+    "gift": "",
+    "order": 5,
+    "active": false,
+    "id": 1775922920457
   }
 ]

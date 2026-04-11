@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useVideoStore } from "../hooks/useVideoStore";
+import { useIdolStore } from "../hooks/useIdolStore";
 import { useTTSStore } from "../hooks/useTTSStore";
 import { SOCKET_URL } from "../utils/constant";
 import { MESSAGE_TYPE } from "../utils/type";
@@ -63,22 +64,34 @@ const TikTokListener = () => {
 
       useTTSStore.getState().speakGift(giftData.nickname, giftData.amount, giftName);
 
-      const active = useVideoStore.getState().getActiveVideos();
-      if (active.length === 0) return;
+      const activeVideos = useVideoStore.getState().getActiveVideos();
+      if (activeVideos.length === 0) return;
+
       const giftNameLower = giftName.toLowerCase().trim();
-      const matched = active.filter((v) => v.gift && v.gift.toLowerCase().trim() === giftNameLower);
-
-      if (matched.length === 0) return;
-
       const n = Math.min(Number(giftData.amount ?? 1), 50);
+
+      // --- 2-TIER TRIGGER SYSTEM ---
+      // Tier 1: Is there a video that explicitly asks for this gift?
+      let matchedVideos = activeVideos.filter(
+        (v) => v.gift && v.gift.toLowerCase().trim() === giftNameLower
+      );
+
+      // Tier 2: Global fallback (Random among any active idol)
+      if (matchedVideos.length === 0) {
+        matchedVideos = activeVideos;
+      }
+
+      if (matchedVideos.length === 0) return;
+
       const state = useVideoStore.getState();
       const lastQueued = state.videoQueue[state.videoQueue.length - 1] ?? state.selectedVideo;
-      const curIdx = matched.findIndex((v) => v.video === lastQueued);
+      const curIdx = matchedVideos.findIndex((v) => v.video === lastQueued);
       const scoreByPath = new Map();
 
       for (let i = 0; i < n; i++) {
-        const idx = ((curIdx === -1 ? 0 : curIdx) + 1 + i) % matched.length;
-        const path = matched[idx].video;
+        // Rotary mode pick
+        const idx = ((curIdx === -1 ? 0 : curIdx) + 1 + i) % matchedVideos.length;
+        const path = matchedVideos[idx].video;
         useVideoStore.getState().enqueueVideo(path, giftName);
         scoreByPath.set(path, (scoreByPath.get(path) || 0) + 1);
       }

@@ -47,11 +47,11 @@ async function uploadFile(file, type) {
 const EMPTY_FORM = {
   name: "",
   description: "",
-  gift: "",
   avatar: "",
   video: "",
   order: 1,
   active: true,
+  idolId: null // New uploaded videos default to null idol
 };
 
 /* ─── Modal ─── */
@@ -63,26 +63,8 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
   );
   const [uploading, setUploading] = useState({ video: false, avatar: false });
   const [uploadError, setUploadError] = useState("");
-  const [giftOptions, setGiftOptions] = useState(["Rose"]);
   const avatarRef = useRef();
   const videoRef = useRef();
-
-  useEffect(() => {
-    fetch(`${API}/api/gifts`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          // Extract unique gift names, always keep Rose at top
-          const names = data.map((g) => g.giftName).filter(Boolean);
-          const unique = [...new Set(["Rose", ...names])];
-          setGiftOptions(unique);
-        }
-      })
-      .catch(() => {
-        // Fallback: just keep Rose
-        setGiftOptions(["Rose"]);
-      });
-  }, []);
 
   const set = (k, v) => setForm((p) => ({ ...p, [k]: v }));
 
@@ -225,37 +207,8 @@ const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
             />
           </div>
 
-          {/* gift + order row */}
-          <div className="grid grid-cols-2 gap-3.5 sm:gap-5">
-            <div>
-              <label className="text-[9px] sm:text-[10px] uppercase font-black text-gray-500 tracking-wider mb-2 flex items-center gap-1.5">
-                <MdCardGiftcard className="text-[#fbbf24] w-[13px] h-[13px] sm:w-[14px] sm:h-[14px]" /> Quà tặng
-              </label>
-              <div className="relative">
-                <select
-                  value={form.gift}
-                  onChange={(e) => set("gift", e.target.value)}
-                  className="w-full appearance-none bg-[#252630] border border-[#2e2f38] rounded-xl px-4 py-2.5 sm:px-5 sm:py-3 text-white text-[13px] font-semibold focus:outline-none focus:border-[#d946ef]/60 transition-all cursor-pointer pr-10"
-                >
-                  <option value="" className="bg-[#1a1b23] text-gray-500 font-medium">
-                    — Chưa chọn quà —
-                  </option>
-                  {giftOptions.map((name) => (
-                    <option key={name} value={name} className="bg-[#1a1b23] text-white font-medium">
-                      🎁 {name}
-                    </option>
-                  ))}
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
-                  <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </div>
-              <p className="text-[10px] text-gray-500 mt-2 font-medium">
-                TikTok Live Gift • Trống = không kích hoạt
-              </p>
-            </div>
+          {/* order row */}
+          <div className="grid grid-cols-1">
             <div>
               <label className="text-[9px] sm:text-[10px] uppercase font-black text-white/30 tracking-wider mb-2 block">
                 Thứ tự
@@ -500,11 +453,6 @@ const VideoCard = ({
           <p className="text-[11px] sm:text-[13px] text-gray-600 italic mt-0.5 sm:mt-1 mb-2 sm:mb-3">Không có mô tả</p>
         )}
         <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-3 flex-wrap">
-          {/* gift badge */}
-          <span className="flex items-center truncate gap-1 text-[9px] sm:text-[11px] font-bold bg-[#fbbf24]/10 text-[#fbbf24] border border-[#fbbf24]/20 rounded-lg px-2 py-0.5 sm:px-2.5 sm:py-1 shadow-sm">
-            <MdCardGiftcard className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            {video.gift || "Không gắn quà"}
-          </span>
           {/* video path */}
           <span className="text-[9px] sm:text-[11px] text-gray-400 font-mono truncate max-w-[150px] sm:max-w-[200px] flex items-center gap-1 bg-white/[0.06] px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg border border-white/[0.1] shadow-inner">
             <MdVideocam className="text-gray-400 shrink-0 w-3 h-3 sm:w-3.5 sm:h-3.5" />
@@ -600,11 +548,10 @@ const UploadPage = () => {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 md:gap-6 mb-6 md:mb-8 shrink-0">
         <div>
           <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d946ef] uppercase mb-3">Cinema Studio</h4>
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-3 md:mb-4 tracking-tight">Quản lý Video</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-3 md:mb-4 tracking-tight">Thư viện Video Gốc</h1>
           <p className="text-sm text-gray-400 max-w-2xl leading-relaxed">
-            Upload và liên kết các video với các món quà trên TikTok Live. Hiện đang có {" "}
-            <span className="text-white font-semibold">{activeCount} / {videos.length}</span> {" "}
-            video được cấu hình kích hoạt.
+            Danh sách toàn bộ các file Video trên hệ thống. 
+            Để liên kết cho từng Idol cụ thể, hãy thực hiện qua Tab <b>Idols</b>.
           </p>
         </div>
         <div className="hidden sm:flex items-center gap-3 shrink-0 pb-1">

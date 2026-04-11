@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useGiftStore } from "../hooks/useGiftStore";
 import { useVideoStore } from "../hooks/useVideoStore";
+import { useIdolStore } from "../hooks/useIdolStore";
 import {
   MdAdd,
   MdEdit,
@@ -138,6 +139,7 @@ const DeleteConfirm = ({ name, onConfirm, onClose }) => (
 const GiftPage = () => {
   const { gifts, fetchGifts, addGift, updateGift, deleteGift, loading } = useGiftStore();
   const { videos } = useVideoStore();
+  const { idols } = useIdolStore();
   const [modal, setModal] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [search, setSearch] = useState("");
@@ -165,9 +167,7 @@ const GiftPage = () => {
           <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d946ef] uppercase mb-3">Asset Studio</h4>
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-3 md:mb-4 tracking-tight">Quản lý Quà tặng</h1>
           <p className="text-sm text-gray-400 max-w-2xl leading-relaxed">
-            Quản lý phần thưởng và quà tặng phân bổ trong phiên phát sóng. Hiện đang có{" "}
-            <span className="text-white font-semibold">{usedGiftNames.size} / {gifts.length}</span>{" "}
-            quà đang được sử dụng.
+            Từ điển cấu hình các loại Quà Tặng (ID và Tên) trên hệ thống TikTok. Để cài đặt "Quà này phát video nào", hãy làm việc trong tab <b>Idols</b>.
           </p>
         </div>
 
@@ -208,7 +208,6 @@ const GiftPage = () => {
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
             {filtered.map((gift) => {
-              const isUsed = usedGiftNames.has(gift.giftName);
               const isActive = gift.active !== false;
 
               return (
@@ -262,11 +261,6 @@ const GiftPage = () => {
                       <h3 className={`text-[13px] sm:text-[17px] font-black sm:font-extrabold tracking-tight truncate leading-tight ${isActive ? "text-white" : "text-gray-300"}`}>
                         {gift.giftName}
                       </h3>
-                      {isUsed && (
-                        <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-[#10b981]/15 border border-[#10b981]/30 text-[8.5px] sm:text-[9px] text-[#10b981] font-bold uppercase tracking-widest shadow-[0_0_10px_rgba(16,185,129,0.1)]">
-                          Used
-                        </span>
-                      )}
                     </div>
                     <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
                       <p className="text-[10px] sm:text-[12px] text-gray-500 font-mono leading-none">

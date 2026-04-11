@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { MdDashboard, MdOndemandVideo, MdCardGiftcard, MdMenu, MdClose } from "react-icons/md";
+import { MdDashboard, MdOndemandVideo, MdCardGiftcard, MdMenu, MdClose, MdRecentActors } from "react-icons/md";
 import { ROUTES_URL } from "../../utils/constant";
 import { LuSpeech } from "react-icons/lu";
 
 const Menu = [
   { name: "Dashboard", icon: <MdDashboard />, path: ROUTES_URL.DASHBOARD },
-  { name: "Videos", icon: <MdOndemandVideo />, path: ROUTES_URL.UPLOAD },
+  { name: "Videos (Asset)", icon: <MdOndemandVideo />, path: ROUTES_URL.UPLOAD },
+  { name: "Idols", icon: <MdRecentActors />, path: ROUTES_URL.IDOLS },
   { name: "Gifts", icon: <MdCardGiftcard />, path: ROUTES_URL.GIFTS },
   { name: "Text to Speech", icon: <LuSpeech />, path: ROUTES_URL.TTS },
 ];

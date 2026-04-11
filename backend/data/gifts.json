@@ -5,7 +5,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eba3a9bb85c33e017f3648eaf88d7189~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 100,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 7934,
@@ -13,7 +14,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/d56945782445b0b8c8658ed44f894c7b~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5658,
@@ -21,7 +23,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/20b8f61246c7b6032777bb81bf4ee055~tplv-obj.png",
     "diamonds": 20,
     "maxRepeatCount": 5,
-    "active": true
+    "active": true,
+    "idolId": 1775919085139
   },
   {
     "giftId": 5269,
@@ -29,7 +32,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/802a21ae29f9fae5abe3693de9f874bd~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 100,
-    "active": true
+    "active": true,
+    "idolId": 1775919085138
   },
   {
     "giftId": 15231,
@@ -37,7 +41,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/fc549cf1bc61f9c8a1c97ebab68dced7.png~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 100,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 8825,
@@ -45,7 +50,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/d53125bd5416e6f2f6ab61da02ddd302.png~tplv-obj.png",
     "diamonds": 10,
     "maxRepeatCount": 5,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 8913,
@@ -53,7 +59,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eb77ead5c3abb6da6034d3cf6cfeb438~tplv-obj.png",
     "diamonds": 10,
     "maxRepeatCount": 20,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 17465,
@@ -61,7 +68,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/0a5db92508ee667339289b2f87bc3123.png~tplv-obj.png",
     "diamonds": 20,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5509,
@@ -69,7 +77,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/08af67ab13a8053269bf539fd27f3873.png~tplv-obj.png",
     "diamonds": 199,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5879,
@@ -77,7 +86,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4e7ad6bdf0a1d860c538f38026d4e812~tplv-obj.png",
     "diamonds": 30,
     "maxRepeatCount": 10,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5487,
@@ -85,7 +95,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/a4c4dc437fd3a6632aba149769491f49.png~tplv-obj.png",
     "diamonds": 5,
     "maxRepeatCount": 11,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 13651,
@@ -93,12 +104,14 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/b342e28d73dac6547e0b3e2ad57f6597.png~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 20,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 6652,
     "giftName": "Autumn 2024",
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5660,
@@ -106,7 +119,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/6cd022271dc4669d182cad856384870f~tplv-obj.png",
     "diamonds": 100,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5586,
@@ -114,7 +128,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/934b5a10dee8376df5870a61d2ea5cb6.png~tplv-obj.png",
     "diamonds": 199,
     "maxRepeatCount": 8,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 6007,
@@ -122,15 +137,18 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/9f8bd92363c400c284179f6719b6ba9c~tplv-obj.png",
     "diamonds": 299,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 11179,
-    "giftName": "Naughty Chicken"
+    "giftName": "Naughty Chicken",
+    "idolId": null
   },
   {
     "giftId": 14397,
-    "giftName": "Fairy Wings"
+    "giftName": "Fairy Wings",
+    "idolId": null
   },
   {
     "giftId": 5585,
@@ -138,11 +156,13 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/cb4e11b3834e149f08e1cdcc93870b26~tplv-obj.png",
     "diamonds": 100,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": 1775919085140
   },
   {
     "giftId": 6781,
-    "giftName": "Watermelon Love"
+    "giftName": "Watermelon Love",
+    "idolId": null
   },
   {
     "giftId": 10138,
@@ -150,7 +170,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/3c5e5fc699ed9bee71e79cc90bc5ab37.png~tplv-obj.png",
     "diamonds": 10,
     "maxRepeatCount": 10,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5827,
@@ -158,7 +179,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/968820bc85e274713c795a6aef3f7c67~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 100,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 57800,
@@ -166,7 +188,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/a38efdb71f680c88e9bd14199ff907f2.png~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 5,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 15232,
@@ -174,7 +197,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/e9cafce8279220ed26016a71076d6a8a.png~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 99,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 16145,
@@ -182,7 +206,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/0884604db383907f9dd0fe9512937589.png~tplv-obj.png",
     "diamonds": 300,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 57593,
@@ -190,7 +215,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/92bd8c4f0d4fef2cee16e9adcd50a222.png~tplv-obj.png",
     "diamonds": 549,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5897,
@@ -198,7 +224,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/97a26919dbf6afe262c97e22a83f4bf1~tplv-obj.png",
     "diamonds": 699,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 5659,
@@ -206,7 +233,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/0f158a08f7886189cdabf496e8a07c21~tplv-obj.png",
     "diamonds": 99,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 9948,
@@ -214,7 +242,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/b48c69f4df49c28391bcc069bbc31b41.png~tplv-obj.png",
     "diamonds": 500,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 37318,
@@ -222,7 +251,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/saliency_seg_1768348578450_0.97fad32a19b036c77623c3343ce2e457.png~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 20,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 6427,
@@ -230,7 +260,8 @@
     "active": true,
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/2f1e4f3f5c728ffbfa35705b480fdc92~tplv-obj.png",
     "diamonds": 99,
-    "maxRepeatCount": 5
+    "maxRepeatCount": 5,
+    "idolId": null
   },
   {
     "giftId": 10961,
@@ -238,12 +269,14 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/ff861a220649506452e3dc35c58266ea.png~tplv-obj.png",
     "diamonds": 5,
     "maxRepeatCount": 13,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 7122,
     "giftName": " Gem Gun",
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 19448,
@@ -251,7 +284,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/12374117770f779919bf002461fdfac0.png~tplv-obj.png",
     "diamonds": 10,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 17667,
@@ -259,7 +293,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/14b52e1933131d94a2634acf1625559d.png~tplv-obj.png",
     "diamonds": 199,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 41327,
@@ -267,7 +302,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/saliency_seg_1769154345445_0.4aef53e18c5f9db7dbac6a5527d883ab.png~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 57597,
@@ -275,7 +311,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/3afb4aeb6abf9335864ce85f364156e2.png~tplv-obj.png",
     "diamonds": 399,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 7412,
@@ -283,7 +320,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/a40b91f7a11d4cbce780989e2d20a1f4~tplv-obj.png",
     "diamonds": 5,
     "maxRepeatCount": 13,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 8635,
@@ -291,7 +329,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/0573114db41d2cf9c7dd70c8b0fab38e.png~tplv-obj.png",
     "diamonds": 5,
     "maxRepeatCount": 10,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 9875,
@@ -299,7 +338,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/312f721603de550519983ca22f5cc445.png~tplv-obj.png",
     "diamonds": 10,
     "maxRepeatCount": 2,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 57596,
@@ -307,11 +347,13 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/48af771dd2405a0d01b4dd7184e8cfad.png~tplv-obj.png",
     "diamonds": 299,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 13087,
-    "giftName": "Bubblegum"
+    "giftName": "Bubblegum",
+    "idolId": null
   },
   {
     "giftId": 57327,
@@ -319,7 +361,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/3b7e12fca3911a4bb65b699b8b0ffb8f.png~tplv-obj.png",
     "diamonds": 5,
     "maxRepeatCount": 11,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 6064,
@@ -327,15 +370,18 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/3f02fa9594bd1495ff4e8aa5ae265eef~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 782,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 17950,
-    "giftName": "Candy Puffs"
+    "giftName": "Candy Puffs",
+    "idolId": null
   },
   {
     "giftId": 17947,
-    "giftName": "Bubbly Kiss"
+    "giftName": "Bubbly Kiss",
+    "idolId": null
   },
   {
     "giftId": 16690,
@@ -343,7 +389,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/2fa794a99919386b85402d9a0a991b2b.png~tplv-obj.png",
     "diamonds": 9,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 17948,
@@ -351,11 +398,13 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/be17076f04429b60eb2d7c3e03a2ea9d.png~tplv-obj.png",
     "diamonds": 1030,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 17949,
-    "giftName": "Candy Kiss"
+    "giftName": "Candy Kiss",
+    "idolId": null
   },
   {
     "giftId": 6788,
@@ -363,15 +412,18 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/8e1a5d66370c5586545e358e37c10d25~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 5,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 6097,
-    "giftName": "Little Crown"
+    "giftName": "Little Crown",
+    "idolId": null
   },
   {
     "giftId": 52064,
-    "giftName": "Spicy Chaos"
+    "giftName": "Spicy Chaos",
+    "idolId": null
   },
   {
     "giftId": 19447,
@@ -379,11 +431,13 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/dfd48ef1952b6d315856adda7705d02d.png~tplv-obj.png",
     "diamonds": 5,
     "maxRepeatCount": 4,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 11583,
-    "giftName": "DJ Glasses"
+    "giftName": "DJ Glasses",
+    "idolId": null
   },
   {
     "giftId": 11046,
@@ -391,19 +445,23 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/79a02148079526539f7599150da9fd28.png~tplv-obj.png",
     "diamonds": 1000,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 6784,
-    "giftName": "Cake Slice"
+    "giftName": "Cake Slice",
+    "idolId": null
   },
   {
     "giftId": 55535,
-    "giftName": "Nyota"
+    "giftName": "Nyota",
+    "idolId": null
   },
   {
     "giftId": 12988,
-    "giftName": "Super GG"
+    "giftName": "Super GG",
+    "idolId": null
   },
   {
     "giftId": 8914,
@@ -411,15 +469,18 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/863e7947bc793f694acbe970d70440a1.png~tplv-obj.png",
     "diamonds": 399,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 12852,
-    "giftName": "Level Ship"
+    "giftName": "Level Ship",
+    "idolId": null
   },
   {
     "giftId": 13464,
-    "giftName": "Night Star"
+    "giftName": "Night Star",
+    "idolId": null
   },
   {
     "giftId": 9340,
@@ -427,7 +488,8 @@
     "active": true,
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/3ac5ec732f6f4ba7b1492248bfea83d6~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 200
+    "maxRepeatCount": 200,
+    "idolId": null
   },
   {
     "giftId": 15063,
@@ -435,7 +497,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/551ecaf639c5e02354f9e7c1a763ec72.png~tplv-obj.png",
     "diamonds": 10,
     "maxRepeatCount": 3,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 19438,
@@ -443,7 +506,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/0b4f61e8ab637f11449300d03929ef87.png~tplv-obj.png",
     "diamonds": 1,
     "maxRepeatCount": 100,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 9947,
@@ -451,7 +515,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/e033c3f28632e233bebac1668ff66a2f.png~tplv-obj.png",
     "diamonds": 10,
     "maxRepeatCount": 5,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 6267,
@@ -459,7 +524,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/148eef0884fdb12058d1c6897d1e02b9~tplv-obj.png",
     "diamonds": 299,
     "maxRepeatCount": 1,
-    "active": true
+    "active": true,
+    "idolId": null
   },
   {
     "giftId": 9202,
@@ -467,7 +533,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/b199d028d5beb081fe16edcf77db0830~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 54724,
@@ -475,7 +542,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/d686d45bd66e16b0aca8b0e5eb52a977.png~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 9498,
@@ -483,7 +551,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/f76750ab58ee30fc022c9e4e11d25c9d.png~tplv-obj.png",
     "diamonds": 1000,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 10017,
@@ -491,7 +560,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/2db38e8f2a9fb804cb7d3bd2a0ba635c.png~tplv-obj.png",
     "diamonds": 500,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 17044,
@@ -499,7 +569,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/b0d9f32b9d4c04afbb0267dcb5b576fa.png~tplv-obj.png",
     "diamonds": 88,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 9909,
@@ -507,7 +578,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/dac91f95d4135654fe16d09369dd8355.png~tplv-obj.png",
     "diamonds": 1500,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6820,
@@ -515,7 +587,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/46fa70966d8e931497f5289060f9a794~tplv-obj.png",
     "diamonds": 2150,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6414,
@@ -523,7 +596,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/0115cb20f6629dc50d39f6b747bddf73~tplv-obj.png",
     "diamonds": 1500,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 13903,
@@ -531,7 +605,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/2b9e1ad149b5f642a5e4371771b4e091.png~tplv-obj.png",
     "diamonds": 299,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 14048,
@@ -539,7 +614,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/0de49ea9a79e65307c674596da517792.png~tplv-obj.png",
     "diamonds": 2988,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6671,
@@ -547,7 +623,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/134e51c00f46e01976399883ca4e4798~tplv-obj.png",
     "diamonds": 199,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 19446,
@@ -555,7 +632,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/4a68411b3e92fc2bf68d458d5f906b74.png~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 69
+    "maxRepeatCount": 69,
+    "idolId": null
   },
   {
     "giftId": 7168,
@@ -563,7 +641,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/e0589e95a2b41970f0f30f6202f5fce6~tplv-obj.png",
     "diamonds": 500,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6089,
@@ -571,7 +650,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/e7ce188da898772f18aaffe49a7bd7db~tplv-obj.png",
     "diamonds": 7000,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 18608,
@@ -579,7 +659,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/cbc0508afc678106f11392ae1ed3c055.png~tplv-obj.png",
     "diamonds": 349,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 19443,
@@ -587,7 +668,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/075e206d6da035f10ff5f8fecd82abcc.png~tplv-obj.png",
     "diamonds": 15,
     "active": true,
-    "maxRepeatCount": 3
+    "maxRepeatCount": 3,
+    "idolId": null
   },
   {
     "giftId": 13462,
@@ -595,7 +677,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/483fbb7908887e111feb9d68426e33bd.png~tplv-obj.png",
     "diamonds": 100,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 12316,
@@ -603,7 +686,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/c2cd98b5d3147b983fcbf35d6dd38e36.png~tplv-obj.png",
     "diamonds": 100,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 10668,
@@ -611,7 +695,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/af980f4ec9ed73f3229df8dfb583abe6.png~tplv-obj.png",
     "diamonds": 1500,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6592,
@@ -619,7 +704,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/2734231d880b5cd20149f4cc8c760279~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 19441,
@@ -627,7 +713,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/1f5ca5cfb4b98c2761fb85987f47c641.png~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 19439,
@@ -635,7 +722,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/77f6ab69b0b03bda98a0a3d2bfdeb46f.png~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 49519,
@@ -643,7 +731,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/saliency_seg_1768451332860_0.4e9206fba57ce145656e07c66c35d4e2.png~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6104,
@@ -651,7 +740,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/6c2ab2da19249ea570a2ece5e3377f04~tplv-obj.png",
     "diamonds": 99,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6766,
@@ -659,7 +749,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/1bdf0b38142a94af0f71ea53da82a3b1~tplv-obj.png",
     "diamonds": 100,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 14237,
@@ -667,7 +758,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/af684e26138b33fd04ab50bd35a14a7c.png~tplv-obj.png",
     "diamonds": 299,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 11862,
@@ -675,7 +767,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/96d9226ef1c33784a24d0779ad3029d3.png~tplv-obj.png",
     "diamonds": 1000,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 5978,
@@ -683,7 +776,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4227ed71f2c494b554f9cbe2147d4899~tplv-obj.png",
     "diamonds": 899,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 11473,
@@ -691,7 +785,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/651e705c26b704d03bc9c06d841808f1.png~tplv-obj.png",
     "diamonds": 5000,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 15065,
@@ -699,7 +794,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/b5ac8bb9da5569185bfdc1be357d3906.png~tplv-obj.png",
     "diamonds": 1500,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 14046,
@@ -707,7 +803,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/d1ba80bb94f93ac973bc4f30794c6d28.png~tplv-obj.png",
     "diamonds": 100,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 42008,
@@ -715,7 +812,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/saliency_seg_1768805714471_0.f45d66cc4e45fc4922ab01767fa58954.png~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 57594,
@@ -723,7 +821,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/e9fbad0840d145dd95dabede5a309587.png~tplv-obj.png",
     "diamonds": 400,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 57595,
@@ -731,7 +830,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/602e3444f1810b8b048a2e706eb19898.png~tplv-obj.png",
     "diamonds": 450,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6369,
@@ -739,7 +839,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4fb89af2082a290b37d704e20f4fe729~tplv-obj.png",
     "diamonds": 29999,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 6090,
@@ -747,7 +848,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/9494c8a0bc5c03521ef65368e59cc2b8~tplv-obj.png",
     "diamonds": 1088,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 7124,
@@ -755,13 +857,111 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/fe27eba54a50c0a687e3dc0f2c02067d~tplv-obj.png",
     "diamonds": 4888,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "idolId": null
   },
   {
     "giftId": 14000,
     "giftName": "Glitter Bow",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/dd02c4c2cb726134314e89abec0b5476.png~tplv-obj.png",
     "diamonds": 149,
+    "active": true,
+    "maxRepeatCount": 1,
+    "idolId": null
+  },
+  {
+    "giftId": 14239,
+    "giftName": "Rising Star",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/1c015f238086c961a72893a8c0ae18cc.png~tplv-obj.png",
+    "diamonds": 99,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 13904,
+    "giftName": "Cupid's Bow",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/f6dd3172f50e4f4ff8d7a6bbce9d4150.png~tplv-obj.png",
+    "diamonds": 99,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 14787,
+    "giftName": "Spider on web",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/e6fc469b538b91485c7ed77ad97d3e08.png~tplv-obj.png",
+    "diamonds": 299,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 19168,
+    "giftName": "Love Glasses",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/7b3f141efe8a943faba19f855a003943.png~tplv-obj.png",
+    "diamonds": 149,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 37953,
+    "giftName": "Cục Bông Rạng Rỡ",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/saliency_seg_1768346196256_0.f4604ac3354a68b6b46e55a333aab7f1.png~tplv-obj.png",
+    "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 18708,
+    "giftName": "Cat",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/ed64975b4e809224ec3dffc616840205.png~tplv-obj.png",
+    "diamonds": 222,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 10670,
+    "giftName": "Future Journey",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/dd615b15ed696ee886064d5415dab688.png~tplv-obj.png",
+    "diamonds": 15000,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 14109,
+    "giftName": "Mark of Love",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/582475419a820e0b0dbc964799b6146e.png~tplv-obj.png",
+    "diamonds": 99,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 11180,
+    "giftName": "Love Painting",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/de6f01cb2a0deb2da24cb5d1ecf9a23b.png~tplv-obj.png",
+    "diamonds": 99,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 13263,
+    "giftName": "Love Shelter",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/3b1e8de86d841496b87567014827537b.png~tplv-obj.png",
+    "diamonds": 1200,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 13073,
+    "giftName": "Butterfly for You",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/e02af5a7d59a958bd38536f7e3473f75.png~tplv-obj.png",
+    "diamonds": 299,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 10547,
+    "giftName": "Pinch Face",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/a10aab8940d3d5aee14b14cde033ab2a.png~tplv-obj.png",
+    "diamonds": 249,
     "active": true,
     "maxRepeatCount": 1
   }

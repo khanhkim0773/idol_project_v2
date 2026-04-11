@@ -4,7 +4,9 @@ import ConnectForm from "./components/ConnectForm";
 import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
 import GiftPage from "./pages/GiftPage";
+import IdolPage from "./pages/IdolPage";
 import { useGiftStore } from "./hooks/useGiftStore";
+import { useIdolStore } from "./hooks/useIdolStore";
 import Sidebar from "./components/Layout/Sidebar";
 
 import { ROUTES_URL } from "./utils/constant";
@@ -17,11 +19,13 @@ const App = () => {
   const [connectedUsername, setConnectedUsername] = useState("");
   const { fetchVideos } = useVideoStore();
   const { fetchGifts } = useGiftStore();
+  const { fetchIdols } = useIdolStore();
 
   useEffect(() => {
+    fetchIdols();
     fetchVideos();
     fetchGifts();
-  }, [fetchVideos, fetchGifts]);
+  }, [fetchIdols, fetchVideos, fetchGifts]);
 
   if (!isConnected) {
     return (
@@ -75,6 +79,7 @@ const App = () => {
         <Routes>
           <Route path={ROUTES_URL.DASHBOARD} element={<HomePage username={connectedUsername} />} />
           <Route path={ROUTES_URL.UPLOAD} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><UploadPage /></div>} />
+          <Route path={ROUTES_URL.IDOLS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><IdolPage /></div>} />
           <Route path={ROUTES_URL.GIFTS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><GiftPage /></div>} />
           <Route path={ROUTES_URL.TTS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><ModalTTS /></div>} />
         </Routes>

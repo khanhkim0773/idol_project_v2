@@ -10,6 +10,7 @@ export const IMAGES = {
 
 export const ROUTES_URL = {
     DASHBOARD: "/",
+    IDOLS: "/idols",
     UPLOAD: "/upload",
     GIFTS: "/gifts",
     TTS: "/tts",

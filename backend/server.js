@@ -14,6 +14,7 @@ import { filesRouter } from "./routes/files.routes.js";
 import { createGiftsRouter } from "./routes/gifts.routes.js";
 import { createVideosRouter } from "./routes/videos.routes.js";
 import statsRouter from "./routes/stats.routes.js";
+import { createIdolsRouter } from "./routes/idols.routes.js";
 
 // Ensure directories exist
 [VIDEO_DIR, AVATAR_DIR, DATA_DIR].forEach((dir) => {
@@ -49,8 +50,9 @@ app.use("/api", createTiktokRouter(io, knownGifts));   // POST /api/connect
 app.use("/api/upload", uploadRouter);                   // POST /api/upload/video|avatar
 app.use("/api/files", filesRouter);                     // DELETE /api/files
 app.use("/api/gifts", createGiftsRouter(knownGifts));   // GET /api/gifts
-app.use("/api/videos", createVideosRouter(initialVideos)); // NEW: GET/POST/PATCH /api/videos
-app.use("/api/stats", statsRouter);                     // NEW: GET /api/stats/leaderboard
+app.use("/api/videos", createVideosRouter(initialVideos)); // GET/POST/PATCH /api/videos
+app.use("/api/idols", createIdolsRouter());             // GET/POST/PATCH/DELETE /api/idols
+app.use("/api/stats", statsRouter);                     // GET /api/stats/leaderboard
 
 // Proxy TTS voices-list (bypass CORS from ngrok)
 app.get("/api/tts/voices-list", async (req, res) => {
