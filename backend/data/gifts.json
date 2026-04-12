@@ -127,7 +127,7 @@
     "giftName": "Hearts",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/934b5a10dee8376df5870a61d2ea5cb6.png~tplv-obj.png",
     "diamonds": 199,
-    "maxRepeatCount": 8,
+    "maxRepeatCount": 20,
     "active": true,
     "idolId": null
   },

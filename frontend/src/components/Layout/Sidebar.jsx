@@ -51,10 +51,10 @@ const Sidebar = () => {
         {/* Logo */}
         <div>
           <div className="mb-10 px-4">
-            <h1 className="text-[26px] font-black luminous-text-gradient tracking-tight">
+            <h1 className="text-[26px] font-bold luminous-text-gradient tracking-tight">
               Luminous
             </h1>
-            <p className="text-[9px] tracking-[0.2em] text-luminous-gray/70 mt-0.5 font-bold uppercase">
+            <p className="text-[9px] tracking-[0.2em] text-luminous-gray/70 mt-0.5 font-bold  ">
               MANAGEMENT
             </p>
           </div>
@@ -94,10 +94,10 @@ const Sidebar = () => {
         <div>
           <div className="flex items-center justify-between mb-10 px-2">
             <div>
-              <h1 className="text-[24px] font-black luminous-text-gradient tracking-tight">
+              <h1 className="text-[24px] font-bold luminous-text-gradient tracking-tight">
                 Luminous
               </h1>
-              <p className="text-[9px] tracking-[0.2em] text-luminous-gray/70 mt-0.5 font-bold uppercase">
+              <p className="text-[9px] tracking-[0.2em] text-luminous-gray/70 mt-0.5 font-bold  ">
                 MANAGEMENT
               </p>
             </div>

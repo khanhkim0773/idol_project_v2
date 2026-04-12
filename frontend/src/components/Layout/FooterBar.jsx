@@ -27,7 +27,7 @@ const FooterBar = () => {
             }
           >
             <span className="text-[22px]">{item.icon}</span>
-            <span className="text-[8px] font-bold uppercase tracking-wider leading-none">
+            <span className="text-[8px] font-bold     leading-none">
               {item.name}
             </span>
           </NavLink>

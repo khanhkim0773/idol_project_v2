@@ -1,18 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useVideoStore } from "../hooks/useVideoStore";
 import {
-  MdAdd,
-  MdEdit,
-  MdDelete,
-  MdCardGiftcard,
-  MdVideocam,
-  MdClose,
-  MdCheck,
-  MdArrowUpward,
-  MdArrowDownward,
-  MdImage,
-  MdCloudUpload,
-  MdTune,
+ MdAdd,
+ MdEdit,
+ MdDelete,
+ MdCardGiftcard,
+ MdVideocam,
+ MdClose,
+ MdCheck,
+ MdArrowUpward,
+ MdArrowDownward,
+ MdImage,
+ MdCloudUpload,
+ MdTune,
 } from "react-icons/md";
 import { SOCKET_URL } from "../utils/constant";
 
@@ -21,674 +21,667 @@ const API = SOCKET_URL;
 
 /* ─── Upload helpers ─── */
 async function uploadFile(file, type) {
-  // type: 'video' | 'avatar'
-  const form = new FormData();
-  form.append("file", file);
-  const res = await fetch(`${API}/api/upload/${type}`, {
-    method: "POST",
-    body: form,
-  });
-  if (!res.ok) {
-    // Try to read server JSON error message, fallback to statusText
-    let msg = res.statusText;
-    try {
-      const body = await res.json();
-      if (body.error) msg = body.error;
-    } catch (err) {
-      console.error("Error parsing upload error:", err);
-    }
-    throw new Error(msg);
-  }
-  const data = await res.json();
-  return data.path; // e.g. '/video/123-dance.mp4'
+ // type: 'video' | 'avatar'
+ const form = new FormData();
+ form.append("file", file);
+ const res = await fetch(`${API}/api/upload/${type}`, {
+ method: "POST",
+ body: form,
+ });
+ if (!res.ok) {
+ // Try to read server JSON error message, fallback to statusText
+ let msg = res.statusText;
+ try {
+ const body = await res.json();
+ if (body.error) msg = body.error;
+ } catch (err) {
+ console.error("Error parsing upload error:", err);
+ }
+ throw new Error(msg);
+ }
+ const data = await res.json();
+ return data.path; // e.g. '/video/123-dance.mp4'
 }
 
 /* ─── helpers ─── */
 const EMPTY_FORM = {
-  name: "",
-  description: "",
-  avatar: "",
-  video: "",
-  order: 1,
-  active: true,
-  idolId: null // New uploaded videos default to null idol
+ name: "",
+ description: "",
+ avatar: "",
+ video: "",
+ order: 1,
+ active: true,
+ idolId: null // New uploaded videos default to null idol
 };
 
 /* ─── Modal ─── */
 const VideoModal = ({ initial, onSave, onClose, maxOrder }) => {
-  const [form, setForm] = useState(initial ?? EMPTY_FORM);
-  const [avatarPreview, setAvatarPreview] = useState(initial?.avatar ?? "");
-  const [videoName, setVideoName] = useState(
-    initial?.video ? initial.video.split("/").pop() : "",
-  );
-  const [uploading, setUploading] = useState({ video: false, avatar: false });
-  const [uploadError, setUploadError] = useState("");
-  const avatarRef = useRef();
-  const videoRef = useRef();
+ const [form, setForm] = useState(initial ?? EMPTY_FORM);
+ const [avatarPreview, setAvatarPreview] = useState(initial?.avatar ?? "");
+ const [videoName, setVideoName] = useState(
+ initial?.video ? initial.video.split("/").pop() : "",
+ );
+ const [uploading, setUploading] = useState({ video: false, avatar: false });
+ const [uploadError, setUploadError] = useState("");
+ const avatarRef = useRef();
+ const videoRef = useRef();
 
-  const set = (k, v) => setForm((p) => ({ ...p, [k]: v }));
+ const set = (k, v) => setForm((p) => ({ ...p, [k]: v }));
 
-  const handleAvatarFile = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setUploadError("");
-    // Show local preview immediately while uploading
-    const localUrl = URL.createObjectURL(file);
-    setAvatarPreview(localUrl);
-    setUploading((u) => ({ ...u, avatar: true }));
-    try {
-      const path = await uploadFile(file, "avatar");
-      set("avatar", path);
-      setAvatarPreview(path);
-      URL.revokeObjectURL(localUrl);
-    } catch (err) {
-      setUploadError("Lỗi upload ảnh: " + err.message);
-      setAvatarPreview("");
-      set("avatar", "");
-    } finally {
-      setUploading((u) => ({ ...u, avatar: false }));
-    }
-  };
+ const handleAvatarFile = async (e) => {
+ const file = e.target.files[0];
+ if (!file) return;
+ setUploadError("");
+ // Show local preview immediately while uploading
+ const localUrl = URL.createObjectURL(file);
+ setAvatarPreview(localUrl);
+ setUploading((u) => ({ ...u, avatar: true }));
+ try {
+ const path = await uploadFile(file, "avatar");
+ set("avatar", path);
+ setAvatarPreview(path);
+ URL.revokeObjectURL(localUrl);
+ } catch (err) {
+ setUploadError("Lỗi upload ảnh: " + err.message);
+ setAvatarPreview("");
+ set("avatar", "");
+ } finally {
+ setUploading((u) => ({ ...u, avatar: false }));
+ }
+ };
 
-  const handleVideoFile = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setUploadError("");
-    setVideoName(file.name + " (đang upload...)");
-    setUploading((u) => ({ ...u, video: true }));
-    try {
-      const path = await uploadFile(file, "video");
-      set("video", path);
-      setVideoName(path.split("/").pop());
-    } catch (err) {
-      setUploadError("Lỗi upload video: " + err.message);
-      setVideoName("");
-      set("video", "");
-    } finally {
-      setUploading((u) => ({ ...u, video: false }));
-    }
-  };
+ const handleVideoFile = async (e) => {
+ const file = e.target.files[0];
+ if (!file) return;
+ setUploadError("");
+ setVideoName(file.name + " (đang upload...)");
+ setUploading((u) => ({ ...u, video: true }));
+ try {
+ const path = await uploadFile(file, "video");
+ set("video", path);
+ setVideoName(path.split("/").pop());
+ } catch (err) {
+ setUploadError("Lỗi upload video: " + err.message);
+ setVideoName("");
+ set("video", "");
+ } finally {
+ setUploading((u) => ({ ...u, video: false }));
+ }
+ };
 
-  const isUploading = uploading.video || uploading.avatar;
-  const valid = form.name.trim() && form.video && !isUploading;
+ const isUploading = uploading.video || uploading.avatar;
+ const valid = form.name.trim() && form.video && !isUploading;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-      <div className="relative w-full max-w-xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
-        {/* header */}
-        <div className="flex items-center justify-between px-4 py-2.5 sm:px-7 sm:py-4 border-b border-white/[0.05] bg-white/[0.02]">
-          <h2 className="text-white font-black text-[15px] sm:text-lg tracking-tight flex items-center gap-2">
-            {initial ? (
-              <span className="flex items-center gap-2 text-[#d946ef]">
-                <MdEdit className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]" /> Sửa Video
-              </span>
-            ) : (
-              <span className="flex items-center gap-2 text-[#06b6d4]">
-                <MdAdd className="w-5 h-5 sm:w-6 sm:h-6" /> Thêm Video Mới
-              </span>
-            )}
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-white transition p-2 rounded-xl hover:bg-white/[0.08]"
-          >
-            <MdClose className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]" />
-          </button>
-        </div>
+ return (
+ <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+ <div className="relative w-full max-w-xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
+ {/* header */}
+ <div className="flex items-center justify-between px-4 py-2.5 sm:px-7 sm:py-4 border-b border-white/[0.05] bg-white/[0.02]">
+ <h2 className="text-white font-bold text-xs sm:text-sm tracking-tight flex items-center gap-2">
+ <span className="flex items-center gap-2 text-[#d946ef]">
+ <MdVideocam size={18} className="sm:size-5" /> {initial ? "Chỉnh sửa video" : "Thêm video mới"}
+ </span>
+ </h2>
+ <button
+ onClick={onClose}
+ className="text-gray-400 hover:text-white transition p-2 rounded-xl hover:bg-white/[0.08]"
+ >
+ <MdClose className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]" />
+ </button>
+ </div>
 
-        {/* body */}
-        <div className="p-4 sm:p-7 flex flex-col gap-3 sm:gap-6 max-h-[70vh] sm:max-h-[65vh] overflow-y-auto custom-scrollbar">
-          {/* upload error */}
-          {uploadError && (
-            <div className="text-red-400 text-[11px] sm:text-[13px] bg-red-400/10 border border-red-400/20 px-3 py-2 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl font-medium">
-              ⚠️ {uploadError}
-            </div>
-          )}
+ {/* body */}
+ <div className="p-4 sm:p-7 flex flex-col gap-3 sm:gap-6 max-h-[70vh] sm:max-h-[65vh] overflow-y-auto custom-scrollbar">
+ {/* upload error */}
+ {uploadError && (
+ <div className="text-red-400 text-[11px] sm:text-[13px] bg-red-400/10 border border-red-400/20 px-3 py-2 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl font-medium">
+ ⚠️ {uploadError}
+ </div>
+ )}
 
-          {/* avatar + name row */}
-          <div className="flex gap-4 sm:gap-5 items-start">
-            {/* avatar */}
-            <div
-              className={`relative shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl border-2 border-dashed bg-white/[0.02] flex items-center justify-center cursor-pointer transition-colors group overflow-hidden shadow-2xl ${uploading.avatar ? "border-[#06b6d4]" : "border-white/10 hover:border-[#06b6d4]"
-                }`}
-              onClick={() => !uploading.avatar && avatarRef.current?.click()}
-            >
-              {avatarPreview ? (
-                <img
-                  src={avatarPreview}
-                  alt="avatar"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <MdImage
-                  size={32}
-                  className="text-gray-500 group-hover:text-[#06b6d4] transition"
-                />
-              )}
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                {uploading.avatar ? (
-                  <div className="w-6 h-6 border-2 border-[#06b6d4] border-t-transparent rounded-full animate-spin shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
-                ) : (
-                  <MdImage size={24} className="text-white" />
-                )}
-              </div>
-              <input
-                ref={avatarRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleAvatarFile}
-              />
-            </div>
+ {/* avatar + name row */}
+ <div className="flex gap-4 sm:gap-5 items-start">
+ {/* avatar */}
+ <div
+ className={`relative shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl border-2 border-dashed bg-white/[0.02] flex items-center justify-center cursor-pointer transition-colors group overflow-hidden shadow-2xl ${uploading.avatar ? "border-[#06b6d4]" : "border-white/10 hover:border-[#06b6d4]"
+ }`}
+ onClick={() => !uploading.avatar && avatarRef.current?.click()}
+ >
+ {avatarPreview ? (
+ <img
+ src={avatarPreview}
+ alt="avatar"
+ className="w-full h-full object-cover"
+ />
+ ) : (
+ <MdImage
+ size={32}
+ className="text-gray-500 group-hover:text-[#06b6d4] transition"
+ />
+ )}
+ <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+ {uploading.avatar ? (
+ <div className="w-6 h-6 border-2 border-[#06b6d4] border-t-transparent rounded-full animate-spin shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+ ) : (
+ <MdImage size={24} className="text-white" />
+ )}
+ </div>
+ <input
+ ref={avatarRef}
+ type="file"
+ accept="image/*"
+ className="hidden"
+ onChange={handleAvatarFile}
+ />
+ </div>
 
-            {/* name */}
-            <div className="flex-1 flex flex-col gap-2 relative top-0.5">
-              <label className="text-[9px] sm:text-[10px] uppercase font-black text-gray-500 tracking-wider">
-                Tên Video *
-              </label>
-              <input
-                value={form.name}
-                onChange={(e) => set("name", e.target.value)}
-                placeholder="Vd: Bình An - Nhảy Sôi Động"
-                className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-4 py-2.5 sm:px-5 sm:py-3.5 text-white text-[13px] sm:text-sm placeholder-[#52546e] focus:outline-none focus:border-[#d946ef]/60 transition-all font-semibold"
-              />
-            </div>
-          </div>
+ {/* name */}
+ <div className="flex-1 flex flex-col gap-2 relative top-0.5">
+ <label className="text-[8px] sm:text-[9px] font-medium text-gray-400">
+ Tên video *
+ </label>
+ <input
+ value={form.name}
+ onChange={(e) => set("name", e.target.value)}
+ placeholder="Vd: Bình An - Nhảy Sôi Động"
+ className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-4 py-2 sm:px-5 sm:py-3.5 text-white text-[11px] sm:text-sm placeholder-[#52546e] focus:outline-none focus:border-[#d946ef]/60 transition-all font-medium"
+ />
+ </div>
+ </div>
 
-          {/* description */}
-          <div>
-            <label className="text-[9px] sm:text-[10px] uppercase font-black text-gray-500 tracking-wider mb-2 block">Mô tả</label>
-            <textarea
-              value={form.description}
-              onChange={(e) => set("description", e.target.value)}
-              placeholder="Mô tả ngắn về nội dung video..."
-              rows={2}
-              className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-4 py-2.5 sm:px-5 sm:py-3 text-white text-[13px] placeholder-[#52546e] focus:outline-none focus:border-[#d946ef]/60 transition-all resize-none font-medium leading-relaxed"
-            />
-          </div>
+ {/* description */}
+ <div>
+ <label className="text-[8px] sm:text-[9px] font-medium text-gray-400 mb-1 block">Mô tả</label>
+ <textarea
+ value={form.description}
+ onChange={(e) => set("description", e.target.value)}
+ placeholder="Mô tả ngắn về nội dung video..."
+ rows={2}
+ className="w-full bg-[#252630] border border-[#2e2f38] rounded-xl px-4 py-2 sm:px-5 sm:py-3 text-white text-[11px] placeholder-[#52546e] focus:outline-none focus:border-[#d946ef]/60 transition-all resize-none font-medium leading-relaxed"
+ />
+ </div>
 
-          {/* order row */}
-          <div className="grid grid-cols-1">
-            <div>
-              <label className="text-[9px] sm:text-[10px] uppercase font-black text-white/30 tracking-wider mb-2 block">
-                Thứ tự
-              </label>
-              <input
-                type="number"
-                min={1}
-                max={maxOrder + 1}
-                value={form.order}
-                onChange={(e) => set("order", parseInt(e.target.value) || 1)}
-                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-2.5 sm:px-5 sm:py-3.5 text-white text-[13px] font-mono focus:outline-none focus:border-[#d946ef]/60 transition-all font-medium"
-              />
-            </div>
-          </div>
+ {/* order row */}
+ <div className="grid grid-cols-1">
+ <div>
+ <label className="text-[8px] sm:text-[9px] font-medium text-white/30 mb-1 block">
+ Thứ tự
+ </label>
+ <input
+ type="number"
+ min={1}
+ max={maxOrder + 1}
+ value={form.order}
+ onChange={(e) => set("order", parseInt(e.target.value) || 1)}
+ className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-2 sm:px-5 sm:py-3.5 text-white text-[11px] font-mono focus:outline-none focus:border-[#d946ef]/60 transition-all font-medium"
+ />
+ </div>
+ </div>
 
-          {/* video file */}
-          <div>
-            <label className="text-[9px] sm:text-[10px] uppercase font-black text-gray-500 tracking-wider mb-2 flex items-center gap-1.5">
-              <MdVideocam className="text-[#06b6d4] w-[13px] h-[13px] sm:w-[14px] sm:h-[14px]" /> File Video *
-            </label>
-            <div
-              className={`w-full border-2 border-dashed rounded-xl sm:rounded-2xl px-4 py-4 sm:px-5 sm:py-6 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-colors bg-[#252630] shadow-inner group ${uploading.video
-                  ? "border-[#06b6d4]/60 cursor-not-allowed"
-                  : "border-[#3f404d] cursor-pointer hover:border-[#06b6d4]"
-                }`}
-              onClick={() => !uploading.video && videoRef.current?.click()}
-            >
-              {uploading.video ? (
-                <>
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 border-3 sm:border-4 border-[#06b6d4] border-t-transparent rounded-full animate-spin shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
-                  <p className="text-[11px] sm:text-[13px] text-[#06b6d4] font-black mt-1 sm:mt-2">Đang tải...</p>
-                </>
-              ) : videoName ? (
-                <>
-                  <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-[#06b6d4]/10 text-[#06b6d4] flex items-center justify-center mb-0.5 sm:mb-1 group-hover:scale-110 transition-transform">
-                    <MdVideocam className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </div>
-                  <p className="text-[12px] sm:text-[14px] font-black text-white/90 text-center break-all leading-tight">
-                    {videoName}
-                  </p>
-                  <p className="text-[9px] sm:text-[11px] text-gray-500 font-black tracking-wide">
-                    Click để thay đổi
-                  </p>
-                </>
-              ) : (
-                <>
-                  <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-white/5 text-gray-400 flex items-center justify-center mb-0.5 sm:mb-1 group-hover:text-[#06b6d4] group-hover:bg-[#06b6d4]/10 transition-all">
-                    <MdCloudUpload className="w-[22px] h-[22px] sm:w-7 sm:h-7" />
-                  </div>
-                  <p className="text-[12px] sm:text-[14px] font-black text-gray-300">
-                    Chọn video
-                  </p>
-                  <p className="text-[9px] sm:text-[11px] text-gray-500 font-black tracking-wide">
-                    MP4, WebM (Lưu vào /video/)
-                  </p>
-                </>
-              )}
-              <input
-                ref={videoRef}
-                type="file"
-                accept="video/*"
-                className="hidden"
-                onChange={handleVideoFile}
-              />
-            </div>
+ {/* video file */}
+ <div>
+ <label className="text-[9px] font-medium text-gray-400 mb-1.5 flex items-center gap-1.5">
+ <MdVideocam className="text-[#06b6d4] w-[13px] h-[13px]" /> File video *
+ </label>
+ <div
+ className={`w-full border-2 border-dashed rounded-xl sm:rounded-2xl px-4 py-4 sm:px-5 sm:py-6 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-colors bg-[#252630] shadow-inner group ${uploading.video
+ ? "border-[#06b6d4]/60 cursor-not-allowed"
+ : "border-[#3f404d] cursor-pointer hover:border-[#06b6d4]"
+ }`}
+ onClick={() => !uploading.video && videoRef.current?.click()}
+ >
+ {uploading.video ? (
+ <>
+ <div className="w-6 h-6 sm:w-8 sm:h-8 border-3 sm:border-4 border-[#06b6d4] border-t-transparent rounded-full animate-spin shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+ <p className="text-[11px] sm:text-[12px] text-[#06b6d4] font-bold mt-1">Đang tải...</p>
+ </>
+ ) : videoName ? (
+ <>
+ <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-[#06b6d4]/10 text-[#06b6d4] flex items-center justify-center mb-0.5 sm:mb-1 group-hover:scale-110 transition-transform">
+ <MdVideocam className="w-5 h-5 sm:w-6 sm:h-6" />
+ </div>
+ <p className={`font-bold text-white/90 text-center break-all leading-tight ${videoName ? 'text-[9px] sm:text-[13px]' : 'text-[10px] sm:text-[13px]'}`}>
+ {videoName || "Chọn video"}
+ </p>
+ <p className="text-[7px] sm:text-[10px] text-gray-500 font-medium">
+ {videoName ? "Click để thay đổi" : "MP4, WebM"}
+ </p>
+ </>
+ ) : (
+ <>
+ <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-white/5 text-gray-400 flex items-center justify-center mb-0.5 sm:mb-1 group-hover:text-[#06b6d4] group-hover:bg-[#06b6d4]/10 transition-all">
+ <MdCloudUpload className="w-[22px] h-[22px] sm:w-7 sm:h-7" />
+ </div>
+ <p className="text-[11px] sm:text-[13px] font-bold text-gray-300">
+ Chọn video
+ </p>
+ <p className="text-[9px] sm:text-[10px] text-gray-500 font-medium">
+ MP4, WebM
+ </p>
+ </>
+ )}
+ <input
+ ref={videoRef}
+ type="file"
+ accept="video/*"
+ className="hidden"
+ onChange={handleVideoFile}
+ />
+ </div>
 
-            <div className="mt-2.5 relative">
-              <input
-                value={
-                  typeof form.video === "string" && !form.video.startsWith("blob:")
-                    ? form.video
-                    : ""
-                }
-                onChange={(e) => {
-                  set("video", e.target.value);
-                  setVideoName(e.target.value.split("/").pop());
-                }}
-                placeholder="Hoặc nhập đường dẫn: /video/dance.mp4"
-                className="w-full bg-[#1a1b23] border border-[#2e2f38] rounded-xl px-4 py-2.5 sm:px-5 sm:py-3.5 text-white text-[11px] sm:text-[13px] placeholder-[#52546e] focus:outline-none focus:border-[#06b6d4]/60 transition-all font-mono"
-              />
-            </div>
-          </div>
+ <div className="mt-2.5 relative">
+ <input
+ value={
+ typeof form.video === "string" && !form.video.startsWith("blob:")
+ ? form.video
+ : ""
+ }
+ onChange={(e) => {
+ set("video", e.target.value);
+ setVideoName(e.target.value.split("/").pop());
+ }}
+ placeholder="Hoặc nhập đường dẫn: /video/dance.mp4"
+ className="w-full bg-[#1a1b23] border border-[#2e2f38] rounded-xl px-4 py-2.5 sm:px-5 sm:py-3.5 text-white text-[11px] sm:text-[13px] placeholder-[#52546e] focus:outline-none focus:border-[#06b6d4]/60 transition-all font-mono"
+ />
+ </div>
+ </div>
 
-          {/* active toggle */}
-          <div className="flex items-center justify-between bg-white/[0.03] rounded-xl px-4 py-3 sm:px-5 sm:py-4 border border-white/[0.06] shadow-inner mt-1">
-            <div>
-              <p className="text-[13px] sm:text-[15px] text-white font-black tracking-tight uppercase">Trạng thái Video</p>
-              <p className="text-[11px] sm:text-[12px] text-white/30 mt-0.5 font-medium">
-                Kích hoạt để hiển thị video trên live
-              </p>
-            </div>
-            <button
-              onClick={() => set("active", !form.active)}
-              className={`relative w-10 h-5 sm:w-12 sm:h-6 rounded-full transition-colors duration-300 border border-transparent ${form.active ? "bg-[#10b981]" : "bg-white/10 border-white/5"}`}
-            >
-              <div
-                className={`absolute top-[2px] left-[2px] sm:left-[2.5px] w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] bg-white rounded-full transition-transform duration-300 shadow-sm ${form.active ? "translate-x-[20px] sm:translate-x-[25px]" : "translate-x-0"
-                  }`}
-              />
-            </button>
-          </div>
-        </div>
+ {/* active toggle */}
+ <div className="flex items-center justify-between bg-white/[0.03] rounded-xl px-4 py-3 sm:px-5 sm:py-4 border border-white/[0.06] shadow-inner mt-1">
+ <div>
+ <p className="text-[11px] sm:text-[14px] text-white font-semibold">Trạng thái video</p>
+ <p className="text-[9px] sm:text-[12px] text-white/30 mt-0.5 font-medium">
+ Kích hoạt để hiển thị video trên live
+ </p>
+ </div>
+ <button
+ onClick={() => set("active", !form.active)}
+ className={`relative w-10 h-5 sm:w-12 sm:h-6 rounded-full transition-colors duration-300 border border-transparent ${form.active ? "bg-[#10b981]" : "bg-white/10 border-white/5"}`}
+ >
+ <div
+ className={`absolute top-[2px] left-[2px] sm:left-[2.5px] w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] bg-white rounded-full transition-transform duration-300 shadow-sm ${form.active ? "translate-x-[20px] sm:translate-x-[25px]" : "translate-x-0"
+ }`}
+ />
+ </button>
+ </div>
+ </div>
 
-        {/* footer */}
-        <div className="flex items-center justify-end gap-2.5 px-4 py-3 sm:px-7 sm:py-5 border-t border-white/[0.05] bg-white/[0.02]">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 sm:px-6 sm:py-3 rounded-xl border border-white/[0.1] text-gray-500 hover:text-white hover:bg-white/[0.06] text-xs sm:text-sm font-semibold transition"
-          >
-            Hủy
-          </button>
-          <button
-            disabled={!valid}
-            onClick={() => onSave(form)}
-            className={`px-5 py-2 sm:px-7 sm:py-3 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center gap-1.5 shadow-xl ${valid
-                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white hover:brightness-110 active:scale-95"
-                : "bg-white/[0.06] text-gray-600 cursor-not-allowed"
-              }`}
-          >
-            {isUploading ? (
-              <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-            ) : (
-              <MdCheck className="w-4 h-4 sm:w-5 sm:h-5" />
-            )}
-            {initial ? "Lưu" : "Thêm"}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+ {/* footer */}
+ <div className="flex items-center justify-end gap-2.5 px-4 py-3 sm:px-7 sm:py-5 border-t border-white/[0.05] bg-white/[0.02]">
+ <button
+ onClick={onClose}
+ className="px-4 py-2 sm:px-6 sm:py-3 rounded-xl border border-white/[0.1] text-gray-500 hover:text-white hover:bg-white/[0.06] text-xs sm:text-sm font-semibold transition"
+ >
+ Hủy
+ </button>
+ <button
+ disabled={!valid}
+ onClick={() => onSave(form)}
+ className={`px-5 py-2 sm:px-6 sm:py-2.5 rounded-xl text-[10px] sm:text-xs font-semibold transition-all flex items-center gap-1.5 shadow-xl ${valid
+ ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white hover:brightness-110 active:scale-95"
+ : "bg-white/[0.06] text-gray-600 cursor-not-allowed"
+ }`}
+ >
+ {isUploading ? (
+ <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+ ) : (
+ <MdCheck size={16} className="sm:size-5" />
+ )}
+ {initial ? "Lưu" : "Thêm"}
+ </button>
+ </div>
+ </div>
+ </div>
+ );
 };
 
 /* ─── Delete Confirm ─── */
 const DeleteConfirm = ({ name, onConfirm, onClose }) => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
-    <div className="w-full max-w-[320px] sm:max-w-sm bg-[#1a1b26]/80 backdrop-blur-3xl rounded-[2rem] border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-4 sm:p-7 flex flex-col gap-3.5 sm:gap-5 text-center items-center">
-      <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 mb-1">
-        <MdDelete className="text-red-500 w-5 h-5 sm:w-8 sm:h-8" />
-      </div>
-      <h3 className="text-white font-black text-[17px] sm:text-xl">Xóa Video</h3>
-      <p className="text-gray-400 text-[13px] sm:text-[15px] leading-relaxed">
-        Bạn có chắc muốn xóa video{" "}
-        <span className="text-white font-bold px-1.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.1]">"{name}"</span> không?
-      </p>
-      <div className="flex w-full gap-2.5 mt-2">
-        <button
-          onClick={onClose}
-          className="flex-1 py-2.5 sm:py-3.5 rounded-xl border border-white/[0.1] text-gray-500 hover:text-white hover:bg-white/[0.06] text-xs sm:text-sm font-semibold transition"
-        >
-          Hủy
-        </button>
-        <button
-          onClick={onConfirm}
-          className="flex-1 py-2.5 sm:py-3.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-500 text-xs sm:text-sm font-black transition"
-        >
-          Xóa
-        </button>
-      </div>
-    </div>
-  </div>
+ <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
+ <div className="w-full max-w-[320px] sm:max-w-sm bg-[#1a1b26]/80 backdrop-blur-3xl rounded-[2rem] border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-4 sm:p-7 flex flex-col gap-3.5 sm:gap-5 text-center items-center">
+ <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20 mb-1">
+ <MdDelete className="text-red-500 w-5 h-5 sm:w-8 sm:h-8" />
+ </div>
+ <h3 className="text-white font-bold text-base sm:text-lg">Xóa Video</h3>
+ <p className="text-gray-400 text-[13px] sm:text-[15px] leading-relaxed">
+ Bạn có chắc muốn xóa video{" "}
+ <span className="text-white font-bold px-1.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.1]">"{name}"</span> không?
+ </p>
+ <div className="flex w-full gap-2.5 mt-2">
+ <button
+ onClick={onClose}
+ className="flex-1 py-2.5 sm:py-3.5 rounded-xl border border-white/[0.1] text-gray-500 hover:text-white hover:bg-white/[0.06] text-xs sm:text-sm font-semibold transition"
+ >
+ Hủy
+ </button>
+ <button
+ onClick={onConfirm}
+ className="flex-1 py-2.5 sm:py-3 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-500 text-[10px] sm:text-xs font-semibold transition"
+ >
+ Xóa
+ </button>
+ </div>
+ </div>
+ </div>
 );
 
 /* ─── Video Card ─── */
 const VideoCard = ({
-  video,
-  index,
-  total,
-  onEdit,
-  onDelete,
-  onToggle,
-  onMoveUp,
-  onMoveDown,
+ video,
+ index,
+ total,
+ onEdit,
+ onDelete,
+ onToggle,
+ onMoveUp,
+ onMoveDown,
 }) => {
-  return (
-    <div
-      className={`group relative flex flex-col md:flex-row items-center gap-5 p-5 rounded-3xl border transition-all duration-300 backdrop-blur-xl ${video.active
-          ? "bg-white/[0.03] border-white/5 hover:border-[#d946ef]/30 hover:shadow-[0_8px_30px_rgba(217,70,239,0.08)] hover:bg-white/[0.06]"
-          : "bg-white/[0.01] border-white/[0.03] opacity-[0.55] grayscale"
-        }`}
-    >
-      {/* order badge */}
-      <div className="flex md:flex-col flex-row w-full md:w-auto justify-between md:justify-center items-center gap-2 shrink-0">
-        <button
-          onClick={onMoveUp}
-          disabled={index === 0}
-          className="text-gray-500 hover:text-white hover:bg-[#252630] rounded-lg disabled:opacity-20 disabled:cursor-not-allowed transition p-1.5"
-        >
-          <MdArrowUpward size={20} />
-        </button>
-        <div
-          className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center text-[13px] sm:text-[15px] font-black ${video.active
-              ? "bg-[#252630] text-[#d946ef] border border-[#3f404d] shadow-inner"
-              : "bg-[#1a1b23] text-gray-500 border border-[#2e2f38]"
-            }`}
-        >
-          {video.order}
-        </div>
-        <button
-          onClick={onMoveDown}
-          disabled={index === total - 1}
-          className="text-gray-500 hover:text-white hover:bg-[#252630] rounded-lg disabled:opacity-20 disabled:cursor-not-allowed transition p-1.5"
-        >
-          <MdArrowDownward size={20} />
-        </button>
-      </div>
+ return (
+ <div
+ className={`group relative flex flex-col md:flex-row items-center gap-5 p-5 rounded-3xl border transition-all duration-300 backdrop-blur-xl ${video.active
+ ? "bg-white/[0.03] border-white/5 hover:border-[#d946ef]/30 hover:shadow-[0_8px_30px_rgba(217,70,239,0.08)] hover:bg-white/[0.06]"
+ : "bg-white/[0.01] border-white/[0.03] opacity-[0.55] grayscale"
+ }`}
+ >
+ {/* order badge */}
+ <div className="flex md:flex-col flex-row w-full md:w-auto justify-between md:justify-center items-center gap-2 shrink-0">
+ <button
+ onClick={onMoveUp}
+ disabled={index === 0}
+ className="text-gray-500 hover:text-white hover:bg-[#252630] rounded-lg disabled:opacity-20 disabled:cursor-not-allowed transition p-1.5"
+ >
+ <MdArrowUpward size={20} />
+ </button>
+ <div
+ className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center text-[12px] sm:text-[14px] font-bold ${video.active
+ ? "bg-[#252630] text-[#d946ef] border border-[#3f404d] shadow-inner"
+ : "bg-[#1a1b23] text-gray-500 border border-[#2e2f38]"
+ }`}
+ >
+ {video.order}
+ </div>
+ <button
+ onClick={onMoveDown}
+ disabled={index === total - 1}
+ className="text-gray-500 hover:text-white hover:bg-[#252630] rounded-lg disabled:opacity-20 disabled:cursor-not-allowed transition p-1.5"
+ >
+ <MdArrowDownward size={20} />
+ </button>
+ </div>
 
-      {/* avatar */}
-      <div className={`shrink-0 w-16 h-16 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl overflow-hidden border-2 transition-all shadow-inner ${video.active ? "border-white/[0.12]" : "border-white/[0.06]"}`}>
-        {video.avatar ? (
-          <img
-            src={video.avatar}
-            alt={video.name}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-[#252630] text-gray-500">
-            <MdVideocam className="w-6 h-6 sm:w-8 sm:h-8" />
-          </div>
-        )}
-      </div>
+ {/* avatar */}
+ <div className={`shrink-0 w-16 h-16 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl overflow-hidden border-2 transition-all shadow-inner ${video.active ? "border-white/[0.12]" : "border-white/[0.06]"}`}>
+ {video.avatar ? (
+ <img
+ src={video.avatar}
+ alt={video.name}
+ className="w-full h-full object-cover"
+ />
+ ) : (
+ <div className="w-full h-full flex items-center justify-center bg-[#252630] text-gray-500">
+ <MdVideocam className="w-6 h-6 sm:w-8 sm:h-8" />
+ </div>
+ )}
+ </div>
 
-      {/* info */}
-      <div className="flex-1 min-w-0 w-full flex flex-col justify-center text-center md:text-left">
-        <div className="flex flex-col md:flex-row items-center gap-2 sm:gap-3 flex-wrap mb-1">
-          <h3 className={`text-[16px] sm:text-[19px] font-extrabold tracking-tight truncate w-full md:w-auto ${video.active ? "text-white" : "text-gray-400"}`}>
-            {video.name}
-          </h3>
-          <span
-            className={`shrink-0 text-[9px] sm:text-[10px] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full font-bold uppercase tracking-widest border shadow-sm ${video.active
-                ? "bg-[#10b981]/15 text-[#10b981] border-[#10b981]/30 shadow-[0_0_10px_rgba(16,185,129,0.1)]"
-                : "bg-[#252630] text-gray-500 border-[#3f404d]"
-              }`}
-          >
-            {video.active ? "Active" : "Inactive"}
-          </span>
-        </div>
-        {video.description ? (
-          <p className="text-[11px] sm:text-[13px] text-gray-400 mt-0.5 sm:mt-1 mb-2 sm:mb-3 line-clamp-1 sm:line-clamp-2 leading-relaxed">
-            {video.description}
-          </p>
-        ) : (
-          <p className="text-[11px] sm:text-[13px] text-gray-600 italic mt-0.5 sm:mt-1 mb-2 sm:mb-3">Không có mô tả</p>
-        )}
-        <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-3 flex-wrap">
-          {/* video path */}
-          <span className="text-[9px] sm:text-[11px] text-gray-400 font-mono truncate max-w-[150px] sm:max-w-[200px] flex items-center gap-1 bg-white/[0.06] px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg border border-white/[0.1] shadow-inner">
-            <MdVideocam className="text-gray-400 shrink-0 w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            {video.video ? video.video.split("/").pop() : "Chưa upload"}
-          </span>
-        </div>
-      </div>
+ {/* info */}
+ <div className="flex-1 min-w-0 w-full flex flex-col justify-center text-center md:text-left">
+ <div className="flex flex-col md:flex-row items-center gap-2 sm:gap-3 flex-wrap mb-1">
+ <h3 className={`text-[15px] sm:text-[17px] font-bold truncate w-full md:w-auto ${video.active ? "text-white" : "text-gray-400"}`}>
+ {video.name}
+ </h3>
+ <span
+ className={`shrink-0 text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full font-medium border shadow-sm ${video.active
+ ? "bg-[#10b981]/15 text-[#10b981] border-[#10b981]/30"
+ : "bg-[#252630] text-gray-500 border-[#3f404d]"
+ }`}
+ >
+ {video.active ? "Đang chạy" : "Tạm dừng"}
+ </span>
+ </div>
+ {video.description ? (
+ <p className="text-[11px] sm:text-[13px] text-gray-400 mt-0.5 sm:mt-1 mb-2 sm:mb-3 line-clamp-1 sm:line-clamp-2 leading-relaxed">
+ {video.description}
+ </p>
+ ) : (
+ <p className="text-[11px] sm:text-[13px] text-gray-600 italic mt-0.5 sm:mt-1 mb-2 sm:mb-3">Không có mô tả</p>
+ )}
+ <div className="flex items-center justify-center md:justify-start gap-2 sm:gap-3 flex-wrap">
+ {/* video path */}
+ <span className="text-[9px] sm:text-[11px] text-gray-400 font-mono truncate max-w-[150px] sm:max-w-[200px] flex items-center gap-1 bg-white/[0.06] px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg border border-white/[0.1] shadow-inner">
+ <MdVideocam className="text-gray-400 shrink-0 w-3 h-3 sm:w-3.5 sm:h-3.5" />
+ {video.video ? video.video.split("/").pop() : "Chưa upload"}
+ </span>
+ </div>
+ </div>
 
-      {/* actions */}
-      <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-4 md:pt-0 border-t md:border-t-0 border-white/[0.08] w-full md:w-auto">
-        {/* toggle */}
-        <button
-          onClick={onToggle}
-          title={video.active ? "Tắt video" : "Bật video"}
-          className={`relative w-12 h-6 mx-2 rounded-full transition-colors duration-300 border border-transparent shrink-0 ${video.active ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6]" : "bg-[#252630] border-[#3f404d]"
-            }`}
-        >
-          <span
-            className={`absolute top-[2px] left-[2.5px] w-[18px] h-[18px] bg-white rounded-full transition-transform duration-300 shadow-sm ${video.active ? "translate-x-[25px]" : "translate-x-0"
-              }`}
-          />
-        </button>
+ {/* actions */}
+ <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-4 md:pt-0 border-t md:border-t-0 border-white/[0.08] w-full md:w-auto">
+ {/* toggle */}
+ <button
+ onClick={onToggle}
+ title={video.active ? "Tắt video" : "Bật video"}
+ className={`relative w-12 h-6 mx-2 rounded-full transition-colors duration-300 border border-transparent shrink-0 ${video.active ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6]" : "bg-[#252630] border-[#3f404d]"
+ }`}
+ >
+ <span
+ className={`absolute top-[2px] left-[2.5px] w-[18px] h-[18px] bg-white rounded-full transition-transform duration-300 shadow-sm ${video.active ? "translate-x-[25px]" : "translate-x-0"
+ }`}
+ />
+ </button>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={onEdit}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.06] text-gray-400 hover:text-[#06b6d4] hover:bg-[#06b6d4]/10 border border-white/[0.1] hover:border-[#06b6d4]/40 transition-all shadow-sm"
-            title="Chỉnh sửa"
-          >
-            <MdEdit size={18} />
-          </button>
-          <button
-            onClick={onDelete}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.06] text-gray-400 hover:text-red-500 hover:bg-red-500/10 border border-white/[0.1] hover:border-red-500/40 transition-all shadow-sm"
-            title="Xóa"
-          >
-            <MdDelete size={18} />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+ <div className="flex items-center gap-2">
+ <button
+ onClick={onEdit}
+ className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.06] text-gray-400 hover:text-[#06b6d4] hover:bg-[#06b6d4]/10 border border-white/[0.1] hover:border-[#06b6d4]/40 transition-all shadow-sm"
+ title="Chỉnh sửa"
+ >
+ <MdEdit size={18} />
+ </button>
+ <button
+ onClick={onDelete}
+ className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.06] text-gray-400 hover:text-red-500 hover:bg-red-500/10 border border-white/[0.1] hover:border-red-500/40 transition-all shadow-sm"
+ title="Xóa"
+ >
+ <MdDelete size={18} />
+ </button>
+ </div>
+ </div>
+ </div>
+ );
 };
 
 /* ─── Main Page ─── */
 const UploadPage = () => {
-  const { videos, addVideo, updateVideo, deleteVideo, toggleActive, queuePriority, setQueuePriority } =
-    useVideoStore();
+ const { videos, addVideo, updateVideo, deleteVideo, toggleActive, queuePriority, setQueuePriority } =
+ useVideoStore();
 
-  const [modal, setModal] = useState(null); // null | { mode: 'add' | 'edit', data?: video }
-  const [deleteTarget, setDeleteTarget] = useState(null);
-  const [filter, setFilter] = useState("all"); // all | active | inactive
+ const [modal, setModal] = useState(null); // null | { mode: 'add' | 'edit', data?: video }
+ const [deleteTarget, setDeleteTarget] = useState(null);
+ const [filter, setFilter] = useState("all"); // all | active | inactive
 
-  // Sort by order
-  const sorted = [...videos].sort((a, b) => a.order - b.order);
-  const filtered =
-    filter === "all"
-      ? sorted
-      : filter === "active"
-        ? sorted.filter((v) => v.active)
-        : sorted.filter((v) => !v.active);
+ // Sort by order
+ const sorted = [...videos].sort((a, b) => a.order - b.order);
+ const filtered =
+ filter === "all"
+ ? sorted
+ : filter === "active"
+ ? sorted.filter((v) => v.active)
+ : sorted.filter((v) => !v.active);
 
-  const activeCount = videos.filter((v) => v.active).length;
+ const activeCount = videos.filter((v) => v.active).length;
 
-  const handleSave = (form) => {
-    if (modal.mode === "add") {
-      addVideo(form);
-    } else {
-      updateVideo(modal.data.id, form);
-    }
-    setModal(null);
-  };
+ const handleSave = (form) => {
+ if (modal.mode === "add") {
+ addVideo(form);
+ } else {
+ updateVideo(modal.data.id, form);
+ }
+ setModal(null);
+ };
 
-  const handleMoveUp = (id, order) => {
-    const target = sorted.filter((v) => v.order < order).at(-1);
-    if (!target) return;
-    updateVideo(id, { order: target.order });
-    updateVideo(target.id, { order: order });
-  };
+ const handleMoveUp = (id, order) => {
+ const target = sorted.filter((v) => v.order < order).at(-1);
+ if (!target) return;
+ updateVideo(id, { order: target.order });
+ updateVideo(target.id, { order: order });
+ };
 
-  const handleMoveDown = (id, order) => {
-    const arr = sorted.filter((v) => v.order > order);
-    const target = arr[0];
-    if (!target) return;
-    const targetOrder = target.order;
-    updateVideo(id, { order: targetOrder });
-    updateVideo(target.id, { order: order });
-  };
+ const handleMoveDown = (id, order) => {
+ const arr = sorted.filter((v) => v.order > order);
+ const target = arr[0];
+ if (!target) return;
+ const targetOrder = target.order;
+ updateVideo(id, { order: targetOrder });
+ updateVideo(target.id, { order: order });
+ };
 
-  return (
-    <div className="w-full text-white p-4 sm:p-6 md:p-10 font-sans flex flex-col">
-      {/* ── Header ── */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 md:gap-6 mb-6 md:mb-8 shrink-0">
-        <div>
-          <h4 className="text-[10px] font-bold tracking-[0.2em] text-[#d946ef] uppercase mb-3">Cinema Studio</h4>
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white mb-3 md:mb-4 tracking-tight">Thư viện Video Gốc</h1>
-          <p className="text-sm text-gray-400 max-w-2xl leading-relaxed">
-            Danh sách toàn bộ các file Video trên hệ thống. 
-            Để liên kết cho từng Idol cụ thể, hãy thực hiện qua Tab <b>Idols</b>.
-          </p>
-        </div>
-        <div className="hidden sm:flex items-center gap-3 shrink-0 pb-1">
-          <button
-            onClick={() => setModal({ mode: "add" })}
-            className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-sm font-bold shadow-[0_0_20px_rgba(217,70,239,0.2)] hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] hover:scale-[1.02] transition-all"
-          >
-            <MdAdd size={20} /> Thêm Video Mới
-          </button>
-        </div>
-      </div>
+ return (
+ <div className="w-full text-white p-4 sm:p-6 md:p-10 font-sans flex flex-col">
+ {/* ── Header ── */}
+ <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 md:gap-6 mb-6 md:mb-8 shrink-0">
+ <div>
+ <h4 className="text-[10px] font-semibold text-[#d946ef] mb-2">Thư viện</h4>
+ <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">Thư viện Video Gốc</h1>
+ <p className="text-xs sm:text-sm text-gray-400 max-w-2xl leading-relaxed">
+ Danh sách toàn bộ video hệ thống. Gán video cho nhân vật tại tab Idols.
+ </p>
+ </div>
+ <div className="hidden sm:flex items-center gap-3 shrink-0 pb-1">
+ <button
+ onClick={() => setModal({ mode: "add" })}
+ className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-xs font-semibold shadow-xl hover:scale-[1.02] transition-all"
+ >
+ <MdAdd size={18} /> Thêm Video mới
+ </button>
+ </div>
+ </div>
 
-      {/* ── Stats row / Filters ── */}
-      <div className="mb-6 md:mb-8 shrink-0 flex items-center gap-2 sm:gap-3 flex-wrap">
-        {["all", "active", "inactive"].map((f) => (
-          <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={`px-4 sm:px-5 py-2.5 rounded-xl text-[11px] font-extrabold uppercase tracking-[0.1em] transition-all duration-300 min-h-[40px] ${filter === f
-                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_15px_rgba(217,70,239,0.3)] border border-transparent hover:brightness-110"
-                : "bg-white/[0.05] border border-white/[0.1] text-gray-400 hover:text-white hover:border-[#d946ef]/40 hover:bg-white/[0.1]"
-              }`}
-          >
-            {f === "all"
-              ? `Tất cả (${videos.length})`
-              : f === "active"
-                ? `Active (${activeCount})`
-                : `Inactive (${videos.length - activeCount})`}
-          </button>
-        ))}
-      </div>
+ {/* ── Stats row / Filters ── */}
+ <div className="mb-6 md:mb-8 shrink-0 flex items-center gap-2 sm:gap-3 flex-wrap">
+ {["all", "active", "inactive"].map((f) => (
+ <button
+ key={f}
+ onClick={() => setFilter(f)}
+ className={`px-3.5 py-2 rounded-xl text-[10px] sm:text-[11px] font-semibold transition-all duration-300 min-h-[36px] ${filter === f
+ ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-lg border border-transparent hover:brightness-110"
+ : "bg-white/[0.05] border border-white/[0.1] text-gray-400 hover:text-white hover:border-[#d946ef]/40 hover:bg-white/[0.1]"
+ }`}
+ >
+ {f === "all"
+ ? `Tất cả (${videos.length})`
+ : f === "active"
+ ? `Đang chạy (${activeCount})`
+ : `Tạm dừng (${videos.length - activeCount})`}
+ </button>
+ ))}
+ </div>
 
-      {/* ── Queue Priority Settings ── */}
-      <div className="mb-10 py-7 px-5 sm:px-8 md:p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/5 backdrop-blur-2xl flex flex-col items-start md:flex-row md:items-center justify-between gap-6 shadow-2xl relative overflow-hidden group shrink-0">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#d946ef]/5 blur-[100px] -mr-32 -mt-32 pointer-events-none" />
-        
-        <div className="flex items-center gap-6 relative z-10">
-          <div className="w-14 h-14 rounded-2xl bg-white/[0.02] flex items-center justify-center text-[#d946ef] border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500 shrink-0">
-            <MdTune size={28} />
-          </div>
-          <div className="max-w-md">
-            <h3 className="text-xl font-black text-white tracking-tight leading-tight">Chế độ Ưu tiên Hàng đợi</h3>
-            <p className="text-[12px] text-gray-400 mt-2 leading-relaxed font-medium">
-              Cách hệ thống chọn video tiếp theo khi có nhiều quà tặng cùng lúc. 
-              <span className="text-[#d946ef]/60 ml-1 font-bold">Bình chọn (Voting)</span> giúp tăng tương tác hơn.
-            </p>
-          </div>
-        </div>
+ {/* ── Queue Priority Settings ── */}
+ <div className="mb-10 py-7 px-5 sm:px-8 md:p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/5 backdrop-blur-2xl flex flex-col items-start md:flex-row md:items-center justify-between gap-6 shadow-2xl relative overflow-hidden group shrink-0">
+ <div className="absolute top-0 right-0 w-64 h-64 bg-[#d946ef]/5 blur-[100px] -mr-32 -mt-32 pointer-events-none" />
+ 
+ <div className="flex items-center gap-6 relative z-10">
+ <div className="w-14 h-14 rounded-2xl bg-white/[0.02] flex items-center justify-center text-[#d946ef] border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500 shrink-0">
+ <MdTune size={28} />
+ </div>
+ <div className="max-w-md">
+ <h3 className="text-lg font-bold text-white tracking-tight leading-tight">Chế độ hàng đợi</h3>
+ <p className="text-[11px] sm:text-[12px] text-gray-400 mt-2 leading-relaxed">
+ Cách hệ thống chọn video tiếp theo khi có nhiều quà. 
+ <span className="text-[#d946ef]/60 ml-1 font-semibold">Bình chọn (Voting)</span> giúp tăng tương tác hơn.
+ </p>
+ </div>
+ </div>
 
-        <div className="flex bg-white/[0.02] p-1.5 rounded-[1.25rem] border border-white/5 shadow-2xl relative z-10 self-stretch sm:self-auto w-full md:w-auto">
-          <button
-            onClick={() => setQueuePriority("voting")}
-            className={`flex-1 md:flex-none px-6 sm:px-8 py-3.5 rounded-[1rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 min-h-[46px] flex items-center justify-center ${
-              queuePriority === "voting"
-                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_25px_rgba(217,70,239,0.3)] scale-[1.02]"
-                : "text-white/30 hover:text-white hover:bg-white/[0.03]"
-            }`}
-          >
-            Bình chọn (Voting)
-          </button>
-          <button
-            onClick={() => setQueuePriority("fifo")}
-            className={`flex-1 md:flex-none px-6 sm:px-8 py-3.5 rounded-[1rem] text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 min-h-[46px] flex items-center justify-center ${
-              queuePriority === "fifo"
-                ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_0_25px_rgba(217,70,239,0.3)] scale-[1.02]"
-                : "text-white/30 hover:text-white hover:bg-white/[0.03]"
-            }`}
-          >
-            Thời gian (FIFO)
-          </button>
-        </div>
-      </div>
+ <div className="flex bg-white/[0.02] p-1.5 rounded-[1.25rem] border border-white/5 shadow-2xl relative z-10 self-stretch sm:self-auto w-full md:w-auto">
+ <button
+ onClick={() => setQueuePriority("voting")}
+ className={`flex-1 md:flex-none px-5 sm:px-6 py-2.5 rounded-xl text-[10px] sm:text-[11px] font-semibold transition-all duration-300 min-h-[40px] flex items-center justify-center ${
+ queuePriority === "voting"
+ ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-lg scale-[1.02]"
+ : "text-white/30 hover:text-white hover:bg-white/[0.03]"
+ }`}
+ >
+ Bình chọn (Voting)
+ </button>
+ <button
+ onClick={() => setQueuePriority("fifo")}
+ className={`flex-1 md:flex-none px-5 sm:px-6 py-2.5 rounded-xl text-[10px] sm:text-[11px] font-semibold transition-all duration-300 min-h-[40px] flex items-center justify-center ${
+ queuePriority === "fifo"
+ ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-lg scale-[1.02]"
+ : "text-white/30 hover:text-white hover:bg-white/[0.03]"
+ }`}
+ >
+ Thời gian (FIFO)
+ </button>
+ </div>
+ </div>
 
-      {/* ── List ── */}
-      <div className="flex-1 pb-20 flex flex-col gap-5">
-        {filtered.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center gap-4 text-gray-500 py-32 rounded-3xl border border-dashed border-white/[0.08] bg-white/[0.02]">
-            <div className="w-24 h-24 mb-2 rounded-full bg-[#1a1b23] border border-[#2e2f38] flex items-center justify-center shadow-inner">
-              <MdVideocam size={40} className="text-[#3f404d]" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-1">Trống Dữ Liệu</h3>
-            <p className="text-sm">
-              {filter === "all"
-                ? "Chưa có video nào trong thư viện. Thêm video để bắt đầu!"
-                : "Không tìm thấy video nào theo bộ lọc này."}
-            </p>
-          </div>
-        ) : (
-          filtered.map((video, idx) => (
-            <VideoCard
-              key={video.id}
-              video={video}
-              index={idx}
-              total={filtered.length}
-              onEdit={() => setModal({ mode: "edit", data: video })}
-              onDelete={() => setDeleteTarget(video)}
-              onToggle={() => toggleActive(video.id)}
-              onMoveUp={() => handleMoveUp(video.id, video.order)}
-              onMoveDown={() => handleMoveDown(video.id, video.order)}
-            />
-          ))
-        )}
-      </div>
+ {/* ── List ── */}
+ <div className="flex-1 pb-20 flex flex-col gap-5">
+ {filtered.length === 0 ? (
+ <div className="flex-1 flex flex-col items-center justify-center gap-4 text-gray-500 py-32 rounded-3xl border border-dashed border-white/[0.08] bg-white/[0.02]">
+ <div className="w-24 h-24 mb-2 rounded-full bg-[#1a1b23] border border-[#2e2f38] flex items-center justify-center shadow-inner">
+ <MdVideocam size={40} className="text-[#3f404d]" />
+ </div>
+ <h3 className="text-lg font-bold text-white mb-0.5">Chưa có video</h3>
+ <p className="text-[11px] sm:text-[13px]">
+ {filter === "all"
+ ? "Chưa có video nào trong thư viện. Thêm video để bắt đầu!"
+ : "Không tìm thấy video nào theo bộ lọc này."}
+ </p>
+ </div>
+ ) : (
+ filtered.map((video, idx) => (
+ <VideoCard
+ key={video.id}
+ video={video}
+ index={idx}
+ total={filtered.length}
+ onEdit={() => setModal({ mode: "edit", data: video })}
+ onDelete={() => setDeleteTarget(video)}
+ onToggle={() => toggleActive(video.id)}
+ onMoveUp={() => handleMoveUp(video.id, video.order)}
+ onMoveDown={() => handleMoveDown(video.id, video.order)}
+ />
+ ))
+ )}
+ </div>
 
-      {/* FAB for mobile */}
-      <div className="sm:hidden block">
-        <div className="fixed bottom-6 right-5 z-40">
-          <button
-            onClick={() => setModal({ mode: "add" })}
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_8px_20px_rgba(217,70,239,0.3)] transition-all"
-          >
-            <MdAdd size={24} />
-          </button>
-        </div>
-      </div>
+ {/* FAB for mobile */}
+ <div className="sm:hidden block">
+ <div className="fixed bottom-6 right-5 z-40">
+ <button
+ onClick={() => setModal({ mode: "add" })}
+ className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-[0_8px_20px_rgba(217,70,239,0.3)] transition-all"
+ >
+ <MdAdd size={24} />
+ </button>
+ </div>
+ </div>
 
-      {/* ── Modals ── */}
-      {modal && (
-        <VideoModal
-          initial={modal.data}
-          maxOrder={videos.length}
-          onSave={handleSave}
-          onClose={() => setModal(null)}
-        />
-      )}
-      {deleteTarget && (
-        <DeleteConfirm
-          name={deleteTarget.name}
-          onConfirm={() => {
-            deleteVideo(deleteTarget.id);
-            setDeleteTarget(null);
-          }}
-          onClose={() => setDeleteTarget(null)}
-        />
-      )}
-    </div>
-  );
+ {/* ── Modals ── */}
+ {modal && (
+ <VideoModal
+ initial={modal.data}
+ maxOrder={videos.length}
+ onSave={handleSave}
+ onClose={() => setModal(null)}
+ />
+ )}
+ {deleteTarget && (
+ <DeleteConfirm
+ name={deleteTarget.name}
+ onConfirm={() => {
+ deleteVideo(deleteTarget.id);
+ setDeleteTarget(null);
+ }}
+ onClose={() => setDeleteTarget(null)}
+ />
+ )}
+ </div>
+ );
 };
 
 export default UploadPage;
