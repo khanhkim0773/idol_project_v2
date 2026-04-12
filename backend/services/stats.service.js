@@ -33,10 +33,6 @@ export const logGift = (giftData) => {
   }
 };
 
-/**
- * Get raw gift logs data
- * Returns the raw gift_logs.json array – FE handles aggregation & diamond lookup
- */
 export const getLeaderboard = () => {
   try {
     if (!fs.existsSync(GIFT_LOGS_FILE)) return [];
@@ -46,5 +42,17 @@ export const getLeaderboard = () => {
   } catch (e) {
     console.error("[stats] Error reading gift logs:", e.message);
     return [];
+  }
+};
+
+/**
+ * Clear the leaderboard (reset for a new live session)
+ */
+export const clearLeaderboard = () => {
+  try {
+    fs.writeFileSync(GIFT_LOGS_FILE, JSON.stringify([]), "utf-8");
+    console.log("[stats] 🧹 Leaderboard reset for new live session.");
+  } catch (e) {
+    console.error("[stats] Error resetting leaderboard:", e.message);
   }
 };

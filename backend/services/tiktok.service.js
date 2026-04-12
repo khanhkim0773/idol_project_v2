@@ -1,6 +1,6 @@
 import { WebcastPushConnection } from "tiktok-live-connector";
 import { registerGift } from "./gifts.service.js";
-import { logGift } from "./stats.service.js";
+import { logGift, clearLeaderboard } from "./stats.service.js";
 
 let tiktokLiveConnection = null;
 
@@ -28,6 +28,7 @@ export const connectToTikTok = (username, io, knownGifts, res) => {
     .connect()
     .then((state) => {
       console.info(`[tiktok] Connected to roomId ${state.roomId}`);
+      clearLeaderboard();
       io.emit("tiktok_connected", username);
       if (res) res.json({ success: true, message: `Connected to ${username}` });
     })

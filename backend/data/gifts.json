@@ -1088,5 +1088,13 @@
     "diamonds": 5000,
     "active": true,
     "maxRepeatCount": 1
+  },
+  {
+    "giftId": 5731,
+    "giftName": "Coral",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/d4faa402c32bf4f92bee654b2663d9f1~tplv-obj.png",
+    "diamonds": 499,
+    "active": true,
+    "maxRepeatCount": 1
   }
 ]
