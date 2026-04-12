@@ -33,16 +33,11 @@ const SelectThumbnail = ({ isCompact = false }) => {
  <div key={`${index}-${q.videoPath}`} className="relative shrink-0">
  <div className="w-6 sm:w-8 h-6 sm:h-8 rounded-xl overflow-hidden border border-[#d946ef]/30 shadow-[0_0_10px_rgba(217,70,239,0.2)]">
  <img
- src={idolModel?.avatar || videoModel.avatar}
+ src={idolModel?.avatar || videoModel?.avatar || "/images/default_avatar.png"}
  alt=""
- className="w-full h-full object-cover"
+ className="w-full h-full object-cover" onError={(e) => { e.target.src = "/images/default_avatar.png"; }}
  />
  </div>
- {q.count > 1 && (
- <div className="absolute -top-1 -right-1 bg-[#d946ef] text-white text-[8px] font-semibold px-1 rounded-full min-w-[14px] text-center shadow-lg border border-white/20">
- {q.count}
- </div>
- )}
  </div>
  );
  })}
@@ -88,7 +83,7 @@ const SelectThumbnail = ({ isCompact = false }) => {
  } ${isCompact ? 'w-6 h-6 sm:w-8 sm:h-8' : 'w-8 h-8 sm:w-10 sm:h-10'}`}>
  <div className="w-full h-full rounded-full overflow-hidden bg-white/5">
  {idol.avatar ? (
- <img src={idol.avatar} alt="" className="w-full h-full object-cover" />
+ <img src={idol.avatar} alt="" className="w-full h-full object-cover" onError={(e) => { e.target.src = "/images/default_avatar.png"; }} />
  ) : (
  <div className="w-full h-full flex items-center justify-center text-white/20 text-[10px]">?</div>
  )}

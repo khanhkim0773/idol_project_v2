@@ -116,41 +116,26 @@ export const useVideoStore = create((set, get) => ({
   selectedVideo: null,
   selectedSound: null,
   currentGiftName: null,
+  currentGiftSender: null,
   videoMode: "favorite", // 'favorite' | 'queue'
   playId: 0,
 
-  // Settings
-  queuePriority: localStorage.getItem("stage_queue_priority") || "voting", // 'voting' | 'fifo'
-  setQueuePriority: (priority) => {
-    localStorage.setItem("stage_queue_priority", priority);
-    set({ queuePriority: priority });
-  },
-
   // ---------- video queue ----------
-  // Each item: { videoPath, count, giftName, timestamp }
+  // Each item: { id, videoPath, giftName, nickname, timestamp }
   videoQueue: [],
 
-  enqueueVideo: (videoPath, giftName = "") => {
+  enqueueVideo: (videoPath, giftName = "", nickname = "") => {
     set((state) => {
-      const existingIndex = state.videoQueue.findIndex(
-        (q) => q.videoPath === videoPath
-      );
-      let nextQueue = [...state.videoQueue];
-
-      if (existingIndex !== -1) {
-        nextQueue[existingIndex] = {
-          ...nextQueue[existingIndex],
-          count: nextQueue[existingIndex].count + 1,
-        };
-      } else {
-        nextQueue.push({
+      const nextQueue = [
+        ...state.videoQueue,
+        {
+          id: Date.now() + Math.random().toString(36).substring(2),
           videoPath,
           giftName,
-          count: 1,
+          nickname,
           timestamp: Date.now(),
-        });
-      }
-
+        },
+      ];
       return { videoQueue: nextQueue };
     });
 
@@ -161,32 +146,20 @@ export const useVideoStore = create((set, get) => ({
   },
 
   processNext: () => {
-    const { videoQueue, queuePriority, getActiveVideos, playId } = get();
+    const { videoQueue, getActiveVideos, playId } = get();
 
     if (videoQueue.length > 0) {
-      // Sort based on priority
-      let sorted = [...videoQueue];
-      if (queuePriority === "voting") {
-        sorted.sort((a, b) => {
-          if (b.count !== a.count) return b.count - a.count;
-          return a.timestamp - b.timestamp;
-        });
-      } else {
-        sorted.sort((a, b) => a.timestamp - b.timestamp);
-      }
-
-      const nextItem = sorted[0];
+      // Pure FIFO based on insertion
+      const nextItem = videoQueue[0];
 
       set((state) => {
-        const updatedQueue = state.videoQueue
-          .map((q) =>
-            q.videoPath === nextItem.videoPath ? { ...q, count: q.count - 1 } : q
-          )
-          .filter((q) => q.count > 0);
+        // Remove the first item from the queue
+        const updatedQueue = state.videoQueue.slice(1);
 
         return {
           selectedVideo: nextItem.videoPath,
           currentGiftName: nextItem.giftName,
+          currentGiftSender: nextItem.nickname,
           videoMode: "queue",
           videoQueue: updatedQueue,
           playId: playId + 1,
@@ -220,6 +193,7 @@ export const useVideoStore = create((set, get) => ({
         set({
           selectedVideo: randomTarget.video,
           currentGiftName: null,
+          currentGiftSender: null,
           videoMode: "favorite",
           playId: playId + 1,
         });

@@ -32,6 +32,7 @@ const HomePage = ({ username }) => {
  const playId = useVideoStore((state) => state.playId);
  const videoMode = useVideoStore((state) => state.videoMode);
  const currentGiftName = useVideoStore((state) => state.currentGiftName);
+ const currentGiftSender = useVideoStore((state) => state.currentGiftSender);
 
  const [showLiveFeed, setShowLiveFeed] = useState(false);
 
@@ -91,10 +92,10 @@ const HomePage = ({ username }) => {
  {/* Gift Performance Badge */}
  {videoMode === "queue" && currentGiftName && (
  <div className="absolute top-20 left-1/2 -translate-x-1/2 z-[100] w-full px-4 pointer-events-none">
- <div className="bg-white/[0.08] backdrop-blur-xl border border-white/20 rounded-2xl py-2 px-4 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(0,0,0,0.4)]">
- <span className="text-[10px] font-bold text-[#d946ef] ">Đang trình diễn</span>
- <div className="w-1 h-1 rounded-full bg-white/40" />
- <span className="text-[12px] font-bold text-white ">{currentGiftName}</span>
+ <div className="bg-white/[0.12] backdrop-blur-2xl border border-white/20 rounded-2xl py-2.5 px-5 flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.6)]">
+ <span className="text-[10px] sm:text-[11px] font-bold text-white text-center leading-tight">
+ Cảm ơn <span className="text-[#d946ef]">{currentGiftSender || "bạn"}</span> đã tặng <span className="text-[#eab308]">{currentGiftName}</span>
+ </span>
  </div>
  </div>
  )}

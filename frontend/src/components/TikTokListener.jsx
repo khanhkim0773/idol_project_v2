@@ -92,7 +92,7 @@ const TikTokListener = () => {
  // Rotary mode pick
  const idx = ((curIdx === -1 ? 0 : curIdx) + 1 + i) % matchedVideos.length;
  const path = matchedVideos[idx].video;
- useVideoStore.getState().enqueueVideo(path, giftName);
+ useVideoStore.getState().enqueueVideo(path, giftName, giftData.nickname);
  scoreByPath.set(path, (scoreByPath.get(path) || 0) + 1);
  }
  scoreByPath.forEach((delta, path) => useVideoStore.getState().addGiftScore(path, delta));

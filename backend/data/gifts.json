@@ -4,7 +4,7 @@
     "giftName": "Rose",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eba3a9bb85c33e017f3648eaf88d7189~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 100,
+    "maxRepeatCount": 998,
     "active": true,
     "idolId": null
   },
@@ -196,7 +196,7 @@
     "giftName": "You're awesome",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/e9cafce8279220ed26016a71076d6a8a.png~tplv-obj.png",
     "diamonds": 1,
-    "maxRepeatCount": 99,
+    "maxRepeatCount": 101,
     "active": true,
     "idolId": null
   },
@@ -480,7 +480,11 @@
   {
     "giftId": 13464,
     "giftName": "Night Star",
-    "idolId": null
+    "idolId": null,
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/3d136834fe9964927d6b30499a68b741.png~tplv-obj.png",
+    "diamonds": 199,
+    "maxRepeatCount": 1,
+    "active": true
   },
   {
     "giftId": 9340,
@@ -962,6 +966,86 @@
     "giftName": "Pinch Face",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/a10aab8940d3d5aee14b14cde033ab2a.png~tplv-obj.png",
     "diamonds": 249,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 12355,
+    "giftName": "Team Cheers",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/6a934c90e5533a4145bed7eae66d71bd.png~tplv-obj.png",
+    "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 12356,
+    "giftName": "Team Power",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/fb8da877eabca4ae295483f7cdfe7d31.png~tplv-obj.png",
+    "diamonds": 9,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 18227,
+    "giftName": "Santa Cocoa",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/8d188b6a7cfd7b98f778f18302a8f7f4.png~tplv-obj.png",
+    "diamonds": 149,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 16550,
+    "giftName": "Sour Daddy",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/963e12ba84805721d96b06deaf5d660b.png~tplv-obj.png",
+    "diamonds": 199,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 19308,
+    "giftName": "Sweet Flutter",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/f70e199a23a5ff232ce241d07c3dc99b.png~tplv-obj.png",
+    "diamonds": 249,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 16051,
+    "giftName": "Diamond",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/55ee5e871f7f413d24521f824682bb10.png~tplv-obj.png",
+    "diamonds": 1099,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 14398,
+    "giftName": "Vibrant Stage",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/ae0a1abca4313c916e2a4e40813d90d6.png~tplv-obj.png",
+    "diamonds": 1400,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 10672,
+    "giftName": "Sam in New City",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/291de897e4a8c3b72c358a9734c5b7d8.png~tplv-obj.png",
+    "diamonds": 6000,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 6233,
+    "giftName": "Travel with You",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/753098e5a8f45afa965b73616c04cf89~tplv-obj.png",
+    "diamonds": 999,
+    "active": true,
+    "maxRepeatCount": 1
+  },
+  {
+    "giftId": 17666,
+    "giftName": "Family",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/8821932e2d3fe78e9af0bcf785ca1759.png~tplv-obj.png",
+    "diamonds": 90,
     "active": true,
     "maxRepeatCount": 1
   }

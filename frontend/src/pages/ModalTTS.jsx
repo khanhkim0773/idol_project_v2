@@ -94,17 +94,17 @@ const ModalTTS = () => {
  <div className="w-full text-white p-4 sm:p-6 md:p-10 font-sans">
  {/* Header */}
  <div className="mb-6 md:mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-6 shrink-0">
- <div>
- <h4 className="text-[8px] sm:text-[9px] font-bold tracking-[0.25em] text-[#d946ef] mb-1.5 sm:mb-2 text-center sm:text-left">Configuration Studio</h4>
- <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-1.5 sm:mb-3 text-center sm:text-left">Voice Dynamics</h1>
- <p className="text-[11px] sm:text-sm text-gray-500 max-w-2xl leading-relaxed text-center sm:text-left">
- Cấu hình TTS Custom API cho luồng phát sóng của bạn. Tự động đọc khi có quà tặng và chào đón người mới vào live.
- </p>
- </div>
+  <div>
+   <h4 className="text-[9px] font-medium text-[#d946ef] mb-1.5 text-center sm:text-left">Cấu hình hệ thống</h4>
+   <h1 className="text-xl sm:text-2xl font-bold text-white mb-2 text-center sm:text-left">Giọng nói nhân vật</h1>
+   <p className="text-[11px] sm:text-[13px] text-gray-400 max-w-2xl leading-relaxed text-center sm:text-left">
+    Cấu hình Custom API cho luồng phát sóng của bạn. Tự động đọc khi có quà tặng và chào đón người mới vào live.
+   </p>
+  </div>
  <div className="flex items-center gap-3 shrink-0 pb-1">
- <div className="px-5 py-2.5 rounded-full text-[10px] font-bold bg-white/[0.03] border border-white/10 text-white/40 shadow-xl">
- CONNECTED API
- </div>
+  <div className="px-4 py-1.5 rounded-full text-[9px] font-semibold bg-white/[0.03] border border-white/10 text-white/40 shadow-xl">
+   API HOẠT ĐỘNG
+  </div>
  </div>
  </div>
 
@@ -227,11 +227,11 @@ const ModalTTS = () => {
  {/* Right Column */}
  <div className="md:col-span-1 border border-white/5 bg-white/[0.03] backdrop-blur-3xl rounded-[2rem] p-4 sm:p-7 h-fit top-0 shadow-2xl relative overflow-hidden">
  <div className="absolute top-0 right-0 w-64 h-64 bg-[#d946ef]/5 blur-[100px] -mr-32 -mt-32 pointer-events-none" />
- <h3 className="text-white font-bold text-sm sm:text-base mb-7 sm:mb-8">Audio Dynamics</h3>
+  <h3 className="text-white font-bold text-xs sm:text-sm mb-6 sm:mb-7">Âm thanh</h3>
 
  <div className="mt-2 text-[#d946ef]">
- <Slider
- label="VOLUME"
+  <Slider
+  label="ÂM LƯỢNG"
  value={volume}
  min={0}
  max={1}
@@ -241,7 +241,7 @@ const ModalTTS = () => {
  />
  </div>
 
- <h3 className="text-gray-500 text-[9px] sm:text-[10px] font-bold tracking-[0.2em] mt-8 sm:mt-12 mb-4 sm:mb-5 text-center sm:text-left">SYSTEM CONTROLS</h3>
+  <h3 className="text-gray-500 text-[8px] sm:text-[9px] font-semibold mt-6 sm:mt-10 mb-3 sm:mb-4 text-center sm:text-left">HỆ THỐNG</h3>
  <div className="space-y-3 sm:space-y-4">
  <div className="flex justify-between items-center p-3 sm:p-4 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] transition-colors border border-white/[0.06]">
  <span className="text-[12px] sm:text-[13px] text-gray-400 font-bold ">TTS Auto-Read</span>
@@ -346,15 +346,15 @@ const ModalTTS = () => {
  <div className="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0 justify-end">
  <button
  onClick={handleTest}
- className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.12] text-gray-300 text-sm font-semibold transition-colors flex-1 md:flex-none"
+ className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.12] text-gray-300 text-xs font-semibold transition-colors flex-1 md:flex-none"
  >
- Preview Voice
+ Nghe thử
  </button>
  <button
  onClick={handleSave}
- className="flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-sm font-bold shadow-[0_0_20px_rgba(217,70,239,0.2)] hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] transition-all flex-1 md:flex-none"
+ className="flex items-center justify-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-xs font-bold shadow-xl hover:scale-[1.02] transition-all flex-1 md:flex-none"
  >
- {saved ? "Saved Successfully!" : "Save Configuration"}
+ {saved ? "Đã lưu!" : "Lưu cấu hình"}
  </button>
  </div>
  </div>

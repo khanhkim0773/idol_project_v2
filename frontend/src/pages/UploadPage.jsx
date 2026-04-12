@@ -493,7 +493,7 @@ const VideoCard = ({
 
 /* ─── Main Page ─── */
 const UploadPage = () => {
- const { videos, addVideo, updateVideo, deleteVideo, toggleActive, queuePriority, setQueuePriority } =
+ const { videos, addVideo, updateVideo, deleteVideo, toggleActive } =
  useVideoStore();
 
  const [modal, setModal] = useState(null); // null | { mode: 'add' | 'edit', data?: video }
@@ -576,50 +576,8 @@ const UploadPage = () => {
  </button>
  ))}
  </div>
-
- {/* ── Queue Priority Settings ── */}
- <div className="mb-10 py-7 px-5 sm:px-8 md:p-10 rounded-[2.5rem] bg-white/[0.03] border border-white/5 backdrop-blur-2xl flex flex-col items-start md:flex-row md:items-center justify-between gap-6 shadow-2xl relative overflow-hidden group shrink-0">
- <div className="absolute top-0 right-0 w-64 h-64 bg-[#d946ef]/5 blur-[100px] -mr-32 -mt-32 pointer-events-none" />
- 
- <div className="flex items-center gap-6 relative z-10">
- <div className="w-14 h-14 rounded-2xl bg-white/[0.02] flex items-center justify-center text-[#d946ef] border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500 shrink-0">
- <MdTune size={28} />
- </div>
- <div className="max-w-md">
- <h3 className="text-lg font-bold text-white tracking-tight leading-tight">Chế độ hàng đợi</h3>
- <p className="text-[11px] sm:text-[12px] text-gray-400 mt-2 leading-relaxed">
- Cách hệ thống chọn video tiếp theo khi có nhiều quà. 
- <span className="text-[#d946ef]/60 ml-1 font-semibold">Bình chọn (Voting)</span> giúp tăng tương tác hơn.
- </p>
- </div>
- </div>
-
- <div className="flex bg-white/[0.02] p-1.5 rounded-[1.25rem] border border-white/5 shadow-2xl relative z-10 self-stretch sm:self-auto w-full md:w-auto">
- <button
- onClick={() => setQueuePriority("voting")}
- className={`flex-1 md:flex-none px-5 sm:px-6 py-2.5 rounded-xl text-[10px] sm:text-[11px] font-semibold transition-all duration-300 min-h-[40px] flex items-center justify-center ${
- queuePriority === "voting"
- ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-lg scale-[1.02]"
- : "text-white/30 hover:text-white hover:bg-white/[0.03]"
- }`}
- >
- Bình chọn (Voting)
- </button>
- <button
- onClick={() => setQueuePriority("fifo")}
- className={`flex-1 md:flex-none px-5 sm:px-6 py-2.5 rounded-xl text-[10px] sm:text-[11px] font-semibold transition-all duration-300 min-h-[40px] flex items-center justify-center ${
- queuePriority === "fifo"
- ? "bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white shadow-lg scale-[1.02]"
- : "text-white/30 hover:text-white hover:bg-white/[0.03]"
- }`}
- >
- Thời gian (FIFO)
- </button>
- </div>
- </div>
-
- {/* ── List ── */}
- <div className="flex-1 pb-20 flex flex-col gap-5">
+  {/* ── List ── */}
+  <div className="flex-1 pb-20 flex flex-col gap-5">
  {filtered.length === 0 ? (
  <div className="flex-1 flex flex-col items-center justify-center gap-4 text-gray-500 py-32 rounded-3xl border border-dashed border-white/[0.08] bg-white/[0.02]">
  <div className="w-24 h-24 mb-2 rounded-full bg-[#1a1b23] border border-[#2e2f38] flex items-center justify-center shadow-inner">
