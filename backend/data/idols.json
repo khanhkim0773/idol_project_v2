@@ -1,23 +1,9 @@
 [
   {
-    "id": 1775919085137,
-    "name": "Bình An",
-    "avatar": "/avatar/avatar-ba1.jpg",
+    "id": 1775982868562,
+    "name": "Mai Anh",
+    "avatar": "",
     "active": true,
     "order": 1
-  },
-  {
-    "id": 1775919085138,
-    "name": "Liễu Như Yên",
-    "avatar": "/avatar/avatar-ba2.jpg",
-    "active": true,
-    "order": 2
-  },
-  {
-    "id": 1775919085139,
-    "name": "Tiểu Mỹ",
-    "avatar": "/avatar/avatar-ba3.jpg",
-    "active": true,
-    "order": 3
   }
 ]

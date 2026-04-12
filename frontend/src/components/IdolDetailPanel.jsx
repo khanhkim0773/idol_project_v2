@@ -265,8 +265,12 @@ const VideoCardMini = ({ video, allGifts, updateVideo, handleRemove }) => {
          <div className="flex justify-between items-start mb-3">
              <div className="text-xs font-mono text-gray-500 truncate max-w-[150px]">{video.video.split("/").pop()}</div>
              <div className="flex gap-2">
-                <button onClick={() => updateVideo(video.id, { active: !video.active })} className="text-gray-400 hover:text-white transition-colors" title={video.active ? "Đang Bật" : "Đã Tắt"}>
-                   <MdCheck className={video.active ? "text-[#10b981]" : ""} size={18}/>
+                <button 
+                   onClick={() => updateVideo(video.id, { active: !video.active })} 
+                   className={`relative w-10 h-5 rounded-full transition-colors duration-300 border border-transparent shrink-0 ${video.active ? "bg-[#10b981]" : "bg-white/10 border-white/5"}`}
+                   title={video.active ? "Đang Bật" : "Đã Tắt"}
+                >
+                   <div className={`absolute top-[2px] left-[2.5px] w-[14px] h-[14px] bg-white rounded-full transition-transform duration-300 shadow-sm ${video.active ? "translate-x-[20px]" : "translate-x-0"}`} />
                 </button>
                 <button onClick={() => { if(confirm("Xóa video khỏi Idol này?")) handleRemove(video.id) }} className="text-gray-400 hover:text-red-500 transition-colors" title="Bỏ Chọn Video Này">
                    <MdClose size={18}/>

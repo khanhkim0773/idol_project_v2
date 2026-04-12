@@ -1,43 +1,46 @@
 [
   {
-    "id": 1,
-    "video": "/video/favorite.webm",
-    "idolId": null,
-    "triggerGift": "Rose",
-    "active": false,
+    "name": "Mai Anh Xin chào ",
+    "description": "Mai anh xin chào ",
+    "avatar": "",
+    "video": "/video/1775982779247-favorite.webm",
     "order": 1,
-    "gift": ""
-  },
-  {
-    "id": 2,
-    "video": "/video/maianh_3.webm",
-    "idolId": 1775919085138,
-    "triggerGift": "TikTok",
     "active": true,
-    "order": 2
+    "idolId": 1775982868562,
+    "id": 1775982781557,
+    "gift": "Rose"
   },
   {
-    "id": 3,
-    "video": "/video/maianh_4.webm",
-    "idolId": 1775919085139,
-    "triggerGift": "Perfume",
+    "name": "Mai Anh Nhảy 1 ",
+    "description": "",
+    "avatar": "",
+    "video": "/video/1775983180855-maianh_3.webm",
+    "order": 2,
     "active": true,
-    "order": 3
+    "idolId": 1775982868562,
+    "id": 1775983194641,
+    "gift": "Perfume"
   },
   {
-    "id": 4,
-    "video": "/video/maianh_5.webm",
-    "idolId": 1775919085140,
-    "triggerGift": "Confetti",
+    "name": "Mai Anh nhảy 2 ",
+    "description": "",
+    "avatar": "",
+    "video": "/video/1775983218664-maianh_4.webm",
+    "order": 3,
     "active": true,
-    "order": 4
+    "idolId": 1775982868562,
+    "id": 1775983220234,
+    "gift": "Heart Me"
   },
   {
-    "idolId": null,
-    "video": "/video/1775922920432-favorite.webm",
-    "gift": "",
-    "order": 5,
-    "active": false,
-    "id": 1775922920457
+    "name": "Mai Anh nhảy 3",
+    "description": "",
+    "avatar": "",
+    "video": "/video/1775983245337-maianh_5.webm",
+    "order": 4,
+    "active": true,
+    "idolId": 1775982868562,
+    "id": 1775983246260,
+    "gift": "TikTok"
   }
 ]

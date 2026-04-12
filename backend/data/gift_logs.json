@@ -35818,5 +35818,135 @@
     "amount": 1,
     "diamonds": 199,
     "timestamp": "2026-04-11T17:02:12.369Z"
+  },
+  {
+    "giftId": 5655,
+    "giftName": "Rose",
+    "userId": "7406633936946267141",
+    "nickname": "Bao Tram 💞",
+    "profilePicture": "https://p9-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/3197357334b753d64bc70e4c30ad7a75~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=1c0499aa&x-expires=1776153600&x-signature=VQvIMBTJU%2B%2FUTLT0Pko%2FoRpgFTw%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-12T08:34:01.598Z"
+  },
+  {
+    "giftId": 5655,
+    "giftName": "Rose",
+    "userId": "7008067175269647361",
+    "nickname": "🍼Huy Hoàng🍼",
+    "profilePicture": "https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/ce6e017f200523d3197070c32dcb2be0~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=20ab96b1&x-expires=1776153600&x-signature=Dj9zUHxlusn9fRmkXXoHINKXxyw%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my3",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-12T08:34:46.975Z"
+  },
+  {
+    "giftId": 5586,
+    "giftName": "Hearts",
+    "userId": "6884212323608904705",
+    "nickname": "💫 D.Merlin 🌼",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/cecef80edb8be4f5f6239e7e9a3d2604~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=86c2eafd&x-expires=1776153600&x-signature=L%2BIHnEa1wqJLoKXVYCUhQYo8uAU%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 199,
+    "timestamp": "2026-04-12T08:35:00.387Z"
+  },
+  {
+    "giftId": 8825,
+    "giftName": "Lucky pig",
+    "userId": "7378367241765913606",
+    "nickname": "study without me",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/5b642c4bf50178018ed29eb074d03c11~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=c28a76f1&x-expires=1776153600&x-signature=%2BnxEoApYD9IFXEiFTXYrYL1%2Bpk4%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 3,
+    "diamonds": 10,
+    "timestamp": "2026-04-12T08:38:48.138Z"
+  },
+  {
+    "giftId": 5655,
+    "giftName": "Rose",
+    "userId": "7378367241765913606",
+    "nickname": "study without me",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/5b642c4bf50178018ed29eb074d03c11~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=c28a76f1&x-expires=1776153600&x-signature=%2BnxEoApYD9IFXEiFTXYrYL1%2Bpk4%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 3,
+    "diamonds": 1,
+    "timestamp": "2026-04-12T08:39:06.474Z"
+  },
+  {
+    "giftId": 7934,
+    "giftName": "Heart Me",
+    "userId": "7154734277895717914",
+    "nickname": "Zioo🦭",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/c2912310d032ca30f9ec7ae58fbac8ca~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=7951a40c&x-expires=1776153600&x-signature=fQtmESf8zpqaed5gfnPeCntNJaE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=sg1",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-12T08:41:15.943Z"
+  },
+  {
+    "giftId": 13651,
+    "giftName": "Popular Vote",
+    "userId": "7154734277895717914",
+    "nickname": "Zioo🦭",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/c2912310d032ca30f9ec7ae58fbac8ca~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=7951a40c&x-expires=1776153600&x-signature=fQtmESf8zpqaed5gfnPeCntNJaE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=sg1",
+    "amount": 1,
+    "diamonds": 1,
+    "timestamp": "2026-04-12T08:41:23.373Z"
+  },
+  {
+    "giftId": 8825,
+    "giftName": "Lucky pig",
+    "userId": "7190292741417960474",
+    "nickname": "Yunii🦭🐼",
+    "profilePicture": "https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/8825609314c4750fa15395ce9f0fde5b~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=b57cadbd&x-expires=1776153600&x-signature=CAFOS%2BfALmZtlJLnSX4Yu1nr1KU%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my3",
+    "amount": 1,
+    "diamonds": 10,
+    "timestamp": "2026-04-12T08:43:58.890Z"
+  },
+  {
+    "giftId": 5586,
+    "giftName": "Hearts",
+    "userId": "7097093587008324609",
+    "nickname": "🦭ɱâ𝘺🍬oｎ𝐿Ꮍ💝ᏖƳᏁ𝘪Ꮛ🦭",
+    "profilePicture": "https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/8ef0b7a799d3cf3231e85566264b5c1d~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=a99e5b08&x-expires=1776153600&x-signature=Pduss9XnZOTHF4pTLhofuHKzIIU%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 199,
+    "timestamp": "2026-04-12T08:44:02.215Z"
+  },
+  {
+    "giftId": 8825,
+    "giftName": "Lucky pig",
+    "userId": "6850643959879386113",
+    "nickname": "𝓜𝓪𝓲 𝓐𝓷𝓱♡",
+    "profilePicture": "https://p16-common-sign.tiktokcdn.com/tos-alisg-avt-0068/b05431fd14bf158e36f620af0d457513~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=72e4a46d&x-expires=1776153600&x-signature=4M56Gbf2Rpeo5U5RLhRXb4P6Kvs%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 10,
+    "timestamp": "2026-04-12T08:44:18.794Z"
+  },
+  {
+    "giftId": 8825,
+    "giftName": "Lucky pig",
+    "userId": "7395605012284212232",
+    "nickname": "🫀🦭",
+    "profilePicture": "https://p9-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/9b3c41bac0f6dfad0335413349504d65~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=4adbb40e&x-expires=1776153600&x-signature=pT1lTW4iphFX48OFoa7MwFVStZw%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 10,
+    "timestamp": "2026-04-12T08:44:22.375Z"
+  },
+  {
+    "giftId": 8825,
+    "giftName": "Lucky pig",
+    "userId": "7266051462864847873",
+    "nickname": "🦋🦭🐦‍🔥",
+    "profilePicture": "https://p9-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/ffedb56ccb76cbbee5212831bb35cc0b~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=9654f137&x-expires=1776153600&x-signature=rjWypHuSiVO2oQvyDbKnW3d7EUY%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 1,
+    "diamonds": 10,
+    "timestamp": "2026-04-12T08:44:28.839Z"
+  },
+  {
+    "giftId": 5655,
+    "giftName": "Rose",
+    "userId": "7266051462864847873",
+    "nickname": "🦋🦭🐦‍🔥",
+    "profilePicture": "https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/ffedb56ccb76cbbee5212831bb35cc0b~tplv-tiktokx-cropcenter:100:100.webp?dr=14579&refresh_token=531db5d1&x-expires=1776153600&x-signature=0KqGhwxS1DyZdfeEAc5010rtVo4%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=fdd36af4&idc=my2",
+    "amount": 4,
+    "diamonds": 1,
+    "timestamp": "2026-04-12T08:45:12.035Z"
   }
 ]

@@ -223,7 +223,7 @@ const IdolPage = () => {
           </p>
         </div>
         <button
-           onClick={() => setModal({ mode: "add" })}
+           onClick={() => setModal("add")}
            className="shrink-0 flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-sm font-bold shadow-[0_0_20px_rgba(217,70,239,0.2)] hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] hover:scale-[1.02] transition-all"
          >
            <MdAdd size={20} /> Thêm Idol Mới
