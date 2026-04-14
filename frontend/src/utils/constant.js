@@ -13,6 +13,7 @@ export const ROUTES_URL = {
     IDOLS: "/idols",
     UPLOAD: "/upload",
     GIFTS: "/gifts",
+    OVERLAYS: "/overlays",
     TTS: "/tts",
 }
 

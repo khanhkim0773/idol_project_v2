@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useGiftStore } from "../hooks/useGiftStore";
 import { useVideoStore } from "../hooks/useVideoStore";
 import { useIdolStore } from "../hooks/useIdolStore";
-import { uploadFile } from "../utils/uploadFile";
+import { useOverlayStore } from "../hooks/useOverlayStore";
 import {
   MdAdd,
   MdEdit,
@@ -11,44 +11,21 @@ import {
   MdCheck,
   MdSearch,
   MdCardGiftcard,
-  MdCloudUpload,
-  MdMovieFilter,
-  MdTimer,
+  MdMovieFilter
 } from "react-icons/md";
 
 /* ─── GiftModal ─── */
 const GiftModal = ({ initial, onSave, onClose }) => {
-  const [giftId, setGiftId]                   = useState(initial?.giftId || "");
-  const [giftName, setGiftName]               = useState(initial?.giftName || "");
-  const [overlayMedia, setOverlayMedia]       = useState(initial?.overlayMedia || "");
-  const [overlayDuration, setOverlayDuration] = useState(initial?.overlayDuration ?? 3);
-  const [overlayFileName, setOverlayFileName] = useState(
-    initial?.overlayMedia ? initial.overlayMedia.split("/").pop() : ""
-  );
-  const [overlayUploading, setOverlayUploading] = useState(false);
-  const [error, setError]   = useState("");
-  const overlayRef = useRef();
+  const [giftId, setGiftId] = useState(initial?.giftId || "");
+  const [giftName, setGiftName] = useState(initial?.giftName || "");
+  const [overlayId, setOverlayId] = useState(initial?.overlayId || "");
+  const [error, setError] = useState("");
+  
+  const overlays = useOverlayStore((state) => state.overlays);
 
-  const isGif = overlayMedia && overlayMedia.toLowerCase().endsWith(".gif");
-
-  const handleOverlayFile = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setError("");
-    setOverlayFileName(file.name + " (đang upload...)");
-    setOverlayUploading(true);
-    try {
-      const path = await uploadFile(file, "overlay");
-      setOverlayMedia(path);
-      setOverlayFileName(path.split("/").pop());
-    } catch (err) {
-      setError("Lỗi upload overlay: " + err.message);
-      setOverlayFileName("");
-      setOverlayMedia("");
-    } finally {
-      setOverlayUploading(false);
-    }
-  };
+  useEffect(() => {
+    useOverlayStore.getState().fetchOverlays();
+  }, []);
 
   const handleSave = async () => {
     if (!giftId || !giftName) {
@@ -58,8 +35,7 @@ const GiftModal = ({ initial, onSave, onClose }) => {
     const res = await onSave({
       giftId,
       giftName,
-      overlayMedia,
-      overlayDuration: Number(overlayDuration) || 3,
+      overlayId: overlayId ? Number(overlayId) : null,
     });
     if (!res.success) {
       setError(res.error);
@@ -128,7 +104,6 @@ const GiftModal = ({ initial, onSave, onClose }) => {
 
           {/* ── Overlay Section ── */}
           <div className="border border-white/[0.06] rounded-xl sm:rounded-2xl overflow-hidden">
-            {/* section header */}
             <div className="flex items-center gap-2 px-3 py-2 bg-white/[0.03] border-b border-white/[0.05]">
               <MdMovieFilter className="text-[#d946ef] w-3.5 h-3.5 shrink-0" />
               <span className="text-[9px] sm:text-[10px] font-bold text-white/40 tracking-wide">
@@ -137,92 +112,37 @@ const GiftModal = ({ initial, onSave, onClose }) => {
             </div>
 
             <div className="p-3 sm:p-4 flex flex-col gap-3">
-              {/* Drop zone */}
-              <div
-                onClick={() => !overlayUploading && overlayRef.current?.click()}
-                className={`w-full border-2 border-dashed rounded-xl px-4 py-4 flex flex-col items-center justify-center gap-2 transition-all cursor-pointer group ${
-                  overlayUploading
-                    ? "border-[#d946ef]/60 cursor-not-allowed bg-[#d946ef]/5"
-                    : overlayMedia
-                    ? "border-[#10b981]/50 bg-[#10b981]/5 hover:border-[#10b981]"
-                    : "border-white/[0.08] bg-white/[0.02] hover:border-[#d946ef]/50 hover:bg-white/[0.04]"
-                }`}
+              <label className="text-[10px] font-bold text-white/30 block mb-1">
+                Chọn hiệu ứng
+              </label>
+              <select
+                value={overlayId || ""}
+                onChange={(e) => setOverlayId(e.target.value)}
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#d946ef]/60"
               >
-                {overlayUploading ? (
-                  <>
-                    <div className="w-6 h-6 border-2 border-[#d946ef] border-t-transparent rounded-full animate-spin shadow-[0_0_10px_rgba(217,70,239,0.4)]" />
-                    <p className="text-[11px] text-[#d946ef] font-bold">Đang tải lên...</p>
-                  </>
-                ) : overlayMedia ? (
-                  <>
-                    {isGif ? (
-                      <img
-                        src={overlayMedia}
-                        alt="overlay preview"
-                        className="w-16 h-16 object-contain rounded-lg border border-white/10"
-                      />
-                    ) : (
-                      <div className="w-10 h-10 rounded-full bg-[#10b981]/10 flex items-center justify-center border border-[#10b981]/30">
-                        <MdMovieFilter className="text-[#10b981] w-5 h-5" />
-                      </div>
-                    )}
-                    <p className="text-[11px] font-bold text-[#10b981] flex items-center gap-1">
-                      <MdCheck className="w-3.5 h-3.5" />
-                      {overlayFileName || overlayMedia.split("/").pop()}
-                    </p>
-                    <p className="text-[9px] text-white/30">Click để thay đổi</p>
-                  </>
-                ) : (
-                  <>
-                    <div className="w-9 h-9 rounded-full bg-white/[0.04] flex items-center justify-center border border-white/[0.08] group-hover:border-[#d946ef]/40 group-hover:bg-[#d946ef]/5 transition-all">
-                      <MdCloudUpload className="text-gray-500 group-hover:text-[#d946ef] w-5 h-5 transition-colors" />
-                    </div>
-                    <p className="text-[11px] font-bold text-gray-400 group-hover:text-white transition-colors">
-                      Chọn file overlay
-                    </p>
-                    <p className="text-[9px] text-white/20">.webm (trong suốt) · .gif · .mp4</p>
-                  </>
-                )}
-                <input
-                  ref={overlayRef}
-                  type="file"
-                  accept=".webm,.gif,.mp4,.mov"
-                  className="hidden"
-                  onChange={handleOverlayFile}
-                />
-              </div>
-
-              {/* Manual URL input */}
-              <input
-                value={!overlayMedia.startsWith("blob:") ? overlayMedia : ""}
-                onChange={(e) => {
-                  setOverlayMedia(e.target.value);
-                  setOverlayFileName(e.target.value.split("/").pop());
-                }}
-                placeholder="Hoặc nhập đường dẫn: /overlay/effect.webm"
-                className="w-full bg-white/[0.03] border border-white/[0.06] rounded-xl px-4 py-2.5 text-white text-[11px] placeholder-white/20 focus:outline-none focus:border-[#d946ef]/40 transition-all font-mono"
-              />
-
-              {/* Duration config */}
-              <div className="flex items-center gap-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl px-3 py-2.5">
-                <MdTimer className="text-[#fbbf24] w-4 h-4 shrink-0" />
-                <div className="flex-1">
-                  <p className="text-[9px] font-bold text-white/40 mb-0.5">
-                    Thời gian hiển thị (giây)
-                  </p>
-                  <p className="text-[8px] text-white/20">
-                    Dùng cho .gif — WEBM tự kết thúc qua sự kiện onEnded
-                  </p>
-                </div>
-                <input
-                  type="number"
-                  min={1}
-                  max={30}
-                  value={overlayDuration}
-                  onChange={(e) => setOverlayDuration(e.target.value)}
-                  className="w-14 bg-white/[0.05] border border-white/[0.08] rounded-lg px-2 py-1 text-white text-[12px] font-mono font-bold text-center focus:outline-none focus:border-[#fbbf24]/50 transition-all"
-                />
-              </div>
+                <option value="">Không có hiệu ứng</option>
+                {overlays.filter(o => o.active).map(o => (
+                  <option key={o.id} value={o.id}>
+                    {o.name} - ({o.duration}s)
+                  </option>
+                ))}
+              </select>
+              
+              {overlayId && (
+                 <div className="px-4 py-3 bg-white/[0.02] border border-white/5 rounded-xl flex items-center gap-3">
+                    {(() => {
+                       const selectedOverlay = overlays.find(o => String(o.id) === String(overlayId));
+                       if (!selectedOverlay) return null;
+                       return (
+                         <>
+                           <div className="w-5 h-5 rounded-full shadow-lg" style={{ backgroundColor: selectedOverlay.preview_color }}></div>
+                           <span className="text-sm font-semibold text-white">{selectedOverlay.name}</span>
+                           <span className="text-xs text-gray-400 ml-auto">{selectedOverlay.type} ({selectedOverlay.duration}s)</span>
+                         </>
+                       );
+                    })()}
+                 </div>
+              )}
             </div>
           </div>
         </div>
@@ -281,17 +201,15 @@ const DeleteConfirm = ({ name, onConfirm, onClose }) => (
 const GiftPage = () => {
   const { gifts, fetchGifts, addGift, updateGift, deleteGift, loading } = useGiftStore();
   const { videos } = useVideoStore();
-  const { idols } = useIdolStore();
   const [modal, setModal] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState("all"); // "all", "used", "unused"
+  const [activeTab, setActiveTab] = useState("all");
 
   useEffect(() => {
     fetchGifts();
   }, [fetchGifts]);
 
-  // Create a set of gift names currently in use by videos
   const usedGiftNames = new Set(videos.map((v) => v.gift).filter(Boolean));
 
   const filtered = gifts
@@ -311,7 +229,6 @@ const GiftPage = () => {
 
   return (
     <div className="w-full h-full text-white overflow-y-auto p-4 sm:p-6 md:p-10 font-sans flex flex-col">
-      {/* Header section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 md:gap-6 mb-6 md:mb-8 shrink-0">
         <div>
           <h4 className="text-[9px] font-medium text-[#d946ef] mb-2 leading-none">Thư viện quà</h4>
@@ -386,7 +303,7 @@ const GiftPage = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
             {filtered.map((gift) => {
               const isActive = gift.active !== false;
-              const hasOverlay = !!gift.overlayMedia;
+              const hasOverlay = !!gift.overlayId;
 
               return (
                 <div
@@ -516,8 +433,7 @@ const GiftPage = () => {
                 ? await addGift(data)
                 : await updateGift(data.giftId, {
                     giftName: data.giftName,
-                    overlayMedia: data.overlayMedia,
-                    overlayDuration: data.overlayDuration,
+                    overlayId: data.overlayId,
                   });
             if (res.success) setModal(null);
             return res;

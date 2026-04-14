@@ -255,10 +255,10 @@ export const useVideoStore = create((set, get) => ({
     }),
 
   // ---------- transition overlay ----------
-  // URL của file overlay (.webm / .gif) đang được hiển thị; null = không có
-  activeOverlayUrl: null,
+  // Cấu hình (Object) của overlay đang được hiển thị; null = không có
+  activeOverlay: null,
 
-  triggerOverlay: (url) => set({ activeOverlayUrl: url }),
-  clearOverlay: ()      => set({ activeOverlayUrl: null }),
+  triggerOverlay: (overlayConfig) => set({ activeOverlay: overlayConfig }),
+  clearOverlay: ()      => set({ activeOverlay: null }),
 
 }));

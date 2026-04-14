@@ -18,7 +18,7 @@ export const createGiftsRouter = () => {
   // POST /api/gifts - Add new gift manually
   router.post("/", async (req, res) => {
     try {
-      const { giftId, giftName } = req.body;
+      const { giftId, giftName, overlayId } = req.body;
       if (!giftId || !giftName) {
         return res.status(400).json({ error: "giftId and giftName are required" });
       }
@@ -34,7 +34,12 @@ export const createGiftsRouter = () => {
         return res.status(400).json({ error: "Gift ID already exists" });
       }
 
-      const newGift = { giftId: Number(giftId), giftName, active: true };
+      const newGift = {
+        giftId: Number(giftId),
+        giftName,
+        active: true,
+        overlayId: overlayId ? Number(overlayId) : null,
+      };
       const { data, error } = await supabase.from("gifts").insert([newGift]).select();
       if (error) throw error;
       res.status(201).json(data[0]);

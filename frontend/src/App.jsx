@@ -4,12 +4,16 @@ import ConnectForm from "./components/ConnectForm";
 import HomePage from "./pages/HomePage";
 import UploadPage from "./pages/UploadPage";
 import GiftPage from "./pages/GiftPage";
+import OverlayPage from "./pages/OverlayPage";
 import IdolPage from "./pages/IdolPage";
 import { useGiftStore } from "./hooks/useGiftStore";
 import { useIdolStore } from "./hooks/useIdolStore";
+import { useOverlayStore } from "./hooks/useOverlayStore";
 import Sidebar from "./components/Layout/Sidebar";
 
 import { ROUTES_URL } from "./utils/constant";
+import { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 import { useVideoStore } from "./hooks/useVideoStore";
 import ModalTTS from "./pages/ModalTTS";
@@ -20,12 +24,19 @@ const App = () => {
   const { fetchVideos } = useVideoStore();
   const { fetchGifts } = useGiftStore();
   const { fetchIdols } = useIdolStore();
+  const { fetchOverlays } = useOverlayStore();
 
   useEffect(() => {
     fetchIdols();
     fetchVideos();
     fetchGifts();
-  }, [fetchIdols, fetchVideos, fetchGifts]);
+    fetchOverlays();
+
+    // Init tsParticles once
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    });
+  }, [fetchIdols, fetchVideos, fetchGifts, fetchOverlays]);
 
   if (!isConnected) {
     return (
@@ -81,6 +92,7 @@ const App = () => {
           <Route path={ROUTES_URL.UPLOAD} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><UploadPage /></div>} />
           <Route path={ROUTES_URL.IDOLS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><IdolPage /></div>} />
           <Route path={ROUTES_URL.GIFTS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><GiftPage /></div>} />
+          <Route path={ROUTES_URL.OVERLAYS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><OverlayPage /></div>} />
           <Route path={ROUTES_URL.TTS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><ModalTTS /></div>} />
         </Routes>
       </div>
