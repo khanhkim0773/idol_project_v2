@@ -58,11 +58,11 @@ const HomePage = ({ username }) => {
           </div>
         )}
 
-        <GlassPanel title="BXH Ä‘áº¡i gia" className="flex-[6] min-h-0">
+        <GlassPanel title="BXH đại gia" className="flex-[6] min-h-0">
           <Leaderboard />
         </GlassPanel>
 
-        <GlassPanel title="ThÃ nh viÃªn" className="flex-[4] min-h-0">
+        <GlassPanel title="Thành viên" className="flex-[4] min-h-0">
           <SelectThumbnail />
         </GlassPanel>
       </div>
@@ -95,7 +95,7 @@ const HomePage = ({ username }) => {
               <div className="absolute top-20 left-1/2 -translate-x-1/2 z-[100] w-full px-4 pointer-events-none">
                 <div className="bg-white/[0.12] backdrop-blur-2xl border border-white/20 rounded-2xl py-2.5 px-5 flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.6)]">
                   <span className="text-[10px] sm:text-[11px] font-bold text-white text-center leading-tight">
-                    Cáº£m Æ¡n <span className="text-[#d946ef]">{currentGiftSender || "báº¡n"}</span> Ä‘Ã£ táº·ng <span className="text-[#eab308]">{currentGiftName}</span>
+                    Cảm ơn <span className="text-[#d946ef]">{currentGiftSender || "bạn"}</span> đã tặng <span className="text-[#eab308]">{currentGiftName}</span>
                   </span>
                 </div>
               </div>
@@ -123,7 +123,7 @@ const HomePage = ({ username }) => {
             <div className="absolute bottom-36 left-1/2 -translate-x-1/2 z-[100] w-full px-4 pointer-events-none animate-bounce-subtle">
               <div className="bg-white/[0.12] backdrop-blur-2xl border border-white/20 rounded-2xl py-2.5 px-5 flex items-center justify-center shadow-[0_0_40px_rgba(0,0,0,0.6)]">
                 <span className="text-[10px] sm:text-[11px] font-bold text-white text-center leading-tight">
-                  Cáº£m Æ¡n <span className="text-[#d946ef]">{currentGiftSender || "báº¡n"}</span> Ä‘Ã£ táº·ng <span className="text-[#eab308]">{currentGiftName}</span>
+                  Cảm ơn <span className="text-[#d946ef]">{currentGiftSender || "bạn"}</span> đã tặng <span className="text-[#eab308]">{currentGiftName}</span>
                 </span>
               </div>
             </div>
@@ -162,7 +162,7 @@ const HomePage = ({ username }) => {
             onClick={() => setShowLiveFeed(!showLiveFeed)}
             className="pointer-events-auto w-fit px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/50 text-[9px] font-bold backdrop-blur-md active:scale-95 transition-all mt-1"
           >
-            {showLiveFeed ? "áº¨n Chat" : "Hiá»‡n Chat"}
+            {showLiveFeed ? "Ẩn Chat" : "Hiện Chat"}
           </button>
         </div>
 

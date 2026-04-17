@@ -70,7 +70,10 @@ const TikTokListener = () => {
       if (activeVideos.length === 0) return;
 
       const giftNameLower = giftName.toLowerCase().trim();
-      const n = Math.min(Number(giftData.amount ?? 1), 50);
+      
+      const amount = Number(giftData.amount ?? 1);
+      const n = 1; // Chỉ xếp hàng 1 video dù tặng số lượng bao nhiêu
+      const displayGiftName = `x${amount} ${giftName}`;
 
       // --- 2-TIER TRIGGER SYSTEM ---
       // Tier 1: Is there a video that explicitly asks for this gift?
@@ -108,9 +111,9 @@ const TikTokListener = () => {
         const idx = ((curIdx === -1 ? 0 : curIdx) + 1 + i) % matchedVideos.length;
         const v = matchedVideos[idx];
         const path = v.video;
-        useVideoStore.getState().enqueueVideo(path, giftName, giftData.nickname);
-        useVideoStore.getState().addIdolGift(v.idolId, giftDiamonds, giftImage);
-        scoreByPath.set(path, (scoreByPath.get(path) || 0) + 1);
+        useVideoStore.getState().enqueueVideo(path, displayGiftName, giftData.nickname);
+        useVideoStore.getState().addIdolGift(v.idolId, giftDiamonds * amount, giftImage);
+        scoreByPath.set(path, (scoreByPath.get(path) || 0) + amount);
       }
       scoreByPath.forEach((delta, path) => useVideoStore.getState().addGiftScore(path, delta));
     });
