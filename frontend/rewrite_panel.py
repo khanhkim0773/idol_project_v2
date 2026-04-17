@@ -1,174 +1,12 @@
-import React, { useState, useRef } from "react";
-import { useIdolStore } from "../hooks/useIdolStore";
-import { useVideoStore } from "../hooks/useVideoStore";
-import { useGiftStore } from "../hooks/useGiftStore";
-import { SOCKET_URL } from "../utils/constant";
-import {
- MdClose,
- MdImage,
- MdCloudUpload,
- MdCheck,
- MdOndemandVideo,
- MdCardGiftcard,
- MdRecentActors,
- MdAdd,
- MdDelete,
- MdEdit,
-} from "react-icons/md";
+import re
 
-// Note: Re-using the same upload util
-const API = SOCKET_URL;
+with open('/run/media/whale/Data/Fibonax/metaverse/idol_project_v2/frontend/src/components/IdolDetailPanel.jsx', 'r') as f:
+    content = f.read()
 
-async function uploadFile(file, type) {
- const form = new FormData();
- form.append("file", file);
- const res = await fetch(`${API}/api/upload/${type}`, {
- method: "POST",
- body: form,
- });
- if (!res.ok) {
- let msg = res.statusText;
- try {
- const body = await res.json();
- if (body.error) msg = body.error;
- } catch {}
- throw new Error(msg);
- }
- const data = await res.json();
- return data.path;
-}
+# Pattern to replace TabVideos and VideoCardMini
+# We search from "const TabVideos = " to "export default IdolDetailPanel;"
 
-const IdolDetailPanel = ({ idolId, onClose }) => {
- const { idols, updateIdol } = useIdolStore();
- const { videos, addVideo, updateVideo, deleteVideo } = useVideoStore();
- const { gifts, updateGift } = useGiftStore();
-
- const idol = idols.find((i) => i.id === idolId);
- const idolVideos = videos.filter((v) => v.idolId === idolId).sort((a,b) => a.order - b.order);
- const idolGifts = gifts.filter((g) => g.idolId === idolId);
-
- const [activeTab, setActiveTab] = useState("info"); // info, videos, gifts
-
- if (!idol) return null;
-
- return (
- <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 sm:p-6">
- <div className="w-full max-w-5xl h-[90vh] bg-[#1a1b26]/90 border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col backdrop-blur-2xl">
- {/* Header */}
- <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.05] bg-white/[0.02] shrink-0">
- <div className="flex items-center gap-4">
- <div className="w-12 h-12 rounded-full overflow-hidden bg-[#252630] border-2 border-[#d946ef]/40 flex items-center justify-center">
- {idol.avatar ? <img src={idol.avatar} className="w-full h-full object-cover" /> : <MdRecentActors size={24} className="text-gray-500"/>}
- </div>
- <div>
- <h2 className="text-white font-bold text-sm sm:text-base tracking-tight">{idol.name}</h2>
- <p className="text-[9px] sm:text-[11px] text-gray-400 font-mono">ID: {idol.id} • {idolVideos.length} video • {idolGifts.length} quà</p>
- </div>
- </div>
- <button onClick={onClose} className="text-gray-400 hover:text-white p-2 rounded-xl hover:bg-white/[0.08] transition">
- <MdClose size={24} />
- </button>
- </div>
-
- {/* Navigation */}
- <div className="flex px-4 sm:px-6 gap-4 sm:gap-6 border-b border-white/[0.05] shrink-0">
- <button onClick={() => setActiveTab("info")} className={`py-3 text-[10px] sm:text-xs font-medium border-b-2 transition-colors ${activeTab === 'info' ? 'border-[#d946ef] text-[#d946ef]' : 'border-transparent text-gray-500 hover:text-white'}`}>
- Thông tin
- </button>
- <button onClick={() => setActiveTab("videos")} className={`py-3 text-[10px] sm:text-xs font-medium border-b-2 transition-colors ${activeTab === 'videos' ? 'border-[#06b6d4] text-[#06b6d4]' : 'border-transparent text-gray-500 hover:text-white'}`}>
- Video & Quà
- </button>
- </div>
-
- {/* Content Area */}
- <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
- {activeTab === "info" && <TabInfo idol={idol} updateIdol={updateIdol} />}
- {activeTab === "videos" && <TabVideos idol={idol} idolVideos={idolGifts.length} allVideos={videos} allGifts={gifts} updateVideo={updateVideo} />}
- </div>
- </div>
- </div>
- );
-};
-
-// --- Tab Components ---
-
-const TabInfo = ({ idol, updateIdol }) => {
- const [form, setForm] = useState(idol);
- const [uploading, setUploading] = useState(false);
- const avatarRef = useRef();
-
- const handleAvatarFile = async (e) => {
- const file = e.target.files[0];
- if (!file) return;
- const localUrl = URL.createObjectURL(file);
- setForm(p => ({ ...p, avatar: localUrl }));
- setUploading(true);
- try {
- const path = await uploadFile(file, "avatar");
- setForm(p => ({ ...p, avatar: path }));
- updateIdol(idol.id, { avatar: path });
- URL.revokeObjectURL(localUrl);
- } catch (err) {
- alert("Lỗi upload: " + err.message);
- } finally {
- setUploading(false);
- }
- };
-
- const handleSaveName = () => {
- if (form.name.trim() && form.name !== idol.name) {
- updateIdol(idol.id, { name: form.name.trim() });
- }
- };
-
- return (
- <div className="max-w-xl flex flex-col gap-8">
- <div className="flex items-center gap-6">
- <div
- className={`relative shrink-0 w-32 h-32 rounded-3xl border-2 border-dashed bg-[#252630] flex flex-col items-center justify-center cursor-pointer transition-colors overflow-hidden ring-4 ring-[#252630]/50 ${uploading ? "border-[#06b6d4]" : "border-[#3f404d] hover:border-[#06b6d4]"}`}
- onClick={() => !uploading && avatarRef.current?.click()}
- >
- {form.avatar ? (
- <img src={form.avatar} alt="avatar" className="w-full h-full object-cover" />
- ) : (
- <div className="flex flex-col items-center gap-2 text-gray-500">
- <MdCloudUpload size={32} />
- <span className="text-[9px] font-medium">Chọn ảnh</span>
- </div>
- )}
- <div className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition flex items-center justify-center">
- {uploading ? <div className="w-8 h-8 border-3 border-[#06b6d4] border-t-transparent rounded-full animate-spin" /> : <MdImage size={28} className="text-white" />}
- </div>
- <input ref={avatarRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarFile} />
- </div>
- <div>
- <h3 className="text-sm sm:text-lg font-bold text-[11px] sm:text-[13px] text-white mb-0.5">Ảnh đại diện</h3>
- <p className="text-[9px] sm:text-[11px] text-gray-400 leading-tight">Click vào khung ảnh để thay đổi.</p>
- </div>
- </div>
-
- <div>
- <label className="text-[9px] font-medium text-gray-500 mb-1.5 block">Tên nhân vật</label>
- <div className="flex gap-3">
- <input
- value={form.name}
- onChange={(e) => setForm({...form, name: e.target.value})}
- className="flex-1 bg-[#252630] border border-[#2e2f38] rounded-xl px-4 py-2 text-white text-[11px] sm:text-xs focus:outline-none focus:border-[#d946ef]/60 transition-all font-normal"
- />
- <button 
- onClick={handleSaveName}
- disabled={form.name === idol.name || !form.name.trim()}
- className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-[10px] sm:text-xs font-semibold disabled:opacity-30 disabled:grayscale transition"
- >
- Cập nhật
- </button>
- </div>
- </div>
- </div>
- );
-};
-
-const TabVideos = ({ idol, allVideos, allGifts, updateVideo }) => {
+new_content = """const TabVideos = ({ idol, allVideos, allGifts, updateVideo }) => {
   const [pickerParam, setPickerParam] = useState(null);
 
   const idolVideos = allVideos
@@ -342,3 +180,9 @@ const VideoCardMini = ({ video, allGifts, updateVideo, handleRemove }) => {
 }
 
 export default IdolDetailPanel;
+"""
+
+import re
+result = re.sub(r'const TabVideos = .*', new_content, content, flags=re.DOTALL)
+with open('/run/media/whale/Data/Fibonax/metaverse/idol_project_v2/frontend/src/components/IdolDetailPanel.jsx', 'w') as f:
+    f.write(result)

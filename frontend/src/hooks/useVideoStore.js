@@ -115,6 +115,26 @@ export const useVideoStore = create((set, get) => ({
       .sort((a, b) => a.order - b.order);
   },
 
+  getIdleVideos: () => {
+    const { videos } = get();
+    const activeIdols = useIdolStore.getState().getActiveIdols();
+    const activeIdolIds = activeIdols.map((i) => i.id);
+
+    return [...videos]
+      .filter((v) => v.active && (!v.idolId || activeIdolIds.includes(v.idolId)) && v.isIdle)
+      .sort((a, b) => a.order - b.order);
+  },
+
+  getGiftVideos: () => {
+    const { videos } = get();
+    const activeIdols = useIdolStore.getState().getActiveIdols();
+    const activeIdolIds = activeIdols.map((i) => i.id);
+
+    return [...videos]
+      .filter((v) => v.active && (!v.idolId || activeIdolIds.includes(v.idolId)) && !v.isIdle)
+      .sort((a, b) => a.order - b.order);
+  },
+
   // ---------- currently selected video ----------
   selectedVideo: null,
   selectedSound: null,
@@ -172,24 +192,24 @@ export const useVideoStore = create((set, get) => ({
       // Idle mode: Pick random active Idol -> Pick random video from that Idol
       const activeIdols = useIdolStore.getState().getActiveIdols();
       let randomTarget = null;
+      const idleVideos = get().getIdleVideos();
 
       if (activeIdols.length > 0) {
         // Pick random Idol
         const randomIdol = activeIdols[Math.floor(Math.random() * activeIdols.length)];
-        // Get their active videos
-        const idolVideos = getActiveVideos().filter(v => v.idolId === randomIdol.id);
+        // Get their active idle videos
+        const idolVideos = idleVideos.filter(v => v.idolId === randomIdol.id);
 
         if (idolVideos.length > 0) {
-           randomTarget = idolVideos[Math.floor(Math.random() * idolVideos.length)];
+          randomTarget = idolVideos[Math.floor(Math.random() * idolVideos.length)];
         }
       }
 
-      // Fallback if idol has no videos or no idols active: pick random from any active video
+      // Fallback if idol has no videos or no idols active: pick random from any active idle video
       if (!randomTarget) {
-         const actives = getActiveVideos();
-         if (actives.length > 0) {
-           randomTarget = actives[Math.floor(Math.random() * actives.length)];
-         }
+        if (idleVideos.length > 0) {
+          randomTarget = idleVideos[Math.floor(Math.random() * idleVideos.length)];
+        }
       }
 
       if (randomTarget) {
@@ -262,6 +282,6 @@ export const useVideoStore = create((set, get) => ({
   activeOverlay: null,
 
   triggerOverlay: (overlayConfig) => set({ activeOverlay: overlayConfig }),
-  clearOverlay: ()      => set({ activeOverlay: null }),
+  clearOverlay: () => set({ activeOverlay: null }),
 
 }));

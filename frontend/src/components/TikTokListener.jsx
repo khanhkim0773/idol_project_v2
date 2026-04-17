@@ -66,7 +66,7 @@ const TikTokListener = () => {
 
       useTTSStore.getState().speakGift(giftData.nickname, giftData.amount, giftName);
 
-      const activeVideos = useVideoStore.getState().getActiveVideos();
+      const activeVideos = useVideoStore.getState().getGiftVideos();
       if (activeVideos.length === 0) return;
 
       const giftNameLower = giftName.toLowerCase().trim();

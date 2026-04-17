@@ -55,9 +55,10 @@ const SelectThumbnail = ({ isCompact = false }) => {
  activeIdols.map((idol) => {
  const isIdolSelected = currentIdolId === idol.id;
  
- // Collect gift icons for this idol's active videos
+ // Collect gift icons for this idol's active videos (excluding idle videos)
  const idolVideos = videos.filter(v => v.idolId === idol.id && v.active);
- const giftNames = [...new Set(idolVideos.map(v => v.gift).filter(Boolean))];
+ const giftVideos = idolVideos.filter(v => !v.isIdle);
+ const giftNames = [...new Set(giftVideos.map(v => v.gift).filter(Boolean))];
  const giftIcons = giftNames.map(name => gifts.find(g => g.giftName === name)?.image).filter(Boolean);
 
  const handleIdolClick = () => {
