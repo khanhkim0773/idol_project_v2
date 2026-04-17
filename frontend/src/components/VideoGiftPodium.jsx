@@ -111,6 +111,7 @@ const VideoGiftPodium = () => {
 
   const { first, second, third } = useMemo(() => {
     const ranked = idols
+      .filter(idol => idol.active)
       .map(idol => ({
         id: idol.id,
         name: idol.name,
