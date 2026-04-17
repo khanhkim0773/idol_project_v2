@@ -5,7 +5,8 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
  * Uses a 'Fixed Timer' linger effect to ensure the 3s blur is guaranteed.
  * Zero-flicker Top-Layer swap technique.
  */
-export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
+export const BlackScreenVideo = ({ videoSrc, onVideoEnded, videoMode = "favorite" }) => {
+ const isGiftMode = videoMode === "queue";
  const [slotA, setSlotA] = useState({ src: videoSrc, opacity: 1, zIndex: 10 });
  const [slotB, setSlotB] = useState({ src: "", opacity: 0, zIndex: 5 });
  const [activeSlot, setActiveSlot] = useState("A");
@@ -62,38 +63,61 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
 
  if (slot !== incomingSlot || isTransitioning) return;
 
- // ----- START CINEMATIC SWAP -----
- setIsTransitioning(true);
- setIsWarping(true); // Ensure mask is ON
-
  const incomingRef = slot === "A" ? videoRefA.current : videoRefB.current;
+ const oldRef = slot === "A" ? videoRefB.current : videoRefA.current;
+
+ setIsTransitioning(true);
+
+ if (!isGiftMode) {
+ // ===== IDLE MODE: Instant swap, no flash =====
+ if (incomingRef) incomingRef.currentTime = 0;
  playVideo(incomingRef);
 
- setTimeout(() => {
- // 1. Reset clock to ensure clean start
- if (incomingRef) incomingRef.currentTime = 0;
-
- // 2. Crossfade: New video on TOP
+ // Immediately show new video at full opacity on top
  if (slot === "B") {
  setSlotB(prev => ({ ...prev, opacity: 1 }));
  } else {
  setSlotA(prev => ({ ...prev, opacity: 1 }));
  }
 
- // 3. Middle of transition (1s into crossfade)
- setTimeout(() => {
+ // Switch active slot on next frame to avoid race
+ requestAnimationFrame(() => {
  setActiveSlot(slot);
-
- // Hide/Pause the old video behind the new one
- const oldRef = slot === "A" ? videoRefB.current : videoRefA.current;
  if (oldRef) oldRef.pause();
 
- // 4. LINGER PHASE: Wait EXACTLY 3 seconds from the moment it became active
+ // Cleanup old slot after visual swap is done
+ setTimeout(() => {
+ if (slot === "B") {
+ setSlotA({ src: "", opacity: 0, zIndex: 5 });
+ } else {
+ setSlotB({ src: "", opacity: 0, zIndex: 5 });
+ }
+ setIsTransitioning(false);
+ }, 300);
+ });
+
+ } else {
+ // ===== GIFT MODE: Full cinematic swap with blur =====
+ setIsWarping(true);
+ playVideo(incomingRef);
+
+ setTimeout(() => {
+ if (incomingRef) incomingRef.currentTime = 0;
+
+ if (slot === "B") {
+ setSlotB(prev => ({ ...prev, opacity: 1 }));
+ } else {
+ setSlotA(prev => ({ ...prev, opacity: 1 }));
+ }
+
+ setTimeout(() => {
+ setActiveSlot(slot);
+ if (oldRef) oldRef.pause();
+
  if (lingerTimeoutRef.current) clearTimeout(lingerTimeoutRef.current);
  lingerTimeoutRef.current = setTimeout(() => {
- setIsWarping(false); // FINALLY clear mask after IDOL has played 3s
+ setIsWarping(false);
 
- // Cleanup old slot
  if (slot === "B") {
  setSlotA({ src: "", opacity: 0, zIndex: 5 });
  } else {
@@ -104,13 +128,13 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
  setIsTransitioning(false);
  }, 1000);
  }, 500);
+ }
  };
 
  const handleTimeUpdate = (e) => {
  const video = e.target;
- // STARTING the mask before the end
- // Only trigger if we aren't already transitioning to avoid loops
- if (!isTransitioning && !isWarping && video.duration > 0 && video.currentTime > video.duration - 1.2) {
+ // Only apply pre-end warp for gift videos
+ if (isGiftMode && !isTransitioning && !isWarping && video.duration > 0 && video.currentTime > video.duration - 1.2) {
  setIsWarping(true);
  }
  };
@@ -127,7 +151,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
  muted={false}
  playsInline
  className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out
- ${isWarping ? 'blur-[12px] scale-105 contrast-[1.1]' : 'blur-0 scale-100 contrast-[1.0]'}
+ ${(isGiftMode && isWarping) ? 'blur-[12px] scale-105 contrast-[1.1]' : 'blur-0 scale-100 contrast-[1.0]'}
  `}
  style={{
  opacity: slotA.opacity,
@@ -146,7 +170,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
  muted
  playsInline
  className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out
- ${isWarping ? 'blur-[12px] scale-105 contrast-[1.1]' : 'blur-0 scale-100 contrast-[1.0]'}
+ ${(isGiftMode && isWarping) ? 'blur-[12px] scale-105 contrast-[1.1]' : 'blur-0 scale-100 contrast-[1.0]'}
  `}
  style={{
  opacity: slotB.opacity,
@@ -163,7 +187,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded }) => {
  */}
  <div
  className={`absolute inset-0 z-[100] transition-all duration-700 pointer-events-none
- ${isWarping ? 'opacity-100 bg-black/20' : 'opacity-0 bg-transparent'}
+ ${(isGiftMode && isWarping) ? 'opacity-100 bg-black/20' : 'opacity-0 bg-transparent'}
  `}
  />
 

@@ -106,6 +106,7 @@ const HomePage = ({ username }) => {
                 key={`${selectedVideo}:${playId}`}
                 videoSrc={selectedVideo}
                 onVideoEnded={processNext}
+                videoMode={videoMode}
               />
             )}
             <OverlayPlayer id="tsparticles-desktop" />
@@ -143,6 +144,7 @@ const HomePage = ({ username }) => {
               key={`${selectedVideo}:${playId}`}
               videoSrc={selectedVideo}
               onVideoEnded={processNext}
+              videoMode={videoMode}
             />
           )}
           <OverlayPlayer id="tsparticles-mobile" />
