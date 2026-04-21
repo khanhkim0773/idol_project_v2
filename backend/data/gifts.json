@@ -507,7 +507,7 @@
     "idolId": null,
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/3d136834fe9964927d6b30499a68b741.png~tplv-obj.png",
     "diamonds": 199,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 8,
     "active": true
   },
   {
@@ -1199,5 +1199,50 @@
     "active": true,
     "maxRepeatCount": 1,
     "id": 1776740058758
+  },
+  {
+    "giftId": 59286,
+    "giftName": "SEA Shell",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/04d53e1019450131a4054d84e0f89c85.png~tplv-obj.png",
+    "diamonds": 1,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776745840780
+  },
+  {
+    "giftId": 14382,
+    "giftName": "Floating Octopus",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/022d496f79aa50d3042f0660d37ed48a.png~tplv-obj.png",
+    "diamonds": 199,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776745956261
+  },
+  {
+    "giftId": 13206,
+    "giftName": "Pinch Cheek",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/d1c75692e369466b4fd23546e513caed~tplv-obj.png",
+    "diamonds": 199,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776746014527
+  },
+  {
+    "giftId": 58238,
+    "giftName": "Drum Hamster ",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/a7b5c0dd3569b6bea5e4456bd8b38da7.png~tplv-obj.png",
+    "diamonds": 549,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776754698764
+  },
+  {
+    "giftId": 56612,
+    "giftName": "Blitz in Sea",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/fc9a249032a0dedd01f86106ff0b54d9.png~tplv-obj.png",
+    "diamonds": 3088,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776754857264
   }
 ]
