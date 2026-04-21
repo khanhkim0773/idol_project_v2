@@ -250,7 +250,8 @@
     "active": true,
     "idolId": 1776746996026,
     "id": 1776746765119,
-    "isIdle": false
+    "isIdle": false,
+    "gift": "222"
   },
   {
     "name": "bảo hân rose",
@@ -261,7 +262,8 @@
     "active": true,
     "idolId": 1776746996026,
     "id": 1776746790160,
-    "isIdle": false
+    "isIdle": false,
+    "gift": "Rose"
   },
   {
     "name": "bảo hâm cảm ơn và đứng chờ ",
@@ -294,7 +296,8 @@
     "active": true,
     "idolId": 1776746996026,
     "id": 1776746841276,
-    "isIdle": false
+    "isIdle": false,
+    "gift": "Creeper"
   },
   {
     "name": "bảo hân tan ca ",
@@ -327,7 +330,8 @@
     "active": true,
     "idolId": 1776746996026,
     "id": 1776746876284,
-    "isIdle": false
+    "isIdle": false,
+    "gift": "Cục Bông Rạng Rỡ"
   },
   {
     "name": "bảo hân nhảy 1 ",
@@ -338,7 +342,8 @@
     "active": true,
     "idolId": 1776746996026,
     "id": 1776746884857,
-    "isIdle": false
+    "isIdle": false,
+    "gift": "Freestyle"
   },
   {
     "name": "bảo hân nhảy 2",
@@ -349,7 +354,8 @@
     "active": true,
     "idolId": 1776746996026,
     "id": 1776746893513,
-    "isIdle": false
+    "isIdle": false,
+    "gift": "GG"
   },
   {
     "name": "bảo hân nhảy 3",
@@ -382,7 +388,8 @@
     "active": true,
     "idolId": 1776746996026,
     "id": 1776746932685,
-    "isIdle": false
+    "isIdle": false,
+    "gift": "111"
   },
   {
     "name": "bảo hân trói ",
@@ -393,7 +400,8 @@
     "active": true,
     "idolId": 1776746996026,
     "id": 1776746944114,
-    "isIdle": false
+    "isIdle": false,
+    "gift": "Ice Cream Cone"
   },
   {
     "name": "bảo hân xin biến hình",
