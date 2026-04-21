@@ -1,7 +1,9 @@
-import { supabase } from "../config/supabase.js";
+import { createJsonStore } from "../config/json-store.js";
+
+const store = createJsonStore("gift_logs.json");
 
 /**
- * Log a gift transaction to Supabase gift_logs table
+ * Log a gift transaction to gift_logs.json
  */
 export const logGift = async (giftData) => {
   try {
@@ -16,28 +18,23 @@ export const logGift = async (giftData) => {
       timestamp: new Date().toISOString(),
     };
 
-    const { error } = await supabase.from("gift_logs").insert([newLog]);
-    if (error) throw error;
+    store.insert(newLog);
 
     console.log(
       `[stats] 📝 Logged gift: ${giftData.giftName} x${newLog.amount} from ${giftData.nickname}`
     );
   } catch (e) {
-    console.error("[stats] Error logging gift to Supabase:", e.message);
+    console.error("[stats] Error logging gift:", e.message);
   }
 };
 
 export const getLeaderboard = async () => {
   try {
-    const { data, error } = await supabase
-      .from("gift_logs")
-      .select("*")
-      .order("timestamp", { ascending: false });
-
-    if (error) throw error;
-    return data || [];
+    const data = store.readAll();
+    // Sort by timestamp descending (mới nhất trước)
+    return data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
   } catch (e) {
-    console.error("[stats] Error reading gift logs from Supabase:", e.message);
+    console.error("[stats] Error reading gift logs:", e.message);
     return [];
   }
 };
@@ -47,15 +44,7 @@ export const getLeaderboard = async () => {
  */
 export const clearLeaderboard = async () => {
   try {
-    // Delete all rows safely. In Supabase, you need a condition to delete all.
-    // eq('id', id) or just delete with neq.
-    // Using a dummy filter to delete all
-    const { error } = await supabase
-      .from("gift_logs")
-      .delete()
-      .neq("id", "00000000-0000-0000-0000-000000000000"); // deletes all rows
-
-    if (error) throw error;
+    store.writeAll([]);
     console.log("[stats] 🧹 Leaderboard reset for new live session.");
   } catch (e) {
     console.error("[stats] Error resetting leaderboard:", e.message);

@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { loadIdols, saveIdol, updateIdol, deleteIdol } from "../services/idols.service.js";
-import { supabase } from "../config/supabase.js";
+import { createJsonStore } from "../config/json-store.js";
+
+const store = createJsonStore("idols.json");
 
 export const createIdolsRouter = () => {
   const router = Router();
@@ -24,19 +26,14 @@ export const createIdolsRouter = () => {
       }
 
       // Get max order
-      const { data: latest } = await supabase
-        .from("idols")
-        .select("order")
-        .order("order", { ascending: false })
-        .limit(1);
-      
-      const maxOrder = latest && latest.length > 0 ? latest[0].order : 0;
+      const allIdols = store.readAll();
+      const maxOrder = allIdols.reduce((max, idol) => Math.max(max, idol.order || 0), 0);
 
       const newIdol = {
         name: name.trim(),
         avatar,
         active,
-        order: (maxOrder || 0) + 1,
+        order: maxOrder + 1,
       };
 
       const result = await saveIdol(newIdol);
@@ -76,18 +73,15 @@ export const createIdolsRouter = () => {
     }
   });
 
-  // POST /api/idols/replace — Replace entire list (bulk sync) - Not recommended with DB, keeping for backwards compatibility via bulk operations
+  // POST /api/idols/replace — Replace entire list (bulk sync)
   router.post("/replace", async (req, res) => {
     try {
       const newList = req.body;
       if (!Array.isArray(newList)) {
         return res.status(400).json({ error: "Expected array" });
       }
-      // Simple bulk replace: delete all then insert all. For small list it's OK.
-      await supabase.from("idols").delete().neq("id", -1); // delete all
-      const { data, error } = await supabase.from("idols").insert(newList).select();
-      if (error) throw error;
-      res.json({ success: true, count: data?.length || 0 });
+      store.writeAll(newList);
+      res.json({ success: true, count: newList.length });
     } catch (e) {
       res.status(500).json({ error: e.message });
     }

@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { loadVideos, saveVideo, updateVideo, deleteVideo } from "../services/videos.service.js";
-import { supabase } from "../config/supabase.js";
+import { createJsonStore } from "../config/json-store.js";
+
+const store = createJsonStore("videos.json");
 
 export const createVideosRouter = () => {
   const router = Router();
@@ -20,10 +22,8 @@ export const createVideosRouter = () => {
     try {
       const newVideos = req.body;
       if (Array.isArray(newVideos)) {
-        await supabase.from("videos").delete().neq("id", -1); // delete all
-        const { data, error } = await supabase.from("videos").insert(newVideos).select();
-        if (error) throw error;
-        res.json({ success: true, count: data?.length || 0 });
+        store.writeAll(newVideos);
+        res.json({ success: true, count: newVideos.length });
       } else {
         res.status(400).json({ error: "Invalid data format. Expected an array." });
       }

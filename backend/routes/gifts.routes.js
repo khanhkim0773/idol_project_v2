@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { loadGifts } from "../services/gifts.service.js";
-import { supabase } from "../config/supabase.js";
+import { createJsonStore } from "../config/json-store.js";
+
+const store = createJsonStore("gifts.json");
 
 export const createGiftsRouter = () => {
   const router = Router();
@@ -24,13 +26,8 @@ export const createGiftsRouter = () => {
       }
 
       // Kiểm tra trùng lặp
-      const { data: existingGifts, error: fetchErr } = await supabase
-        .from("gifts")
-        .select("id")
-        .eq("giftId", Number(giftId));
-
-      if (fetchErr) throw fetchErr;
-      if (existingGifts && existingGifts.length > 0) {
+      const existing = store.findBy("giftId", Number(giftId));
+      if (existing) {
         return res.status(400).json({ error: "Gift ID already exists" });
       }
 
@@ -40,9 +37,8 @@ export const createGiftsRouter = () => {
         active: true,
         overlayId: overlayId ? Number(overlayId) : null,
       };
-      const { data, error } = await supabase.from("gifts").insert([newGift]).select();
-      if (error) throw error;
-      res.status(201).json(data[0]);
+      const inserted = store.insert(newGift);
+      res.status(201).json(inserted);
     } catch (e) {
       res.status(500).json({ error: e.message });
     }
@@ -54,17 +50,11 @@ export const createGiftsRouter = () => {
       const { id } = req.params;
       const patch = req.body;
       
-      const { data, error } = await supabase
-        .from("gifts")
-        .update(patch)
-        .eq("giftId", Number(id))
-        .select();
-
-      if (error) throw error;
-      if (!data || data.length === 0) {
+      const updated = store.update("giftId", Number(id), patch);
+      if (!updated) {
         return res.status(404).json({ error: "Gift not found" });
       }
-      res.json(data[0]);
+      res.json(updated);
     } catch (e) {
       res.status(500).json({ error: e.message });
     }
@@ -74,17 +64,11 @@ export const createGiftsRouter = () => {
   router.delete("/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const { data, error } = await supabase
-        .from("gifts")
-        .delete()
-        .eq("giftId", Number(id))
-        .select();
-
-      if (error) throw error;
-      if (!data || data.length === 0) {
+      const removed = store.remove("giftId", Number(id));
+      if (!removed) {
         return res.status(404).json({ error: "Gift not found" });
       }
-      res.json(data[0]);
+      res.json(removed);
     } catch (e) {
       res.status(500).json({ error: e.message });
     }

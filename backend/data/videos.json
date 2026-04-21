@@ -8,7 +8,8 @@
     "active": true,
     "idolId": 1775982868562,
     "id": 1775982781557,
-    "gift": "Perfume"
+    "gift": "",
+    "isIdle": true
   },
   {
     "name": "Mai Anh Nhảy 1 ",
@@ -52,7 +53,8 @@
     "active": true,
     "idolId": 1776043618415,
     "id": 1776043860541,
-    "gift": "You're awesome"
+    "gift": "",
+    "isIdle": true
   },
   {
     "name": "Tuyết Nhi nhảy 1 ",

@@ -105,5 +105,5 @@ app.post("/api/tts/speak", async (req, res) => {
 const PORT = process.env.PORT || 3004;
 httpServer.listen(PORT, () => {
   console.log(`Backend Server listening at http://localhost:${PORT}`);
-  console.log(`📡 Dữ liệu đang được lưu ở Supabase PostgreSQL`);
+  console.log(`📡 Dữ liệu đang được lưu ở local JSON files (backend/data/)`);
 });

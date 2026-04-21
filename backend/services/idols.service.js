@@ -1,28 +1,21 @@
-import { supabase } from "../config/supabase.js";
+import { createJsonStore } from "../config/json-store.js";
+
+const store = createJsonStore("idols.json");
 
 export const loadIdols = async () => {
   try {
-    const { data, error } = await supabase
-      .from("idols")
-      .select("*")
-      .order("order", { ascending: true });
-
-    if (error) throw error;
-    return data || [];
+    const data = store.readAll();
+    // Sort theo order ascending
+    return data.sort((a, b) => (a.order || 0) - (b.order || 0));
   } catch (e) {
-    console.warn("[idols] Could not read idols from Supabase:", e.message);
+    console.error("[idols] Could not read idols:", e.message);
     return [];
   }
 };
 
 export const saveIdol = async (idolData) => {
   try {
-    const { data, error } = await supabase
-      .from("idols")
-      .insert([idolData])
-      .select();
-    if (error) throw error;
-    return data[0];
+    return store.insert(idolData);
   } catch (e) {
     console.error("[idols] Could not insert idol:", e.message);
     return null;
@@ -31,13 +24,7 @@ export const saveIdol = async (idolData) => {
 
 export const updateIdol = async (id, patch) => {
   try {
-    const { data, error } = await supabase
-      .from("idols")
-      .update(patch)
-      .eq("id", id)
-      .select();
-    if (error) throw error;
-    return data[0];
+    return store.update("id", Number(id), patch);
   } catch (e) {
     console.error("[idols] Could not update idol:", e.message);
     return null;
@@ -46,12 +33,8 @@ export const updateIdol = async (id, patch) => {
 
 export const deleteIdol = async (id) => {
   try {
-    const { error } = await supabase
-      .from("idols")
-      .delete()
-      .eq("id", id);
-    if (error) throw error;
-    return true;
+    const removed = store.remove("id", Number(id));
+    return removed !== null;
   } catch (e) {
     console.error("[idols] Could not delete idol:", e.message);
     return false;

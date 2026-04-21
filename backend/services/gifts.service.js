@@ -1,17 +1,14 @@
-import { supabase } from "../config/supabase.js";
+import { createJsonStore } from "../config/json-store.js";
 
-// Lấy danh sách toàn bộ gifts từ Supabase (ordered theo id để ổn định)
+const store = createJsonStore("gifts.json");
+
+// Lấy danh sách toàn bộ gifts (ordered theo giftId để ổn định)
 export const loadGifts = async () => {
   try {
-    const { data, error } = await supabase
-      .from("gifts")
-      .select("*")
-      .order("id", { ascending: true });
-
-    if (error) throw error;
-    return data || [];
+    const data = store.readAll();
+    return data.sort((a, b) => (a.giftId || 0) - (b.giftId || 0));
   } catch (e) {
-    console.error("[gifts] Could not read gifts from Supabase:", e.message);
+    console.error("[gifts] Could not read gifts:", e.message);
     return [];
   }
 };
@@ -22,42 +19,29 @@ export const registerGift = async (giftData) => {
   const newRepeatCount = giftData.repeatCount || 1;
 
   try {
-    // Kiểm tra xem gift đã tồn tại chưa
-    const { data: existingGifts, error: fetchError } = await supabase
-      .from("gifts")
-      .select("*")
-      .eq("giftId", giftId)
-      .limit(1);
+    const existing = store.findBy("giftId", giftId);
 
-    if (fetchError) throw fetchError;
-
-    if (existingGifts && existingGifts.length > 0) {
+    if (existing) {
       // Gift đã tồn tại -> Cập nhật nếu cần
-      const gift = existingGifts[0];
       const updates = {};
       let needsUpdate = false;
 
-      if (!gift.image && giftData.giftPictureUrl) {
+      if (!existing.image && giftData.giftPictureUrl) {
         updates.image = giftData.giftPictureUrl;
         needsUpdate = true;
       }
-      if ((gift.diamonds === undefined || gift.diamonds === null) && giftData.diamondCount !== undefined) {
+      if ((existing.diamonds === undefined || existing.diamonds === null) && giftData.diamondCount !== undefined) {
         updates.diamonds = giftData.diamondCount;
         needsUpdate = true;
       }
-      if (!gift.maxRepeatCount || newRepeatCount > gift.maxRepeatCount) {
+      if (!existing.maxRepeatCount || newRepeatCount > existing.maxRepeatCount) {
         updates.maxRepeatCount = newRepeatCount;
         needsUpdate = true;
         console.log(`[gifts] 🏆 New record for "${giftData.giftName}": ${newRepeatCount}`);
       }
 
       if (needsUpdate) {
-        const { error: updateError } = await supabase
-          .from("gifts")
-          .update(updates)
-          .eq("giftId", giftId);
-          
-        if (updateError) throw updateError;
+        store.update("giftId", giftId, updates);
       }
       return { saved: false };
     } else {
@@ -71,15 +55,10 @@ export const registerGift = async (giftData) => {
         maxRepeatCount: newRepeatCount,
       };
 
-      const { data: insertedGift, error: insertError } = await supabase
-        .from("gifts")
-        .insert([newGift])
-        .select();
-
-      if (insertError) throw insertError;
+      const inserted = store.insert(newGift);
       
       console.log(`[gifts] 💾 Đã lưu gift mới: "${giftData.giftName}" (id=${giftId}) | 💎 ${giftData.diamondCount}`);
-      return { saved: true, data: insertedGift[0] };
+      return { saved: true, data: inserted };
     }
   } catch (err) {
     console.error("[gifts] Error in registerGift:", err.message);
