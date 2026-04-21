@@ -14,6 +14,7 @@ export const ROUTES_URL = {
     UPLOAD: "/upload",
     GIFTS: "/gifts",
     OVERLAYS: "/overlays",
+    ZONES: "/zones",
     TTS: "/tts",
 }
 

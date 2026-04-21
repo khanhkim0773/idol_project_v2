@@ -14,6 +14,7 @@ import { createVideosRouter } from "./routes/videos.routes.js";
 import statsRouter from "./routes/stats.routes.js";
 import { createIdolsRouter } from "./routes/idols.routes.js";
 import { createOverlaysRouter } from "./routes/overlays.routes.js";
+import { createZonesRouter } from "./routes/zones.routes.js";
 
 // Đảm bảo các thư mục vật lý tồn tại
 [VIDEO_DIR, AVATAR_DIR, OVERLAY_DIR, DATA_DIR].forEach((dir) => {
@@ -48,6 +49,7 @@ app.use("/api/gifts", createGiftsRouter());             // GET/POST/PATCH /api/g
 app.use("/api/videos", createVideosRouter());           // GET/POST/PATCH /api/videos
 app.use("/api/idols", createIdolsRouter());             // GET/POST/PATCH/DELETE /api/idols
 app.use("/api/overlays", createOverlaysRouter());       // GET/POST/PATCH/DELETE /api/overlays
+app.use("/api/zones", createZonesRouter());             // GET/POST/PATCH/DELETE /api/zones
 app.use("/api/stats", statsRouter);                     // GET /api/stats/leaderboard
 
 // Proxy TTS voices-list (bypass CORS from ngrok)

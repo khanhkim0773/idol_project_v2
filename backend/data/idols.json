@@ -10,14 +10,14 @@
     "id": 1776043618415,
     "name": "Nguyễn Lê Khánh",
     "avatar": "/avatar/1776043716832-avatar.png",
-    "active": true,
+    "active": false,
     "order": 2
   },
   {
     "id": 1776044055048,
     "name": "Mẫn Nhi",
     "avatar": "/avatar/1776044096328-avatar.png",
-    "active": true,
+    "active": false,
     "order": 3
   }
 ]

@@ -6,9 +6,11 @@ import UploadPage from "./pages/UploadPage";
 import GiftPage from "./pages/GiftPage";
 import OverlayPage from "./pages/OverlayPage";
 import IdolPage from "./pages/IdolPage";
+import ZonePage from "./pages/ZonePage";
 import { useGiftStore } from "./hooks/useGiftStore";
 import { useIdolStore } from "./hooks/useIdolStore";
 import { useOverlayStore } from "./hooks/useOverlayStore";
+import { useZoneStore } from "./hooks/useZoneStore";
 import Sidebar from "./components/Layout/Sidebar";
 
 import { ROUTES_URL } from "./utils/constant";
@@ -25,18 +27,20 @@ const App = () => {
   const { fetchGifts } = useGiftStore();
   const { fetchIdols } = useIdolStore();
   const { fetchOverlays } = useOverlayStore();
+  const { fetchZones } = useZoneStore();
 
   useEffect(() => {
     fetchIdols();
     fetchVideos();
     fetchGifts();
     fetchOverlays();
+    fetchZones();
 
     // Init tsParticles once
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     });
-  }, [fetchIdols, fetchVideos, fetchGifts, fetchOverlays]);
+  }, [fetchIdols, fetchVideos, fetchGifts, fetchOverlays, fetchZones]);
 
   if (!isConnected) {
     return (
@@ -93,6 +97,7 @@ const App = () => {
           <Route path={ROUTES_URL.IDOLS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><IdolPage /></div>} />
           <Route path={ROUTES_URL.GIFTS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><GiftPage /></div>} />
           <Route path={ROUTES_URL.OVERLAYS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><OverlayPage /></div>} />
+          <Route path={ROUTES_URL.ZONES} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><ZonePage /></div>} />
           <Route path={ROUTES_URL.TTS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><ModalTTS /></div>} />
         </Routes>
       </div>

@@ -57,7 +57,7 @@
     "giftName": "Lucky pig",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/d53125bd5416e6f2f6ab61da02ddd302.png~tplv-obj.png",
     "diamonds": 10,
-    "maxRepeatCount": 5,
+    "maxRepeatCount": 8,
     "active": true,
     "idolId": null
   },
@@ -75,7 +75,7 @@
     "giftName": "little kisses",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/0a5db92508ee667339289b2f87bc3123.png~tplv-obj.png",
     "diamonds": 20,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 3,
     "active": true,
     "idolId": null
   },
@@ -1190,5 +1190,14 @@
     "diamonds": 99,
     "active": true,
     "maxRepeatCount": 1
+  },
+  {
+    "giftId": 59287,
+    "giftName": "Shell Energy",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/563b478b293a94fbe82f87d68d6489ea.png~tplv-obj.png",
+    "diamonds": 100,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776740058758
   }
 ]

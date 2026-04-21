@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { MdDashboard, MdOndemandVideo, MdCardGiftcard, MdMenu, MdClose, MdRecentActors, MdAutoAwesome } from "react-icons/md";
+import { MdDashboard, MdOndemandVideo, MdCardGiftcard, MdMenu, MdClose, MdRecentActors, MdAutoAwesome, MdOpenWith } from "react-icons/md";
 import { ROUTES_URL } from "../../utils/constant";
 import { LuSpeech } from "react-icons/lu";
 
@@ -10,6 +10,7 @@ const Menu = [
   { name: "Idols", icon: <MdRecentActors />, path: ROUTES_URL.IDOLS },
   { name: "Gifts", icon: <MdCardGiftcard />, path: ROUTES_URL.GIFTS },
   { name: "Overlays", icon: <MdAutoAwesome />, path: ROUTES_URL.OVERLAYS },
+  { name: "Gift Zones", icon: <MdOpenWith />, path: ROUTES_URL.ZONES },
   { name: "Text to Speech", icon: <LuSpeech />, path: ROUTES_URL.TTS },
 ];
 

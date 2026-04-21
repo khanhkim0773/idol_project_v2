@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "name": "Khu Câu Lệnh",
+    "nameEn": "Command Area",
+    "icon": "command",
+    "color": "#ff6b9d",
+    "position": {
+      "x": 2,
+      "y": 8
+    },
+    "size": {
+      "w": 40,
+      "h": 35
+    },
+    "gifts": [
+      {
+        "giftId": 5269,
+        "title": "Mua "
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Khu Hiệu Ứng",
+    "nameEn": "Effect Area",
+    "icon": "effect",
+    "color": "#a855f7",
+    "position": {
+      "x": 2,
+      "y": 45
+    },
+    "size": {
+      "w": 40,
+      "h": 45
+    },
+    "gifts": [
+      {
+        "giftId": 5659,
+        "title": "Paper Crane"
+      },
+      {
+        "giftId": 5827,
+        "title": "Ice Cream Cone"
+      },
+      {
+        "giftId": 6233,
+        "title": "Travel with You"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Khu Vũ Đạo",
+    "nameEn": "Dance Area",
+    "icon": "dance",
+    "color": "#06b6d4",
+    "position": {
+      "x": 58,
+      "y": 8
+    },
+    "size": {
+      "w": 40,
+      "h": 50
+    },
+    "gifts": [
+      {
+        "giftId": 6090,
+        "title": "Fireworks"
+      },
+      {
+        "giftId": 5731,
+        "title": "Coral"
+      },
+      {
+        "giftId": 6267,
+        "title": "Corgi"
+      }
+    ]
+  }
+]
