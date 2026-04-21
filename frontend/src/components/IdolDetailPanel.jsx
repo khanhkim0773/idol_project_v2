@@ -313,27 +313,23 @@ const VideoCardMini = ({ video, allGifts, updateVideo, handleRemove }) => {
 
       {!video.isIdle && (
         <div className="bg-[#fbbf24]/5 border border-[#fbbf24]/20 p-3 rounded-xl mt-auto">
-          <label className="text-[9px] font-medium text-[#fbbf24]/80 mb-1.5 block flex items-center gap-1">
-            <MdCardGiftcard size={12}/> Quà gán cho video này
+          <label className="text-[9px] font-medium text-[#fbbf24]/80 mb-1.5 flex items-center gap-1">
+            <MdCardGiftcard size={12}/> Quà / Lệnh gán cho video này
           </label>
           <div className="relative">
-            <select 
+            <input 
+              type="text"
+              list={`gift-options-${video.id}`}
               value={video.gift || ""} 
               onChange={handleGiftSelect}
-              className="w-full appearance-none bg-black/40 border border-white/10 hover:border-white/20 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-white text-[11px] sm:text-sm focus:outline-none focus:border-[#fbbf24]/50 font-semibold cursor-pointer pr-8"
-            >
-              <option value="" className="text-gray-500 italic">-- Random --</option>
+              placeholder="Nhập lệnh (vd: 111) hoặc chọn quà..."
+              className="w-full bg-black/40 border border-white/10 hover:border-white/20 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-white text-[11px] sm:text-sm focus:outline-none focus:border-[#fbbf24]/50 font-semibold"
+            />
+            <datalist id={`gift-options-${video.id}`}>
               {allGifts.map(g => (
-                <option key={g.giftId} value={g.giftName} className="text-white font-medium">
-                  {g.giftName}
-                </option>
+                <option key={g.giftId} value={g.giftName} />
               ))}
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
-              <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
+            </datalist>
           </div>
         </div>
       )}

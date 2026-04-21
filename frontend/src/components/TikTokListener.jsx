@@ -70,7 +70,7 @@ const TikTokListener = () => {
       if (activeVideos.length === 0) return;
 
       const giftNameLower = giftName.toLowerCase().trim();
-      
+
       const amount = Number(giftData.amount ?? 1);
       const n = 1; // Chỉ xếp hàng 1 video dù tặng số lượng bao nhiêu
       const displayGiftName = `x${amount} ${giftName}`;
@@ -125,7 +125,32 @@ const TikTokListener = () => {
     });
 
     socket.on("tiktok_chat", (msg) => {
-      addLog({ type: "chat", name: msg.nickname || msg.user, text: msg.comment, avatar: msg.profilePicture });
+      const username = msg.nickname || msg.user;
+      addLog({ type: "chat", name: username, text: msg.comment, avatar: msg.profilePicture });
+
+      const commentText = (msg.comment || "").toLowerCase().trim();
+      const activeVideos = useVideoStore.getState().getGiftVideos();
+      if (activeVideos.length === 0) return;
+
+      // Check if comment matches any video's trigger (the 'gift' field)
+      const matchedVideos = activeVideos.filter(
+        (v) => v.gift && v.gift.toLowerCase().trim() === commentText
+      );
+
+      if (matchedVideos.length > 0) {
+        const state = useVideoStore.getState();
+        const lastQueued = state.videoQueue[state.videoQueue.length - 1] ?? state.selectedVideo;
+        const curIdx = matchedVideos.findIndex((v) => v.video === lastQueued);
+
+        // Rotary mode pick
+        const idx = ((curIdx === -1 ? 0 : curIdx) + 1) % matchedVideos.length;
+        const v = matchedVideos[idx];
+        const path = v.video;
+
+        useVideoStore.getState().enqueueVideo(path, `Lệnh: ${msg.comment}`, username);
+        // Commands are free, 0 diamonds
+        useVideoStore.getState().addIdolGift(v.idolId, 0, null);
+      }
     });
 
     return () => socket.disconnect();
