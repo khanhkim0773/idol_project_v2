@@ -8,6 +8,7 @@ import VideoGiftPodium from "../components/VideoGiftPodium";
 import GiftNotification from "../components/GiftNotification";
 import OverlayPlayer from "../components/OverlayPlayer";
 import ZoneOverlay from "../components/ZoneOverlay";
+import MCAssistant from "../components/MCAssistant";
 
 /* ─── TikTok-style Ultra-Glass Panel ─── */
 const GlassPanel = ({ title, children, className = "" }) => (
@@ -45,6 +46,7 @@ const HomePage = ({ username }) => {
 
   return (
     <div className="w-full h-full flex flex-col lg:flex-row items-stretch gap-3 md:gap-4 lg:gap-6 sm:p-3 sm:pt-3 md:p-4 md:pt-4 lg:p-6 lg:pt-6 overflow-hidden">
+      <MCAssistant />
 
       {/* ── LEFT COLUMN: Thành viên (Desktop) ── */}
       <div className="hidden lg:flex flex-col gap-3 lg:gap-4 w-[280px] xl:w-[320px] shrink-0 min-h-0">

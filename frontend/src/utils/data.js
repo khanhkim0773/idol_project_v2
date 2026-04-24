@@ -20,7 +20,7 @@ export const arrModels = [
     image: "/avatar/avatar-ba3.jpg",
     video: "/video/binhan-3.mp4",
   },
- 
+
   {
     id: 4,
     name: "Tiểu Kiều",

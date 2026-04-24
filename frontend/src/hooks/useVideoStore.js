@@ -142,6 +142,7 @@ export const useVideoStore = create((set, get) => ({
   currentGiftSender: null,
   videoMode: "favorite", // 'favorite' | 'queue'
   playId: 0,
+  lastActivity: Date.now(),
 
   // ---------- video queue ----------
   // Each item: { id, videoPath, giftName, nickname, timestamp }
@@ -159,7 +160,7 @@ export const useVideoStore = create((set, get) => ({
           timestamp: Date.now(),
         },
       ];
-      return { videoQueue: nextQueue };
+      return { videoQueue: nextQueue, lastActivity: Date.now() };
     });
 
     // If nothing is playing, start immediately

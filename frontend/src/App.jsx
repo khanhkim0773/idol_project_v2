@@ -19,6 +19,7 @@ import { loadSlim } from "@tsparticles/slim";
 
 import { useVideoStore } from "./hooks/useVideoStore";
 import ModalTTS from "./pages/ModalTTS";
+import MCPage from "./pages/MCPage";
 
 const App = () => {
   const [isConnected, setIsConnected] = useState(false);
@@ -74,16 +75,16 @@ const App = () => {
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Top-left: deep indigo blob */}
         <div className="absolute -top-40 -left-40 w-[800px] h-[800px] rounded-full bg-[#312e81]/60 blur-[100px] opacity-70" />
-        
+
         {/* Bottom-right: teal blob */}
         <div className="absolute -bottom-40 -right-40 w-[800px] h-[800px] rounded-full bg-[#0e7490]/50 blur-[100px] opacity-60" />
-        
+
         {/* Center: intense purple spotlight */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full bg-[#4f46e5]/20 blur-[140px]" />
-        
+
         {/* Top-right: pink/fuchsia accent */}
         <div className="absolute top-[-100px] right-[10%] w-[500px] h-[500px] rounded-full bg-[#db2777]/40 blur-[100px] opacity-50" />
-        
+
         {/* Subtle animated overlay */}
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
       </div>
@@ -99,6 +100,7 @@ const App = () => {
           <Route path={ROUTES_URL.OVERLAYS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><OverlayPage /></div>} />
           <Route path={ROUTES_URL.ZONES} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><ZonePage /></div>} />
           <Route path={ROUTES_URL.TTS} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><ModalTTS /></div>} />
+          <Route path={ROUTES_URL.MC} element={<div className="w-full h-full overflow-y-auto pt-16 sm:pt-20 pb-12 px-4 sm:px-6"><MCPage /></div>} />
         </Routes>
       </div>
 

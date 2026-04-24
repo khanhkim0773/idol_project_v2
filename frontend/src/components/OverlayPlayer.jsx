@@ -18,7 +18,7 @@ const OverlayPlayer = ({ isPreview = false, previewData = null, onClosePreview =
   // Auto-clear overlay after duration (Chỉ áp dụng cho particles hoặc fallback)
   useEffect(() => {
     if (!overlay) return;
-    
+
     // Video tự clear khi onEnded, nên nếu là video thì skip timeout (trừ khi có lỗi thì dùng safety timeout trong renderer)
     if (overlay.type === 'video') return;
 
@@ -50,7 +50,7 @@ const OverlayPlayer = ({ isPreview = false, previewData = null, onClosePreview =
       ) : (
         <ParticleOverlayRenderer overlay={overlay} />
       )}
-      
+
       {isPreview && (
         <div className="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-auto z-[100000]">
           <button onClick={onClosePreview} className="px-6 py-2 bg-red-500/80 hover:bg-red-500 rounded-full text-white font-bold shadow-lg">

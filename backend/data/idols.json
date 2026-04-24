@@ -23,14 +23,14 @@
   {
     "name": "Bảo Hân",
     "avatar": "/avatar/1776746435581-avatar.png",
-    "active": false,
+    "active": true,
     "order": 4,
     "id": 1776746441927
   },
   {
     "name": "Bình An",
     "avatar": "/avatar/1776746994461-avatar.png",
-    "active": true,
+    "active": false,
     "order": 5,
     "id": 1776746996026
   }

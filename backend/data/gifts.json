@@ -57,7 +57,7 @@
     "giftName": "Lucky pig",
     "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/d53125bd5416e6f2f6ab61da02ddd302.png~tplv-obj.png",
     "diamonds": 10,
-    "maxRepeatCount": 8,
+    "maxRepeatCount": 20,
     "active": true,
     "idolId": null
   },
@@ -75,7 +75,7 @@
     "giftName": "little kisses",
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/0a5db92508ee667339289b2f87bc3123.png~tplv-obj.png",
     "diamonds": 20,
-    "maxRepeatCount": 3,
+    "maxRepeatCount": 5,
     "active": true,
     "idolId": null
   },
@@ -438,7 +438,10 @@
   {
     "giftId": 6097,
     "giftName": "Little Crown",
-    "idolId": null
+    "idolId": null,
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/cf3db11b94a975417043b53401d0afe1~tplv-obj.png",
+    "diamonds": 99,
+    "maxRepeatCount": 1
   },
   {
     "giftId": 52064,
@@ -1206,7 +1209,7 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/04d53e1019450131a4054d84e0f89c85.png~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1,
+    "maxRepeatCount": 5,
     "id": 1776745840780
   },
   {
@@ -1244,5 +1247,59 @@
     "active": true,
     "maxRepeatCount": 1,
     "id": 1776754857264
+  },
+  {
+    "giftId": 19445,
+    "giftName": "Name shoutout",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/9b1d432109c95e77e8de11dd442c0a1f.png~tplv-obj.png",
+    "diamonds": 5,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776841818649
+  },
+  {
+    "giftId": 6149,
+    "giftName": "Interstellar",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/8520d47b59c202a4534c1560a355ae06~tplv-obj.png",
+    "diamonds": 10000,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776842780194
+  },
+  {
+    "giftId": 7121,
+    "giftName": "Marvelous Confetti",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/fccc851d351716bc8b34ec65786c727d~tplv-obj.png",
+    "diamonds": 100,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776930068000
+  },
+  {
+    "giftId": 16427,
+    "giftName": "Starlight Sceptre",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/bcb3636b904fe6050d6a47efb1eafd2c.png~tplv-obj.png",
+    "diamonds": 1200,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776934441662
+  },
+  {
+    "giftId": 52616,
+    "giftName": "Party Laser",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/469999dc1598d243114e9969f8d19467.png~tplv-obj.png",
+    "diamonds": 1300,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776934781037
+  },
+  {
+    "giftId": 14788,
+    "giftName": "Blow Rosie Kisses",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/710076b6be7de742f800c4ab88fab9ff.png~tplv-obj.png",
+    "diamonds": 2199,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776935128283
   }
 ]

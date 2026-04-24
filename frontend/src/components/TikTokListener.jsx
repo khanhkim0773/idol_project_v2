@@ -7,6 +7,7 @@ import { useGiftStore } from "../hooks/useGiftStore";
 import { useOverlayStore } from "../hooks/useOverlayStore";
 import { SOCKET_URL } from "../utils/constant";
 import { MESSAGE_TYPE } from "../utils/type";
+import ErrorBoundary from "./ErrorBoundary";
 
 const getMessageStyle = (type) => {
   if (type === "gift") return "text-[#d946ef]";
@@ -26,8 +27,8 @@ const TikTokListener = () => {
   const [isConnected, setIsConnected] = useState(false);
   const chatEndRef = useRef(null);
 
-  const activeVideos = getActiveVideos();
-  const currentIndex = activeVideos.findIndex((v) => v.video === selectedVideo);
+  const activeVideos = getActiveVideos() || [];
+  const currentIndex = Array.isArray(activeVideos) ? activeVideos.findIndex((v) => v?.video === selectedVideo) : -1;
   const actualIndex = currentIndex === -1 ? 0 : currentIndex;
 
   useEffect(() => {
@@ -157,50 +158,52 @@ const TikTokListener = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col bg-transparent">
-      {/* Header compact */}
-      <div className="shrink-0 px-4 py-2 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
-        <div className="flex items-center gap-2">
-          <div className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${isConnected ? "bg-[#10b981] animate-pulse" : "bg-red-500"}`} />
-          <span className="text-[8px] sm:text-[9px] font-semibold text-white/40">
-            {isConnected ? "Live Stream" : "Disconnected"}
+    <ErrorBoundary>
+      <div className="w-full h-full flex flex-col bg-transparent">
+        {/* Header compact */}
+        <div className="shrink-0 px-4 py-2 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
+          <div className="flex items-center gap-2">
+            <div className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${isConnected ? "bg-[#10b981] animate-pulse" : "bg-red-500"}`} />
+            <span className="text-[8px] sm:text-[9px] font-semibold text-white/40">
+              {isConnected ? "Live Stream" : "Disconnected"}
+            </span>
+          </div>
+          <span className="text-[8px] sm:text-[9px] font-semibold text-white/30 tracking-tight">
+            IDOL <span className="text-white/55">{actualIndex + 1}/{activeVideos.length}</span>
           </span>
         </div>
-        <span className="text-[8px] sm:text-[9px] font-semibold text-white/30 tracking-tight">
-          IDOL <span className="text-white/55">{actualIndex + 1}/{activeVideos.length}</span>
-        </span>
-      </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-1.5 py-1 flex flex-col gap-0.5 custom-scrollbar">
-        {logs.length === 0 ? (
-          <div className="flex-1 flex items-center justify-center text-white/10 text-[9px] font-bold tracking-[0.2em] py-10">
-            Awaiting Activity...
-          </div>
-        ) : (
-          logs.map((log) => (
-            <div key={log.id} className="flex items-start gap-1.5 sm:gap-2.5 px-2 sm:px-2.5 py-1 sm:py-1.5 hover:bg-white/[0.03] rounded-lg transition-colors group">
-              {log.avatar ? (
-                <img src={log.avatar} alt="" className="w-5 h-5 sm:w-6 sm:h-6 rounded-full object-cover shrink-0 border border-white/5" />
-              ) : (
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/5 shrink-0" />
-              )}
-              <div className="flex-1 min-w-0 leading-tight">
-                {log.name && (
-                  <span className="text-[9.5px] sm:text-[10.5px] font-semibold text-white/50 mr-1 group-hover:text-white/80 transition-colors">
-                    {log.name}
-                  </span>
-                )}
-                <span className={`text-[9.5px] sm:text-[10.5px] font-normal break-words leading-tight sm:leading-snug ${getMessageStyle(log.type)}`}>
-                  {log.text}
-                </span>
-              </div>
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-1.5 py-1 flex flex-col gap-0.5 custom-scrollbar">
+          {logs.length === 0 ? (
+            <div className="flex-1 flex items-center justify-center text-white/10 text-[9px] font-bold tracking-[0.2em] py-10">
+              Awaiting Activity...
             </div>
-          ))
-        )}
-        <div ref={chatEndRef} />
+          ) : (
+            logs.map((log) => (
+              <div key={log.id} className="flex items-start gap-1.5 sm:gap-2.5 px-2 sm:px-2.5 py-1 sm:py-1.5 hover:bg-white/[0.03] rounded-lg transition-colors group">
+                {log.avatar ? (
+                  <img src={log.avatar} alt="" className="w-5 h-5 sm:w-6 sm:h-6 rounded-full object-cover shrink-0 border border-white/5" />
+                ) : (
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/5 shrink-0" />
+                )}
+                <div className="flex-1 min-w-0 leading-tight">
+                  {log.name && (
+                    <span className="text-[9.5px] sm:text-[10.5px] font-semibold text-white/50 mr-1 group-hover:text-white/80 transition-colors">
+                      {log.name}
+                    </span>
+                  )}
+                  <span className={`text-[9.5px] sm:text-[10.5px] font-normal break-words leading-tight sm:leading-snug ${getMessageStyle(log.type)}`}>
+                    {log.text}
+                  </span>
+                </div>
+              </div>
+            ))
+          )}
+          <div ref={chatEndRef} />
+        </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 };
 

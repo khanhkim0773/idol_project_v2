@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { MdDashboard, MdOndemandVideo, MdCardGiftcard, MdMenu, MdClose, MdRecentActors, MdAutoAwesome, MdOpenWith } from "react-icons/md";
+import { MdDashboard, MdOndemandVideo, MdCardGiftcard, MdMenu, MdClose, MdRecentActors, MdAutoAwesome, MdOpenWith, MdRecordVoiceOver } from "react-icons/md";
 import { ROUTES_URL } from "../../utils/constant";
 import { LuSpeech } from "react-icons/lu";
 
@@ -12,6 +12,7 @@ const Menu = [
   { name: "Overlays", icon: <MdAutoAwesome />, path: ROUTES_URL.OVERLAYS },
   { name: "Gift Zones", icon: <MdOpenWith />, path: ROUTES_URL.ZONES },
   { name: "Text to Speech", icon: <LuSpeech />, path: ROUTES_URL.TTS },
+  { name: "MC Assistant", icon: <MdRecordVoiceOver />, path: ROUTES_URL.MC },
 ];
 
 const NavItems = ({ onClose }) => (

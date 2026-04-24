@@ -147,7 +147,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded, videoMode = "favorite
  {/* Slot A */}
  <video
  ref={videoRefA}
- src={slotA.src}
+ src={slotA.src || undefined}
  muted={false}
  playsInline
  className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out
@@ -166,7 +166,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded, videoMode = "favorite
  {/* Slot B */}
  <video
  ref={videoRefB}
- src={slotB.src}
+ src={slotB.src || undefined}
  muted
  playsInline
  className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out

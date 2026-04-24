@@ -16,6 +16,7 @@ export const ROUTES_URL = {
     OVERLAYS: "/overlays",
     ZONES: "/zones",
     TTS: "/tts",
+    MC: "/mc",
 }
 
 

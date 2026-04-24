@@ -4,168 +4,168 @@ import { useVideoStore } from "../hooks/useVideoStore";
 import { useGiftStore } from "../hooks/useGiftStore";
 import { SOCKET_URL } from "../utils/constant";
 import {
- MdClose,
- MdImage,
- MdCloudUpload,
- MdCheck,
- MdOndemandVideo,
- MdCardGiftcard,
- MdRecentActors,
- MdAdd,
- MdDelete,
- MdEdit,
+  MdClose,
+  MdImage,
+  MdCloudUpload,
+  MdCheck,
+  MdOndemandVideo,
+  MdCardGiftcard,
+  MdRecentActors,
+  MdAdd,
+  MdDelete,
+  MdEdit,
 } from "react-icons/md";
 
 // Note: Re-using the same upload util
 const API = SOCKET_URL;
 
 async function uploadFile(file, type) {
- const form = new FormData();
- form.append("file", file);
- const res = await fetch(`${API}/api/upload/${type}`, {
- method: "POST",
- body: form,
- });
- if (!res.ok) {
- let msg = res.statusText;
- try {
- const body = await res.json();
- if (body.error) msg = body.error;
- } catch {}
- throw new Error(msg);
- }
- const data = await res.json();
- return data.path;
+  const form = new FormData();
+  form.append("file", file);
+  const res = await fetch(`${API}/api/upload/${type}`, {
+    method: "POST",
+    body: form,
+  });
+  if (!res.ok) {
+    let msg = res.statusText;
+    try {
+      const body = await res.json();
+      if (body.error) msg = body.error;
+    } catch { }
+    throw new Error(msg);
+  }
+  const data = await res.json();
+  return data.path;
 }
 
 const IdolDetailPanel = ({ idolId, onClose }) => {
- const { idols, updateIdol } = useIdolStore();
- const { videos, addVideo, updateVideo, deleteVideo } = useVideoStore();
- const { gifts, updateGift } = useGiftStore();
+  const { idols, updateIdol } = useIdolStore();
+  const { videos, addVideo, updateVideo, deleteVideo } = useVideoStore();
+  const { gifts, updateGift } = useGiftStore();
 
- const idol = idols.find((i) => i.id === idolId);
- const idolVideos = videos.filter((v) => v.idolId === idolId).sort((a,b) => a.order - b.order);
- const idolGifts = gifts.filter((g) => g.idolId === idolId);
+  const idol = idols.find((i) => i.id === idolId);
+  const idolVideos = videos.filter((v) => v.idolId === idolId).sort((a, b) => a.order - b.order);
+  const idolGifts = gifts.filter((g) => g.idolId === idolId);
 
- const [activeTab, setActiveTab] = useState("info"); // info, videos, gifts
+  const [activeTab, setActiveTab] = useState("info"); // info, videos, gifts
 
- if (!idol) return null;
+  if (!idol) return null;
 
- return (
- <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 sm:p-6">
- <div className="w-full max-w-5xl h-[90vh] bg-[#1a1b26]/90 border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col backdrop-blur-2xl">
- {/* Header */}
- <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.05] bg-white/[0.02] shrink-0">
- <div className="flex items-center gap-4">
- <div className="w-12 h-12 rounded-full overflow-hidden bg-[#252630] border-2 border-[#d946ef]/40 flex items-center justify-center">
- {idol.avatar ? <img src={idol.avatar} className="w-full h-full object-cover" /> : <MdRecentActors size={24} className="text-gray-500"/>}
- </div>
- <div>
- <h2 className="text-white font-bold text-sm sm:text-base tracking-tight">{idol.name}</h2>
- <p className="text-[9px] sm:text-[11px] text-gray-400 font-mono">ID: {idol.id} • {idolVideos.length} video • {idolGifts.length} quà</p>
- </div>
- </div>
- <button onClick={onClose} className="text-gray-400 hover:text-white p-2 rounded-xl hover:bg-white/[0.08] transition">
- <MdClose size={24} />
- </button>
- </div>
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 sm:p-6">
+      <div className="w-full max-w-5xl h-[90vh] bg-[#1a1b26]/90 border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col backdrop-blur-2xl">
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.05] bg-white/[0.02] shrink-0">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full overflow-hidden bg-[#252630] border-2 border-[#d946ef]/40 flex items-center justify-center">
+              {idol.avatar ? <img src={idol.avatar} className="w-full h-full object-cover" /> : <MdRecentActors size={24} className="text-gray-500" />}
+            </div>
+            <div>
+              <h2 className="text-white font-bold text-sm sm:text-base tracking-tight">{idol.name}</h2>
+              <p className="text-[9px] sm:text-[11px] text-gray-400 font-mono">ID: {idol.id} • {idolVideos.length} video • {idolGifts.length} quà</p>
+            </div>
+          </div>
+          <button onClick={onClose} className="text-gray-400 hover:text-white p-2 rounded-xl hover:bg-white/[0.08] transition">
+            <MdClose size={24} />
+          </button>
+        </div>
 
- {/* Navigation */}
- <div className="flex px-4 sm:px-6 gap-4 sm:gap-6 border-b border-white/[0.05] shrink-0">
- <button onClick={() => setActiveTab("info")} className={`py-3 text-[10px] sm:text-xs font-medium border-b-2 transition-colors ${activeTab === 'info' ? 'border-[#d946ef] text-[#d946ef]' : 'border-transparent text-gray-500 hover:text-white'}`}>
- Thông tin
- </button>
- <button onClick={() => setActiveTab("videos")} className={`py-3 text-[10px] sm:text-xs font-medium border-b-2 transition-colors ${activeTab === 'videos' ? 'border-[#06b6d4] text-[#06b6d4]' : 'border-transparent text-gray-500 hover:text-white'}`}>
- Video & Quà
- </button>
- </div>
+        {/* Navigation */}
+        <div className="flex px-4 sm:px-6 gap-4 sm:gap-6 border-b border-white/[0.05] shrink-0">
+          <button onClick={() => setActiveTab("info")} className={`py-3 text-[10px] sm:text-xs font-medium border-b-2 transition-colors ${activeTab === 'info' ? 'border-[#d946ef] text-[#d946ef]' : 'border-transparent text-gray-500 hover:text-white'}`}>
+            Thông tin
+          </button>
+          <button onClick={() => setActiveTab("videos")} className={`py-3 text-[10px] sm:text-xs font-medium border-b-2 transition-colors ${activeTab === 'videos' ? 'border-[#06b6d4] text-[#06b6d4]' : 'border-transparent text-gray-500 hover:text-white'}`}>
+            Video & Quà
+          </button>
+        </div>
 
- {/* Content Area */}
- <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
- {activeTab === "info" && <TabInfo idol={idol} updateIdol={updateIdol} />}
- {activeTab === "videos" && <TabVideos idol={idol} idolVideos={idolGifts.length} allVideos={videos} allGifts={gifts} updateVideo={updateVideo} />}
- </div>
- </div>
- </div>
- );
+        {/* Content Area */}
+        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+          {activeTab === "info" && <TabInfo idol={idol} updateIdol={updateIdol} />}
+          {activeTab === "videos" && <TabVideos idol={idol} idolVideos={idolGifts.length} allVideos={videos} allGifts={gifts} updateVideo={updateVideo} />}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 // --- Tab Components ---
 
 const TabInfo = ({ idol, updateIdol }) => {
- const [form, setForm] = useState(idol);
- const [uploading, setUploading] = useState(false);
- const avatarRef = useRef();
+  const [form, setForm] = useState(idol);
+  const [uploading, setUploading] = useState(false);
+  const avatarRef = useRef();
 
- const handleAvatarFile = async (e) => {
- const file = e.target.files[0];
- if (!file) return;
- const localUrl = URL.createObjectURL(file);
- setForm(p => ({ ...p, avatar: localUrl }));
- setUploading(true);
- try {
- const path = await uploadFile(file, "avatar");
- setForm(p => ({ ...p, avatar: path }));
- updateIdol(idol.id, { avatar: path });
- URL.revokeObjectURL(localUrl);
- } catch (err) {
- alert("Lỗi upload: " + err.message);
- } finally {
- setUploading(false);
- }
- };
+  const handleAvatarFile = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const localUrl = URL.createObjectURL(file);
+    setForm(p => ({ ...p, avatar: localUrl }));
+    setUploading(true);
+    try {
+      const path = await uploadFile(file, "avatar");
+      setForm(p => ({ ...p, avatar: path }));
+      updateIdol(idol.id, { avatar: path });
+      URL.revokeObjectURL(localUrl);
+    } catch (err) {
+      alert("Lỗi upload: " + err.message);
+    } finally {
+      setUploading(false);
+    }
+  };
 
- const handleSaveName = () => {
- if (form.name.trim() && form.name !== idol.name) {
- updateIdol(idol.id, { name: form.name.trim() });
- }
- };
+  const handleSaveName = () => {
+    if (form.name.trim() && form.name !== idol.name) {
+      updateIdol(idol.id, { name: form.name.trim() });
+    }
+  };
 
- return (
- <div className="max-w-xl flex flex-col gap-8">
- <div className="flex items-center gap-6">
- <div
- className={`relative shrink-0 w-32 h-32 rounded-3xl border-2 border-dashed bg-[#252630] flex flex-col items-center justify-center cursor-pointer transition-colors overflow-hidden ring-4 ring-[#252630]/50 ${uploading ? "border-[#06b6d4]" : "border-[#3f404d] hover:border-[#06b6d4]"}`}
- onClick={() => !uploading && avatarRef.current?.click()}
- >
- {form.avatar ? (
- <img src={form.avatar} alt="avatar" className="w-full h-full object-cover" />
- ) : (
- <div className="flex flex-col items-center gap-2 text-gray-500">
- <MdCloudUpload size={32} />
- <span className="text-[9px] font-medium">Chọn ảnh</span>
- </div>
- )}
- <div className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition flex items-center justify-center">
- {uploading ? <div className="w-8 h-8 border-3 border-[#06b6d4] border-t-transparent rounded-full animate-spin" /> : <MdImage size={28} className="text-white" />}
- </div>
- <input ref={avatarRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarFile} />
- </div>
- <div>
- <h3 className="text-sm sm:text-lg font-bold text-[11px] sm:text-[13px] text-white mb-0.5">Ảnh đại diện</h3>
- <p className="text-[9px] sm:text-[11px] text-gray-400 leading-tight">Click vào khung ảnh để thay đổi.</p>
- </div>
- </div>
+  return (
+    <div className="max-w-xl flex flex-col gap-8">
+      <div className="flex items-center gap-6">
+        <div
+          className={`relative shrink-0 w-32 h-32 rounded-3xl border-2 border-dashed bg-[#252630] flex flex-col items-center justify-center cursor-pointer transition-colors overflow-hidden ring-4 ring-[#252630]/50 ${uploading ? "border-[#06b6d4]" : "border-[#3f404d] hover:border-[#06b6d4]"}`}
+          onClick={() => !uploading && avatarRef.current?.click()}
+        >
+          {form.avatar ? (
+            <img src={form.avatar} alt="avatar" className="w-full h-full object-cover" />
+          ) : (
+            <div className="flex flex-col items-center gap-2 text-gray-500">
+              <MdCloudUpload size={32} />
+              <span className="text-[9px] font-medium">Chọn ảnh</span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition flex items-center justify-center">
+            {uploading ? <div className="w-8 h-8 border-3 border-[#06b6d4] border-t-transparent rounded-full animate-spin" /> : <MdImage size={28} className="text-white" />}
+          </div>
+          <input ref={avatarRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarFile} />
+        </div>
+        <div>
+          <h3 className="text-sm sm:text-lg font-bold text-[11px] sm:text-[13px] text-white mb-0.5">Ảnh đại diện</h3>
+          <p className="text-[9px] sm:text-[11px] text-gray-400 leading-tight">Click vào khung ảnh để thay đổi.</p>
+        </div>
+      </div>
 
- <div>
- <label className="text-[9px] font-medium text-gray-500 mb-1.5 block">Tên nhân vật</label>
- <div className="flex gap-3">
- <input
- value={form.name}
- onChange={(e) => setForm({...form, name: e.target.value})}
- className="flex-1 bg-[#252630] border border-[#2e2f38] rounded-xl px-4 py-2 text-white text-[11px] sm:text-xs focus:outline-none focus:border-[#d946ef]/60 transition-all font-normal"
- />
- <button 
- onClick={handleSaveName}
- disabled={form.name === idol.name || !form.name.trim()}
- className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-[10px] sm:text-xs font-semibold disabled:opacity-30 disabled:grayscale transition"
- >
- Cập nhật
- </button>
- </div>
- </div>
- </div>
- );
+      <div>
+        <label className="text-[9px] font-medium text-gray-500 mb-1.5 block">Tên nhân vật</label>
+        <div className="flex gap-3">
+          <input
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            className="flex-1 bg-[#252630] border border-[#2e2f38] rounded-xl px-4 py-2 text-white text-[11px] sm:text-xs focus:outline-none focus:border-[#d946ef]/60 transition-all font-normal"
+          />
+          <button
+            onClick={handleSaveName}
+            disabled={form.name === idol.name || !form.name.trim()}
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#d946ef] to-[#8b5cf6] text-white text-[10px] sm:text-xs font-semibold disabled:opacity-30 disabled:grayscale transition"
+          >
+            Cập nhật
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const TabVideos = ({ idol, allVideos, allGifts, updateVideo }) => {
@@ -173,7 +173,7 @@ const TabVideos = ({ idol, allVideos, allGifts, updateVideo }) => {
 
   const idolVideos = allVideos
     .filter((v) => v.idolId === idol.id)
-    .sort((a,b) => a.order - b.order);
+    .sort((a, b) => a.order - b.order);
 
   const idleVideos = idolVideos.filter(v => v.isIdle);
   const giftVideos = idolVideos.filter(v => !v.isIdle);
@@ -195,11 +195,11 @@ const TabVideos = ({ idol, allVideos, allGifts, updateVideo }) => {
             <p className="text-gray-400 text-[9px] sm:text-[11px] mt-1">Phát xoay vòng ngẫu nhiên khi Idol rảnh rỗi (không có quà).</p>
           </div>
           <button onClick={() => setPickerParam({ isIdle: true })} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#10b981]/10 text-[#10b981] hover:bg-[#10b981]/20 font-semibold border border-[#10b981]/30 transition text-[10px] sm:text-xs shrink-0">
-            <MdAdd size={18} className="sm:size-5"/>
+            <MdAdd size={18} className="sm:size-5" />
             Thêm Video Chờ
           </button>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {idleVideos.length === 0 && (
             <div className="col-span-full py-8 text-center text-gray-500 border border-dashed border-white/10 rounded-2xl">
@@ -220,7 +220,7 @@ const TabVideos = ({ idol, allVideos, allGifts, updateVideo }) => {
             <p className="text-gray-400 text-[9px] sm:text-[11px] mt-1">Chỉ phát khi nhận đúng món quà được gán. Tránh phát ngẫu nhiên.</p>
           </div>
           <button onClick={() => setPickerParam({ isIdle: false })} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#fbbf24]/10 text-[#fbbf24] hover:bg-[#fbbf24]/20 font-semibold border border-[#fbbf24]/30 transition text-[10px] sm:text-xs shrink-0">
-            <MdAdd size={18} className="sm:size-5"/>
+            <MdAdd size={18} className="sm:size-5" />
             Thêm Video Quà
           </button>
         </div>
@@ -247,26 +247,26 @@ const TabVideos = ({ idol, allVideos, allGifts, updateVideo }) => {
                 </h3>
                 <p className="text-gray-400 text-[9px] mt-1">Chọn để gán cho {idol.name}.</p>
               </div>
-              <button onClick={()=>setPickerParam(null)} className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-gray-500 hover:text-white hover:bg-white/10 transition">
-                <MdClose size={20}/>
+              <button onClick={() => setPickerParam(null)} className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-gray-500 hover:text-white hover:bg-white/10 transition">
+                <MdClose size={20} />
               </button>
             </div>
             <div className="p-5 sm:p-7 overflow-y-auto flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 custom-scrollbar">
               {availableVideos.length === 0 && (
                 <div className="col-span-full py-16 flex flex-col items-center justify-center text-gray-500 border border-dashed border-white/10 rounded-2xl">
-                  <MdOndemandVideo size={48} className="mb-3 opacity-30"/>
-                  Kho chung đã hết Video khả dụng.<br/>Vui lòng trở về và tải thêm lên từ Thư viện gốc.
+                  <MdOndemandVideo size={48} className="mb-3 opacity-30" />
+                  Kho chung đã hết Video khả dụng.<br />Vui lòng trở về và tải thêm lên từ Thư viện gốc.
                 </div>
               )}
               {availableVideos.map(v => (
-                <div key={v.id} 
+                <div key={v.id}
                   onClick={() => {
                     updateVideo(v.id, { idolId: idol.id, isIdle: pickerParam.isIdle });
                     setPickerParam(null);
                   }}
                   className="flex flex-col group cursor-pointer relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-[#06b6d4]/5 hover:border-[#06b6d4]/40 transition-all duration-300 shadow-lg hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)] hover:-translate-y-1">
                   <div className="aspect-video w-full bg-black/50 flex items-center justify-center overflow-hidden border-b border-white/5 relative">
-                    {v.avatar ? 
+                    {v.avatar ?
                       <img src={v.avatar} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" /> :
                       <MdOndemandVideo size={36} className="text-gray-600 group-hover:text-[#06b6d4] transition-colors duration-300" />
                     }
@@ -298,15 +298,15 @@ const VideoCardMini = ({ video, allGifts, updateVideo, handleRemove }) => {
           {video.name || video.video.split("/").pop()}
         </div>
         <div className="flex gap-2">
-          <button 
-            onClick={() => updateVideo(video.id, { active: !video.active })} 
+          <button
+            onClick={() => updateVideo(video.id, { active: !video.active })}
             className={`relative w-10 h-5 rounded-full transition-colors duration-300 border border-transparent shrink-0 ${video.active ? "bg-[#10b981]" : "bg-white/10 border-white/5"}`}
             title={video.active ? "Đang Bật" : "Đã Tắt"}
           >
             <div className={`absolute top-[2px] left-[2.5px] w-[14px] h-[14px] bg-white rounded-full transition-transform duration-300 shadow-sm ${video.active ? "translate-x-[20px]" : "translate-x-0"}`} />
           </button>
-          <button onClick={() => { if(confirm("Xóa video khỏi Idol này?")) handleRemove(video.id) }} className="text-gray-400 hover:text-red-500 transition-colors" title="Bỏ Chọn Video Này">
-            <MdClose size={18}/>
+          <button onClick={() => { if (confirm("Xóa video khỏi Idol này?")) handleRemove(video.id) }} className="text-gray-400 hover:text-red-500 transition-colors" title="Bỏ Chọn Video Này">
+            <MdClose size={18} />
           </button>
         </div>
       </div>
@@ -314,13 +314,13 @@ const VideoCardMini = ({ video, allGifts, updateVideo, handleRemove }) => {
       {!video.isIdle && (
         <div className="bg-[#fbbf24]/5 border border-[#fbbf24]/20 p-3 rounded-xl mt-auto">
           <label className="text-[9px] font-medium text-[#fbbf24]/80 mb-1.5 flex items-center gap-1">
-            <MdCardGiftcard size={12}/> Quà / Lệnh gán cho video này
+            <MdCardGiftcard size={12} /> Quà / Lệnh gán cho video này
           </label>
           <div className="relative">
-            <input 
+            <input
               type="text"
               list={`gift-options-${video.id}`}
-              value={video.gift || ""} 
+              value={video.gift || ""}
               onChange={handleGiftSelect}
               placeholder="Nhập lệnh (vd: 111) hoặc chọn quà..."
               className="w-full bg-black/40 border border-white/10 hover:border-white/20 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-white text-[11px] sm:text-sm focus:outline-none focus:border-[#fbbf24]/50 font-semibold"

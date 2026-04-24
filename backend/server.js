@@ -5,7 +5,7 @@ import { Server } from "socket.io";
 import cors from "cors";
 import fs from "fs";
 
-import { PUBLIC_DIR, VIDEO_DIR, AVATAR_DIR, OVERLAY_DIR, DATA_DIR } from "./config/paths.js";
+import { PUBLIC_DIR, VIDEO_DIR, AVATAR_DIR, OVERLAY_DIR, DATA_DIR, MC_AUDIO_DIR } from "./config/paths.js";
 import { createTiktokRouter } from "./routes/tiktok.routes.js";
 import { uploadRouter } from "./routes/upload.routes.js";
 import { filesRouter } from "./routes/files.routes.js";
@@ -15,9 +15,10 @@ import statsRouter from "./routes/stats.routes.js";
 import { createIdolsRouter } from "./routes/idols.routes.js";
 import { createOverlaysRouter } from "./routes/overlays.routes.js";
 import { createZonesRouter } from "./routes/zones.routes.js";
+import { createMCRouter } from "./routes/mc.routes.js";
 
 // Đảm bảo các thư mục vật lý tồn tại
-[VIDEO_DIR, AVATAR_DIR, OVERLAY_DIR, DATA_DIR].forEach((dir) => {
+[VIDEO_DIR, AVATAR_DIR, OVERLAY_DIR, DATA_DIR, MC_AUDIO_DIR].forEach((dir) => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
@@ -50,6 +51,7 @@ app.use("/api/videos", createVideosRouter());           // GET/POST/PATCH /api/v
 app.use("/api/idols", createIdolsRouter());             // GET/POST/PATCH/DELETE /api/idols
 app.use("/api/overlays", createOverlaysRouter());       // GET/POST/PATCH/DELETE /api/overlays
 app.use("/api/zones", createZonesRouter());             // GET/POST/PATCH/DELETE /api/zones
+app.use("/api/mc", createMCRouter());                   // GET/PATCH/POST/DELETE /api/mc
 app.use("/api/stats", statsRouter);                     // GET /api/stats/leaderboard
 
 // Proxy TTS voices-list (bypass CORS from ngrok)

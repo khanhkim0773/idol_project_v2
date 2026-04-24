@@ -12,3 +12,4 @@ export const AVATAR_DIR = path.join(PUBLIC_DIR, "avatar");
 export const OVERLAY_DIR = path.join(PUBLIC_DIR, "overlay");
 
 export const DATA_DIR = path.join(SERVER_DIR, "data");
+export const MC_AUDIO_DIR = path.join(PUBLIC_DIR, "audio", "mc");
