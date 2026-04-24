@@ -1322,5 +1322,14 @@
     "active": true,
     "maxRepeatCount": 1,
     "id": 1777000241179
+  },
+  {
+    "giftId": 15190,
+    "giftName": "Powerful Mind",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/2184128b55eaef8a390a1a43a2ffdf16.png~tplv-obj.png",
+    "diamonds": 450,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1777001308706
   }
 ]

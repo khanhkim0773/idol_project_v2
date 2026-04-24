@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Khu Câu Lệnh",
+    "name": "Khu Bình Luận",
     "nameEn": "Command Area",
     "icon": "command",
     "color": "#ff6b9d",
@@ -16,11 +16,11 @@
     "gifts": [
       {
         "giftId": 5586,
-        "title": "Comment 111 để thả tim"
+        "title": "111 thả tim"
       },
       {
         "giftId": 5269,
-        "title": "Comment 222 để biến hình"
+        "title": "222 biến hình "
       }
     ]
   },

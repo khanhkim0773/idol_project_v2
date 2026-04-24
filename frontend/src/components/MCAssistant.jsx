@@ -12,6 +12,12 @@ const MCAssistant = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const timerRef = useRef(null);
+  const shuffleBagRef = useRef([]); // Túi chứa các audio chưa được phát trong vòng hiện tại
+
+  // Reset túi khi danh sách audio thay đổi (bật/tắt, thêm/xóa)
+  useEffect(() => {
+    shuffleBagRef.current = [];
+  }, [audios]);
 
   // -- NEW: Refs for unmount safety --
   const isMountedRef = useRef(true);
@@ -98,12 +104,32 @@ const MCAssistant = () => {
       return;
     }
 
-    const randomAudio = activeAudios[Math.floor(Math.random() * activeAudios.length)];
+    // -- Shuffle Bag Logic --
+    // Nếu túi rỗng, làm mới túi bằng cách copy và xáo trộn (shuffle) danh sách active
+    if (shuffleBagRef.current.length === 0) {
+      const newBag = [...activeAudios];
+      for (let i = newBag.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newBag[i], newBag[j]] = [newBag[j], newBag[i]];
+      }
+      shuffleBagRef.current = newBag;
+    }
+
+    // Lấy audio đầu tiên ra khỏi túi
+    const nextAudio = shuffleBagRef.current.shift();
+
+    // Fallback an toàn
+    if (!nextAudio) {
+      timerRef.current = scheduleTimer(() => {
+        playRandomMC();
+      }, (currentConfig?.idleTimeout || 60) * 1000);
+      return;
+    }
     
     // Stop any existing audio
     stopAudio();
 
-    const audio = new Audio(`${SOCKET_URL}${randomAudio.path}`);
+    const audio = new Audio(`${SOCKET_URL}${nextAudio.path}`);
     audio.volume = currentConfig?.volume || 0.5;
     audioRef.current = audio;
     

@@ -4,7 +4,7 @@ import { SOCKET_URL } from "../utils/constant";
 const STORAGE_KEY = "tts_settings";
 
 const DEFAULTS = {
-  customApiUrl: "https://unoverlooked-soulfully-rayna.ngrok-free.dev/tts",
+  customApiUrl: "https://bb96-42-117-110-57.ngrok-free.app/tts",
   customVoice: "",
   customNumStep: 16,
   customFirstChunkWords: 10,
@@ -77,7 +77,7 @@ if (typeof document !== "undefined") {
 // ─── Custom API TTS (via backend proxy to bypass CORS) ───
 const speakWithCustomAPI = async (text, state) => {
   try {
-    const ttsUrl = state.customApiUrl || "https://unoverlooked-soulfully-rayna.ngrok-free.dev/tts";
+    const ttsUrl = state.customApiUrl || "https://bb96-42-117-110-57.ngrok-free.app/tts";
     const proxyUrl = `${SOCKET_URL}/api/tts/speak`;
 
     const payload = {
