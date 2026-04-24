@@ -1,1 +1,33 @@
-[]
+[
+  {
+    "name": "Rose",
+    "type": "particles",
+    "duration": 5,
+    "media_url": "/overlay/1777004579986-overlay-c51235f8-1d1e-432d-bfb4-09bea507400c.png",
+    "preview_color": "#d946ef",
+    "particle_config": {
+      "quantity": 96,
+      "speed": {
+        "min": 3.5,
+        "max": 6.5
+      },
+      "size": {
+        "min": 28,
+        "max": 73
+      },
+      "opacity": {
+        "min": 0.8,
+        "max": 1
+      },
+      "direction": "bottom",
+      "wobble": true,
+      "wobbleSpeed": 5,
+      "rotation": true,
+      "rotationSpeed": 16,
+      "fadeOut": true,
+      "lifespan": 5
+    },
+    "id": 1777003804384,
+    "active": true
+  }
+]

@@ -36,6 +36,8 @@ const HomePage = ({ username }) => {
   const currentGiftName = useVideoStore((state) => state.currentGiftName);
   const currentGiftSender = useVideoStore((state) => state.currentGiftSender);
   const interruptSignal = useVideoStore((state) => state.interruptSignal);
+  const confirmGiftSync = useVideoStore((state) => state.confirmGiftSync);
+  const activeGiftNotification = useVideoStore((state) => state.activeGiftNotification);
 
 
 
@@ -108,6 +110,7 @@ const HomePage = ({ username }) => {
                 key={`${selectedVideo}:${playId}`}
                 videoSrc={selectedVideo}
                 onVideoEnded={processNext}
+                onVideoPlay={videoMode === "queue" ? confirmGiftSync : undefined}
                 videoMode={videoMode}
               />
             )}
@@ -149,6 +152,7 @@ const HomePage = ({ username }) => {
               key={`${selectedVideo}:${playId}`}
               videoSrc={selectedVideo}
               onVideoEnded={processNext}
+              onVideoPlay={videoMode === "queue" ? confirmGiftSync : undefined}
               videoMode={videoMode}
             />
           )}

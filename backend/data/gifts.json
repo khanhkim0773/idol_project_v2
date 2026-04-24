@@ -8,7 +8,8 @@
     "active": true,
     "idolId": null,
     "overlayMedia": "/overlay/1775999319240-overlay-grok-video-bb093b32-c868-41f7-8310-f9752ffc77f6.mp4",
-    "overlayDuration": 1
+    "overlayDuration": 1,
+    "overlayId": 1777003804384
   },
   {
     "giftId": 7934,
@@ -192,7 +193,8 @@
     "diamonds": 1,
     "maxRepeatCount": 100,
     "active": true,
-    "idolId": null
+    "idolId": null,
+    "overlayId": 1777003804384
   },
   {
     "giftId": 57800,
@@ -394,7 +396,8 @@
     "diamonds": 1,
     "maxRepeatCount": 782,
     "active": true,
-    "idolId": null
+    "idolId": null,
+    "overlayId": 1777003804384
   },
   {
     "giftId": 17950,
@@ -579,7 +582,8 @@
     "diamonds": 1,
     "active": true,
     "maxRepeatCount": 9,
-    "idolId": null
+    "idolId": null,
+    "overlayId": 1777003804384
   },
   {
     "giftId": 9498,
@@ -752,7 +756,8 @@
     "diamonds": 1,
     "active": true,
     "maxRepeatCount": 1,
-    "idolId": null
+    "idolId": null,
+    "overlayId": 1777003804384
   },
   {
     "giftId": 19439,
@@ -947,7 +952,8 @@
     "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/saliency_seg_1768346196256_0.f4604ac3354a68b6b46e55a333aab7f1.png~tplv-obj.png",
     "diamonds": 1,
     "active": true,
-    "maxRepeatCount": 1
+    "maxRepeatCount": 1,
+    "overlayId": 1777003804384
   },
   {
     "giftId": 18708,
@@ -1331,5 +1337,14 @@
     "active": true,
     "maxRepeatCount": 1,
     "id": 1777001308706
+  },
+  {
+    "giftId": 17046,
+    "giftName": "Melon Juice",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/912d29e708fe00d72487908114803e77.png~tplv-obj.png",
+    "diamonds": 199,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1777003072252
   }
 ]

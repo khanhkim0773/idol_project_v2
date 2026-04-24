@@ -145,11 +145,59 @@ export const useVideoStore = create((set, get) => ({
   interruptSignal: 0,
   lastActivity: Date.now(),
 
+  // ---------- gift sync (nhạc trưởng) ----------
+  // Metadata của gift đang chờ video thực sự phát xong transition
+  // Sẽ được kích hoạt bởi confirmGiftSync() khi BlackScreenVideo gọi onVideoPlay
+  pendingGiftMeta: null,   // { overlayConfig, ttsText, ttsAmount, ttsGiftName, notifData }
+  activeGiftNotification: null, // { nickname, amount, giftName, avatar } | null
+
+  // Được gọi bởi BlackScreenVideo khi video quà tặng thực sự bắt đầu phát
+  // Kích hoạt overlay + TTS + notification cùng lúc
+  confirmGiftSync: () => {
+    const { pendingGiftMeta } = get();
+    if (!pendingGiftMeta) return;
+
+    // 1. Kích hoạt Overlay
+    if (pendingGiftMeta.overlayConfig) {
+      set({ activeOverlay: pendingGiftMeta.overlayConfig });
+    }
+
+    // 2. Kích hoạt TTS (import động để tránh circular dep)
+    if (pendingGiftMeta.ttsText) {
+      import("./useTTSStore").then(({ useTTSStore }) => {
+        useTTSStore.getState().speakGift(
+          pendingGiftMeta.ttsText,
+          pendingGiftMeta.ttsAmount,
+          pendingGiftMeta.ttsGiftName
+        );
+      });
+    }
+
+    // 3. Hiển thị Gift Notification
+    if (pendingGiftMeta.notifData) {
+      const notifId = Date.now();
+      set({ activeGiftNotification: { ...pendingGiftMeta.notifData, id: notifId } });
+      // Tự xóa sau 4 giây
+      setTimeout(() => {
+        set((state) => {
+          if (state.activeGiftNotification?.id === notifId) {
+            return { activeGiftNotification: null };
+          }
+          return {};
+        });
+      }, 4000);
+    }
+
+    // Xóa meta sau khi đã kích hoạt
+    set({ pendingGiftMeta: null });
+  },
+
   // ---------- video queue ----------
-  // Each item: { id, videoPath, giftName, nickname, timestamp }
+  // Each item: { id, videoPath, giftName, nickname, timestamp, meta }
   videoQueue: [],
 
-  enqueueVideo: (videoPath, giftName = "", nickname = "") => {
+  // meta: { overlayConfig, ttsText, ttsAmount, ttsGiftName, notifData }
+  enqueueVideo: (videoPath, giftName = "", nickname = "", meta = null) => {
     set((state) => {
       const nextQueue = [
         ...state.videoQueue,
@@ -159,6 +207,7 @@ export const useVideoStore = create((set, get) => ({
           giftName,
           nickname,
           timestamp: Date.now(),
+          meta,
         },
       ];
       return { videoQueue: nextQueue, lastActivity: Date.now() };
@@ -192,6 +241,8 @@ export const useVideoStore = create((set, get) => ({
           videoMode: "queue",
           videoQueue: updatedQueue,
           playId: playId + 1,
+          // Lưu meta để confirmGiftSync() kích hoạt sau khi video thực sự phát
+          pendingGiftMeta: nextItem.meta || null,
         };
       });
     } else {
@@ -289,5 +340,7 @@ export const useVideoStore = create((set, get) => ({
 
   triggerOverlay: (overlayConfig) => set({ activeOverlay: overlayConfig }),
   clearOverlay: () => set({ activeOverlay: null }),
+
+  clearGiftNotification: () => set({ activeGiftNotification: null }),
 
 }));

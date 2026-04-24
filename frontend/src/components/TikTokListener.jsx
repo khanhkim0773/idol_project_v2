@@ -65,7 +65,8 @@ const TikTokListener = () => {
         avatar: giftData.profilePicture,
       });
 
-      useTTSStore.getState().speakGift(giftData.nickname, giftData.amount, giftName);
+      // ⚠️ KHÔNG gọi speakGift() hay triggerOverlay() ở đây nữa
+      // Tất cả sẽ được kích hoạt đồng bộ bởi confirmGiftSync() khi video thực sự play
 
       const activeVideos = useVideoStore.getState().getGiftVideos();
       if (activeVideos.length === 0) return;
@@ -93,14 +94,31 @@ const TikTokListener = () => {
       const giftDiamonds = giftInfo?.diamonds || 1;
       const giftImage = giftInfo?.image || null;
 
-
+      // Tìm overlay config (nếu có) — lưu vào meta, KHÔNG trigger ngay
+      let overlayConfig = null;
       if (giftInfo?.overlayId) {
         const overlays = useOverlayStore.getState().overlays;
         const overlay = overlays.find(o => String(o.id) === String(giftInfo.overlayId));
         if (overlay && overlay.active) {
-          useVideoStore.getState().triggerOverlay(overlay);
+          overlayConfig = overlay;
         }
       }
+
+      // Đóng gói toàn bộ metadata để đồng bộ khi video play
+      const giftMeta = {
+        overlayConfig,
+        // TTS: truyền thông tin để speakGift() xây dựng câu nói
+        ttsText: giftData.nickname,
+        ttsAmount: amount,
+        ttsGiftName: giftName,
+        // Notification data
+        notifData: {
+          nickname: giftData.nickname || "Anonymous",
+          avatar: giftData.profilePicture,
+          amount: amount,
+          giftName: giftName || "Gift",
+        },
+      };
 
       const state = useVideoStore.getState();
       const lastQueued = state.videoQueue[state.videoQueue.length - 1] ?? state.selectedVideo;
@@ -112,7 +130,8 @@ const TikTokListener = () => {
         const idx = ((curIdx === -1 ? 0 : curIdx) + 1 + i) % matchedVideos.length;
         const v = matchedVideos[idx];
         const path = v.video;
-        useVideoStore.getState().enqueueVideo(path, displayGiftName, giftData.nickname);
+        // Truyền meta vào hàng đợi — sẽ được kích hoạt khi video thực sự play
+        useVideoStore.getState().enqueueVideo(path, displayGiftName, giftData.nickname, giftMeta);
         useVideoStore.getState().addIdolGift(v.idolId, giftDiamonds * amount, giftImage);
         scoreByPath.set(path, (scoreByPath.get(path) || 0) + amount);
       }

@@ -5,7 +5,7 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
  * Uses a 'Fixed Timer' linger effect to ensure the 3s blur is guaranteed.
  * Zero-flicker Top-Layer swap technique.
  */
-export const BlackScreenVideo = ({ videoSrc, onVideoEnded, videoMode = "favorite" }) => {
+export const BlackScreenVideo = ({ videoSrc, onVideoEnded, onVideoPlay, videoMode = "favorite" }) => {
  const isGiftMode = videoMode === "queue";
  const [slotA, setSlotA] = useState({ src: videoSrc, opacity: 1, zIndex: 10 });
  const [slotB, setSlotB] = useState({ src: "", opacity: 0, zIndex: 5 });
@@ -97,38 +97,41 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded, videoMode = "favorite
  });
 
  } else {
- // ===== GIFT MODE: Full cinematic swap with blur =====
- setIsWarping(true);
- playVideo(incomingRef);
+    // ===== GIFT MODE: Full cinematic swap with blur =====
+    setIsWarping(true);
+    playVideo(incomingRef);
 
- setTimeout(() => {
- if (incomingRef) incomingRef.currentTime = 0;
+    setTimeout(() => {
+      if (incomingRef) incomingRef.currentTime = 0;
 
- if (slot === "B") {
- setSlotB(prev => ({ ...prev, opacity: 1 }));
- } else {
- setSlotA(prev => ({ ...prev, opacity: 1 }));
- }
+      if (slot === "B") {
+        setSlotB(prev => ({ ...prev, opacity: 1 }));
+      } else {
+        setSlotA(prev => ({ ...prev, opacity: 1 }));
+      }
 
- setTimeout(() => {
- setActiveSlot(slot);
- if (oldRef) oldRef.pause();
+      setTimeout(() => {
+        setActiveSlot(slot);
+        if (oldRef) oldRef.pause();
 
- if (lingerTimeoutRef.current) clearTimeout(lingerTimeoutRef.current);
- lingerTimeoutRef.current = setTimeout(() => {
- setIsWarping(false);
+        // 🎯 Video quà tặng thực sự bắt đầu phát — kích hoạt nhạc trưởng
+        if (onVideoPlay) onVideoPlay();
 
- if (slot === "B") {
- setSlotA({ src: "", opacity: 0, zIndex: 5 });
- } else {
- setSlotB({ src: "", opacity: 0, zIndex: 5 });
- }
- }, 3000);
+        if (lingerTimeoutRef.current) clearTimeout(lingerTimeoutRef.current);
+        lingerTimeoutRef.current = setTimeout(() => {
+          setIsWarping(false);
 
- setIsTransitioning(false);
- }, 1000);
- }, 500);
- }
+          if (slot === "B") {
+            setSlotA({ src: "", opacity: 0, zIndex: 5 });
+          } else {
+            setSlotB({ src: "", opacity: 0, zIndex: 5 });
+          }
+        }, 3000);
+
+        setIsTransitioning(false);
+      }, 1000);
+    }, 500);
+  }
  };
 
  const handleTimeUpdate = (e) => {
