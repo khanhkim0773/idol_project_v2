@@ -1,8 +1,8 @@
 {
   "config": {
     "enabled": true,
-    "idleTimeout": 130,
-    "volume": 0.5,
+    "idleTimeout": 10,
+    "volume": 1,
     "interruptOnGift": true
   },
   "audios": [

@@ -49,8 +49,18 @@ const MCAssistant = () => {
   }, [lastActivity, config.enabled, config.idleTimeout, videoMode]);
 
   const playRandomMC = () => {
-    const activeAudios = audios.filter(a => a.active);
-    if (activeAudios.length === 0) return;
+    const state = useMCStore.getState();
+    const currentAudios = state.audios;
+    const currentConfig = state.config;
+
+    const activeAudios = currentAudios.filter(a => a.active);
+    if (activeAudios.length === 0) {
+      // Keep the loop alive even if no active audios are present yet
+      timerRef.current = setTimeout(() => {
+        playRandomMC();
+      }, (currentConfig?.idleTimeout || 60) * 1000);
+      return;
+    }
 
     const randomAudio = activeAudios[Math.floor(Math.random() * activeAudios.length)];
     
@@ -58,10 +68,19 @@ const MCAssistant = () => {
     stopAudio();
 
     const audio = new Audio(`${SOCKET_URL}${randomAudio.path}`);
-    audio.volume = config?.volume || 0.5;
+    audio.volume = currentConfig?.volume || 0.5;
     audioRef.current = audio;
     
-    audio.play().catch(err => console.warn("[MC] Playback blocked by browser:", err));
+    audio.play().catch(err => {
+      console.warn("[MC] Playback blocked by browser:", err);
+      setIsPlaying(false);
+      audioRef.current = null;
+      // Restart the idle timer if playback failed
+      const latestConfig = useMCStore.getState().config;
+      timerRef.current = setTimeout(() => {
+        playRandomMC();
+      }, (latestConfig?.idleTimeout || 60) * 1000);
+    });
     setIsPlaying(true);
 
     audio.onended = () => {
@@ -69,9 +88,10 @@ const MCAssistant = () => {
       setIsPlaying(false);
       audioRef.current = null;
       // Restart the idle timer after audio ends
+      const latestConfig = useMCStore.getState().config;
       timerRef.current = setTimeout(() => {
         playRandomMC();
-      }, (config?.idleTimeout || 60) * 1000);
+      }, (latestConfig?.idleTimeout || 60) * 1000);
     };
   };
 
