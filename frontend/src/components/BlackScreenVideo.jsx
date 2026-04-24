@@ -150,9 +150,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded, videoMode = "favorite
  src={slotA.src || undefined}
  muted={false}
  playsInline
- className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out
- ${(isGiftMode && isWarping) ? 'blur-[12px] scale-105 contrast-[1.1]' : 'blur-0 scale-100 contrast-[1.0]'}
- `}
+ className="absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out blur-0 scale-100 contrast-[1.0]"
  style={{
  opacity: slotA.opacity,
  zIndex: slotA.zIndex
@@ -169,9 +167,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded, videoMode = "favorite
  src={slotB.src || undefined}
  muted
  playsInline
- className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out
- ${(isGiftMode && isWarping) ? 'blur-[12px] scale-105 contrast-[1.1]' : 'blur-0 scale-100 contrast-[1.0]'}
- `}
+ className="absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out blur-0 scale-100 contrast-[1.0]"
  style={{
  opacity: slotB.opacity,
  zIndex: slotB.zIndex
@@ -186,9 +182,7 @@ export const BlackScreenVideo = ({ videoSrc, onVideoEnded, videoMode = "favorite
  OVERLAY MASK (Permanent during state)
  */}
  <div
- className={`absolute inset-0 z-[100] transition-all duration-700 pointer-events-none
- ${(isGiftMode && isWarping) ? 'opacity-100 bg-black/20' : 'opacity-0 bg-transparent'}
- `}
+ className="absolute inset-0 z-[100] transition-all duration-700 pointer-events-none opacity-0 bg-transparent"
  />
 
  </div>

@@ -13,6 +13,34 @@ const MCAssistant = () => {
   const audioRef = useRef(null);
   const timerRef = useRef(null);
 
+  // -- NEW: Refs for unmount safety --
+  const isMountedRef = useRef(true);
+  const allTimersRef = useRef(new Set());
+
+  const scheduleTimer = (fn, delay) => {
+    const id = setTimeout(() => {
+      allTimersRef.current.delete(id);
+      fn();
+    }, delay);
+    allTimersRef.current.add(id);
+    return id;
+  };
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      allTimersRef.current.forEach(id => clearTimeout(id));
+      allTimersRef.current.clear();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.onended = null;
+        audioRef.current = null;
+      }
+    };
+  }, []);
+  // ----------------------------------
+
   // Fetch initial data
   useEffect(() => {
     fetchMCData();
@@ -47,7 +75,7 @@ const MCAssistant = () => {
     }
 
     // Set new idle timer
-    timerRef.current = setTimeout(() => {
+    timerRef.current = scheduleTimer(() => {
       playRandomMC();
     }, (config?.idleTimeout || 60) * 1000);
 
@@ -64,7 +92,7 @@ const MCAssistant = () => {
     const activeAudios = currentAudios.filter(a => a.active);
     if (activeAudios.length === 0) {
       // Keep the loop alive even if no active audios are present yet
-      timerRef.current = setTimeout(() => {
+      timerRef.current = scheduleTimer(() => {
         playRandomMC();
       }, (currentConfig?.idleTimeout || 60) * 1000);
       return;
@@ -85,19 +113,19 @@ const MCAssistant = () => {
       audioRef.current = null;
       // Restart the idle timer if playback failed
       const latestConfig = useMCStore.getState().config;
-      timerRef.current = setTimeout(() => {
+      timerRef.current = scheduleTimer(() => {
         playRandomMC();
       }, (latestConfig?.idleTimeout || 60) * 1000);
     });
     setIsPlaying(true);
 
     audio.onended = () => {
-      if (!audioRef.current) return; // Component might have unmounted or audio stopped
+      if (!audioRef.current || !isMountedRef.current) return; // Component might have unmounted or audio stopped
       setIsPlaying(false);
       audioRef.current = null;
       // Restart the idle timer after audio ends
       const latestConfig = useMCStore.getState().config;
-      timerRef.current = setTimeout(() => {
+      timerRef.current = scheduleTimer(() => {
         playRandomMC();
       }, (latestConfig?.idleTimeout || 60) * 1000);
     };

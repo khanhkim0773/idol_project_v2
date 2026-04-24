@@ -290,7 +290,10 @@
     "giftId": 7122,
     "giftName": " Gem Gun",
     "active": true,
-    "idolId": null
+    "idolId": null,
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/dd06007ade737f1001977590b11d3f61~tplv-obj.png",
+    "diamonds": 500,
+    "maxRepeatCount": 1
   },
   {
     "giftId": 19448,
@@ -1301,5 +1304,23 @@
     "active": true,
     "maxRepeatCount": 1,
     "id": 1776935128283
+  },
+  {
+    "giftId": 5779,
+    "giftName": "I love you",
+    "image": "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/beaaa3a78a00b5b20661b00924ab0e7f~tplv-obj.png",
+    "diamonds": 10,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1776999830261
+  },
+  {
+    "giftId": 59005,
+    "giftName": "Live Up water",
+    "image": "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/6a6365da54b5f6b47570291a38995017.png~tplv-obj.png",
+    "diamonds": 15,
+    "active": true,
+    "maxRepeatCount": 1,
+    "id": 1777000241179
   }
 ]
