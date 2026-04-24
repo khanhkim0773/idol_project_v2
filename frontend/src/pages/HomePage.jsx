@@ -9,6 +9,7 @@ import GiftNotification from "../components/GiftNotification";
 import OverlayPlayer from "../components/OverlayPlayer";
 import ZoneOverlay from "../components/ZoneOverlay";
 import MCAssistant from "../components/MCAssistant";
+import GiftSimulator from "../components/GiftSimulator";
 
 /* ─── TikTok-style Ultra-Glass Panel ─── */
 const GlassPanel = ({ title, children, className = "" }) => (
@@ -66,6 +67,9 @@ const HomePage = ({ username }) => {
         <GlassPanel title="Thành viên" className="flex-1 min-h-0">
           <SelectThumbnail />
         </GlassPanel>
+
+        {/* Gift Simulator Panel */}
+        <GiftSimulator />
       </div>
 
       {/* ── CENTER: Phone Frame (Desktop) / Full Screen (Mobile) ── */}
