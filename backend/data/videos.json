@@ -413,5 +413,17 @@
     "idolId": 1776746996026,
     "id": 1776746966061,
     "isIdle": true
+  },
+  {
+    "name": "Bảo Hân biến hình",
+    "description": "Bảo Hân biến hình",
+    "avatar": "",
+    "video": "/video/1777006255774-biá--n-hÃ-nh-Ã-o-Ä-á--.mp4",
+    "order": 37,
+    "active": true,
+    "idolId": 1776746441927,
+    "id": 1777006257008,
+    "isIdle": false,
+    "gift": "222"
   }
 ]
