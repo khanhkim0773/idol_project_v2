@@ -142,6 +142,7 @@ export const useVideoStore = create((set, get) => ({
   currentGiftSender: null,
   videoMode: "favorite", // 'favorite' | 'queue'
   playId: 0,
+  interruptSignal: 0,
   lastActivity: Date.now(),
 
   // ---------- video queue ----------
@@ -163,8 +164,12 @@ export const useVideoStore = create((set, get) => ({
       return { videoQueue: nextQueue, lastActivity: Date.now() };
     });
 
-    // If nothing is playing, start immediately
-    if (!get().selectedVideo) {
+    const state = get();
+    // If nothing is playing, or if currently playing idle video, process next immediately
+    if (!state.selectedVideo || state.videoMode === "favorite") {
+      if (state.videoMode === "favorite") {
+        set((s) => ({ interruptSignal: s.interruptSignal + 1 }));
+      }
       get().processNext();
     }
   },

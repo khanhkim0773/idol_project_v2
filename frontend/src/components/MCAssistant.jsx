@@ -7,6 +7,7 @@ const MCAssistant = () => {
   const { config, audios, fetchMCData } = useMCStore();
   const lastActivity = useVideoStore((state) => state.lastActivity);
   const videoMode = useVideoStore((state) => state.videoMode);
+  const interruptSignal = useVideoStore((state) => state.interruptSignal);
   
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
@@ -16,6 +17,13 @@ const MCAssistant = () => {
   useEffect(() => {
     fetchMCData();
   }, [fetchMCData]);
+
+  // Handle Interrupt Signal
+  useEffect(() => {
+    if (interruptSignal === 0) return;
+    stopAudio();
+    if (timerRef.current) clearTimeout(timerRef.current);
+  }, [interruptSignal]);
 
   // Handle Playback Logic
   useEffect(() => {

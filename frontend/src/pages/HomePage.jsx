@@ -35,6 +35,8 @@ const HomePage = ({ username }) => {
   const videoMode = useVideoStore((state) => state.videoMode);
   const currentGiftName = useVideoStore((state) => state.currentGiftName);
   const currentGiftSender = useVideoStore((state) => state.currentGiftSender);
+  const interruptSignal = useVideoStore((state) => state.interruptSignal);
+
 
 
   // Auto-start or pick favorite on mount
